@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "849512846547",
+    "project_id": "chat-app-a37e7",
+    "storage_bucket": "chat-app-a37e7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:849512846547:android:c0bc545306b034a1e8f026",
+        "android_client_info": {
+          "package_name": "com.example.health_care"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCEFTpXAAPo_ZTxQ3ggwl0WzAHFrjz0Iss"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
