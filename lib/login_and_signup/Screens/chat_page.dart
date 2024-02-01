@@ -19,7 +19,6 @@ class ChatPage extends StatelessWidget {
   Widget build(BuildContext context) {
     var email = ModalRoute.of(context)!.settings.arguments;
     return Scaffold(
-      backgroundColor: kPrimaryColor,
       body: Container(
         margin: const EdgeInsets.only(top: 80),
         decoration: const BoxDecoration(

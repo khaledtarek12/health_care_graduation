@@ -5,7 +5,6 @@ import 'package:health_care/core/widgets/custom_container.dart';
 import 'package:health_care/login_and_signup/Widget/login_page_bottom_text_row.dart';
 import 'package:health_care/login_and_signup/Widget/text_forget_your_password.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
-import '../../const.dart';
 import '../../helper/show_snackbar.dart';
 import '../Widget/custom_button.dart';
 import '../Widget/custom_awsome_icons.dart';
@@ -70,7 +69,6 @@ class _LoginHomePageState extends State<LoginHomePage> {
         return ModalProgressHUD(
           inAsyncCall: isLoading,
           child: Scaffold(
-            backgroundColor: kPrimaryColor,
             body: CustomContainer(
               child: Form(
                 key: formkey,

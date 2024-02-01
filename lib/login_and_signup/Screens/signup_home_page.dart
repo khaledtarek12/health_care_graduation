@@ -1,4 +1,3 @@
-// ignore_for_file: use_build_context_synchronously
 import 'package:health_care/core/widgets/custom_container.dart';
 import 'package:health_care/login_and_signup/Widget/custom_button.dart';
 import 'package:health_care/login_and_signup/Widget/custom_awsome_icons.dart';
@@ -56,7 +55,6 @@ class _SignupHomePageState extends State<SignupHomePage> {
         return ModalProgressHUD(
           inAsyncCall: isLoading,
           child: Scaffold(
-            backgroundColor: kPrimaryColor,
             body: CustomContainer(
               child: Form(
                 key: formkey,

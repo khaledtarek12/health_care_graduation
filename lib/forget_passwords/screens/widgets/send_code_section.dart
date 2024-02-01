@@ -7,7 +7,10 @@ import 'package:health_care/login_and_signup/Widget/text_form_validator_field.da
 class SendCodeSection extends StatelessWidget {
   const SendCodeSection({
     super.key,
+    this.onTap,
   });
+
+  final void Function()? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +33,7 @@ class SendCodeSection extends StatelessWidget {
           prefexIcon: Icon(Icons.email_outlined),
         ),
         const SizedBox(height: 20),
-        CusttomButton(text: 'Send Code', onTap: () {}),
+        CusttomButton(text: 'Send Code', onTap: onTap),
         const Spacer(),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:health_care/const.dart';
-import 'package:health_care/forget_passwords/screens/forget_body_screen.dart';
+import 'package:health_care/forget_passwords/screens/widgets/forget_body_screen.dart';
 
 class ForgetPasswordView extends StatelessWidget {
   const ForgetPasswordView({super.key});

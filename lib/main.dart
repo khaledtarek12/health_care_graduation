@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:health_care/const.dart';
 import 'package:health_care/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -50,6 +51,8 @@ class ChatApp extends StatelessWidget {
         },
         debugShowCheckedModeBanner: false,
         initialRoute: SplashViewHome.id,
+        theme:
+            ThemeData.light().copyWith(scaffoldBackgroundColor: kPrimaryColor),
       ),
     );
   }
