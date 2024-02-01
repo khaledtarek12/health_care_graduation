@@ -1,11 +1,12 @@
-import 'package:health_care/Widget/chat_bubble.dart';
-import 'package:health_care/Widget/custom_app_container_bar.dart';
-import 'package:health_care/Widget/text_without_field.dart';
+import 'package:health_care/login_and_signup/Widget/chat_bubble.dart';
+import 'package:health_care/login_and_signup/Widget/custom_app_container_bar.dart';
+import 'package:health_care/login_and_signup/Widget/text_without_field.dart';
 import 'package:health_care/const.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'cubits/chat/chat_cubit.dart';
+import '../cubits/chat/chat_cubit.dart';
+
 
 // ignore: must_be_immutable, use_key_in_widget_constructors
 class ChatPage extends StatelessWidget {

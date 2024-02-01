@@ -1,18 +1,18 @@
 // ignore_for_file: use_build_context_synchronously
-import 'package:health_care/Widget/button.dart';
-import 'package:health_care/Widget/custom_awsome_icons.dart';
-import 'package:health_care/Widget/cutom_row_devider.dart';
-import 'package:health_care/Widget/cutom_row_radiobutton.dart';
-import 'package:health_care/Widget/text_form_validator_field.dart';
+import 'package:health_care/login_and_signup/Widget/button.dart';
+import 'package:health_care/login_and_signup/Widget/custom_awsome_icons.dart';
+import 'package:health_care/login_and_signup/Widget/cutom_row_devider.dart';
+import 'package:health_care/login_and_signup/Widget/cutom_row_radiobutton.dart';
+import 'package:health_care/login_and_signup/Widget/text_form_validator_field.dart';
 import 'package:health_care/const.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
 import '../../helper/show_snackbar.dart';
+import '../cubits/chat/chat_cubit.dart';
+import '../cubits/login_cubit/login_cubit.dart';
 import 'chat_page.dart';
-import 'cubits/chat/chat_cubit.dart';
-import 'cubits/login_cubit/login_cubit.dart';
 import 'entier_doctor_chatcall_page.dart';
 import 'signup_home_page.dart';
 

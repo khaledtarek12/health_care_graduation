@@ -1,11 +1,13 @@
 
-import 'package:health_care/Widget/button_call_chat.dart';
+import 'dart:developer';
+
+import 'package:health_care/login_and_signup/Widget/button_call_chat.dart';
 import 'package:health_care/const.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../cubits/chat/chat_cubit.dart';
 import 'chat_page.dart';
-import 'cubits/chat/chat_cubit.dart';
 
 class EntierCallChatScreen extends StatelessWidget {
   const EntierCallChatScreen({super.key});
@@ -66,7 +68,7 @@ class EntierCallChatScreen extends StatelessWidget {
                               BlocProvider.of<ChatCubit>(context).getMessages();
                               Navigator.pushNamed(context, ChatPage.id,
                                   arguments: email);
-                              print('$email');
+                              log('$email');
                             },
                             text: 'Chat',
                             icon: Icons.chat,

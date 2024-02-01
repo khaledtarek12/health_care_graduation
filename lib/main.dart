@@ -8,14 +8,13 @@ import 'package:health_care/screen_splash/views/widgets/screen_intro1.dart';
 import 'package:health_care/screen_splash/views/widgets/screen_intro2.dart';
 import 'package:health_care/screen_splash/views/widgets/screen_intro3.dart';
 import 'package:health_care/screen_splash/views/widgets/screen_intro4.dart';
-
-import 'login_and_signup/Screens/chat_page.dart';
-import 'login_and_signup/Screens/cubits/chat/chat_cubit.dart';
-import 'login_and_signup/Screens/cubits/login_cubit/login_cubit.dart';
-import 'login_and_signup/Screens/cubits/register/register_cubit.dart';
+import 'package:health_care/login_and_signup/Screens/chat_page.dart';
 import 'login_and_signup/Screens/entier_doctor_chatcall_page.dart';
-import 'login_and_signup/Screens/login_home_page.dart';
+import 'package:health_care/login_and_signup/Screens/login_home_page.dart';
 import 'login_and_signup/Screens/signup_home_page.dart';
+import 'login_and_signup/cubits/chat/chat_cubit.dart';
+import 'login_and_signup/cubits/login_cubit/login_cubit.dart';
+import 'login_and_signup/cubits/register/register_cubit.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
