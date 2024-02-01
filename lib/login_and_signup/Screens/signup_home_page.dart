@@ -1,4 +1,5 @@
 // ignore_for_file: use_build_context_synchronously
+import 'package:health_care/core/widgets/custom_container.dart';
 import 'package:health_care/login_and_signup/Widget/custom_button.dart';
 import 'package:health_care/login_and_signup/Widget/custom_awsome_icons.dart';
 import 'package:health_care/login_and_signup/Widget/cutom_row_devider.dart';
@@ -56,136 +57,114 @@ class _SignupHomePageState extends State<SignupHomePage> {
           inAsyncCall: isLoading,
           child: Scaffold(
             backgroundColor: kPrimaryColor,
-            body: Column(
-              children: [
-                const SizedBox(
-                  height: 80,
-                ),
-                Expanded(
-                  child: Container(
-                    padding: const EdgeInsets.only(top: 50),
-                    width: double.infinity,
-                    decoration: const BoxDecoration(
-                      borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(50),
-                          topRight: Radius.circular(50)),
-                      color: kContaineryColor,
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                      child: Form(
-                        key: formkey,
-                        child: ListView(
-                          physics: const BouncingScrollPhysics(),
-                          children: [
-                            const Center(
-                              child: Text(
-                                'Create a new Account',
-                                style: TextStyle(
-                                  fontSize: 25,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              height: MediaQuery.of(context).size.height * .05,
-                            ),
-                            CustomFormTextField(
-                              // ignore: body_might_complete_normally_nullable
-                              validator: (value) {
-                                if (value!.isEmpty) {
-                                  return 'value is empty';
-                                }
-                                if (!RegExp(pattern).hasMatch(value)) {
-                                  return 'Please enter a valid email';
-                                }
-                              },
-                              onChange: (data) {
-                                email = data;
-                              },
-                              hint: 'Email or Username',
-                              prefexIcon: const Icon(Icons.mail),
-                            ),
-                            CustomFormTextField(
-                              // ignore: body_might_complete_normally_nullable
-                              validator: (value) {
-                                if (value!.isEmpty) {
-                                  return 'value is empty';
-                                }
-                              },
-                              obSecureText: obSecureText,
-                              onChange: (data) {
-                                password = data;
-                              },
-                              hint: 'Password',
-                              prefexIcon: const Icon(Icons.lock),
-                              sufxIcon: iconButtonChange(),
-                            ),
-                            CustomFormTextField(
-                              obSecureText: obSecureText,
-                              hint: 'Confirm Password',
-                              prefexIcon: const Icon(Icons.lock),
-                              sufxIcon: iconButtonChange(),
-                            ),
-                            const CustomTextField(
-                              hint: 'Enter your phone',
-                              prefexIcon: Icon(Icons.phone),
-                            ),
-                            const SizedBox(
-                              height: 15,
-                            ),
-                            const CustomTextField(
-                              hint: 'Doctor',
-                              prefexIcon: Icon(Icons.person_add_alt_1_sharp),
-                              sufxIcon:
-                                  Icon(Icons.keyboard_arrow_down_outlined),
-                            ),
-                            const SizedBox(
-                              height: 15,
-                            ),
-                            CusttomButton(
-                              onTap: () async {
-                                if (formkey.currentState!.validate()) {
-                                  BlocProvider.of<RegisterCubit>(context)
-                                      .userRegister(
-                                          email: email!, password: password!);
-                                }
-                              },
-                              text: 'Register',
-                            ),
-                            const CustomRowDevider(),
-                            const SizedBox(
-                              height: 15,
-                            ),
-                            const IconSocialMedia(),
-                            const SizedBox(
-                              height: 20,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                const Text('Don\'t have an account ?'),
-                                GestureDetector(
-                                  onTap: () {
-                                    Navigator.pop(context);
-                                  },
-                                  child: const Text(
-                                    '   LogIn',
-                                    style: TextStyle(
-                                        color: kPrimaryColor,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ),
-                                const SizedBox(height: 15)
-                              ],
-                            ),
-                          ],
+            body: CustomContainer(
+              child: Form(
+                key: formkey,
+                child: ListView(
+                  physics: const BouncingScrollPhysics(),
+                  children: [
+                    const Center(
+                      child: Text(
+                        'Create a new Account',
+                        style: TextStyle(
+                          fontSize: 25,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
                     ),
-                  ),
-                )
-              ],
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * .05,
+                    ),
+                    CustomFormTextField(
+                      // ignore: body_might_complete_normally_nullable
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return 'value is empty';
+                        }
+                        if (!RegExp(pattern).hasMatch(value)) {
+                          return 'Please enter a valid email';
+                        }
+                      },
+                      onChange: (data) {
+                        email = data;
+                      },
+                      hint: 'Email or Username',
+                      prefexIcon: const Icon(Icons.mail),
+                    ),
+                    CustomFormTextField(
+                      // ignore: body_might_complete_normally_nullable
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return 'value is empty';
+                        }
+                      },
+                      obSecureText: obSecureText,
+                      onChange: (data) {
+                        password = data;
+                      },
+                      hint: 'Password',
+                      prefexIcon: const Icon(Icons.lock),
+                      sufxIcon: iconButtonChange(),
+                    ),
+                    CustomFormTextField(
+                      obSecureText: obSecureText,
+                      hint: 'Confirm Password',
+                      prefexIcon: const Icon(Icons.lock),
+                      sufxIcon: iconButtonChange(),
+                    ),
+                    const CustomTextField(
+                      hint: 'Enter your phone',
+                      prefexIcon: Icon(Icons.phone),
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    const CustomTextField(
+                      hint: 'Doctor',
+                      prefexIcon: Icon(Icons.person_add_alt_1_sharp),
+                      sufxIcon: Icon(Icons.keyboard_arrow_down_outlined),
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    CusttomButton(
+                      onTap: () async {
+                        if (formkey.currentState!.validate()) {
+                          BlocProvider.of<RegisterCubit>(context)
+                              .userRegister(email: email!, password: password!);
+                        }
+                      },
+                      text: 'Register',
+                    ),
+                    const CustomRowDevider(),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    const IconSocialMedia(),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text('Don\'t have an account ?'),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.pop(context);
+                          },
+                          child: const Text(
+                            '   LogIn',
+                            style: TextStyle(
+                                color: kPrimaryColor,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                        const SizedBox(height: 15)
+                      ],
+                    ),
+                  ],
+                ),
+              ),
             ),
           ),
         );

@@ -7,3 +7,4 @@ const kMessageCollection = 'messages';
 const kMessage = 'message';
 const kCreatedAt = 'createdAt';
 const kDuration = Duration(milliseconds: 500);
+

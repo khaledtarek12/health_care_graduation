@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:health_care/core/utils/styles.dart';
+import 'package:health_care/core/widgets/custom_container.dart';
 import 'package:health_care/login_and_signup/Widget/login_page_bottom_text_row.dart';
 import 'package:health_care/login_and_signup/Widget/text_forget_your_password.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
@@ -15,7 +16,6 @@ import '../cubits/chat/chat_cubit.dart';
 import '../cubits/login_cubit/login_cubit.dart';
 import 'chat_page.dart';
 import 'entier_doctor_chatcall_page.dart';
-
 
 class LoginHomePage extends StatefulWidget {
   const LoginHomePage({super.key});
@@ -70,131 +70,109 @@ class _LoginHomePageState extends State<LoginHomePage> {
         return ModalProgressHUD(
           inAsyncCall: isLoading,
           child: Scaffold(
-            // appBar: AppBar(title: Text('khaled')),
             backgroundColor: kPrimaryColor,
-            body: Column(
-              children: [
-                const SizedBox(
-                  height: 80,
-                ),
-                Expanded(
-                  child: Container(
-                    padding: const EdgeInsets.only(top: 50),
-                    width: double.infinity,
-                    decoration: const BoxDecoration(
-                      borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(50),
-                          topRight: Radius.circular(50)),
-                      color: kContaineryColor,
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                      child: Form(
-                        key: formkey,
-                        child: ListView(
-                          physics: const BouncingScrollPhysics(),
-                          children: [
-                            const Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  'Login to your Account',
-                                  style: style25,
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: MediaQuery.of(context).size.height * .1,
-                            ),
-                            CustomFormTextField(
-                              // ignore: body_might_complete_normally_nullable
-                              validator: (value) {
-                                if (value!.isEmpty) {
-                                  return 'value is empty';
-                                }
-                                if (!RegExp(pattern).hasMatch(value)) {
-                                  return 'Please enter a valid email';
-                                }
-                              },
-                              onChange: (data) {
-                                email = data;
-                              },
-                              hint: 'Email',
-                              prefexIcon: const Icon(Icons.mail),
-                              keyboardType: TextInputType.emailAddress,
-                            ),
-                            CustomFormTextField(
-                              // ignore: body_might_complete_normally_nullable
-                              validator: (value) {
-                                if (value!.isEmpty) {
-                                  return 'value is empty';
-                                }
-                              },
-                              onChange: (data) {
-                                password = data;
-                              },
-                              obSecureText: obSecureText,
-                              hint: 'Password',
-                              prefexIcon: const Icon(Icons.lock),
-                              sufxIcon: IconButton(
-                                icon: Icon(icon),
-                                onPressed: () {
-                                  setState(() {
-                                    if (obSecureText == true) {
-                                      obSecureText = false;
-                                      icon = Icons.remove_red_eye;
-                                    } else if (obSecureText != true) {
-                                      obSecureText = true;
-                                      icon = Icons.visibility_off;
-                                    }
-                                  });
-                                },
-                              ),
-                              keyboardType: TextInputType.visiblePassword,
-                            ),
-                            const SizedBox(
-                              height: 15,
-                            ),
-                            CusttomRadioButtom(
-                              onGenderSelected: (gender) {
-                                setState(() {
-                                  selectedGender = gender;
-                                });
-                              },
-                            ),
-                            const SizedBox(
-                              height: 15,
-                            ),
-                            CusttomButton(
-                              onTap: () async {
-                                if (formkey.currentState!.validate()) {
-                                  BlocProvider.of<LoginCubit>(context)
-                                      .loginUser(
-                                          email: email!, password: password!);
-                                } else {}
-                              },
-                              text: 'Sign In',
-                            ),
-                            const SizedBox(
-                              height: 25,
-                            ),
-                            const TextForgetYourPassword(),
-                            const CustomRowDevider(),
-                            const SizedBox(
-                              height: 5,
-                            ),
-                            const IconSocialMedia(),
-                            const SizedBox(
-                              height: 40,
-                            ),
-                            const CustomTextRow(),
-                          ],
+            body: CustomContainer(
+              child: Form(
+                key: formkey,
+                child: ListView(
+                  physics: const BouncingScrollPhysics(),
+                  children: [
+                    const Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Login to your Account',
+                          style: style25,
                         ),
-                      ),
+                      ],
                     ),
-                  ),
-                )
-              ],
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * .1,
+                    ),
+                    CustomFormTextField(
+                      // ignore: body_might_complete_normally_nullable
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return 'value is empty';
+                        }
+                        if (!RegExp(pattern).hasMatch(value)) {
+                          return 'Please enter a valid email';
+                        }
+                      },
+                      onChange: (data) {
+                        email = data;
+                      },
+                      hint: 'Email',
+                      prefexIcon: const Icon(Icons.mail),
+                      keyboardType: TextInputType.emailAddress,
+                    ),
+                    CustomFormTextField(
+                      // ignore: body_might_complete_normally_nullable
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return 'value is empty';
+                        }
+                      },
+                      onChange: (data) {
+                        password = data;
+                      },
+                      obSecureText: obSecureText,
+                      hint: 'Password',
+                      prefexIcon: const Icon(Icons.lock),
+                      sufxIcon: IconButton(
+                        icon: Icon(icon),
+                        onPressed: () {
+                          setState(() {
+                            if (obSecureText == true) {
+                              obSecureText = false;
+                              icon = Icons.remove_red_eye;
+                            } else if (obSecureText != true) {
+                              obSecureText = true;
+                              icon = Icons.visibility_off;
+                            }
+                          });
+                        },
+                      ),
+                      keyboardType: TextInputType.visiblePassword,
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    CusttomRadioButtom(
+                      onGenderSelected: (gender) {
+                        setState(() {
+                          selectedGender = gender;
+                        });
+                      },
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    CusttomButton(
+                      onTap: () async {
+                        if (formkey.currentState!.validate()) {
+                          BlocProvider.of<LoginCubit>(context)
+                              .loginUser(email: email!, password: password!);
+                        } else {}
+                      },
+                      text: 'Sign In',
+                    ),
+                    const SizedBox(
+                      height: 25,
+                    ),
+                    const TextForgetYourPassword(),
+                    const CustomRowDevider(),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    const IconSocialMedia(),
+                    const SizedBox(
+                      height: 40,
+                    ),
+                    const CustomTextRow(),
+                  ],
+                ),
+              ),
             ),
           ),
         );
@@ -202,5 +180,3 @@ class _LoginHomePageState extends State<LoginHomePage> {
     );
   }
 }
-
-
