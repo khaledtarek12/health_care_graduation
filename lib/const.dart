@@ -6,3 +6,4 @@ const kSmallFontyColor = Color(0xff929292);
 const kMessageCollection = 'messages';
 const kMessage = 'message';
 const kCreatedAt = 'createdAt';
+const kDuration = Duration(milliseconds: 500);

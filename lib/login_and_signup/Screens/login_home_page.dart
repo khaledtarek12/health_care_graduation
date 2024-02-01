@@ -1,22 +1,22 @@
-// ignore_for_file: use_build_context_synchronously
-import 'package:health_care/login_and_signup/Widget/button.dart';
-import 'package:health_care/login_and_signup/Widget/custom_awsome_icons.dart';
-import 'package:health_care/login_and_signup/Widget/cutom_row_devider.dart';
-import 'package:health_care/login_and_signup/Widget/cutom_row_radiobutton.dart';
-import 'package:health_care/login_and_signup/Widget/text_form_validator_field.dart';
-import 'package:health_care/const.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:health_care/core/utils/styles.dart';
+import 'package:health_care/login_and_signup/Widget/login_page_bottom_text_row.dart';
+import 'package:health_care/login_and_signup/Widget/text_forget_your_password.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
-
+import '../../const.dart';
 import '../../helper/show_snackbar.dart';
+import '../Widget/custom_button.dart';
+import '../Widget/custom_awsome_icons.dart';
+import '../Widget/cutom_row_devider.dart';
+import '../Widget/cutom_row_radiobutton.dart';
+import '../Widget/text_form_validator_field.dart';
 import '../cubits/chat/chat_cubit.dart';
 import '../cubits/login_cubit/login_cubit.dart';
 import 'chat_page.dart';
 import 'entier_doctor_chatcall_page.dart';
-import 'signup_home_page.dart';
 
-// ignore: must_be_immutable
+
 class LoginHomePage extends StatefulWidget {
   const LoginHomePage({super.key});
 
@@ -99,15 +99,12 @@ class _LoginHomePageState extends State<LoginHomePage> {
                               children: [
                                 Text(
                                   'Login to your Account',
-                                  style: TextStyle(
-                                    fontSize: 25,
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                                  style: style25,
                                 ),
                               ],
                             ),
-                            const SizedBox(
-                              height: 120,
+                            SizedBox(
+                              height: MediaQuery.of(context).size.height * .1,
                             ),
                             CustomFormTextField(
                               // ignore: body_might_complete_normally_nullable
@@ -168,7 +165,7 @@ class _LoginHomePageState extends State<LoginHomePage> {
                             const SizedBox(
                               height: 15,
                             ),
-                            CusttomButtonPage(
+                            CusttomButton(
                               onTap: () async {
                                 if (formkey.currentState!.validate()) {
                                   BlocProvider.of<LoginCubit>(context)
@@ -181,17 +178,7 @@ class _LoginHomePageState extends State<LoginHomePage> {
                             const SizedBox(
                               height: 25,
                             ),
-                            const Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text('Forget your password',
-                                    style: TextStyle(
-                                      color: kPrimaryColor,
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w900,
-                                    )),
-                              ],
-                            ),
+                            const TextForgetYourPassword(),
                             const CustomRowDevider(),
                             const SizedBox(
                               height: 5,
@@ -200,24 +187,7 @@ class _LoginHomePageState extends State<LoginHomePage> {
                             const SizedBox(
                               height: 40,
                             ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                const Text('Don\'t have an account ?'),
-                                GestureDetector(
-                                  onTap: () {
-                                    Navigator.pushNamed(
-                                        context, SignupHomePage.id);
-                                  },
-                                  child: const Text(
-                                    '   Sign up',
-                                    style: TextStyle(
-                                        color: kPrimaryColor,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                )
-                              ],
-                            ),
+                            const CustomTextRow(),
                           ],
                         ),
                       ),
@@ -232,3 +202,5 @@ class _LoginHomePageState extends State<LoginHomePage> {
     );
   }
 }
+
+

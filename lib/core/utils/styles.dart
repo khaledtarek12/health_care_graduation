@@ -12,3 +12,9 @@ const style15 = TextStyle(
   fontFamily: 'Poppins',
   color: Colors.white,
 );
+const style25 = TextStyle(
+  fontSize: 25,
+  fontWeight: FontWeight.bold,
+);
+
+

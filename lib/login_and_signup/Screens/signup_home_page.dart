@@ -1,5 +1,5 @@
 // ignore_for_file: use_build_context_synchronously
-import 'package:health_care/login_and_signup/Widget/button.dart';
+import 'package:health_care/login_and_signup/Widget/custom_button.dart';
 import 'package:health_care/login_and_signup/Widget/custom_awsome_icons.dart';
 import 'package:health_care/login_and_signup/Widget/cutom_row_devider.dart';
 import 'package:health_care/login_and_signup/Widget/text_form_validator_field.dart';
@@ -12,7 +12,6 @@ import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import '../../helper/show_snackbar.dart';
 import '../cubits/register/register_cubit.dart';
 import 'login_home_page.dart';
-
 
 // ignore: must_be_immutable
 class SignupHomePage extends StatefulWidget {
@@ -88,8 +87,8 @@ class _SignupHomePageState extends State<SignupHomePage> {
                                 ),
                               ),
                             ),
-                            const SizedBox(
-                              height: 80,
+                            SizedBox(
+                              height: MediaQuery.of(context).size.height * .05,
                             ),
                             CustomFormTextField(
                               // ignore: body_might_complete_normally_nullable
@@ -128,9 +127,6 @@ class _SignupHomePageState extends State<SignupHomePage> {
                               prefexIcon: const Icon(Icons.lock),
                               sufxIcon: iconButtonChange(),
                             ),
-                            const SizedBox(
-                              height: 15,
-                            ),
                             const CustomTextField(
                               hint: 'Enter your phone',
                               prefexIcon: Icon(Icons.phone),
@@ -147,7 +143,7 @@ class _SignupHomePageState extends State<SignupHomePage> {
                             const SizedBox(
                               height: 15,
                             ),
-                            CusttomButtonPage(
+                            CusttomButton(
                               onTap: () async {
                                 if (formkey.currentState!.validate()) {
                                   BlocProvider.of<RegisterCubit>(context)
@@ -179,7 +175,8 @@ class _SignupHomePageState extends State<SignupHomePage> {
                                         color: kPrimaryColor,
                                         fontWeight: FontWeight.bold),
                                   ),
-                                )
+                                ),
+                                const SizedBox(height: 15)
                               ],
                             ),
                           ],
@@ -198,7 +195,7 @@ class _SignupHomePageState extends State<SignupHomePage> {
 
   IconButton iconButtonChange() {
     return IconButton(
-      icon:  Icon(icon),
+      icon: Icon(icon),
       onPressed: () {
         setState(() {
           if (obSecureText == true) {

@@ -72,10 +72,10 @@ class _SplashViewBodyState extends State<SplashViewBody> {
                 onPressed: () {
                   isLastPage
                       ? Get.to(() => const LoginHomePage(),
-                          transition: Transition.rightToLeftWithFade,
-                          duration: const Duration(milliseconds: 500))
+                          transition: Transition.downToUp,
+                          duration: kDuration)
                       : pageController.nextPage(
-                          duration: const Duration(milliseconds: 500),
+                          duration: kDuration,
                           curve: Curves.easeIn);
                 },
                 style: ElevatedButton.styleFrom(

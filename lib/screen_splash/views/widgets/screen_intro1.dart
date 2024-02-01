@@ -24,7 +24,7 @@ class Intro1 extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const SizedBox(height: 430),
+              const SizedBox(height: 400),
               Text(
                 'Welcome to',
                 style: style28.copyWith(fontSize: 35),
@@ -33,7 +33,7 @@ class Intro1 extends StatelessWidget {
                 'Elderly',
                 style: style28.copyWith(fontSize: 35),
               ),
-              const SizedBox(height: 90),
+              const SizedBox(height: 70),
               const Text(
                 textAlign: TextAlign.center,
                 'Taking care of the elderly through a sensor to measure his vital rates',
