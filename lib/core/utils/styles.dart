@@ -14,7 +14,10 @@ const style15 = TextStyle(
 );
 const style25 = TextStyle(
   fontSize: 25,
+  fontFamily: 'Poppins',
   fontWeight: FontWeight.bold,
 );
-
-
+const styleNormal = TextStyle(
+  fontFamily: 'Poppins',
+  fontWeight: FontWeight.normal,
+);

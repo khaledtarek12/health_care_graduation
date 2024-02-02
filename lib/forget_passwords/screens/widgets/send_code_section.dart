@@ -16,16 +16,18 @@ class SendCodeSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const SizedBox(height: 15),
+        const SizedBox(height: 25),
         const Text(
           'Forgot Password?',
           style: style25,
         ),
-        const SizedBox(height: 10),
+        const SizedBox(height: 15),
         const Opacity(
           opacity: .6,
           child: Text(
-              'Don\'t worry! it occurs. Please enter the email address linked with  your account.'),
+            'Don\'t worry! it occurs. Please enter the email address linked with  your account.',
+            style: styleNormal,
+          ),
         ),
         const SizedBox(height: 20),
         const CustomFormTextField(
