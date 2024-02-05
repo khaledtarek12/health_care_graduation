@@ -25,6 +25,7 @@ class SendCodeSection extends StatelessWidget {
         const Opacity(
           opacity: .6,
           child: Text(
+            textAlign: TextAlign.center,
             'Don\'t worry! it occurs. Please enter the email address linked with  your account.',
             style: styleNormal,
           ),

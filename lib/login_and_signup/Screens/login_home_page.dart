@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:health_care/core/utils/styles.dart';
 import 'package:health_care/core/widgets/custom_container.dart';
+import 'package:health_care/doctor_pages/views/doctor_homepage.dart';
 import 'package:health_care/login_and_signup/Widget/login_page_bottom_text_row.dart';
 import 'package:health_care/login_and_signup/Widget/text_forget_your_password.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
@@ -14,7 +15,6 @@ import '../Widget/text_form_validator_field.dart';
 import '../cubits/chat/chat_cubit.dart';
 import '../cubits/login_cubit/login_cubit.dart';
 import 'chat_page.dart';
-import 'entier_doctor_chatcall_page.dart';
 
 class LoginHomePage extends StatefulWidget {
   const LoginHomePage({super.key});
@@ -50,8 +50,7 @@ class _LoginHomePageState extends State<LoginHomePage> {
           BlocProvider.of<ChatCubit>(context).getMessages();
 
           if (selectedGender == 'Doctor') {
-            Navigator.pushNamed(context, EntierCallChatScreen.id,
-                arguments: email);
+            Navigator.pushNamed(context, DoctorHomepage.id, arguments: email);
           } else if (selectedGender == 'Patient') {
             Navigator.pushNamed(context, ChatPage.id, arguments: email);
           } else {

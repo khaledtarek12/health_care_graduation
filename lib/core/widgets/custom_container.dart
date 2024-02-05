@@ -20,7 +20,7 @@ class CustomContainer extends StatelessWidget {
         decoration: const BoxDecoration(
             color: kContaineryColor,
             borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(50), topRight: Radius.circular(50))),
+                topLeft: Radius.circular(30), topRight: Radius.circular(30))),
         child: child,
       ),
     );

@@ -1,14 +1,11 @@
 import 'package:get/get.dart';
 import 'package:health_care/const.dart';
+import 'package:health_care/doctor_pages/views/doctor_homepage.dart';
 import 'package:health_care/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:health_care/screen_splash/views/splash_view.dart';
-import 'package:health_care/screen_splash/views/widgets/screen_intro1.dart';
-import 'package:health_care/screen_splash/views/widgets/screen_intro2.dart';
-import 'package:health_care/screen_splash/views/widgets/screen_intro3.dart';
-import 'package:health_care/screen_splash/views/widgets/screen_intro4.dart';
 import 'package:health_care/login_and_signup/Screens/chat_page.dart';
 import 'login_and_signup/Screens/entier_doctor_chatcall_page.dart';
 import 'package:health_care/login_and_signup/Screens/login_home_page.dart';
@@ -39,10 +36,7 @@ class ChatApp extends StatelessWidget {
       ],
       child: GetMaterialApp(
         routes: {
-          Intro1.id: (context) => const Intro1(),
-          Intro2.id: (context) => const Intro2(),
-          Intro3.id: (context) => const Intro3(),
-          Intro4.id: (context) => const Intro4(),
+          DoctorHomepage.id: (context) => const DoctorHomepage(),
           LoginHomePage.id: (context) => const LoginHomePage(),
           SplashViewHome.id: (context) => const SplashViewHome(),
           SignupHomePage.id: (context) => const SignupHomePage(),
