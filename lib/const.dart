@@ -7,4 +7,4 @@ const kMessageCollection = 'messages';
 const kMessage = 'message';
 const kCreatedAt = 'createdAt';
 const kDuration = Duration(milliseconds: 500);
-
+const String kGoogleapikey = 'AIzaSyD_9nxWffZ29WYTGSFRXuPk123toDJoiE0';

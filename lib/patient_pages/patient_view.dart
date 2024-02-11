@@ -1,6 +1,5 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:health_care/const.dart';
 import 'package:health_care/patient_pages/views/date_picker.dart';
 import 'package:health_care/patient_pages/views/location.dart';
@@ -43,7 +42,7 @@ class _PatientViewState extends State<PatientView> {
             color: kPrimaryColor,
             animationCurve: Curves.linearToEaseOut,
             animationDuration: const Duration(milliseconds: 300),
-            backgroundColor: Colors.white,
+            backgroundColor: index == 1 ? Colors.transparent : Colors.white,
             buttonBackgroundColor: kPrimaryColor,
             onTap: (index) => setState(() => this.index = index),
           ),
