@@ -19,42 +19,44 @@ class EntierCallChatScreen extends StatelessWidget {
 
     return Scaffold(
       body: CustomContainer(
-        child: Column(
-          children: [
-            SizedBox(
-              width: 380,
-              height: 380,
-              child: ClipOval(
-                child: Image.asset(
-                  'assets/images/doctorImage.jpg',
-                  fit: BoxFit.cover,
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              SizedBox(
+                width: 380,
+                height: 380,
+                child: ClipOval(
+                  child: Image.asset(
+                    'assets/images/doctorImage.jpg',
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 60),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  ButtonChat(
-                    onTap: () {},
-                    text: 'Call',
-                    icon: Icons.call_sharp,
-                  ),
-                  ButtonChat(
-                    onTap: () {
-                      BlocProvider.of<ChatCubit>(context).getMessages();
-                      Navigator.pushNamed(context, ChatPage.id,
-                          arguments: email);
-                      log('$email');
-                    },
-                    text: 'Chat',
-                    icon: Icons.chat,
-                  )
-                ],
-              ),
-            )
-          ],
+              Padding(
+                padding: const EdgeInsets.only(top: 60),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    ButtonChat(
+                      onTap: () {},
+                      text: 'Call',
+                      icon: Icons.call_sharp,
+                    ),
+                    ButtonChat(
+                      onTap: () {
+                        BlocProvider.of<ChatCubit>(context).getMessages();
+                        Navigator.pushNamed(context, ChatPage.id,
+                            arguments: email);
+                        log('$email');
+                      },
+                      text: 'Chat',
+                      icon: Icons.chat,
+                    )
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
