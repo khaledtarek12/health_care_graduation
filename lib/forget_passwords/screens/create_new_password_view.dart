@@ -49,7 +49,7 @@ class _CreateNewPasswordState extends State<CreateNewPassword> {
                 sufxIcon: iconButtonChange(),
                 obSecureText: obSecureText,
               ),
-              const SizedBox(height: 40),
+              const SizedBox(height: 30),
               CusttomButton(
                 text: 'Reset Password',
                 onTap: () {
