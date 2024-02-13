@@ -66,11 +66,15 @@ class _LocationPageState extends State<LocationPage> {
             child: Column(
               children: [
                 FloatingActionButton(
+                  key: UniqueKey(),
+                  heroTag: 'btn 1',
                   onPressed: _zoomIn,
                   child: const Icon(Icons.add),
                 ),
                 const SizedBox(height: 8.0),
                 FloatingActionButton(
+                  key: UniqueKey(),
+                  heroTag: 'btn 2',
                   onPressed: _zoomOut,
                   child: const Icon(Icons.remove),
                 ),
@@ -99,17 +103,20 @@ Widget getMarker() {
     width: 40,
     height: 40,
     decoration: BoxDecoration(
-        image: const DecorationImage(
-            image: AssetImage('assets/images/images.jfif'), fit: BoxFit.cover),
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(100),
-        boxShadow: const [
-          BoxShadow(
-            color: Colors.grey,
-            offset: Offset(0, 3),
-            spreadRadius: 6,
-            blurRadius: 6,
-          )
-        ]),
+      image: const DecorationImage(
+        image: AssetImage('assets/images/images.jfif'),
+        fit: BoxFit.cover,
+      ),
+      color: Colors.white,
+      borderRadius: BorderRadius.circular(100),
+      boxShadow: const [
+        BoxShadow(
+          color: Colors.grey,
+          offset: Offset(0, 3),
+          spreadRadius: 6,
+          blurRadius: 6,
+        ),
+      ],
+    ),
   );
 }

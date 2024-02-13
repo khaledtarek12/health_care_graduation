@@ -4,6 +4,7 @@ import 'package:health_care/const.dart';
 import 'package:health_care/patient_pages/views/location.dart';
 
 import 'views/patient_view_body.dart';
+import 'views/widget/date_picker.dart';
 
 class PatientView extends StatefulWidget {
   const PatientView({super.key});
@@ -18,9 +19,10 @@ class _PatientViewState extends State<PatientView> {
   final items = <Widget>[
     const Icon(Icons.person, size: 30),
     const Icon(Icons.location_history, size: 30),
+    const Icon(Icons.date_range, size: 30),
   ];
 
-  // final screens = const [PatientViewBody(), LocationPage(), DatePicker()];
+  final screens = const [PatientViewBody(), LocationPage(), DatePickerPgae()];
 
   int pageNumber = 0;
 
@@ -28,7 +30,7 @@ class _PatientViewState extends State<PatientView> {
   Widget build(BuildContext context) {
     return Scaffold(
       extendBody: true,
-      body: pageNumber == 0 ? const PatientViewBody() : const LocationPage(),
+      body: screens.elementAt(pageNumber),
       bottomNavigationBar: Theme(
         data: Theme.of(context)
             .copyWith(iconTheme: const IconThemeData(color: Colors.white)),
