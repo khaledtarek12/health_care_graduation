@@ -21,21 +21,6 @@ class Intro4 extends StatelessWidget {
         width: double.infinity,
         child: Container(
           decoration: boxDecoration,
-          child: const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 22),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SizedBox(height: 320),
-                Text(
-                  textAlign: TextAlign.center,
-                  'Your best solution to follow up your health from home ',
-                  style: style28,
-                ),
-                SizedBox(height: 80),
-              ],
-            ),
-          ),
         ),
       ),
     );

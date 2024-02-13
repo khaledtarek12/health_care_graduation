@@ -25,18 +25,6 @@ class Intro2 extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: 22),
             child: SizedBox(
               width: double.infinity,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SizedBox(height: 320),
-                  Text(
-                    textAlign: TextAlign.center,
-                    'Check on your health status and follow up on your vital rates',
-                    style: style28,
-                  ),
-                  SizedBox(height: 80),
-                ],
-              ),
             ),
           ),
         ),
