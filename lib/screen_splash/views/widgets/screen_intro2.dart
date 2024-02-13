@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:health_care/core/utils/splacsh_images.dart';
-import 'package:health_care/core/utils/styles.dart';
 import 'package:health_care/core/widgets/box_decoration.dart';
 
 class Intro2 extends StatelessWidget {
