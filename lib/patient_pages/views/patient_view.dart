@@ -1,10 +1,10 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:health_care/const.dart';
-import 'package:health_care/patient_pages/views/location.dart';
+import 'package:health_care/patient_pages/views/widget/location.dart';
 
-import 'views/patient_view_body.dart';
-import 'views/widget/date_picker.dart';
+import 'widget/patient_view_body.dart';
+import 'widget/date_picker.dart';
 
 class PatientView extends StatefulWidget {
   const PatientView({super.key});
