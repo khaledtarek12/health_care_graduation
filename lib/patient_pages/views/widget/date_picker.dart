@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:health_care/const.dart';
 import 'package:health_care/core/utils/styles.dart';
 import 'package:health_care/core/widgets/custom_container.dart';
 import 'package:health_care/patient_pages/data/services/data.service.dart';
@@ -18,28 +17,7 @@ class DatePickerPgae extends StatelessWidget {
           Expanded(
             child: ListView(
               children: alarms.map<Widget>((alarm) {
-                return Container(
-                  margin: const EdgeInsets.only(bottom: 32),
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                  decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                          colors: [
-                            kPrimaryColor,
-                            kPrimaryColor.withOpacity(.6)
-                          ],
-                          begin: Alignment.centerLeft,
-                          end: Alignment.centerRight),
-                      borderRadius: BorderRadius.circular(24),
-                      boxShadow: [
-                        BoxShadow(
-                            color: kPrimaryColor.withOpacity(.5),
-                            blurRadius: 8,
-                            spreadRadius: 2,
-                            offset: const Offset(4, 4))
-                      ]),
-                  child: const CustomAlarmVIiew(),
-                );
+                return const CustomAlarmVIiew();
               }).followedBy([const AddAlramButton()]).toList(),
             ),
           )
