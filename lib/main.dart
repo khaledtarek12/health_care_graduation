@@ -8,6 +8,7 @@ import 'package:health_care/doctor_pages/views/doctor_homepage.dart';
 import 'package:health_care/firebase_options.dart';
 import 'package:health_care/login_and_signup/Screens/chat_page.dart';
 import 'package:health_care/login_and_signup/Screens/login_home_page.dart';
+import 'package:health_care/patient_pages/data/services/local_notification.service.dart';
 import 'package:health_care/screen_splash/views/splash_view.dart';
 
 import 'login_and_signup/Screens/entier_doctor_chatcall_page.dart';
@@ -22,6 +23,7 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  LocalNotificationServices.init();
   runApp(const ChatApp());
 }
 
