@@ -14,6 +14,9 @@ class CustomAlarmVIiew extends StatefulWidget {
 class _CustomAlarmVIiewState extends State<CustomAlarmVIiew> {
   bool isActive = true;
 
+  TimeOfDay timeOfDay =
+      TimeOfDay(hour: DateTime.now().hour, minute: DateTime.now().minute);
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -53,7 +56,8 @@ class _CustomAlarmVIiewState extends State<CustomAlarmVIiew> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('07:00 AM', style: style25.copyWith(color: Colors.white)),
+              Text(timeOfDay.format(context).toString(),
+                  style: style25.copyWith(color: Colors.white)),
               IconButton(
                   onPressed: () {},
                   icon: const Icon(Icons.keyboard_arrow_down,
