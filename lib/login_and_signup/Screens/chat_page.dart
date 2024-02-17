@@ -1,6 +1,6 @@
-import 'package:health_care/login_and_signup/Widget/chat_bubble.dart';
-import 'package:health_care/login_and_signup/Widget/custom_app_container_bar.dart';
-import 'package:health_care/login_and_signup/Widget/text_without_field.dart';
+import 'package:health_care/login_and_signup/Screens/Widget/chat_bubble.dart';
+import 'package:health_care/login_and_signup/Screens/Widget/custom_app_container_bar.dart';
+import 'package:health_care/login_and_signup/Screens/Widget/text_without_field.dart';
 import 'package:health_care/const.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

@@ -4,7 +4,7 @@ import 'package:health_care/const.dart';
 import 'package:health_care/core/utils/styles.dart';
 import 'package:health_care/core/widgets/custom_container.dart';
 import 'package:health_care/forget_passwords/screens/create_new_password_view.dart';
-import 'package:health_care/login_and_signup/Widget/custom_button.dart';
+import 'package:health_care/login_and_signup/Screens/Widget/custom_button.dart';
 import 'package:pinput/pinput.dart';
 
 class OtpView extends StatelessWidget {

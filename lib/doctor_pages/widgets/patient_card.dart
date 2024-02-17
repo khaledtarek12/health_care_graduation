@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:health_care/const.dart';
 import 'package:health_care/doctor_pages/views/write_review.dart';
+import 'package:health_care/login_and_signup/Screens/chat_page.dart';
 
 class Patientcard extends StatelessWidget {
-  const Patientcard({super.key});
+  const Patientcard({super.key, this.email});
+
+final  Object? email;
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +46,12 @@ class Patientcard extends StatelessWidget {
                     children: [
                       const Icon(Icons.local_phone_outlined, size: 30),
                       const SizedBox(width: 15),
-                      const Icon(Icons.chat_outlined, size: 30),
+                      IconButton(
+                          icon: const Icon(Icons.chat_outlined, size: 30),
+                          onPressed: () {
+                            Navigator.pushNamed(context, ChatPage.id,
+                                arguments: email);
+                          }),
                       const SizedBox(width: 15),
                       const Icon(Icons.location_on_outlined, size: 30),
                       const SizedBox(width: 15),

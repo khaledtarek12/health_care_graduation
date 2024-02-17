@@ -1,9 +1,9 @@
 import 'package:health_care/core/widgets/custom_container.dart';
-import 'package:health_care/login_and_signup/Widget/custom_button.dart';
-import 'package:health_care/login_and_signup/Widget/custom_awsome_icons.dart';
-import 'package:health_care/login_and_signup/Widget/cutom_row_devider.dart';
-import 'package:health_care/login_and_signup/Widget/text_form_validator_field.dart';
-import 'package:health_care/login_and_signup/Widget/text_without_field.dart';
+import 'package:health_care/login_and_signup/Screens/Widget/custom_button.dart';
+import 'package:health_care/login_and_signup/Screens/Widget/custom_awsome_icons.dart';
+import 'package:health_care/login_and_signup/Screens/Widget/cutom_row_devider.dart';
+import 'package:health_care/login_and_signup/Screens/Widget/text_form_validator_field.dart';
+import 'package:health_care/login_and_signup/Screens/Widget/text_without_field.dart';
 import 'package:health_care/const.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

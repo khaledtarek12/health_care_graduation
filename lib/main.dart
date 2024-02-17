@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 
 import 'package:health_care/const.dart';
 import 'package:health_care/doctor_pages/views/doctor_homepage.dart';
+import 'package:health_care/doctor_pages/views/my_patient.dart';
 import 'package:health_care/firebase_options.dart';
 import 'package:health_care/login_and_signup/Screens/chat_page.dart';
 import 'package:health_care/login_and_signup/Screens/login_home_page.dart';
@@ -42,6 +43,7 @@ class ChatApp extends StatelessWidget {
       child: GetMaterialApp(
         routes: {
           DoctorHomepage.id: (context) => const DoctorHomepage(),
+          Mypatients.id: (context) => const Mypatients(),
           PatientView.id: (context) => const PatientView(),
           LoginHomePage.id: (context) => const LoginHomePage(),
           SplashViewHome.id: (context) => const SplashViewHome(),

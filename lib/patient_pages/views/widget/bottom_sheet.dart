@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:health_care/core/utils/styles.dart';
-import 'package:health_care/login_and_signup/Widget/custom_button.dart';
-import 'package:health_care/login_and_signup/Widget/text_form_validator_field.dart';
+import 'package:health_care/login_and_signup/Screens/Widget/custom_button.dart';
+import 'package:health_care/login_and_signup/Screens/Widget/text_form_validator_field.dart';
 
 class BottomSheetpage extends StatefulWidget {
   const BottomSheetpage({super.key});

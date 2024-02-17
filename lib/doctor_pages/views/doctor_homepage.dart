@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:health_care/const.dart';
 import 'package:health_care/core/widgets/custom_container.dart';
 
 import '../widgets/image.dart';
@@ -11,6 +13,7 @@ class DoctorHomepage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var email = ModalRoute.of(context)!.settings.arguments;
     return Scaffold(
       body: CustomContainer(
         child:
@@ -27,9 +30,7 @@ class DoctorHomepage extends StatelessWidget {
           SliverToBoxAdapter(
               child: GestureDetector(
             onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return const Mypatients();
-              }));
+              Navigator.pushNamed(context, Mypatients.id, arguments: email);
             },
             child: Container(
               margin: const EdgeInsets.only(top: 100, right: 30, left: 30),

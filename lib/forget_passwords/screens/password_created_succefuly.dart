@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:health_care/core/utils/styles.dart';
 import 'package:health_care/core/widgets/custom_container.dart';
 import 'package:health_care/login_and_signup/Screens/login_home_page.dart';
-import 'package:health_care/login_and_signup/Widget/custom_button.dart';
+import 'package:health_care/login_and_signup/Screens/Widget/custom_button.dart';
 
 import '../../const.dart';
 
