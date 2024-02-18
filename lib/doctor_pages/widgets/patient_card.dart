@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:health_care/const.dart';
 import 'package:health_care/doctor_pages/views/write_review.dart';
@@ -7,7 +8,7 @@ import 'package:health_care/login_and_signup/Screens/chat_page.dart';
 class Patientcard extends StatelessWidget {
   const Patientcard({super.key, this.email});
 
-final  Object? email;
+  final Object? email;
 
   @override
   Widget build(BuildContext context) {
@@ -44,19 +45,25 @@ final  Object? email;
                   padding: const EdgeInsets.only(top: 20),
                   child: Row(
                     children: [
-                      const Icon(Icons.local_phone_outlined, size: 30),
-                      const SizedBox(width: 15),
+                      const Icon(FontAwesomeIcons.phone,
+                          size: 30, color: Color.fromARGB(255, 31, 45, 106)),
+                      const SizedBox(width: 12),
                       IconButton(
-                          icon: const Icon(Icons.chat_outlined, size: 30),
+                          icon: const Icon(FontAwesomeIcons.commentDots,
+                              size: 30,
+                              color: Color.fromARGB(255, 31, 45, 106)),
                           onPressed: () {
-                            Navigator.pushNamed(context, ChatPage.id,
-                                arguments: email);
+                            Get.to(() => ChatPage(),
+                                arguments: email,
+                                transition: Transition.downToUp);
                           }),
-                      const SizedBox(width: 15),
-                      const Icon(Icons.location_on_outlined, size: 30),
-                      const SizedBox(width: 15),
+                      const SizedBox(width: 12),
+                      const Icon(FontAwesomeIcons.locationDot,
+                          size: 30, color: Color.fromARGB(255, 31, 45, 106)),
+                      const SizedBox(width: 12),
                       IconButton(
-                        icon: const Icon(Icons.heart_broken_rounded, size: 30),
+                        icon: const Icon(FontAwesomeIcons.heartPulse,
+                            size: 30, color: Color.fromARGB(255, 31, 45, 106)),
                         onPressed: () {
                           Get.to(() => const ReviewPage(),
                               transition: Transition.downToUp,

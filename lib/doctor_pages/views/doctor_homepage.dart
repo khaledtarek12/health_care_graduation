@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:health_care/const.dart';
 import 'package:health_care/core/widgets/custom_container.dart';
-
 import '../widgets/image.dart';
 import 'my_patient.dart';
 
