@@ -21,12 +21,16 @@ class _DatePickerPgaeState extends State<DatePickerPgae> {
         children: [
           Text('Alarms', style: style25.copyWith(fontSize: 27)),
           Expanded(
-            child: ListView(
-              children: BlocProvider.of<AlarmDataCubit>(context)
-                  .alarmInfo
-                  .map<Widget>((alarm) {
-                return CustomAlarmCard(alarmInfo: alarm);
-              }).followedBy([const AddAlramButton()]).toList(),
+            child: BlocBuilder<AlarmDataCubit, AlarmDataState>(
+              builder: (context, state) {
+                return ListView(
+                  children: BlocProvider.of<AlarmDataCubit>(context)
+                      .alarmInfo
+                      .map<Widget>((alarm) {
+                    return CustomAlarmCard(alarmInfo: alarm);
+                  }).followedBy([const AddAlramButton()]).toList(),
+                );
+              },
             ),
           ),
         ],

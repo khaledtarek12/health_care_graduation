@@ -5,7 +5,6 @@ import 'package:health_care/core/helper/show_snackbar.dart';
 import 'package:health_care/core/utils/styles.dart';
 import 'package:health_care/patient_pages/cubits/alarm/alarm_data_cubit.dart';
 import 'package:health_care/patient_pages/data/model/alarm_info.module.dart';
-import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
 class CustomAlarmCard extends StatefulWidget {
   const CustomAlarmCard({
@@ -21,23 +20,11 @@ class CustomAlarmCard extends StatefulWidget {
 
 class _CustomAlarmCardState extends State<CustomAlarmCard> {
   bool isActive = true;
-  bool isLoading = false;
   TimeOfDay timeOfDay = const TimeOfDay(hour: 0, minute: 00);
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<AlarmDataCubit, AlarmDataState>(
-        // listener: (context, state) {
-        //   if (state is AlarmDataLoading) {
-        //     isLoading = true;
-        //   } else if (state is AlarmDataSuccesful) {
-        //     isLoading = false;
-        //   }
-        //   if (state is AlarmDataFailuer) {
-        //     showSnackBar(context, state.errorMessage);
-        //     isLoading = false;
-        //   }
-        // },
         builder: (context, state) {
       if (state is AlarmDataFailuer) {
         showSnackBar(context, state.errorMessage);
@@ -84,8 +71,11 @@ class _CustomAlarmCardState extends State<CustomAlarmCard> {
                       widget.alarmInfo.alarmDateTime.format(context).toString(),
                       style: style25.copyWith(color: Colors.white)),
                   IconButton(
-                      onPressed: () {},
-                      icon: const Icon(Icons.keyboard_arrow_down,
+                      onPressed: () {
+                        BlocProvider.of<AlarmDataCubit>(context)
+                            .deleteAlarm(alarm: widget.alarmInfo);
+                      },
+                      icon: const Icon(Icons.delete,
                           size: 36, color: Colors.white))
                 ],
               ),

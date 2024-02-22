@@ -8,17 +8,21 @@ class AlarmDataCubit extends Cubit<AlarmDataState> {
   AlarmDataCubit() : super(AlarmDataInitial());
 
   List<AlarmInfo> alarmInfo = [];
-void  addAlarm({
-  required AlarmInfo alarm
-  }) {
+  void addAlarm({required AlarmInfo alarm}) {
     emit(AlarmDataLoading());
     try {
-      alarmInfo.add(AlarmInfo(
-        title: alarm.title,
-        alarmDateTime: alarm.alarmDateTime,
-        description: alarm.description,
-      ));
+      alarmInfo.add(alarm);
 
+      emit(AlarmDataSuccesful());
+    } catch (e) {
+      emit(AlarmDataFailuer(errorMessage: e.toString()));
+    }
+  }
+
+  void deleteAlarm({required AlarmInfo alarm}) {
+    emit(AlarmDataLoading());
+    try {
+      alarmInfo.remove(alarm);
       emit(AlarmDataSuccesful());
     } catch (e) {
       emit(AlarmDataFailuer(errorMessage: e.toString()));
