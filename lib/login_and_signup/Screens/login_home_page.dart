@@ -6,7 +6,7 @@ import 'package:health_care/doctor_pages/views/doctor_homepage.dart';
 import 'package:health_care/login_and_signup/Screens/Widget/login_page_bottom_text_row.dart';
 import 'package:health_care/login_and_signup/Screens/Widget/text_forget_your_password.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
-import '../../helper/show_snackbar.dart';
+import '../../core/helper/show_snackbar.dart';
 import '../../patient_pages/views/patient_view.dart';
 import 'Widget/custom_button.dart';
 import 'Widget/custom_awsome_icons.dart';

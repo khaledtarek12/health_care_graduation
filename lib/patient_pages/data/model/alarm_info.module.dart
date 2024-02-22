@@ -1,8 +1,14 @@
+import 'package:flutter/material.dart';
+
 class AlarmInfo {
-final  DateTime alarmDateTime;
-final  String description;
-final  bool isActive;
+  String title;
+  TimeOfDay alarmDateTime;
+  String description;
+  // bool isActive = true;
 
-  AlarmInfo({required this.alarmDateTime, required this.description, required this.isActive});
-
+  AlarmInfo({
+    required this.title,
+    required this.alarmDateTime,
+    required this.description,
+  });
 }

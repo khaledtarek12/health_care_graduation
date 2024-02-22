@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:health_care/core/utils/styles.dart';
 import 'package:health_care/login_and_signup/Screens/Widget/custom_button.dart';
 import 'package:health_care/login_and_signup/Screens/Widget/text_form_validator_field.dart';
+import 'package:health_care/patient_pages/cubits/alarm/alarm_data_cubit.dart';
+import 'package:health_care/patient_pages/data/model/alarm_info.module.dart';
 
 class BottomSheetpage extends StatefulWidget {
   const BottomSheetpage({super.key});
@@ -11,16 +14,35 @@ class BottomSheetpage extends StatefulWidget {
 }
 
 class _BottomSheetpageState extends State<BottomSheetpage> {
-  TimeOfDay timeOfDay =
-      TimeOfDay(hour: DateTime.now().hour, minute: DateTime.now().minute);
+  late String title;
+  late String description;
+  late TimeOfDay timeOfDay;
+  late AlarmInfo alarmInfo;
+  @override
+  void initState() {
+    timeOfDay = const TimeOfDay(hour: 0, minute: 00);
+    alarmInfo = AlarmInfo(title: '', alarmDateTime: timeOfDay, description: '');
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsetsDirectional.all(25),
       child: Column(
         children: [
-          const CustomFormTextField(hint: 'Title'),
-          const CustomFormTextField(hint: 'Discription'),
+          CustomFormTextField(
+            hint: 'Title',
+            onChange: (value) {
+              alarmInfo.title = value;
+            },
+          ),
+          CustomFormTextField(
+            hint: 'Discription',
+            onChange: (value) {
+              alarmInfo.description = value;
+            },
+          ),
           Padding(
             padding: const EdgeInsets.only(top: 20, left: 10, right: 10),
             child: Row(
@@ -43,6 +65,9 @@ class _BottomSheetpageState extends State<BottomSheetpage> {
           CusttomButton(
               text: 'Save',
               onTap: () {
+                alarmInfo.alarmDateTime = timeOfDay;
+                BlocProvider.of<AlarmDataCubit>(context)
+                    .addAlarm(alarm: alarmInfo);
                 Navigator.pop(context);
               }),
         ],

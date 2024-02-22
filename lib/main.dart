@@ -9,6 +9,7 @@ import 'package:health_care/doctor_pages/views/my_patient.dart';
 import 'package:health_care/firebase_options.dart';
 import 'package:health_care/login_and_signup/Screens/chat_page.dart';
 import 'package:health_care/login_and_signup/Screens/login_home_page.dart';
+import 'package:health_care/patient_pages/cubits/alarm/alarm_data_cubit.dart';
 import 'package:health_care/patient_pages/data/services/local_notification.service.dart';
 import 'package:health_care/screen_splash/views/splash_view.dart';
 
@@ -39,6 +40,7 @@ class ChatApp extends StatelessWidget {
         BlocProvider(create: (context) => LoginCubit()),
         BlocProvider(create: (context) => RegisterCubit()),
         BlocProvider(create: (context) => ChatCubit()),
+        BlocProvider(create: (context) => AlarmDataCubit()),
       ],
       child: GetMaterialApp(
         routes: {
