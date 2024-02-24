@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:health_care/Featuers/const.dart';
 import 'package:health_care/core/helper/show_snackbar.dart';
 import 'package:health_care/core/utils/styles.dart';
@@ -50,14 +51,14 @@ class _CustomAlarmCardState extends State<CustomAlarmCard> {
           child: ClipRRect(
             borderRadius: BorderRadius.circular(24),
             child: Slidable(
-              endActionPane: ActionPane(
+              startActionPane: ActionPane(
                 motion: const ScrollMotion(),
                 children: [
                   SlidableAction(
                     onPressed: (context) {},
                     backgroundColor: const Color(0xFF7BC043),
                     foregroundColor: Colors.white,
-                    icon: Icons.edit,
+                    icon: Icons.edit_notifications_rounded,
                     label: 'Edit',
                   ),
                   SlidableAction(
@@ -67,7 +68,7 @@ class _CustomAlarmCardState extends State<CustomAlarmCard> {
                     },
                     backgroundColor: const Color.fromARGB(255, 165, 36, 3),
                     foregroundColor: Colors.white,
-                    icon: Icons.delete,
+                    icon: FontAwesomeIcons.trash,
                     label: 'Delete',
                   ),
                 ],

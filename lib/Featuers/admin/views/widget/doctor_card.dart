@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:health_care/Featuers/admin/views/widget/edit_current_doctor.dart';
 import 'package:health_care/Featuers/const.dart';
@@ -30,7 +31,7 @@ class DoctorCard extends StatelessWidget {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(24),
         child: Slidable(
-          endActionPane: ActionPane(
+          startActionPane: ActionPane(
             motion: const ScrollMotion(),
             children: [
               SlidableAction(
@@ -41,14 +42,14 @@ class DoctorCard extends StatelessWidget {
                 },
                 backgroundColor: const Color(0xFF7BC043),
                 foregroundColor: Colors.white,
-                icon: Icons.edit,
+                icon: Icons.edit_square,
                 label: 'Edit',
               ),
               SlidableAction(
                 onPressed: (context) {},
                 backgroundColor: const Color.fromARGB(255, 165, 36, 3),
                 foregroundColor: Colors.white,
-                icon: Icons.delete,
+                icon: FontAwesomeIcons.trash,
                 label: 'Delete',
               ),
             ],
