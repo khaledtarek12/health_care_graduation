@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:health_care/Featuers/admin/views/widget/add_new_doctor.dart';
 import 'package:health_care/Featuers/admin/views/widget/doctor_card.dart';
