@@ -139,8 +139,8 @@ class _SignupHomePageState extends State<SignupHomePage> {
                       height: 15,
                     ),
                     const IconSocialMedia(),
-                    const SizedBox(
-                      height: 20,
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * .10,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,

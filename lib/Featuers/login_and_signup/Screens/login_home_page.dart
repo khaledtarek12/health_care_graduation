@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:health_care/Featuers/admin/views/admin_view_page.dart';
 import 'package:health_care/core/utils/styles.dart';
 import 'package:health_care/core/widgets/custom_container.dart';
 import 'package:health_care/Featuers/doctor_pages/views/doctor_homepage.dart';
@@ -53,6 +54,8 @@ class _LoginHomePageState extends State<LoginHomePage> {
             Navigator.pushNamed(context, DoctorHomepage.id, arguments: email);
           } else if (selectedGender == 'Patient') {
             Navigator.pushNamed(context, PatientView.id, arguments: email);
+          } else if (selectedGender == 'Admin') {
+            Navigator.pushNamed(context, AdminViewPage.id, arguments: email);
           } else {
             showSnackBar(
                 context, 'Please select a gender : Doctor or Patient?');
@@ -163,8 +166,8 @@ class _LoginHomePageState extends State<LoginHomePage> {
                       height: 5,
                     ),
                     const IconSocialMedia(),
-                    const SizedBox(
-                      height: 40,
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * .18,
                     ),
                     const CustomTextRow(),
                   ],

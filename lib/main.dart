@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
+import 'package:health_care/Featuers/admin/views/admin_view_page.dart';
 
 import 'package:health_care/Featuers/const.dart';
 import 'package:health_care/Featuers/doctor_pages/views/doctor_homepage.dart';
@@ -45,6 +46,7 @@ class ChatApp extends StatelessWidget {
       child: GetMaterialApp(
         routes: {
           DoctorHomepage.id: (context) => const DoctorHomepage(),
+          AdminViewPage.id: (context) => const AdminViewPage(),
           Mypatients.id: (context) => const Mypatients(),
           PatientView.id: (context) => const PatientView(),
           LoginHomePage.id: (context) => const LoginHomePage(),
