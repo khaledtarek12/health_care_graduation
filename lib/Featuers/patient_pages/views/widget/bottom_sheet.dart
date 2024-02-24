@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:health_care/core/utils/styles.dart';
 import 'package:health_care/Featuers/login_and_signup/Screens/Widget/custom_button.dart';
+import 'package:health_care/core/utils/styles.dart';
 import 'package:health_care/Featuers/login_and_signup/Screens/Widget/text_form_validator_field.dart';
 import 'package:health_care/Featuers/patient_pages/cubits/alarm/alarm_data_cubit.dart';
 import 'package:health_care/Featuers/patient_pages/data/model/alarm_info.module.dart';
@@ -18,6 +18,7 @@ class _BottomSheetpageState extends State<BottomSheetpage> {
   late String description;
   late TimeOfDay timeOfDay;
   late AlarmInfo alarmInfo;
+
   @override
   void initState() {
     timeOfDay = const TimeOfDay(hour: 0, minute: 00);
@@ -27,50 +28,62 @@ class _BottomSheetpageState extends State<BottomSheetpage> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsetsDirectional.all(25),
-      child: Column(
-        children: [
-          CustomFormTextField(
-            hint: 'Title',
-            onChange: (value) {
-              alarmInfo.title = value;
-            },
-          ),
-          CustomFormTextField(
-            hint: 'Discription',
-            onChange: (value) {
-              alarmInfo.description = value;
-            },
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 20, left: 10, right: 10),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(timeOfDay.format(context).toString(),
-                    style: style25.copyWith(color: Colors.black)),
-                IconButton(
+    return SingleChildScrollView(
+      child: Container(
+        padding: const EdgeInsets.all(25),
+        child: Column(
+          mainAxisSize: MainAxisSize.min, // Set mainAxisSize to min
+          children: [
+            Flexible(
+              // Wrap each child with Flexible
+              child: CustomFormTextField(
+                hint: 'Title',
+                onChange: (value) {
+                  alarmInfo.title = value;
+                },
+              ),
+            ),
+            Flexible(
+              child: CustomFormTextField(
+                hint: 'Description',
+                onChange: (value) {
+                  alarmInfo.description = value;
+                },
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 20, left: 10, right: 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    timeOfDay.format(context).toString(),
+                    style: style25.copyWith(color: Colors.black),
+                  ),
+                  IconButton(
                     onPressed: () {
                       showtimepicker();
                     },
                     icon: const Icon(
                       Icons.add_alarm,
                       size: 35,
-                    ))
-              ],
+                    ),
+                  )
+                ],
+              ),
             ),
-          ),
-          const Spacer(),
-          CusttomButton(
+            const SizedBox(height: 16), // Add some space between widgets
+            CusttomButton(
               text: 'Save',
               onTap: () {
                 alarmInfo.alarmDateTime = timeOfDay;
                 BlocProvider.of<AlarmDataCubit>(context)
                     .addAlarm(alarm: alarmInfo);
                 Navigator.pop(context);
-              }),
-        ],
+              },
+            ),
+          ],
+        ),
       ),
     );
   }

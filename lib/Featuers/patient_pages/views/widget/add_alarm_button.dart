@@ -1,9 +1,9 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:health_care/Featuers/const.dart';
+import 'package:health_care/Featuers/patient_pages/views/widget/add_bottom_sheet.dart';
 import 'package:health_care/core/utils/styles.dart';
 import 'package:health_care/Featuers/patient_pages/data/services/local_notification.service.dart';
-import 'package:health_care/Featuers/patient_pages/views/widget/bottom_sheet.dart';
 
 class AddAlramButton extends StatelessWidget {
   const AddAlramButton({
@@ -34,10 +34,10 @@ class AddAlramButton extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 29),
           onPressed: () {
             showModalBottomSheet(
-              constraints: const BoxConstraints(maxHeight: 500),
+              isScrollControlled: true,
               context: context,
               builder: (context) {
-                return const BottomSheetpage();
+                return const AddBottomSheet();
               },
             );
             LocalNotificationServices.showBasicNotification();
