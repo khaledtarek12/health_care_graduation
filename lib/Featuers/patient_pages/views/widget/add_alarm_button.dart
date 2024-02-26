@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:health_care/Featuers/const.dart';
 import 'package:health_care/Featuers/patient_pages/views/widget/add_bottom_sheet.dart';
 import 'package:health_care/core/utils/styles.dart';
-import 'package:health_care/Featuers/patient_pages/data/services/local_notification.service.dart';
 
 class AddAlramButton extends StatelessWidget {
   const AddAlramButton({
@@ -40,7 +39,6 @@ class AddAlramButton extends StatelessWidget {
                 return const AddBottomSheet();
               },
             );
-            LocalNotificationServices.showBasicNotification();
           },
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,

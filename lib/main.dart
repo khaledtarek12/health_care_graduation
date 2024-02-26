@@ -26,7 +26,7 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  LocalNotificationServices.init();
+  await Notifications().initalizeNotification();
   runApp(const ChatApp());
 }
 

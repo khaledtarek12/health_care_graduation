@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:health_care/Featuers/login_and_signup/Screens/Widget/custom_button.dart';
-import 'package:health_care/core/utils/styles.dart';
 import 'package:health_care/Featuers/login_and_signup/Screens/Widget/text_form_validator_field.dart';
 import 'package:health_care/Featuers/patient_pages/cubits/alarm/alarm_data_cubit.dart';
 import 'package:health_care/Featuers/patient_pages/data/model/alarm_info.module.dart';
+import 'package:health_care/Featuers/patient_pages/views/widget/repeat_interval_houres.dart';
+import 'package:health_care/core/utils/styles.dart';
+import 'package:uuid/uuid.dart';
 
 class BottomSheetpage extends StatefulWidget {
   const BottomSheetpage({super.key});
@@ -18,11 +20,19 @@ class _BottomSheetpageState extends State<BottomSheetpage> {
   late String description;
   late TimeOfDay timeOfDay;
   late AlarmInfo alarmInfo;
+  int? selectedInterval;
+  final uuid = const Uuid();
 
   @override
   void initState() {
     timeOfDay = const TimeOfDay(hour: 0, minute: 00);
-    alarmInfo = AlarmInfo(title: '', alarmDateTime: timeOfDay, description: '');
+    alarmInfo = AlarmInfo(
+        title: '',
+        alarmDateTime: timeOfDay,
+        description: '',
+        interval: 0,
+        id: uuid.v4(),
+        isActive: true);
     super.initState();
   }
 
@@ -32,25 +42,36 @@ class _BottomSheetpageState extends State<BottomSheetpage> {
       child: Container(
         padding: const EdgeInsets.all(25),
         child: Column(
-          mainAxisSize: MainAxisSize.min, // Set mainAxisSize to min
+          mainAxisSize: MainAxisSize.min,
           children: [
-            Flexible(
-              // Wrap each child with Flexible
-              child: CustomFormTextField(
-                hint: 'Title',
-                onChange: (value) {
+            const SizedBox(height: 20),
+            CustomFormTextField(
+              hint: 'Title',
+              onChange: (value) {
+                setState(() {
                   alarmInfo.title = value;
-                },
-              ),
+                });
+              },
             ),
-            Flexible(
-              child: CustomFormTextField(
-                hint: 'Description',
-                onChange: (value) {
+            CustomFormTextField(
+              hint: 'Description',
+              onChange: (value) {
+                setState(() {
                   alarmInfo.description = value;
-                },
-              ),
+                });
+              },
             ),
+            const SizedBox(height: 10),
+            RepeatIntervalWidget(
+              selectedInterval: selectedInterval,
+              onIntervalSelected: (interval) {
+                setState(() {
+                  selectedInterval = interval;
+                  alarmInfo.interval = selectedInterval!;
+                });
+              },
+            ),
+            const SizedBox(height: 20),
             Padding(
               padding: const EdgeInsets.only(top: 20, left: 10, right: 10),
               child: Row(
@@ -72,7 +93,7 @@ class _BottomSheetpageState extends State<BottomSheetpage> {
                 ],
               ),
             ),
-            const SizedBox(height: 16), // Add some space between widgets
+            const SizedBox(height: 16),
             CusttomButton(
               text: 'Save',
               onTap: () {
@@ -91,9 +112,11 @@ class _BottomSheetpageState extends State<BottomSheetpage> {
   void showtimepicker() {
     showTimePicker(context: context, initialTime: TimeOfDay.now())
         .then((value) {
-      setState(() {
-        timeOfDay = value!;
-      });
+      if (value != null) {
+        setState(() {
+          timeOfDay = value;
+        });
+      }
     });
   }
 }

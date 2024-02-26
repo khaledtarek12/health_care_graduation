@@ -21,7 +21,8 @@ class CustomAlarmCard extends StatefulWidget {
 }
 
 class _CustomAlarmCardState extends State<CustomAlarmCard> {
-  bool isActive = true;
+  List<int>? notificationIds;
+  int id = 1;
   TimeOfDay timeOfDay = const TimeOfDay(hour: 0, minute: 00);
 
   @override
@@ -35,7 +36,7 @@ class _CustomAlarmCardState extends State<CustomAlarmCard> {
         return Container(
           margin: const EdgeInsets.only(bottom: 32),
           decoration: BoxDecoration(
-              gradient: isActive
+              gradient: widget.alarmInfo.isActive
                   ? LinearGradient(
                       colors: [kPrimaryColor, kPrimaryColor.withOpacity(.6)])
                   : LinearGradient(
@@ -80,26 +81,50 @@ class _CustomAlarmCardState extends State<CustomAlarmCard> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(widget.alarmInfo.title, style: style15),
-                          Switch(
-                              value: isActive,
-                              onChanged: (value) {
-                                setState(() {
-                                  isActive = value;
-                                });
-                              }),
-                        ]),
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          widget.alarmInfo.title,
+                          style: style25.copyWith(color: Colors.white),
+                        ),
+                        BlocBuilder<AlarmDataCubit, AlarmDataState>(
+                          builder: (context, state) {
+                            if (state is AlarmDataSuccesful) {
+                              // Listen to changes in isActive property and update the switch
+                              return Switch(
+                                value: widget.alarmInfo.isActive,
+                                onChanged: (value) {
+                                  BlocProvider.of<AlarmDataCubit>(context)
+                                      .toggleUpdateAlarmActivity(
+                                          alarm: widget.alarmInfo);
+                                },
+                              );
+                            } else {
+                              // Show loading indicator or handle other states if needed
+                              return const CircularProgressIndicator();
+                            }
+                          },
+                        ),
+                      ],
+                    ),
                     Text(
                       widget.alarmInfo.description,
-                      style: styleNormal.copyWith(color: Colors.white),
+                      style: styleNormal.copyWith(
+                          color: Colors.white.withOpacity(.5)),
+                    ),
+                    Text(
+                      widget.alarmInfo.interval != 0
+                          ? 'every  ${widget.alarmInfo.interval} hours | ${widget.alarmInfo.interval == 24 ? "One time a day" : '${(24 / widget.alarmInfo.interval).floor()} Times a day'}'
+                          : 'repeat once at selected time',
+                      style: styleNormal.copyWith(
+                          color: Colors.white.withOpacity(.6)),
                     ),
                     Text(
                         widget.alarmInfo.alarmDateTime
                             .format(context)
                             .toString(),
-                        style: style25.copyWith(color: Colors.white)),
+                        style: style25.copyWith(
+                            color: Colors.white.withOpacity(.8))),
                   ],
                 ),
               ),
