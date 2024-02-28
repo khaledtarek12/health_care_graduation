@@ -20,7 +20,7 @@ class _BottomSheetpageState extends State<BottomSheetpage> {
   late String description;
   late TimeOfDay timeOfDay;
   late AlarmInfo alarmInfo;
-  int? selectedInterval;
+  int selectedInterval = 24;
   final uuid = const Uuid();
 
   @override
@@ -67,7 +67,7 @@ class _BottomSheetpageState extends State<BottomSheetpage> {
               onIntervalSelected: (interval) {
                 setState(() {
                   selectedInterval = interval;
-                  alarmInfo.interval = selectedInterval!;
+                  alarmInfo.interval = selectedInterval;
                 });
               },
             ),

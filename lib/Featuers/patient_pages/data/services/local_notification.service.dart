@@ -37,100 +37,55 @@ class Notifications {
     });
   }
 
-  final Set<String> scheduledNotifications = {};
-
   Future<void> scheduleNotification({required AlarmInfo alarmInfo}) async {
-    if (scheduledNotifications.contains(alarmInfo.id)) {
-      return;
-    }
+    // Assign the same ID for both notifications
+    int notificationId = alarmInfo.id.hashCode;
+
     DateTime now = DateTime.now();
 
-    if (alarmInfo.interval == 0) {
-      // Schedule a one-time notification at the selected time of day
-      await AwesomeNotifications().createNotification(
-        content: NotificationContent(
-          id: alarmInfo.id.hashCode,
-          channelKey: 'basic_channel',
-          title: alarmInfo.title,
-          body: alarmInfo.description,
-          actionType: ActionType.Default,
-          notificationLayout: NotificationLayout.Default,
-          wakeUpScreen: true,
-          autoDismissible: false,
-          category: NotificationCategory.Alarm,
-          // timeoutAfter: Durations.short4,
-          duration: const Duration(seconds: 30),
-        ),
-        schedule: NotificationCalendar(
-          weekday: now.weekday,
-          hour: alarmInfo.alarmDateTime.hour,
-          minute: alarmInfo.alarmDateTime.minute,
-          second: 0,
-          allowWhileIdle: true,
-        ),
-      );
-    } else {
-      // Schedule the first notification
-      await AwesomeNotifications().createNotification(
-        content: NotificationContent(
-          id: alarmInfo.id.hashCode,
-          channelKey: 'basic_channel',
-          title: alarmInfo.title,
-          body: alarmInfo.description,
-          actionType: ActionType.Default,
-          notificationLayout: NotificationLayout.Default,
-          wakeUpScreen: true,
-          autoDismissible: false,
-          category: NotificationCategory.Alarm,
-          // timeoutAfter: Durations.short4,
-          duration: const Duration(seconds: 60),
-        ),
-        schedule: NotificationCalendar(
-          weekday: now.weekday,
-          hour: alarmInfo.alarmDateTime.hour,
-          minute: alarmInfo.alarmDateTime.minute,
-          second: 0,
-          allowWhileIdle: true,
-        ),
-      );
-
-      // Calculate the time for the next notification based on the interval
-      DateTime nextNotificationTime =
-          now.add(Duration(hours: alarmInfo.interval));
-
-      // Schedule subsequent notifications at the specified interval for a certain duration
-      while (nextNotificationTime.isBefore(now.add(const Duration(days: 7)))) {
-        await AwesomeNotifications().createNotification(
-          content: NotificationContent(
-            id: alarmInfo.id.hashCode +
-                nextNotificationTime.hour +
-                nextNotificationTime.minute,
-            channelKey: 'basic_channel',
-            title: alarmInfo.title,
-            body: alarmInfo.description,
-            actionType: ActionType.Default,
-            notificationLayout: NotificationLayout.Default,
-            wakeUpScreen: true,
-            autoDismissible: false,
-            category: NotificationCategory.Alarm,
-            // timeoutAfter: Durations.short4,
-            duration: const Duration(seconds: 60),
-          ),
-          schedule: NotificationCalendar(
-            weekday: nextNotificationTime.weekday,
-            hour: nextNotificationTime.hour,
-            minute: nextNotificationTime.minute,
-            second: 0,
-            allowWhileIdle: true,
-          ),
-        );
-
-        // Move to the next notification time
-        nextNotificationTime =
-            nextNotificationTime.add(Duration(hours: alarmInfo.interval));
-      }
-    }
-    scheduledNotifications.add(alarmInfo.id);
+    // Schedule a one-time notification at the selected time of day
+    await AwesomeNotifications().createNotification(
+      content: NotificationContent(
+        id: notificationId,
+        channelKey: 'basic_channel',
+        title: alarmInfo.title,
+        body: alarmInfo.description,
+        actionType: ActionType.Default,
+        notificationLayout: NotificationLayout.Default,
+        wakeUpScreen: true,
+        autoDismissible: false,
+        category: NotificationCategory.Alarm,
+        duration: const Duration(seconds: 30),
+      ),
+      schedule: NotificationCalendar(
+        weekday: now.weekday,
+        hour: alarmInfo.alarmDateTime.hour,
+        minute: alarmInfo.alarmDateTime.minute,
+        second: 0,
+        allowWhileIdle: true,
+      ),
+    );
+    // Schedule the interval notification with the same ID
+    await AwesomeNotifications().createNotification(
+      content: NotificationContent(
+        id: notificationId, // Use the same ID
+        channelKey: 'basic_channel',
+        title: alarmInfo.title,
+        body: alarmInfo.description,
+        actionType: ActionType.Default,
+        notificationLayout: NotificationLayout.Default,
+        wakeUpScreen: true,
+        autoDismissible: false,
+        category: NotificationCategory.Alarm,
+        duration: const Duration(seconds: 60),
+      ),
+      schedule: NotificationInterval(
+        interval: alarmInfo.interval * 60 * 60,
+        repeats: true,
+        preciseAlarm: true,
+        allowWhileIdle: true,
+      ),
+    );
   }
 
   Future<void> updateNotification({required AlarmInfo alarmInfo}) async {

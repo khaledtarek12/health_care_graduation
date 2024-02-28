@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:health_care/Featuers/const.dart';
 
-
 class RepeatIntervalWidget extends StatelessWidget {
   final int? selectedInterval;
   final Function(int)? onIntervalSelected;
@@ -61,7 +60,9 @@ class RepeatIntervalWidget extends StatelessWidget {
                     '${repeatInterval[index]}',
                     style: TextStyle(
                       fontSize: 16,
-                      color: selectedInterval == repeatInterval[index] ? Colors.white : Colors.black,
+                      color: selectedInterval == repeatInterval[index]
+                          ? Colors.white
+                          : Colors.black,
                     ),
                   ),
                 ),
