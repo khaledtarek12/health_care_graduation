@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:health_care/Featuers/const.dart';
+import 'package:health_care/const.dart';
 import 'package:health_care/core/helper/show_snackbar.dart';
 import 'package:health_care/core/utils/styles.dart';
 import 'package:health_care/Featuers/patient_pages/cubits/alarm/alarm_data_cubit.dart';
@@ -30,7 +30,10 @@ class _CustomAlarmCardState extends State<CustomAlarmCard> {
     return BlocBuilder<AlarmDataCubit, AlarmDataState>(
         builder: (context, state) {
       if (state is AlarmDataFailuer) {
-        showSnackBar(context, state.errorMessage);
+        showErrorSnackBar(
+          context: context,
+          message: state.errorMessage,
+        );
         return Text(state.errorMessage);
       } else if (state is AlarmDataSuccesful) {
         return Container(

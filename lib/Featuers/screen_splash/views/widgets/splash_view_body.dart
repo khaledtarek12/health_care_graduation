@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:health_care/Featuers/const.dart';
-import 'package:health_care/Featuers/screen_splash/views/widgets/screen_intro1.dart';
-import 'package:health_care/Featuers/screen_splash/views/widgets/screen_intro2.dart';
-import 'package:health_care/Featuers/screen_splash/views/widgets/screen_intro3.dart';
-import 'package:health_care/Featuers/screen_splash/views/widgets/screen_intro4.dart';
-import 'package:health_care/Featuers/screen_splash/views/widgets/spash3.dart';
-import 'package:health_care/Featuers/screen_splash/views/widgets/splash0.dart';
+import 'package:health_care/const.dart';
+import 'package:health_care/Featuers/screen_splash/views/widgets/intro_screen.dart';
+import 'package:health_care/Featuers/screen_splash/views/widgets/splash3.dart';
 import 'package:health_care/Featuers/screen_splash/views/widgets/splash2.dart';
+import 'package:health_care/core/utils/splacsh_images.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import 'custom_splash_button.dart';
@@ -23,6 +20,7 @@ class _SplashViewBodyState extends State<SplashViewBody> {
   late PageController pageController;
   bool isLastPage = false;
   int pageNumber = 0;
+  final images = [intro1, intro2, intro3];
 
   @override
   void initState() {
@@ -50,21 +48,18 @@ class _SplashViewBodyState extends State<SplashViewBody> {
                   onPageChanged: (index) {
                     setState(() {
                       pageNumber = index;
-                      isLastPage = (index == 3);
+                      isLastPage = (index == images.length - 1);
                     });
                   },
-                  children: const [
-                    Intro1(),
-                    Intro2(),
-                    Intro3(),
-                    Intro4(),
-                  ],
+                  children: images.map((assetName) {
+                    return IntroScreen(assetName: assetName);
+                  }).toList(),
                 ),
                 Container(
-                  alignment: const Alignment(0, 0.55),
+                  alignment: const Alignment(0, 0.7),
                   child: SmoothPageIndicator(
                     controller: pageController,
-                    count: 4,
+                    count: 3,
                     effect: const WormEffect(
                       dotHeight: 20,
                       dotWidth: 20,
@@ -98,23 +93,13 @@ class _SplashViewBodyState extends State<SplashViewBody> {
   Widget _buildSplashText(Orientation orientation) {
     switch (pageNumber) {
       case 0:
-        return Splash0(context: context, orientation: orientation);
-      case 1:
         return Splsh1(orientation: orientation);
-      case 2:
+      case 1:
         return Splash2(orientation: orientation);
-      case 3:
+      case 2:
         return Splash3(orientation: orientation);
       default:
         return const SizedBox.shrink();
     }
   }
 }
-
-
-
-
-
-
-
-

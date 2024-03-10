@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:health_care/Featuers/const.dart';
+import 'package:health_care/const.dart';
 import 'package:health_care/Featuers/login_and_signup/Screens/signup_home_page.dart';
 
 class CustomTextRow extends StatelessWidget {

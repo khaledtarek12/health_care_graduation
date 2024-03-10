@@ -11,22 +11,27 @@ class Splash2 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(
-        left: orientation == Orientation.portrait ? 8 : 80, // left
-        top: orientation == Orientation.portrait ? 200 : 100, // top
-        right: orientation == Orientation.portrait ? 8 : 80, // right
-      ), // bottom
-      child: const Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            'Enter your medication appointments and let us remind you ',
-            style: style28,
-            textAlign: TextAlign.center,
-          ),
-          SizedBox(height: 80),
-        ],
+    return Material(
+      type: MaterialType.transparency,
+      child: Padding(
+        padding: EdgeInsets.only(
+          left: orientation == Orientation.portrait ? 8 : 80, // left
+          top: orientation == Orientation.portrait
+              ? MediaQuery.of(context).size.height * .55
+              : 100, // top
+          right: orientation == Orientation.portrait ? 8 : 80, // right
+        ), // bottom
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              'Enter your medication appointments and let us remind you ',
+              style: style25.copyWith(color: Colors.white),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 80),
+          ],
+        ),
       ),
     );
   }

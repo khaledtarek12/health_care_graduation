@@ -3,7 +3,7 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:health_care/Featuers/admin/views/widget/edit_current_doctor.dart';
-import 'package:health_care/Featuers/const.dart';
+import 'package:health_care/const.dart';
 import 'package:health_care/core/helper/transation.dart';
 import 'package:health_care/core/utils/styles.dart';
 

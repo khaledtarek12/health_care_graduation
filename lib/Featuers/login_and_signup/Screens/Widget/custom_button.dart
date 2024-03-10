@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:health_care/Featuers/const.dart';
+import 'package:health_care/const.dart';
 import 'package:health_care/core/utils/styles.dart';
 
 class CusttomButton extends StatelessWidget {

@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:health_care/Featuers/admin/views/admin_view_page.dart';
 
-import 'package:health_care/Featuers/const.dart';
+import 'package:health_care/const.dart';
 import 'package:health_care/Featuers/doctor_pages/views/doctor_homepage.dart';
 import 'package:health_care/Featuers/doctor_pages/views/my_patient.dart';
 import 'package:health_care/Featuers/firebase_options.dart';
@@ -13,6 +13,7 @@ import 'package:health_care/Featuers/login_and_signup/Screens/login_home_page.da
 import 'package:health_care/Featuers/patient_pages/cubits/alarm/alarm_data_cubit.dart';
 import 'package:health_care/Featuers/patient_pages/data/services/local_notification.service.dart';
 import 'package:health_care/Featuers/screen_splash/views/splash_view.dart';
+import 'package:health_care/Featuers/screen_splash/views/widgets/splash_screen.dart';
 
 import 'Featuers/login_and_signup/Screens/entier_doctor_chatcall_page.dart';
 import 'Featuers/login_and_signup/Screens/signup_home_page.dart';
@@ -47,6 +48,7 @@ class ChatApp extends StatelessWidget {
         routes: {
           DoctorHomepage.id: (context) => const DoctorHomepage(),
           AdminViewPage.id: (context) => const AdminViewPage(),
+          SplashScreen.id: (context) => const SplashScreen(),
           Mypatients.id: (context) => const Mypatients(),
           PatientView.id: (context) => const PatientView(),
           LoginHomePage.id: (context) => const LoginHomePage(),
@@ -56,7 +58,7 @@ class ChatApp extends StatelessWidget {
           EntierCallChatScreen.id: (context) => const EntierCallChatScreen()
         },
         debugShowCheckedModeBanner: false,
-        initialRoute: SplashViewHome.id,
+        initialRoute: SplashScreen.id,
         theme:
             ThemeData.light().copyWith(scaffoldBackgroundColor: kPrimaryColor),
       ),

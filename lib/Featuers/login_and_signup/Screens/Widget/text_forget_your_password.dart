@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:health_care/Featuers/const.dart';
+import 'package:health_care/const.dart';
 import 'package:health_care/Featuers/forget_passwords/forget_view.dart';
 
 class TextForgetYourPassword extends StatelessWidget {

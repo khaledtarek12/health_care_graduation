@@ -1,6 +1,6 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
-import 'package:health_care/Featuers/const.dart';
+import 'package:health_care/const.dart';
 import 'package:health_care/Featuers/patient_pages/views/widget/add_bottom_sheet.dart';
 import 'package:health_care/core/utils/styles.dart';
 

@@ -49,7 +49,7 @@ class _LoginHomePageState extends State<LoginHomePage> {
           isLoading = true;
         } else if (state is LoginSucessful) {
           BlocProvider.of<ChatCubit>(context).getMessages();
-
+          showSuccessSnackBar(context: context, message: 'Login Successfuly');
           if (selectedGender == 'Doctor') {
             Navigator.pushNamed(context, DoctorHomepage.id, arguments: email);
           } else if (selectedGender == 'Patient') {
@@ -57,13 +57,14 @@ class _LoginHomePageState extends State<LoginHomePage> {
           } else if (selectedGender == 'Admin') {
             Navigator.pushNamed(context, AdminViewPage.id, arguments: email);
           } else {
-            showSnackBar(
-                context, 'Please select a gender : Doctor or Patient?');
+            showErrorSnackBar(
+                context: context,
+                message: 'Please select a gender : Doctor or Patient?');
           }
           isLoading = false;
         }
         if (state is LoginFailuer) {
-          showSnackBar(context, state.errorMessage);
+          showErrorSnackBar(context: context, message: state.errorMessage);
           isLoading = false;
         }
       },

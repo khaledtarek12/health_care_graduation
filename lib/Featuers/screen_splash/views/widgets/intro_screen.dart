@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:health_care/core/utils/splacsh_images.dart';
 import 'package:health_care/core/widgets/box_decoration.dart';
 
-class Intro2 extends StatelessWidget {
-  const Intro2({super.key});
+class IntroScreen extends StatelessWidget {
+  const IntroScreen({super.key, required this.assetName});
 
-  static const id = 'Intro2';
+  static const id = 'IntroScreen';
+  final String assetName;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         image: DecorationImage(
           fit: BoxFit.fill,
-          image: AssetImage(intro2),
+          image: AssetImage(assetName),
         ),
       ),
       child: SizedBox(

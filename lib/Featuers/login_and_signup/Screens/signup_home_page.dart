@@ -4,7 +4,7 @@ import 'package:health_care/Featuers/login_and_signup/Screens/Widget/custom_awso
 import 'package:health_care/Featuers/login_and_signup/Screens/Widget/cutom_row_devider.dart';
 import 'package:health_care/Featuers/login_and_signup/Screens/Widget/text_form_validator_field.dart';
 import 'package:health_care/Featuers/login_and_signup/Screens/Widget/text_without_field.dart';
-import 'package:health_care/Featuers/const.dart';
+import 'package:health_care/const.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
@@ -47,7 +47,7 @@ class _SignupHomePageState extends State<SignupHomePage> {
           isLoading = false;
         }
         if (state is Registerailuer) {
-          showSnackBar(context, state.errorMessage);
+          showErrorSnackBar(context: context, message: state.errorMessage);
           isLoading = false;
         }
       },

@@ -1,4 +1,4 @@
-import 'package:health_care/Featuers/const.dart';
+import 'package:health_care/const.dart';
 
 class MessageModel {
   final String message;
