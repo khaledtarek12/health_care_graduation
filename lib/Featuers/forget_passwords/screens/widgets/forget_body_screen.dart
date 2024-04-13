@@ -10,14 +10,13 @@ class ForgetPasswordBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: CustomContainer(
-        child: SendCodeSection(
-          onTap: () {
-            Get.to(() => const OtpView(),
-                transition: Transition.downToUp, duration: kDuration);
-          },
-        ),
+    return CustomContainer(
+      title: 'ForgetPassword',
+      child: SendCodeSection(
+        onTap: () {
+          Get.to(() => const OtpView(),
+              transition: Transition.downToUp, duration: kDuration);
+        },
       ),
     );
   }

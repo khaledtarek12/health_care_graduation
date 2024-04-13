@@ -1,3 +1,5 @@
+// ignore_for_file: body_might_complete_normally_nullable
+
 import 'package:health_care/core/widgets/custom_container.dart';
 import 'package:health_care/Featuers/login_and_signup/Screens/Widget/custom_button.dart';
 import 'package:health_care/Featuers/login_and_signup/Screens/Widget/custom_awsome_icons.dart';
@@ -56,25 +58,16 @@ class _SignupHomePageState extends State<SignupHomePage> {
           inAsyncCall: isLoading,
           child: Scaffold(
             body: CustomContainer(
+              title: 'Create a new Account',
               child: Form(
                 key: formkey,
                 child: ListView(
                   physics: const BouncingScrollPhysics(),
                   children: [
-                    const Center(
-                      child: Text(
-                        'Create a new Account',
-                        style: TextStyle(
-                          fontSize: 25,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
                     SizedBox(
                       height: MediaQuery.of(context).size.height * .05,
                     ),
                     CustomFormTextField(
-                      // ignore: body_might_complete_normally_nullable
                       validator: (value) {
                         if (value!.isEmpty) {
                           return 'value is empty';
@@ -90,7 +83,6 @@ class _SignupHomePageState extends State<SignupHomePage> {
                       prefexIcon: const Icon(Icons.mail),
                     ),
                     CustomFormTextField(
-                      // ignore: body_might_complete_normally_nullable
                       validator: (value) {
                         if (value!.isEmpty) {
                           return 'value is empty';
@@ -105,14 +97,24 @@ class _SignupHomePageState extends State<SignupHomePage> {
                       sufxIcon: iconButtonChange(),
                     ),
                     CustomFormTextField(
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return 'value is empty';
+                        }
+                      },
                       obSecureText: obSecureText,
                       hint: 'Confirm Password',
                       prefexIcon: const Icon(Icons.lock),
                       sufxIcon: iconButtonChange(),
                     ),
-                    const CustomTextField(
+                    CustomFormTextField(
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return 'value is empty';
+                        }
+                      },
                       hint: 'Enter your phone',
-                      prefexIcon: Icon(Icons.phone),
+                      prefexIcon: const Icon(Icons.phone),
                     ),
                     const SizedBox(
                       height: 15,

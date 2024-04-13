@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:health_care/Featuers/login_and_signup/Screens/Widget/custom_button.dart';
 import 'package:health_care/Featuers/login_and_signup/Screens/Widget/text_form_validator_field.dart';
-import 'package:health_care/core/utils/styles.dart';
 import 'package:health_care/core/widgets/custom_container.dart';
 
 class AddNewDoctor extends StatefulWidget {
@@ -28,17 +27,12 @@ class _AddNewDoctorState extends State<AddNewDoctor> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: CustomContainer(
+        title: 'Add New Doctor',
         child: Form(
           key: formkey,
           child: ListView(
             physics: const BouncingScrollPhysics(),
             children: [
-              const Center(
-                child: Text(
-                  'Add New Doctor',
-                  style: style25,
-                ),
-              ),
               SizedBox(
                 height: MediaQuery.of(context).size.height * .05,
               ),

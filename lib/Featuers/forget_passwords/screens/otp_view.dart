@@ -33,57 +33,55 @@ class OtpView extends StatelessWidget {
 
     return SafeArea(
       child: Scaffold(
-        body: SingleChildScrollView(
-          child: CustomContainer(
-            child: Column(
-              children: [
-                const SizedBox(height: 25),
-                const Text(
-                  textAlign: TextAlign.center,
-                  'OTP Verification',
-                  style: style25,
-                ),
-                const SizedBox(height: 15),
-                const Opacity(
-                    opacity: .6,
+        body: CustomContainer(
+          child: Column(
+            children: [
+              const SizedBox(height: 25),
+              const Text(
+                textAlign: TextAlign.center,
+                'OTP Verification',
+                style: style25,
+              ),
+              const SizedBox(height: 15),
+              const Opacity(
+                  opacity: .6,
+                  child: Text(
+                    textAlign: TextAlign.center,
+                    'Enter the verification code we just sent  on your email address.',
+                    style: styleNormal,
+                  )),
+              const SizedBox(height: 40),
+              Pinput(
+                focusedPinTheme: focusTheme,
+                defaultPinTheme: defaultTheme,
+                submittedPinTheme: focusTheme,
+              ),
+              const SizedBox(height: 40),
+              CusttomButton(
+                text: 'Verify',
+                onTap: () {
+                  Get.to(() => const CreateNewPassword(),
+                      transition: Transition.downToUp, duration: kDuration);
+                },
+              ),
+              const Spacer(),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'Didn\'t received code ?',
+                    style: style15.copyWith(color: Colors.black),
+                  ),
+                  GestureDetector(
+                    onTap: () {},
                     child: Text(
-                      textAlign: TextAlign.center,
-                      'Enter the verification code we just sent  on your email address.',
-                      style: styleNormal,
-                    )),
-                const SizedBox(height: 40),
-                Pinput(
-                  focusedPinTheme: focusTheme,
-                  defaultPinTheme: defaultTheme,
-                  submittedPinTheme: focusTheme,
-                ),
-                const SizedBox(height: 40),
-                CusttomButton(
-                  text: 'Verify',
-                  onTap: () {
-                    Get.to(() => const CreateNewPassword(),
-                        transition: Transition.downToUp, duration: kDuration);
-                  },
-                ),
-                const Spacer(),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'Didn\'t received code ?',
-                      style: style15.copyWith(color: Colors.black),
+                      '   Resend',
+                      style: style15.copyWith(color: kPrimaryColor),
                     ),
-                    GestureDetector(
-                      onTap: () {},
-                      child: Text(
-                        '   Resend',
-                        style: style15.copyWith(color: kPrimaryColor),
-                      ),
-                    ),
-                  ],
-                )
-              ],
-            ),
+                  ),
+                ],
+              )
+            ],
           ),
         ),
       ),

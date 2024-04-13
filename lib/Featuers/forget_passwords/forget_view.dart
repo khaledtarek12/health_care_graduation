@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:health_care/const.dart';
 import 'package:health_care/Featuers/forget_passwords/screens/widgets/forget_body_screen.dart';
 
 class ForgetPasswordView extends StatelessWidget {
@@ -7,9 +6,6 @@ class ForgetPasswordView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      backgroundColor: kPrimaryColor,
-      body: ForgetPasswordBody(),
-    );
+    return const ForgetPasswordBody();
   }
 }

@@ -14,19 +14,9 @@ class Mypatients extends StatelessWidget {
 
     return Scaffold(
       body: CustomContainer(
+        title: "My Patients",
         child:
             CustomScrollView(physics: const BouncingScrollPhysics(), slivers: [
-          const SliverToBoxAdapter(
-              child: Center(
-            child: Text(
-              "My Patients",
-              style: TextStyle(
-                color: Color(0xff101A48),
-                fontSize: 27,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-          )),
           SliverToBoxAdapter(
               child: CardListBuilder(
             email: email,

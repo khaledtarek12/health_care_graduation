@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:health_care/Featuers/login_and_signup/Screens/Widget/custom_button.dart';
 import 'package:health_care/Featuers/login_and_signup/Screens/Widget/text_form_validator_field.dart';
-import 'package:health_care/core/utils/styles.dart';
 import 'package:health_care/core/widgets/custom_container.dart';
 
 class EditCurrentDoctor extends StatefulWidget {
@@ -28,17 +27,12 @@ class _EditCurrentDoctorState extends State<EditCurrentDoctor> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: CustomContainer(
+        title: 'Edit the Informations',
         child: Form(
           key: formkey,
           child: ListView(
             physics: const BouncingScrollPhysics(),
             children: [
-              const Center(
-                child: Text(
-                  'Add New Doctor',
-                  style: style25,
-                ),
-              ),
               SizedBox(
                 height: MediaQuery.of(context).size.height * .05,
               ),
@@ -46,6 +40,7 @@ class _EditCurrentDoctorState extends State<EditCurrentDoctor> {
                 children: [
                   Expanded(
                     child: CustomFormTextField(
+                      prefexIcon: const Icon(Icons.person),
                       hint: 'First name',
                       validator: (value) {
                         if (value!.isEmpty) {
@@ -58,6 +53,7 @@ class _EditCurrentDoctorState extends State<EditCurrentDoctor> {
                   const SizedBox(width: 20),
                   Expanded(
                     child: CustomFormTextField(
+                      prefexIcon: const Icon(Icons.person),
                       hint: 'Last name',
                       validator: (value) {
                         if (value!.isEmpty) {

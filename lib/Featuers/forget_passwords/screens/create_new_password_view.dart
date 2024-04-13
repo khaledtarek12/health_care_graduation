@@ -21,44 +21,42 @@ class _CreateNewPasswordState extends State<CreateNewPassword> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: CustomContainer(
-          child: Column(
-            children: [
-              const SizedBox(height: 25),
-              const Text(
-                'Create new password',
-                style: style25,
-              ),
-              const SizedBox(height: 15),
-              const Opacity(
-                  opacity: .6,
-                  child: Text(
-                    textAlign: TextAlign.center,
-                    'Your new password must be unique from those previously used.',
-                    style: styleNormal,
-                  )),
-              const SizedBox(height: 40),
-              CustomFormTextField(
-                hint: 'new password',
-                sufxIcon: iconButtonChange(),
-                obSecureText: obSecureText,
-              ),
-              CustomFormTextField(
-                hint: 'confirm  password',
-                sufxIcon: iconButtonChange(),
-                obSecureText: obSecureText,
-              ),
-              const SizedBox(height: 30),
-              CusttomButton(
-                text: 'Reset Password',
-                onTap: () {
-                  Get.to(() => const PasswordCreatedSuccefuly(),
-                      transition: Transition.downToUp, duration: kDuration);
-                },
-              )
-            ],
-          ),
+      body: CustomContainer(
+        child: Column(
+          children: [
+            const SizedBox(height: 25),
+            const Text(
+              'Create new password',
+              style: style25,
+            ),
+            const SizedBox(height: 15),
+            const Opacity(
+                opacity: .6,
+                child: Text(
+                  textAlign: TextAlign.center,
+                  'Your new password must be unique from those previously used.',
+                  style: styleNormal,
+                )),
+            const SizedBox(height: 40),
+            CustomFormTextField(
+              hint: 'new password',
+              sufxIcon: iconButtonChange(),
+              obSecureText: obSecureText,
+            ),
+            CustomFormTextField(
+              hint: 'confirm  password',
+              sufxIcon: iconButtonChange(),
+              obSecureText: obSecureText,
+            ),
+            const SizedBox(height: 30),
+            CusttomButton(
+              text: 'Reset Password',
+              onTap: () {
+                Get.to(() => const PasswordCreatedSuccefuly(),
+                    transition: Transition.downToUp, duration: kDuration);
+              },
+            )
+          ],
         ),
       ),
     );

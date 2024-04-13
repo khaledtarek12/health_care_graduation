@@ -86,6 +86,7 @@ void showSuccessSnackBar({
   required String message,
 }) {
   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+    duration: Durations.medium4,
     content: Stack(
       clipBehavior: Clip.none,
       children: [

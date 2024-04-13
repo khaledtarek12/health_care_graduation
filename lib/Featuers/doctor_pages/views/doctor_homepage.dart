@@ -13,6 +13,7 @@ class DoctorHomepage extends StatelessWidget {
     var email = ModalRoute.of(context)!.settings.arguments;
     return Scaffold(
       body: CustomContainer(
+        
         child:
             CustomScrollView(physics: const BouncingScrollPhysics(), slivers: [
           //image

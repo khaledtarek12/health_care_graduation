@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:health_care/core/utils/styles.dart';
 import 'package:health_care/core/widgets/custom_container.dart';
 import 'package:health_care/Featuers/patient_pages/cubits/alarm/alarm_data_cubit.dart';
 import 'package:health_care/Featuers/patient_pages/views/widget/add_alarm_button.dart';
@@ -17,9 +16,10 @@ class _DatePickerPgaeState extends State<DatePickerPgae> {
   @override
   Widget build(BuildContext context) {
     return CustomContainer(
+      title: 'Alarms',
       child: Column(
         children: [
-          Text('Alarms', style: style25.copyWith(fontSize: 27)),
+          const SizedBox(height: 30),
           Expanded(
             child: BlocBuilder<AlarmDataCubit, AlarmDataState>(
               builder: (context, state) {

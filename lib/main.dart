@@ -59,8 +59,6 @@ class ChatApp extends StatelessWidget {
         },
         debugShowCheckedModeBanner: false,
         initialRoute: SplashScreen.id,
-        theme:
-            ThemeData.light().copyWith(scaffoldBackgroundColor: kPrimaryColor),
       ),
     );
   }

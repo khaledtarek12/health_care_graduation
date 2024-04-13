@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:health_care/Featuers/admin/views/admin_view_page.dart';
-import 'package:health_care/core/utils/styles.dart';
 import 'package:health_care/core/widgets/custom_container.dart';
 import 'package:health_care/Featuers/doctor_pages/views/doctor_homepage.dart';
 import 'package:health_care/Featuers/login_and_signup/Screens/Widget/login_page_bottom_text_row.dart';
@@ -49,13 +48,15 @@ class _LoginHomePageState extends State<LoginHomePage> {
           isLoading = true;
         } else if (state is LoginSucessful) {
           BlocProvider.of<ChatCubit>(context).getMessages();
-          showSuccessSnackBar(context: context, message: 'Login Successfuly');
           if (selectedGender == 'Doctor') {
             Navigator.pushNamed(context, DoctorHomepage.id, arguments: email);
+            showSuccessSnackBar(context: context, message: 'Login Successfuly');
           } else if (selectedGender == 'Patient') {
             Navigator.pushNamed(context, PatientView.id, arguments: email);
+            showSuccessSnackBar(context: context, message: 'Login Successfuly');
           } else if (selectedGender == 'Admin') {
             Navigator.pushNamed(context, AdminViewPage.id, arguments: email);
+            showSuccessSnackBar(context: context, message: 'Login Successfuly');
           } else {
             showErrorSnackBar(
                 context: context,
@@ -73,20 +74,12 @@ class _LoginHomePageState extends State<LoginHomePage> {
           inAsyncCall: isLoading,
           child: Scaffold(
             body: CustomContainer(
+              title: 'Login to your Account',
               child: Form(
                 key: formkey,
                 child: ListView(
                   physics: const BouncingScrollPhysics(),
                   children: [
-                    const Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          'Login to your Account',
-                          style: style25,
-                        ),
-                      ],
-                    ),
                     SizedBox(
                       height: MediaQuery.of(context).size.height * .1,
                     ),
@@ -162,10 +155,10 @@ class _LoginHomePageState extends State<LoginHomePage> {
                       height: 25,
                     ),
                     const TextForgetYourPassword(),
-                    const CustomRowDevider(),
                     const SizedBox(
                       height: 5,
                     ),
+                    const CustomRowDevider(),
                     const IconSocialMedia(),
                     SizedBox(
                       height: MediaQuery.of(context).size.height * .18,

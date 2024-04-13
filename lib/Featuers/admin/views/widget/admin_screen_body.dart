@@ -14,8 +14,8 @@ class AdminScreenBody extends StatelessWidget {
     return Scaffold(
       extendBody: true,
       floatingActionButton: SizedBox(
-        height: 70,
-        width: 70,
+        height: 50,
+        width: 50,
         child: FloatingActionButton(
           backgroundColor: kPrimaryColor,
           shape: const CircleBorder(),
@@ -26,21 +26,24 @@ class AdminScreenBody extends StatelessWidget {
           child: const Icon(
             Icons.add,
             color: Colors.white,
-            size: 50,
+            size: 30,
           ),
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: const BottomAppBar(
         color: kPrimaryColor,
-        height: 75,
+        height: 60,
         shape: CircularNotchedRectangle(),
       ),
       body: CustomContainer(
         child: ListView.builder(
           itemCount: 1,
           itemBuilder: (context, index) {
-            return const DoctorCard();
+            return const Padding(
+              padding: EdgeInsets.only(top: 30),
+              child: DoctorCard(),
+            );
           },
         ),
       ),
