@@ -6,7 +6,7 @@ import 'package:health_care/const.dart';
 import 'package:health_care/Featuers/patient_pages/views/widget/location.dart';
 
 import 'widget/patient_view_body.dart';
-import 'widget/date_picker.dart';
+import 'widget/alarm_view_page.dart';
 
 class PatientView extends StatefulWidget {
   const PatientView({super.key});
@@ -60,7 +60,7 @@ class _PatientViewState extends State<PatientView> {
         rightCornerRadius: 32,
         blurEffect: true,
         shadow: BoxShadow(
-            color: kPrimaryColor.withOpacity(.4),
+            color: kPrimaryColor.withOpacity(.5),
             blurRadius: 8,
             spreadRadius: 2,
             offset: const Offset(4, 4)),
