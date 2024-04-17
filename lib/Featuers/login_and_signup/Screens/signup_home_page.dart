@@ -2,8 +2,8 @@
 
 import 'package:health_care/core/widgets/custom_container.dart';
 import 'package:health_care/Featuers/login_and_signup/Screens/Widget/custom_button.dart';
-import 'package:health_care/Featuers/login_and_signup/Screens/Widget/custom_awsome_icons.dart';
-import 'package:health_care/Featuers/login_and_signup/Screens/Widget/cutom_row_devider.dart';
+// import 'package:health_care/Featuers/login_and_signup/Screens/Widget/custom_awsome_icons.dart';
+// import 'package:health_care/Featuers/login_and_signup/Screens/Widget/cutom_row_devider.dart';
 import 'package:health_care/Featuers/login_and_signup/Screens/Widget/text_form_validator_field.dart';
 import 'package:health_care/Featuers/login_and_signup/Screens/Widget/text_without_field.dart';
 import 'package:health_care/const.dart';
@@ -65,7 +65,7 @@ class _SignupHomePageState extends State<SignupHomePage> {
                   physics: const BouncingScrollPhysics(),
                   children: [
                     SizedBox(
-                      height: MediaQuery.of(context).size.height * .05,
+                      height: MediaQuery.of(context).size.height * .11,
                     ),
                     CustomFormTextField(
                       validator: (value) {
@@ -116,9 +116,7 @@ class _SignupHomePageState extends State<SignupHomePage> {
                       hint: 'Enter your phone',
                       prefexIcon: const Icon(Icons.phone),
                     ),
-                    const SizedBox(
-                      height: 15,
-                    ),
+
                     const CustomTextField(
                       hint: 'Doctor',
                       prefexIcon: Icon(Icons.person_add_alt_1_sharp),
@@ -136,13 +134,13 @@ class _SignupHomePageState extends State<SignupHomePage> {
                       },
                       text: 'Register',
                     ),
-                    const CustomRowDevider(),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    const IconSocialMedia(),
+                    // const CustomRowDevider(),
+                    // const SizedBox(
+                    //   height: 15,
+                    // ),
+                    // const IconSocialMedia(),
                     SizedBox(
-                      height: MediaQuery.of(context).size.height * .10,
+                      height: MediaQuery.of(context).size.height * .15,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
