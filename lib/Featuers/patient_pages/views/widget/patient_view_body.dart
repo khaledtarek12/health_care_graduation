@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:health_care/Featuers/patient_pages/views/widget/custom_stack_card.dart';
-import 'package:health_care/const.dart';
-import 'package:health_care/core/utils/styles.dart';
+import 'package:health_care/Featuers/patient_pages/views/widget/heart_beat_view.dart';
+import 'package:health_care/core/helper/transation.dart';
 import 'package:health_care/core/widgets/custom_container.dart';
 
 class PatientViewBody extends StatelessWidget {
@@ -45,6 +46,7 @@ class PatientViewBody extends StatelessWidget {
                   CustomStackCard(
                     child: SvgPicture.asset(
                         'assets/images/chat-line-svgrepo-com.svg',
+                        // ignore: deprecated_member_use
                         color: Colors.white.withOpacity(.8),
                         fit: BoxFit.contain),
                   ),
@@ -52,8 +54,13 @@ class PatientViewBody extends StatelessWidget {
                     child: SvgPicture.asset(
                       'assets/images/heart-beat-svgrepo-com.svg',
                       fit: BoxFit.contain,
+                      // ignore: deprecated_member_use
                       color: Colors.white.withOpacity(.8),
                     ),
+                    onTap: () {
+                      Get.to(() => const HeartBeatView(),
+                          transition: Motivation.zoomTransition());
+                    },
                   ),
                 ],
               ),

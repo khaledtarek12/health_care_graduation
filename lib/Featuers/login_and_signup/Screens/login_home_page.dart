@@ -9,8 +9,8 @@ import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import '../../../core/helper/show_snackbar.dart';
 import '../../patient_pages/views/patient_view.dart';
 import 'Widget/custom_button.dart';
-// import 'Widget/custom_awsome_icons.dart';
-// import 'Widget/cutom_row_devider.dart';
+import 'Widget/custom_awsome_icons.dart';
+import 'Widget/cutom_row_devider.dart';
 import 'Widget/cutom_row_radiobutton.dart';
 import 'Widget/text_form_validator_field.dart';
 import '../cubits/chat/chat_cubit.dart';
@@ -81,7 +81,7 @@ class _LoginHomePageState extends State<LoginHomePage> {
                   physics: const BouncingScrollPhysics(),
                   children: [
                     SizedBox(
-                      height: MediaQuery.of(context).size.height * .19,
+                      height: MediaQuery.of(context).size.height * .1,
                     ),
                     CustomFormTextField(
                       // ignore: body_might_complete_normally_nullable
@@ -158,8 +158,8 @@ class _LoginHomePageState extends State<LoginHomePage> {
                     const SizedBox(
                       height: 5,
                     ),
-                    // const CustomRowDevider(),
-                    // const IconSocialMedia(),
+                    const CustomRowDevider(),
+                    const IconSocialMedia(),
                     SizedBox(
                       height: MediaQuery.of(context).size.height * .2,
                     ),
