@@ -50,22 +50,42 @@ class _LoginHomePageState extends State<LoginHomePage> {
           BlocProvider.of<ChatCubit>(context).getMessages();
           if (selectedGender == 'Doctor') {
             Navigator.pushNamed(context, DoctorHomepage.id, arguments: email);
-            showSuccessSnackBar(context: context, message: 'Login Successfuly');
+            showSuccessgDialog(
+                context: context,
+                message: 'Login Successfuly',
+                btnOkOnPress: () {});
           } else if (selectedGender == 'Patient') {
             Navigator.pushNamed(context, PatientView.id, arguments: email);
-            showSuccessSnackBar(context: context, message: 'Login Successfuly');
-          } else if (selectedGender == 'Admin') {
-            Navigator.pushNamed(context, AdminViewPage.id, arguments: email);
-            showSuccessSnackBar(context: context, message: 'Login Successfuly');
-          } else {
-            showErrorSnackBar(
+            showSuccessgDialog(
                 context: context,
-                message: 'Please select a gender : Doctor or Patient?');
+                message: 'Login Successfuly',
+                btnOkOnPress: () {});
+          } else if (selectedGender == 'Admin') {
+            Navigator.pushNamed(
+              context,
+              AdminViewPage.id,
+              arguments: email,
+            );
+            showSuccessgDialog(
+              context: context,
+              message: 'Login Successfuly',
+              btnOkOnPress: () {},
+            );
+          } else {
+            showErrorgDialog(
+              context: context,
+              message: 'Please select a gender : Doctor or Patient?',
+              btnOkOnPress: () {},
+            );
           }
           isLoading = false;
         }
         if (state is LoginFailuer) {
-          showErrorSnackBar(context: context, message: state.errorMessage);
+          showErrorgDialog(
+            context: context,
+            message: state.errorMessage,
+            btnOkOnPress: () {},
+          );
           isLoading = false;
         }
       },

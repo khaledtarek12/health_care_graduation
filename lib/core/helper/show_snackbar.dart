@@ -1,5 +1,7 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:health_care/const.dart';
 import 'package:health_care/core/utils/styles.dart';
 
 void showErrorSnackBar(
@@ -250,4 +252,67 @@ void showWarrinngSnackBar({
     backgroundColor: Colors.transparent,
     elevation: 0,
   ));
+}
+
+void showWarringDialog({
+  required BuildContext context,
+  required String message,
+  void Function()? btnCancelOnPress,
+  void Function()? btnOkOnPress,
+}) {
+  AwesomeDialog(
+    context: context,
+    dialogType: DialogType.question,
+    animType: AnimType.bottomSlide,
+    title: 'Warring',
+    desc: message,
+    descTextStyle: style15,
+    btnCancelOnPress: btnCancelOnPress,
+    btnOkOnPress: btnOkOnPress,
+    dismissOnBackKeyPress: true,
+    keyboardAware: true,
+  ).show();
+}
+
+void showErrorgDialog({
+  required BuildContext context,
+  required String message,
+  void Function()? btnOkOnPress,
+}) {
+  AwesomeDialog(
+    context: context,
+    dialogType: DialogType.error,
+    animType: AnimType.bottomSlide,
+    title: 'Error',
+    titleTextStyle: style15.copyWith(color: Colors.red.shade700, fontSize: 18),
+    desc: message,
+    descTextStyle: style15.copyWith(color: Colors.red.shade700, fontSize: 18),
+    btnOkOnPress: btnOkOnPress,
+    btnOkColor: Colors.red,
+    btnOkIcon: Icons.cancel,
+    dialogBackgroundColor: Colors.white70,
+    dismissOnBackKeyPress: true,
+    autoHide: const Duration(seconds: 4),
+  ).show();
+}
+
+void showSuccessgDialog({
+  required BuildContext context,
+  required String message,
+  void Function()? btnOkOnPress,
+}) {
+  AwesomeDialog(
+    context: context,
+    dialogType: DialogType.success,
+    animType: AnimType.bottomSlide,
+    title: 'Success',
+    titleTextStyle: style15.copyWith(color: kPrimaryColor, fontSize: 18),
+    desc: message,
+    descTextStyle: style15.copyWith(color: kPrimaryColor, fontSize: 18),
+    btnOkOnPress: btnOkOnPress,
+    btnOkColor: Colors.green,
+    dialogBackgroundColor: Colors.white70,
+    dismissOnBackKeyPress: true,
+    autoHide: const Duration(seconds: 4),
+  ).show();
 }

@@ -129,6 +129,14 @@ class _SignupHomePageState extends State<SignupHomePage> {
                         if (formkey.currentState!.validate()) {
                           BlocProvider.of<RegisterCubit>(context)
                               .userRegister(email: email!, password: password!);
+                          showSuccessgDialog(
+                              context: context,
+                              message: "Your account created successfully");
+                        } else {
+                          showErrorgDialog(
+                              context: context,
+                              message:
+                                  "There was an error, please try again...");
                         }
                       },
                       text: 'Register',
