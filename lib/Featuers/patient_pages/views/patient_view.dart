@@ -50,7 +50,7 @@ class _PatientViewState extends State<PatientView> {
           return Icon(
             iconData,
             color: isActive ? Colors.white : Colors.black,
-            size: isActive ? 55 : 30,
+            size: isActive ? 55 : 40,
           );
         },
         height: 70,

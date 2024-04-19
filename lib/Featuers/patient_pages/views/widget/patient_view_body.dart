@@ -3,7 +3,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:health_care/Featuers/patient_pages/views/widget/custom_stack_card.dart';
 import 'package:health_care/Featuers/patient_pages/views/widget/heart_beat_view.dart';
+import 'package:health_care/const.dart';
 import 'package:health_care/core/helper/transation.dart';
+import 'package:health_care/core/utils/styles.dart';
 import 'package:health_care/core/widgets/custom_container.dart';
 
 class PatientViewBody extends StatelessWidget {
@@ -17,6 +19,7 @@ class PatientViewBody extends StatelessWidget {
       isLogout: true,
       child: SingleChildScrollView(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const SizedBox(height: 25),
             Container(
@@ -26,14 +29,23 @@ class PatientViewBody extends StatelessWidget {
                 borderRadius: BorderRadius.circular(50),
                 image: const DecorationImage(
                     image: AssetImage(
-                      'assets/images/clinical-trial-icon-2793430_1280.png',
+                      'assets/images/healthcare.png',
                     ),
                     fit: BoxFit.fill),
               ),
             ),
+            const SizedBox(height: 20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Icon(Icons.person_3, color: Colors.white, size: 45),
+                const SizedBox(width: 12),
+                Text('Khaled ', style: style25.copyWith(color: kPrimaryColor)),
+                Text(' Tarek', style: style25.copyWith(color: Colors.white)),
+              ],
+            ),
             const SizedBox(
-                height:
-                    100), // Add some spacing between the image and grid view
+                height: 70), // Add some spacing between the image and grid view
             SizedBox(
               height: 300, // Set a fixed height for the GridView
               child: GridView(
