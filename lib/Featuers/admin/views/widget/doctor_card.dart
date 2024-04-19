@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:health_care/Featuers/admin/views/widget/edit_current_doctor.dart';
 import 'package:health_care/const.dart';
+import 'package:health_care/core/helper/show_snackbar.dart';
 import 'package:health_care/core/helper/transation.dart';
 import 'package:health_care/core/utils/styles.dart';
 
@@ -46,9 +47,16 @@ class DoctorCard extends StatelessWidget {
                 label: 'Edit',
               ),
               SlidableAction(
-                onPressed: (context) {},
+                onPressed: (slideContext) {
+                  showQuesstionDialog(
+                    context: context,
+                    message: 'Are you sure to delete Doctor Card',
+                    btnOkOnPress: () {},
+                    btnCancelOnPress: () {},
+                  );
+                },
                 backgroundColor: const Color.fromARGB(255, 165, 36, 3),
-                foregroundColor: Colors.white,
+                foregroundColor: const Color.fromARGB(255, 51, 23, 23),
                 icon: FontAwesomeIcons.trash,
                 label: 'Delete',
               ),

@@ -5,7 +5,6 @@ import 'package:health_care/Featuers/login_and_signup/Screens/Widget/text_form_v
 import 'package:health_care/Featuers/patient_pages/cubits/alarm/alarm_data_cubit.dart';
 import 'package:health_care/Featuers/patient_pages/data/model/alarm_info.module.dart';
 import 'package:health_care/Featuers/patient_pages/views/widget/repeat_interval_houres.dart';
-import 'package:health_care/core/helper/show_snackbar.dart';
 import 'package:health_care/core/utils/styles.dart';
 import 'package:uuid/uuid.dart';
 
@@ -102,11 +101,6 @@ class _BottomSheetpageState extends State<BottomSheetpage> {
                 BlocProvider.of<AlarmDataCubit>(context)
                     .addAlarm(alarm: alarmInfo);
                 Navigator.pop(context);
-                showSuccessgDialog(
-                  context: context,
-                  message: 'Alarm added successfully',
-                  btnOkOnPress: () {},
-                );
               },
             ),
           ],

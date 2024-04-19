@@ -51,15 +51,15 @@ class _LoginHomePageState extends State<LoginHomePage> {
           if (selectedGender == 'Doctor') {
             Navigator.pushNamed(context, DoctorHomepage.id, arguments: email);
             showSuccessgDialog(
-                context: context,
-                message: 'Login Successfuly',
-                btnOkOnPress: () {});
+              dialogContext: context,
+              message: 'Login Successfuly',
+            );
           } else if (selectedGender == 'Patient') {
             Navigator.pushNamed(context, PatientView.id, arguments: email);
             showSuccessgDialog(
-                context: context,
-                message: 'Login Successfuly',
-                btnOkOnPress: () {});
+              dialogContext: context,
+              message: 'Login Successfuly',
+            );
           } else if (selectedGender == 'Admin') {
             Navigator.pushNamed(
               context,
@@ -67,9 +67,8 @@ class _LoginHomePageState extends State<LoginHomePage> {
               arguments: email,
             );
             showSuccessgDialog(
-              context: context,
+              dialogContext: context,
               message: 'Login Successfuly',
-              btnOkOnPress: () {},
             );
           } else {
             showErrorgDialog(

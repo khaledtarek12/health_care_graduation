@@ -66,10 +66,10 @@ class _CustomAlarmCardState extends State<CustomAlarmCard> {
                     label: 'Edit',
                   ),
                   SlidableAction(
-                    onPressed: (context) {
+                    onPressed: (slidContext) {
                       showQuesstionDialog(
                         context: context,
-                        message: 'Are you sure to delete the alarm',
+                        message: 'Are you sure to delete the alarm?',
                         btnCancelOnPress: () {},
                         btnOkOnPress: () {
                           BlocProvider.of<AlarmDataCubit>(context)

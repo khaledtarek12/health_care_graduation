@@ -130,7 +130,7 @@ class _SignupHomePageState extends State<SignupHomePage> {
                           BlocProvider.of<RegisterCubit>(context)
                               .userRegister(email: email!, password: password!);
                           showSuccessgDialog(
-                              context: context,
+                              dialogContext: context,
                               message: "Your account created successfully");
                         } else {
                           showErrorgDialog(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:health_care/Featuers/login_and_signup/Screens/Widget/custom_button.dart';
 import 'package:health_care/Featuers/login_and_signup/Screens/Widget/text_form_validator_field.dart';
+import 'package:health_care/core/helper/show_snackbar.dart';
 import 'package:health_care/core/widgets/custom_container.dart';
 
 class AddNewDoctor extends StatefulWidget {
@@ -27,6 +28,8 @@ class _AddNewDoctorState extends State<AddNewDoctor> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: CustomContainer(
+        isLeading: true,
+        isLogout: true,
         title: 'Add New Doctor',
         child: Form(
           key: formkey,
@@ -34,7 +37,7 @@ class _AddNewDoctorState extends State<AddNewDoctor> {
             physics: const BouncingScrollPhysics(),
             children: [
               SizedBox(
-                height: MediaQuery.of(context).size.height * .05,
+                height: MediaQuery.of(context).size.height * .15,
               ),
               Row(
                 children: [
@@ -126,6 +129,9 @@ class _AddNewDoctorState extends State<AddNewDoctor> {
                 onTap: () {
                   if (formkey.currentState!.validate()) {
                     Navigator.pop(context);
+                    showSuccessgDialog(
+                        dialogContext: context,
+                        message: 'Doctor Added Successfully');
                   }
                 },
               ),
