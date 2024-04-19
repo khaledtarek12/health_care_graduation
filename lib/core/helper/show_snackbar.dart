@@ -254,7 +254,7 @@ void showWarrinngSnackBar({
   ));
 }
 
-void showWarringDialog({
+void showQuesstionDialog({
   required BuildContext context,
   required String message,
   void Function()? btnCancelOnPress,
@@ -264,12 +264,14 @@ void showWarringDialog({
     context: context,
     dialogType: DialogType.question,
     animType: AnimType.bottomSlide,
-    title: 'Warring',
+    title: 'Question',
+    titleTextStyle: style15.copyWith(color: kPrimaryColor, fontSize: 18),
     desc: message,
-    descTextStyle: style15,
+    descTextStyle: style15.copyWith(color: kPrimaryColor, fontSize: 15),
     btnCancelOnPress: btnCancelOnPress,
     btnOkOnPress: btnOkOnPress,
     dismissOnBackKeyPress: true,
+    dialogBackgroundColor: Colors.white70,
     keyboardAware: true,
   ).show();
 }

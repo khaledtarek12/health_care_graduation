@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:health_care/Featuers/login_and_signup/Screens/login_home_page.dart';
 import 'package:health_care/const.dart';
+import 'package:health_care/core/helper/show_snackbar.dart';
 import 'package:health_care/core/utils/styles.dart';
 
 class CustomContainer extends StatelessWidget {
@@ -10,14 +12,12 @@ class CustomContainer extends StatelessWidget {
     this.title,
     this.isLeading = false,
     this.isLogout = false,
-    this.onPressed,
   });
 
   final Widget? child;
   final String? title;
   final bool isLeading;
   final bool isLogout;
-  final void Function()? onPressed;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,7 +33,21 @@ class CustomContainer extends StatelessWidget {
         actions: isLogout
             ? [
                 IconButton(
-                    onPressed: onPressed,
+                    onPressed: () {
+                      showQuesstionDialog(
+                        context: context,
+                        message: 'Are you sure you want to log out?',
+                        btnCancelOnPress: () {},
+                        btnOkOnPress: () {
+                          Navigator.pushAndRemoveUntil(context,
+                              MaterialPageRoute(
+                            builder: (context) {
+                              return const LoginHomePage();
+                            },
+                          ), (route) => false);
+                        },
+                      );
+                    },
                     icon: const Icon(
                       FontAwesomeIcons.rightFromBracket,
                       color: Colors.white,

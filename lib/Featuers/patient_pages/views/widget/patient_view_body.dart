@@ -13,6 +13,8 @@ class PatientViewBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomContainer(
       title: 'Home Page',
+      isLeading: true,
+      isLogout: true,
       child: SingleChildScrollView(
         child: Column(
           children: [

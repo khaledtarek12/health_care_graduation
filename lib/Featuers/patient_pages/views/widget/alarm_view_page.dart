@@ -17,6 +17,8 @@ class _DatePickerPgaeState extends State<DatePickerPgae> {
   Widget build(BuildContext context) {
     return CustomContainer(
       title: 'Alarms',
+      isLeading: true,
+      isLogout: true,
       child: Column(
         children: [
           const SizedBox(height: 30),

@@ -67,8 +67,15 @@ class _CustomAlarmCardState extends State<CustomAlarmCard> {
                   ),
                   SlidableAction(
                     onPressed: (context) {
-                      BlocProvider.of<AlarmDataCubit>(context)
-                          .deleteAlarm(alarm: widget.alarmInfo);
+                      showQuesstionDialog(
+                        context: context,
+                        message: 'Are you sure to delete the alarm',
+                        btnCancelOnPress: () {},
+                        btnOkOnPress: () {
+                          BlocProvider.of<AlarmDataCubit>(context)
+                              .deleteAlarm(alarm: widget.alarmInfo);
+                        },
+                      );
                     },
                     backgroundColor: const Color.fromARGB(255, 165, 36, 3),
                     foregroundColor: Colors.white,

@@ -10,6 +10,14 @@ class HeartBeatView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.blueGrey[900],
+      appBar: AppBar(
+        backgroundColor: Colors.blueGrey[900],
+        leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: const Icon(Icons.arrow_back_ios, color: Colors.white)),
+      ),
       body: Center(
         child: Container(
           color: Colors.blueGrey[900],
