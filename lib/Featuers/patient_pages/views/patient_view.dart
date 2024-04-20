@@ -49,7 +49,7 @@ class _PatientViewState extends State<PatientView> {
           final iconData = items[index];
           return Icon(
             iconData,
-            color: isActive ? Colors.white : Colors.black,
+            color: isActive ? const Color(0xff17455c) : Colors.white70,
             size: isActive ? 55 : 40,
           );
         },
