@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 import 'package:health_care/Featuers/admin/views/admin_view_page.dart';
 
 import 'package:health_care/Featuers/doctor_pages/views/doctor_homepage.dart';
-import 'package:health_care/Featuers/doctor_pages/views/my_patient.dart';
 import 'package:health_care/Featuers/firebase_options.dart';
 import 'package:health_care/Featuers/login_and_signup/Screens/chat_page.dart';
 import 'package:health_care/Featuers/login_and_signup/Screens/login_home_page.dart';
@@ -48,7 +47,6 @@ class ChatApp extends StatelessWidget {
           DoctorHomepage.id: (context) => const DoctorHomepage(),
           AdminViewPage.id: (context) => const AdminViewPage(),
           SplashScreen.id: (context) => const SplashScreen(),
-          Mypatients.id: (context) => const Mypatients(),
           PatientView.id: (context) => const PatientView(),
           LoginHomePage.id: (context) => const LoginHomePage(),
           SplashViewHome.id: (context) => const SplashViewHome(),

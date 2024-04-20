@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:health_care/Featuers/patient_pages/views/widget/custom_stack_card.dart';
 import 'package:health_care/Featuers/patient_pages/views/widget/heart_beat_view.dart';
 import 'package:health_care/const.dart';
 import 'package:health_care/core/helper/transation.dart';
 import 'package:health_care/core/utils/styles.dart';
 import 'package:health_care/core/widgets/custom_container.dart';
+import 'package:health_care/core/widgets/custom_stack_card.dart';
 
 class PatientViewBody extends StatelessWidget {
   const PatientViewBody({super.key});

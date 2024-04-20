@@ -69,7 +69,7 @@ class DoctorCard extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.all(2),
                   child: Image.asset(
-                    'assets/images/doctor (1).png',
+                    'assets/images/doctor.png',
                     fit: BoxFit.fill,
                     width: 100,
                     height: 100,

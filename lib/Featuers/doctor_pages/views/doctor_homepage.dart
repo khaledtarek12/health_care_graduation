@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:health_care/const.dart';
+import 'package:health_care/core/utils/styles.dart';
 import 'package:health_care/core/widgets/custom_container.dart';
 import '../widgets/image.dart';
-import 'my_patient.dart';
+import 'card_patient_list_builder.dart';
 
 class DoctorHomepage extends StatelessWidget {
   const DoctorHomepage({super.key});
@@ -13,9 +15,13 @@ class DoctorHomepage extends StatelessWidget {
     var email = ModalRoute.of(context)!.settings.arguments;
     return Scaffold(
       body: CustomContainer(
-        
-        child:
-            CustomScrollView(physics: const BouncingScrollPhysics(), slivers: [
+        title: 'Doctor Home Page ',
+        isLeading: true,
+        isLogout: true,
+        child: CustomScrollView(slivers: [
+          const SliverToBoxAdapter(
+            child: SizedBox(height: 25),
+          ),
           //image
           const SliverToBoxAdapter(
             child: SizedBox(
@@ -23,34 +29,40 @@ class DoctorHomepage extends StatelessWidget {
               child: ImagePage(),
             ),
           ),
-
+          const SliverToBoxAdapter(
+            child: SizedBox(height: 15),
+          ),
+          SliverToBoxAdapter(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Icon(
+                  Icons.person_3_rounded,
+                  color: Colors.white70,
+                ),
+                const SizedBox(
+                  width: 10,
+                ),
+                Text(
+                  'Khaled',
+                  style: style25.copyWith(color: kPrimaryColor),
+                ),
+                Text(
+                  ' Tarek',
+                  style: style25.copyWith(color: Colors.white),
+                ),
+              ],
+            ),
+          ),
+          const SliverToBoxAdapter(
+            child: SizedBox(height: 25),
+          ),
           //container
           SliverToBoxAdapter(
-              child: GestureDetector(
-            onTap: () {
-              Navigator.pushNamed(context, Mypatients.id, arguments: email);
-            },
-            child: Container(
-              margin: const EdgeInsets.only(top: 100, right: 30, left: 30),
-              decoration: BoxDecoration(
-                  color: const Color.fromARGB(81, 185, 181, 181),
-                  borderRadius: BorderRadius.circular(30)),
-              height: 123,
-              width: 359,
-              child: const Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      "My Patients",
-                      style: TextStyle(
-                        color: Color(0xFF3C365F),
-                        fontSize: 22,
-                      ),
-                    ),
-                    Image(image: AssetImage("assets/images/do.png"))
-                  ]),
+            child: CardPatientListBuilder(
+              email: email,
             ),
-          ))
+          )
         ]),
       ),
     );
