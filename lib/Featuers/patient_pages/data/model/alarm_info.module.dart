@@ -6,7 +6,7 @@ class AlarmInfo {
   TimeOfDay alarmDateTime;
   String description;
   bool isActive;
-  int interval;
+  // int interval;
 
   AlarmInfo({
     required this.id,
@@ -14,6 +14,6 @@ class AlarmInfo {
     required this.title,
     required this.alarmDateTime,
     required this.description,
-    required this.interval,
+    // required this.interval,
   });
 }

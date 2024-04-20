@@ -4,7 +4,6 @@ import 'package:health_care/Featuers/login_and_signup/Screens/Widget/custom_butt
 import 'package:health_care/Featuers/login_and_signup/Screens/Widget/text_form_validator_field.dart';
 import 'package:health_care/Featuers/patient_pages/cubits/alarm/alarm_data_cubit.dart';
 import 'package:health_care/Featuers/patient_pages/data/model/alarm_info.module.dart';
-import 'package:health_care/Featuers/patient_pages/views/widget/repeat_interval_houres.dart';
 import 'package:health_care/core/utils/styles.dart';
 import 'package:uuid/uuid.dart';
 
@@ -20,19 +19,19 @@ class _BottomSheetpageState extends State<BottomSheetpage> {
   late String description;
   late TimeOfDay timeOfDay;
   late AlarmInfo alarmInfo;
-  int selectedInterval = 24;
+  // int selectedInterval = 24;
   final uuid = const Uuid();
 
   @override
   void initState() {
     timeOfDay = const TimeOfDay(hour: 0, minute: 00);
     alarmInfo = AlarmInfo(
-        title: '',
-        alarmDateTime: timeOfDay,
-        description: '',
-        interval: 0,
-        id: uuid.v4(),
-        isActive: true);
+      title: '',
+      alarmDateTime: timeOfDay,
+      description: '',
+      id: uuid.v4(),
+      isActive: true,
+    );
     super.initState();
   }
 
@@ -62,15 +61,15 @@ class _BottomSheetpageState extends State<BottomSheetpage> {
               },
             ),
             const SizedBox(height: 10),
-            RepeatIntervalWidget(
-              selectedInterval: selectedInterval,
-              onIntervalSelected: (interval) {
-                setState(() {
-                  selectedInterval = interval;
-                  alarmInfo.interval = selectedInterval;
-                });
-              },
-            ),
+            // RepeatIntervalWidget(
+            //   selectedInterval: selectedInterval,
+            //   onIntervalSelected: (interval) {
+            //     setState(() {
+            //       selectedInterval = interval;
+            //       alarmInfo.interval = selectedInterval;
+            //     });
+            //   },
+            // ),
             const SizedBox(height: 20),
             Padding(
               padding: const EdgeInsets.only(top: 20, left: 10, right: 10),

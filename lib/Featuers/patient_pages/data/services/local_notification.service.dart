@@ -62,30 +62,31 @@ class Notifications {
         hour: alarmInfo.alarmDateTime.hour,
         minute: alarmInfo.alarmDateTime.minute,
         second: 0,
+        repeats: true,
         allowWhileIdle: true,
       ),
     );
     // Schedule the interval notification with the same ID
-    await AwesomeNotifications().createNotification(
-      content: NotificationContent(
-        id: notificationId, // Use the same ID
-        channelKey: 'basic_channel',
-        title: alarmInfo.title,
-        body: alarmInfo.description,
-        actionType: ActionType.Default,
-        notificationLayout: NotificationLayout.Default,
-        wakeUpScreen: true,
-        autoDismissible: false,
-        category: NotificationCategory.Alarm,
-        duration: const Duration(seconds: 60),
-      ),
-      schedule: NotificationInterval(
-        interval: alarmInfo.interval * 60 * 60,
-        repeats: true,
-        preciseAlarm: true,
-        allowWhileIdle: true,
-      ),
-    );
+    // await AwesomeNotifications().createNotification(
+    //   content: NotificationContent(
+    //     id: notificationId, // Use the same ID
+    //     channelKey: 'basic_channel',
+    //     title: alarmInfo.title,
+    //     body: alarmInfo.description,
+    //     actionType: ActionType.Default,
+    //     notificationLayout: NotificationLayout.Default,
+    //     wakeUpScreen: true,
+    //     autoDismissible: false,
+    //     category: NotificationCategory.Alarm,
+    //     duration: const Duration(seconds: 60),
+    //   ),
+    //   schedule: NotificationInterval(
+    //     interval: alarmInfo.interval * 60 * 60,
+    //     repeats: true,
+    //     preciseAlarm: true,
+    //     allowWhileIdle: true,
+    //   ),
+    // );
   }
 
   Future<void> updateNotification({required AlarmInfo alarmInfo}) async {

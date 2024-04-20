@@ -119,16 +119,16 @@ class _CustomAlarmCardState extends State<CustomAlarmCard> {
                     ),
                     Text(
                       widget.alarmInfo.description,
-                      style: styleNormal.copyWith(
-                          color: Colors.white.withOpacity(.5)),
+                      style: styleNormal.copyWith(color: Colors.white70),
                     ),
-                    Text(
-                      widget.alarmInfo.interval != 0
-                          ? 'every  ${widget.alarmInfo.interval} hours | ${widget.alarmInfo.interval == 24 ? "One time a day" : '${(24 / widget.alarmInfo.interval).floor()} Times a day'}'
-                          : 'repeat once at selected time',
-                      style: styleNormal.copyWith(
-                          color: Colors.white.withOpacity(.6)),
-                    ),
+                    const SizedBox(height: 15),
+                    // Text(
+                    //   widget.alarmInfo.interval != 0
+                    //       ? 'every  ${widget.alarmInfo.interval} hours | ${widget.alarmInfo.interval == 24 ? "One time a day" : '${(24 / widget.alarmInfo.interval).floor()} Times a day'}'
+                    //       : 'repeat once at selected time',
+                    //   style: styleNormal.copyWith(
+                    //       color: Colors.white.withOpacity(.6)),
+                    // ),
                     Text(
                         widget.alarmInfo.alarmDateTime
                             .format(context)
