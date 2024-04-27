@@ -103,6 +103,8 @@ class _CustomAlarmCardState extends State<CustomAlarmCard> {
                               // Listen to changes in isActive property and update the switch
                               return Switch(
                                 value: widget.alarmInfo.isActive,
+                                activeColor: kprimaryDarkcolor,
+                                activeTrackColor: kprimaryVeryDarkcolor,
                                 onChanged: (value) {
                                   BlocProvider.of<AlarmDataCubit>(context)
                                       .toggleUpdateAlarmActivity(

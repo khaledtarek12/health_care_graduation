@@ -1,4 +1,5 @@
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
@@ -28,6 +29,16 @@ class _PatientViewState extends State<PatientView> {
   int pageNumber = 0;
 
   @override
+  void initState() {
+    AwesomeNotifications().isNotificationAllowed().then((isAllowed) async {
+      if (!isAllowed) {
+        await AwesomeNotifications().requestPermissionToSendNotifications();
+      }
+    });
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       extendBody: true,
@@ -49,7 +60,7 @@ class _PatientViewState extends State<PatientView> {
           final iconData = items[index];
           return Icon(
             iconData,
-            color: isActive ? const Color(0xff17455c) : Colors.white70,
+            color: isActive ? const Color(0xff0d2633) : Colors.white70,
             size: isActive ? 55 : 40,
           );
         },

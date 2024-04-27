@@ -17,6 +17,7 @@ class _CusttomRadioButtomState extends State<CusttomRadioButtom> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Radio(
+            activeColor: const Color(0xff17455c),
             value: 'Admin',
             groupValue: gender,
             onChanged: (value) {
@@ -44,6 +45,7 @@ class _CusttomRadioButtomState extends State<CusttomRadioButtom> {
         //   width: 15,
         // ),
         Radio(
+            activeColor: const Color(0xff17455c),
             value: 'Doctor',
             groupValue: gender,
             onChanged: (value) {
@@ -71,6 +73,7 @@ class _CusttomRadioButtomState extends State<CusttomRadioButtom> {
         //   width: 15,
         // ),
         Radio(
+            activeColor: const Color(0xff17455c),
             value: 'Patient',
             groupValue: gender,
             onChanged: (value) {

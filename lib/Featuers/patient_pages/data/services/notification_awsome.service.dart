@@ -11,30 +11,15 @@ class Notifications {
           channelKey: 'basic_channel',
           channelName: 'Basic notifications',
           channelDescription: 'Notification channel for basic notifications',
-          defaultColor: const Color(0xFF9D50DD),
-          ledColor: Colors.white,
-          defaultRingtoneType: DefaultRingtoneType.Alarm,
-          enableLights: true,
-          importance: NotificationImportance.Max,
+          defaultColor: Colors.teal,
+          importance: NotificationImportance.High,
           channelShowBadge: true,
           playSound: true,
-          criticalAlerts: true,
-          enableVibration: true,
-          groupSort: GroupSort.Asc,
+          locked: false,
           icon: 'resource://drawable/logo',
-          ledOffMs: 1000,
-          ledOnMs: 1000,
         ),
       ],
-      debug: true,
     );
-    await AwesomeNotifications()
-        .isNotificationAllowed()
-        .then((isAllowed) async {
-      if (!isAllowed) {
-        await AwesomeNotifications().requestPermissionToSendNotifications();
-      }
-    });
   }
 
   Future<void> scheduleNotification({required AlarmInfo alarmInfo}) async {
@@ -50,12 +35,8 @@ class Notifications {
         channelKey: 'basic_channel',
         title: alarmInfo.title,
         body: alarmInfo.description,
-        actionType: ActionType.Default,
-        notificationLayout: NotificationLayout.Default,
-        wakeUpScreen: true,
-        autoDismissible: false,
+        notificationLayout: NotificationLayout.BigText,
         category: NotificationCategory.Alarm,
-        duration: const Duration(seconds: 30),
       ),
       schedule: NotificationCalendar(
         weekday: now.weekday,
@@ -63,30 +44,25 @@ class Notifications {
         minute: alarmInfo.alarmDateTime.minute,
         second: 0,
         repeats: true,
-        allowWhileIdle: true,
       ),
+      actionButtons: [
+        NotificationActionButton(
+          key: 'dismiss_button',
+          label: 'Dismiss',
+          autoDismissible: true,
+          actionType: ActionType.DisabledAction,
+          enabled: true,
+        ),
+        NotificationActionButton(
+          key: 'view_alarm_button',
+          label: 'View Alarm',
+          autoDismissible:
+              false, // Do not dismiss the notification when this button is clicked
+          enabled: true,
+          showInCompactView: true,
+        ),
+      ],
     );
-    // Schedule the interval notification with the same ID
-    // await AwesomeNotifications().createNotification(
-    //   content: NotificationContent(
-    //     id: notificationId, // Use the same ID
-    //     channelKey: 'basic_channel',
-    //     title: alarmInfo.title,
-    //     body: alarmInfo.description,
-    //     actionType: ActionType.Default,
-    //     notificationLayout: NotificationLayout.Default,
-    //     wakeUpScreen: true,
-    //     autoDismissible: false,
-    //     category: NotificationCategory.Alarm,
-    //     duration: const Duration(seconds: 60),
-    //   ),
-    //   schedule: NotificationInterval(
-    //     interval: alarmInfo.interval * 60 * 60,
-    //     repeats: true,
-    //     preciseAlarm: true,
-    //     allowWhileIdle: true,
-    //   ),
-    // );
   }
 
   Future<void> updateNotification({required AlarmInfo alarmInfo}) async {

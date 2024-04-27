@@ -43,11 +43,11 @@ class AddAlramButton extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Icon(Icons.add_alert, size: 45),
+              const Icon(Icons.add_alert, size: 45, color: Colors.white70),
               const SizedBox(height: 8),
               Text('Add Alarm',
                   style: styleNormal.copyWith(
-                      color: Colors.black, fontWeight: FontWeight.normal))
+                      color: Colors.white70, fontWeight: FontWeight.normal))
             ],
           ),
         ),

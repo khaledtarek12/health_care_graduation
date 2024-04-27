@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:health_care/Featuers/patient_pages/data/model/alarm_info.module.dart';
-import 'package:health_care/Featuers/patient_pages/data/services/local_notification.service.dart';
+import 'package:health_care/Featuers/patient_pages/data/services/notification_awsome.service.dart';
 
 part 'alarm_data_state.dart';
 

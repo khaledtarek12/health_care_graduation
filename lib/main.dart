@@ -9,7 +9,7 @@ import 'package:health_care/Featuers/firebase_options.dart';
 import 'package:health_care/Featuers/login_and_signup/Screens/chat_page.dart';
 import 'package:health_care/Featuers/login_and_signup/Screens/login_home_page.dart';
 import 'package:health_care/Featuers/patient_pages/cubits/alarm/alarm_data_cubit.dart';
-import 'package:health_care/Featuers/patient_pages/data/services/local_notification.service.dart';
+import 'package:health_care/Featuers/patient_pages/data/services/notification_awsome.service.dart';
 import 'package:health_care/Featuers/screen_splash/views/splash_view.dart';
 import 'package:health_care/Featuers/screen_splash/views/widgets/splash_screen.dart';
 

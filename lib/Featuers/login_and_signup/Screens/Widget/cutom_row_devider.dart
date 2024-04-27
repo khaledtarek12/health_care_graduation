@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:health_care/const.dart';
 
 class CustomRowDevider extends StatelessWidget {
   const CustomRowDevider({
@@ -11,6 +12,7 @@ class CustomRowDevider extends StatelessWidget {
       children: [
         Expanded(
           child: Divider(
+            color: kprimaryVeryDarkcolor,
             thickness: 2,
             height: 40,
             indent: 50,
@@ -19,12 +21,13 @@ class CustomRowDevider extends StatelessWidget {
         Text(
           '   or continue with   ',
           style: TextStyle(
-            color: Color(0xffC6C6C6),
+            color: kprimaryVeryDarkcolor,
             fontSize: 13,
           ),
         ),
         Expanded(
           child: Divider(
+            color: kprimaryVeryDarkcolor,
             thickness: 2,
             height: 40,
             endIndent: 50,
