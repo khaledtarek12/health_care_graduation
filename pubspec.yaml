@@ -82,11 +82,13 @@ flutter_icons:
   ios: true
   image_path: assets/images/logo.png
   min_sdk_android: 21 # android min sdk min:16, default 21
+  adaptive_icon_background: "#ffffff"
+  adaptive_icon_foreground: "assets/images/play_store_512.png"
   web:
     generate: true
     image_path: assets/images/logo.png
-    background_color: "#FFFFF"
-    theme_color: "#FFFFF"
+    background_color: "#0d2633"
+    theme_color: "#0d2633"
   windows:
     generate: true
     image_path: assets/images/logo.png
