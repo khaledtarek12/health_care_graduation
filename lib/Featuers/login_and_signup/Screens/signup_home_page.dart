@@ -4,7 +4,7 @@ import 'package:health_care/core/widgets/custom_container.dart';
 import 'package:health_care/Featuers/login_and_signup/Screens/Widget/custom_button.dart';
 import 'package:health_care/Featuers/login_and_signup/Screens/Widget/custom_awsome_icons.dart';
 import 'package:health_care/Featuers/login_and_signup/Screens/Widget/cutom_row_devider.dart';
-import 'package:health_care/Featuers/login_and_signup/Screens/Widget/text_form_validator_field.dart';
+import 'package:health_care/Featuers/login_and_signup/Screens/Widget/custom_form_validator_field.dart';
 import 'package:health_care/Featuers/login_and_signup/Screens/Widget/text_without_field.dart';
 import 'package:health_care/const.dart';
 import 'package:flutter/material.dart';
@@ -152,7 +152,7 @@ class _SignupHomePageState extends State<SignupHomePage> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const Text('Don\'t have an account ?'),
+                        const Text('Already have an account ?'),
                         GestureDetector(
                           onTap: () {
                             Navigator.pop(context);

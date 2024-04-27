@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:health_care/Featuers/login_and_signup/Screens/Widget/custom_button.dart';
-import 'package:health_care/Featuers/login_and_signup/Screens/Widget/text_form_validator_field.dart';
+import 'package:health_care/Featuers/login_and_signup/Screens/Widget/custom_form_validator_field.dart';
 import 'package:health_care/Featuers/patient_pages/cubits/alarm/alarm_data_cubit.dart';
 import 'package:health_care/Featuers/patient_pages/data/model/alarm_info.module.dart';
 import 'package:health_care/core/utils/styles.dart';

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:health_care/const.dart';
 
 // ignore: must_be_immutable
 class CustomFormTextField extends StatelessWidget {
@@ -9,7 +10,8 @@ class CustomFormTextField extends StatelessWidget {
     this.sufxIcon,
     this.onChange,
     this.obSecureText = false,
-    this.keyboardType, this.validator,
+    this.keyboardType,
+    this.validator,
   });
 
   final String? hint;
@@ -28,7 +30,7 @@ class CustomFormTextField extends StatelessWidget {
         obscureText: obSecureText!,
         // ignore: body_might_complete_normally_nullable
         validator: validator,
-
+        cursorColor: kprimaryDarkcolor,
         keyboardType: keyboardType,
         onChanged: onChange,
         decoration: InputDecoration(
@@ -36,7 +38,22 @@ class CustomFormTextField extends StatelessWidget {
           fillColor: const Color(0xffE7EFF2),
           hintText: hint,
           prefixIcon: prefexIcon,
+          prefixIconColor: MaterialStateColor.resolveWith((states) =>
+              states.contains(MaterialState.focused)
+                  ? kprimaryDarkcolor
+                  : Colors.grey.shade700),
           suffixIcon: sufxIcon,
+          suffixIconColor: MaterialStateColor.resolveWith((states) =>
+              states.contains(MaterialState.focused)
+                  ? kprimaryDarkcolor
+                  : Colors.grey.shade700),
+          focusedBorder: const OutlineInputBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(20),
+            ),
+            borderSide: BorderSide(
+                color: kprimaryDarkcolor, style: BorderStyle.solid, width: 2),
+          ),
           border: const OutlineInputBorder(
             borderRadius: BorderRadius.all(
               Radius.circular(20),
@@ -51,6 +68,14 @@ class CustomFormTextField extends StatelessWidget {
             ),
             borderSide: BorderSide(
               color: Colors.white,
+            ),
+          ),
+          errorBorder: const OutlineInputBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(20),
+            ),
+            borderSide: BorderSide(
+              color: Colors.red,
             ),
           ),
         ),

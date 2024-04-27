@@ -64,7 +64,7 @@ class OtpView extends StatelessWidget {
                       transition: Transition.downToUp, duration: kDuration);
                 },
               ),
-              const Spacer(),
+              const Spacer(flex: 5),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -80,7 +80,8 @@ class OtpView extends StatelessWidget {
                     ),
                   ),
                 ],
-              )
+              ),
+              const Spacer(),
             ],
           ),
         ),

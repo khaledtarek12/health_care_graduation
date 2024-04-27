@@ -12,7 +12,7 @@ import 'Widget/custom_button.dart';
 import 'Widget/custom_awsome_icons.dart';
 import 'Widget/cutom_row_devider.dart';
 import 'Widget/cutom_row_radiobutton.dart';
-import 'Widget/text_form_validator_field.dart';
+import 'Widget/custom_form_validator_field.dart';
 import '../cubits/chat/chat_cubit.dart';
 import '../cubits/login_cubit/login_cubit.dart';
 

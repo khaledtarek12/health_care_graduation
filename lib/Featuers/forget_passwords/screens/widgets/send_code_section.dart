@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:health_care/const.dart';
 import 'package:health_care/core/utils/styles.dart';
 import 'package:health_care/Featuers/login_and_signup/Screens/Widget/custom_button.dart';
-import 'package:health_care/Featuers/login_and_signup/Screens/Widget/text_form_validator_field.dart';
+import 'package:health_care/Featuers/login_and_signup/Screens/Widget/custom_form_validator_field.dart';
 
 class SendCodeSection extends StatelessWidget {
   const SendCodeSection({
@@ -37,7 +37,7 @@ class SendCodeSection extends StatelessWidget {
         ),
         const SizedBox(height: 20),
         CusttomButton(text: 'Send Code', onTap: onTap),
-        const Spacer(),
+        const Spacer(flex: 5),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -55,7 +55,8 @@ class SendCodeSection extends StatelessWidget {
               ),
             ),
           ],
-        )
+        ),
+        const Spacer()
       ],
     );
   }

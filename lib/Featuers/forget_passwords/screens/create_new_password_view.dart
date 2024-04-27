@@ -5,7 +5,7 @@ import 'package:health_care/core/utils/styles.dart';
 import 'package:health_care/core/widgets/custom_container.dart';
 import 'package:health_care/Featuers/forget_passwords/screens/password_created_succefuly.dart';
 import 'package:health_care/Featuers/login_and_signup/Screens/Widget/custom_button.dart';
-import 'package:health_care/Featuers/login_and_signup/Screens/Widget/text_form_validator_field.dart';
+import 'package:health_care/Featuers/login_and_signup/Screens/Widget/custom_form_validator_field.dart';
 
 class CreateNewPassword extends StatefulWidget {
   const CreateNewPassword({super.key});
