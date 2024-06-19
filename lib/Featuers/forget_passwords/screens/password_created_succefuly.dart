@@ -4,7 +4,6 @@ import 'package:health_care/core/widgets/custom_container.dart';
 import 'package:health_care/Featuers/login_and_signup/Screens/login_home_page.dart';
 import 'package:health_care/Featuers/login_and_signup/Screens/Widget/custom_button.dart';
 
-
 class PasswordCreatedSuccefuly extends StatelessWidget {
   const PasswordCreatedSuccefuly({super.key});
 
@@ -29,7 +28,7 @@ class PasswordCreatedSuccefuly extends StatelessWidget {
                   textAlign: TextAlign.center),
               const SizedBox(height: 40),
               CusttomButton(
-                text: 'Back to Login',
+                child: const Text('Back to Login'),
                 onTap: () {
                   Navigator.of(context).pushAndRemoveUntil(MaterialPageRoute(
                     builder: (context) {

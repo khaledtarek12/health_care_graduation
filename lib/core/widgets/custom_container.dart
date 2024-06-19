@@ -29,7 +29,7 @@ class CustomContainer extends StatelessWidget {
         toolbarHeight: 110,
         toolbarOpacity: 0.8,
         automaticallyImplyLeading: false,
-        backgroundColor: kPrimaryColor,
+        backgroundColor: kprimaryDarkcolor,
         actions: isLogout
             ? [
                 IconButton(
@@ -71,7 +71,7 @@ class CustomContainer extends StatelessWidget {
         decoration: BoxDecoration(
             gradient: LinearGradient(colors: [
           kPrimaryColor.withOpacity(.82),
-          kPrimaryColor.withOpacity(.02),
+          kPrimaryColor.withOpacity(.32),
         ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
         child: child,
       ),

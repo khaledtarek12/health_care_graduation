@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:health_care/Featuers/admin/views/admin_view_page.dart';
+import 'package:health_care/core/utils/styles.dart';
 import 'package:health_care/core/widgets/custom_container.dart';
 import 'package:health_care/Featuers/doctor_pages/views/doctor_homepage.dart';
 import 'package:health_care/Featuers/login_and_signup/Screens/Widget/login_page_bottom_text_row.dart';
@@ -9,12 +10,12 @@ import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import '../../../core/helper/show_snackbar.dart';
 import '../../patient_pages/views/patient_view.dart';
 import 'Widget/custom_button.dart';
-import 'Widget/custom_awsome_icons.dart';
-import 'Widget/cutom_row_devider.dart';
+// import 'Widget/custom_awsome_icons.dart';
+// import 'Widget/cutom_row_devider.dart';
 import 'Widget/cutom_row_radiobutton.dart';
 import 'Widget/custom_form_validator_field.dart';
-import '../cubits/chat/chat_cubit.dart';
-import '../cubits/login_cubit/login_cubit.dart';
+import '../bloc/chat/chat_cubit.dart';
+import '../bloc/login_cubit/login_cubit.dart';
 
 class LoginHomePage extends StatefulWidget {
   const LoginHomePage({super.key});
@@ -35,7 +36,6 @@ class _LoginHomePageState extends State<LoginHomePage> {
   String? selectedGender;
 
   String pattern = '^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]';
-
   String? password;
   bool? obSecureText = true;
   IconData? icon = Icons.visibility_off;
@@ -50,14 +50,14 @@ class _LoginHomePageState extends State<LoginHomePage> {
           BlocProvider.of<ChatCubit>(context).getMessages();
           if (selectedGender == 'Doctor') {
             Navigator.pushNamed(context, DoctorHomepage.id, arguments: email);
-            showSuccessgDialog(
-              dialogContext: context,
+            showSuccessDialog(
+              context: context,
               message: 'Login Successfuly',
             );
           } else if (selectedGender == 'Patient') {
             Navigator.pushNamed(context, PatientView.id, arguments: email);
-            showSuccessgDialog(
-              dialogContext: context,
+            showSuccessDialog(
+              context: context,
               message: 'Login Successfuly',
             );
           } else if (selectedGender == 'Admin') {
@@ -66,12 +66,12 @@ class _LoginHomePageState extends State<LoginHomePage> {
               AdminViewPage.id,
               arguments: email,
             );
-            showSuccessgDialog(
-              dialogContext: context,
+            showSuccessDialog(
+              context: context,
               message: 'Login Successfuly',
             );
           } else {
-            showErrorgDialog(
+            showErrorDialog(
               context: context,
               message: 'Please select a gender : Doctor or Patient?',
               btnOkOnPress: () {},
@@ -80,7 +80,7 @@ class _LoginHomePageState extends State<LoginHomePage> {
           isLoading = false;
         }
         if (state is LoginFailuer) {
-          showErrorgDialog(
+          showErrorDialog(
             context: context,
             message: state.errorMessage,
             btnOkOnPress: () {},
@@ -100,7 +100,7 @@ class _LoginHomePageState extends State<LoginHomePage> {
                   physics: const BouncingScrollPhysics(),
                   children: [
                     SizedBox(
-                      height: MediaQuery.of(context).size.height * .1,
+                      height: MediaQuery.of(context).size.height * .2,
                     ),
                     CustomFormTextField(
                       // ignore: body_might_complete_normally_nullable
@@ -164,23 +164,26 @@ class _LoginHomePageState extends State<LoginHomePage> {
                     CusttomButton(
                       onTap: () async {
                         if (formkey.currentState!.validate()) {
-                          BlocProvider.of<LoginCubit>(context)
-                              .loginUser(email: email!, password: password!);
+                          BlocProvider.of<LoginCubit>(context).loginUser(
+                              email: email!,
+                              password: password!,
+                              type: selectedGender!);
                         } else {}
                       },
-                      text: 'Sign In',
+                      child: Text('Sign In',
+                          style: style15.copyWith(fontSize: 18)),
                     ),
                     const SizedBox(
                       height: 25,
                     ),
                     const TextForgetYourPassword(),
+                    // const SizedBox(
+                    //   height: 5,
+                    // ),
+                    // const CustomRowDevider(),
+                    // const IconSocialMedia(),
                     const SizedBox(
-                      height: 5,
-                    ),
-                    const CustomRowDevider(),
-                    const IconSocialMedia(),
-                    SizedBox(
-                      height: MediaQuery.of(context).size.height * .2,
+                      height: 25,
                     ),
                     const CustomTextRow(),
                   ],

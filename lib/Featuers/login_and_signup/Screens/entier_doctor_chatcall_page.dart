@@ -5,7 +5,7 @@ import 'package:health_care/Featuers/login_and_signup/Screens/Widget/button_call
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../cubits/chat/chat_cubit.dart';
+import '../bloc/chat/chat_cubit.dart';
 import 'chat_page.dart';
 
 class EntierCallChatScreen extends StatelessWidget {

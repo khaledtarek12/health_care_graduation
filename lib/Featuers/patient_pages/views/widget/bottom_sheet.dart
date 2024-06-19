@@ -94,7 +94,7 @@ class _BottomSheetpageState extends State<BottomSheetpage> {
             ),
             const SizedBox(height: 16),
             CusttomButton(
-              text: 'Save',
+              child: const Text('Save'),
               onTap: () {
                 alarmInfo.alarmDateTime = timeOfDay;
                 BlocProvider.of<AlarmDataCubit>(context)

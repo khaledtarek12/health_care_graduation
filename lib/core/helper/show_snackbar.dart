@@ -276,7 +276,7 @@ void showQuesstionDialog({
   ).show();
 }
 
-void showErrorgDialog({
+void showErrorDialog({
   required BuildContext context,
   required String message,
   void Function()? btnOkOnPress,
@@ -298,19 +298,19 @@ void showErrorgDialog({
   ).show();
 }
 
-void showSuccessgDialog({
-  required BuildContext dialogContext,
-  required String message,
-}) {
+void showSuccessDialog(
+    {required BuildContext context,
+    required String message,
+    void Function()? btnOkOnPress}) {
   AwesomeDialog(
-    context: dialogContext,
+    context: context,
     dialogType: DialogType.success,
     animType: AnimType.bottomSlide,
     title: 'Success',
     titleTextStyle: style15.copyWith(color: kPrimaryColor, fontSize: 18),
     desc: message,
     descTextStyle: style15.copyWith(color: kPrimaryColor, fontSize: 18),
-    btnOkOnPress: () {},
+    btnOkOnPress: btnOkOnPress,
     btnOkColor: Colors.green,
     dialogBackgroundColor: Colors.white70,
     dismissOnBackKeyPress: true,

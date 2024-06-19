@@ -36,7 +36,7 @@ class SendCodeSection extends StatelessWidget {
           prefexIcon: Icon(Icons.email_outlined),
         ),
         const SizedBox(height: 20),
-        CusttomButton(text: 'Send Code', onTap: onTap),
+        CusttomButton(onTap: onTap, child: const Text('Send Code')),
         const Spacer(flex: 5),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,

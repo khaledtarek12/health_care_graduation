@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:health_care/const.dart';
-import 'package:health_care/Featuers/login_and_signup/models/message_model.module.dart';
+import 'package:health_care/Featuers/login_and_signup/data/models/message_model.module.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:meta/meta.dart';
 

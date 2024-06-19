@@ -12,6 +12,8 @@ class CustomFormTextField extends StatelessWidget {
     this.obSecureText = false,
     this.keyboardType,
     this.validator,
+    this.readOnly = false,
+    this.initialValue,
   });
 
   final String? hint;
@@ -21,12 +23,15 @@ class CustomFormTextField extends StatelessWidget {
   final bool? obSecureText;
   final TextInputType? keyboardType;
   final String? Function(String?)? validator;
-
+  final bool? readOnly;
+  final String? initialValue;
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 15),
       child: TextFormField(
+        initialValue: initialValue,
+        readOnly: readOnly!,
         obscureText: obSecureText!,
         // ignore: body_might_complete_normally_nullable
         validator: validator,
@@ -38,13 +43,13 @@ class CustomFormTextField extends StatelessWidget {
           fillColor: const Color(0xffE7EFF2),
           hintText: hint,
           prefixIcon: prefexIcon,
-          prefixIconColor: MaterialStateColor.resolveWith((states) =>
-              states.contains(MaterialState.focused)
+          prefixIconColor: WidgetStateColor.resolveWith((states) =>
+              states.contains(WidgetState.focused)
                   ? kprimaryDarkcolor
                   : Colors.grey.shade700),
           suffixIcon: sufxIcon,
-          suffixIconColor: MaterialStateColor.resolveWith((states) =>
-              states.contains(MaterialState.focused)
+          suffixIconColor: WidgetStateColor.resolveWith((states) =>
+              states.contains(WidgetState.focused)
                   ? kprimaryDarkcolor
                   : Colors.grey.shade700),
           focusedBorder: const OutlineInputBorder(

@@ -1,22 +1,39 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:health_care/Featuers/screen_splash/bloc/cubit/get_my_data_cubit.dart';
 import 'package:health_care/const.dart';
 import 'package:health_care/core/utils/styles.dart';
 import 'package:health_care/core/widgets/custom_container.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../widgets/image.dart';
 import 'card_patient_list_builder.dart';
 
-class DoctorHomepage extends StatelessWidget {
+class DoctorHomepage extends StatefulWidget {
   const DoctorHomepage({super.key});
 
   static const id = 'DoctorHomepage';
 
   @override
+  State<DoctorHomepage> createState() => _DoctorHomepageState();
+}
+
+late SharedPreferences prefs;
+String email = '';
+getEmail() async {
+  prefs = await SharedPreferences.getInstance();
+  email = prefs.getString('email')!;
+}
+
+initState() {
+  getEmail();
+}
+
+class _DoctorHomepageState extends State<DoctorHomepage> {
+  @override
   Widget build(BuildContext context) {
-    var email = ModalRoute.of(context)!.settings.arguments;
     return Scaffold(
       body: CustomContainer(
         title: 'Doctor Home Page ',
-        isLeading: true,
         isLogout: true,
         child: CustomScrollView(slivers: [
           const SliverToBoxAdapter(
@@ -33,25 +50,35 @@ class DoctorHomepage extends StatelessWidget {
             child: SizedBox(height: 15),
           ),
           SliverToBoxAdapter(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Icon(
-                  Icons.person_3_rounded,
-                  color: Colors.white70,
-                ),
-                const SizedBox(
-                  width: 10,
-                ),
-                Text(
-                  'Khaled',
-                  style: style25.copyWith(color: kPrimaryColor),
-                ),
-                Text(
-                  ' Tarek',
-                  style: style25.copyWith(color: Colors.white),
-                ),
-              ],
+            child: BlocBuilder<GetMyDataCubit, GetMyDataState>(
+              builder: (context, state) {
+                return Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Icon(
+                      Icons.person_3_rounded,
+                      color: Colors.white70,
+                    ),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    Text(
+                      state is GetMyDataSuccess
+                          ? '${BlocProvider.of<GetMyDataCubit>(context).doctorData.fristName} '
+                          : '',
+                      style: style25.copyWith(color: kPrimaryColor),
+                    ),
+                    Text(
+                      state is GetMyDataSuccess
+                          ? BlocProvider.of<GetMyDataCubit>(context)
+                              .doctorData
+                              .lastName
+                          : '',
+                      style: style25.copyWith(color: Colors.white),
+                    ),
+                  ],
+                );
+              },
             ),
           ),
           const SliverToBoxAdapter(

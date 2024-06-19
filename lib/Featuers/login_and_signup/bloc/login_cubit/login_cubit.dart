@@ -1,16 +1,23 @@
 import 'package:bloc/bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:meta/meta.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 part 'login_state.dart';
 
 class LoginCubit extends Cubit<LoginState> {
   LoginCubit() : super(LoginInitial());
 
+  late SharedPreferences prefs;
   Future<void> loginUser(
-      {required String email, required String password}) async {
+      {required String email,
+      required String password,
+      required String type}) async {
     emit(LoginLoading());
     try {
+      prefs = await SharedPreferences.getInstance();
+      await prefs.setString('type', type);
+      await prefs.setString('email', email);
       var auth = FirebaseAuth.instance;
       await auth.signInWithEmailAndPassword(email: email, password: password);
       emit(LoginSucessful());

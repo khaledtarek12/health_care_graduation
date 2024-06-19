@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:health_care/const.dart';
 import 'package:health_care/core/utils/styles.dart';
 import 'package:health_care/Featuers/login_and_signup/Screens/login_home_page.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class CustomSplashButton extends StatelessWidget {
   const CustomSplashButton({
@@ -17,10 +18,14 @@ class CustomSplashButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-        onPressed: () {
+        onPressed: () async {
+          SharedPreferences prefs = await SharedPreferences.getInstance();
           isLastPage
-              ? Get.to(() => const LoginHomePage(),
-                  transition: Transition.downToUp, duration: kDuration)
+              ? {
+                  prefs.setBool('initial', true),
+                  Get.to(() => const LoginHomePage(),
+                      transition: Transition.downToUp, duration: kDuration)
+                }
               : pageController.nextPage(
                   duration: kDuration, curve: Curves.easeIn);
         },

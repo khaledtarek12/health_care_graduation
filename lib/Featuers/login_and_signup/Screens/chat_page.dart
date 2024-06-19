@@ -5,8 +5,7 @@ import 'package:health_care/const.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../cubits/chat/chat_cubit.dart';
-
+import '../bloc/chat/chat_cubit.dart';
 
 // ignore: must_be_immutable, use_key_in_widget_constructors
 class ChatPage extends StatelessWidget {

@@ -50,7 +50,7 @@ class _CreateNewPasswordState extends State<CreateNewPassword> {
             ),
             const SizedBox(height: 30),
             CusttomButton(
-              text: 'Reset Password',
+              child: const Text('Reset Password'),
               onTap: () {
                 Get.to(() => const PasswordCreatedSuccefuly(),
                     transition: Transition.downToUp, duration: kDuration);

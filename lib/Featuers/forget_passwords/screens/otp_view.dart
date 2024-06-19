@@ -58,7 +58,7 @@ class OtpView extends StatelessWidget {
               ),
               const SizedBox(height: 40),
               CusttomButton(
-                text: 'Verify',
+                child: const Text('Verify'),
                 onTap: () {
                   Get.to(() => const CreateNewPassword(),
                       transition: Transition.downToUp, duration: kDuration);

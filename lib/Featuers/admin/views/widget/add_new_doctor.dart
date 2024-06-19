@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:health_care/Featuers/admin/bloc/add_doctor_cubit/add_doctor_cubit.dart';
+import 'package:health_care/Featuers/admin/bloc/get_doctor_cubit/get_doctors_cubit.dart';
+import 'package:health_care/Featuers/admin/data/model/doctor_model.module.dart';
 import 'package:health_care/Featuers/login_and_signup/Screens/Widget/custom_button.dart';
 import 'package:health_care/Featuers/login_and_signup/Screens/Widget/custom_form_validator_field.dart';
 import 'package:health_care/core/helper/show_snackbar.dart';
+import 'package:health_care/core/utils/styles.dart';
+import 'package:health_care/core/widgets/circle_loading.dart';
 import 'package:health_care/core/widgets/custom_container.dart';
 
 class AddNewDoctor extends StatefulWidget {
@@ -18,127 +24,175 @@ class _AddNewDoctorState extends State<AddNewDoctor> {
 
   String? email;
 
+  String? fristName;
+  String? lastName;
+  String? phoneNumber;
+  String? password;
+
   String pattern = '^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]';
 
-  String? password;
   bool? obSecureText = true;
   IconData? icon = Icons.visibility_off;
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: CustomContainer(
-        isLeading: true,
-        isLogout: true,
-        title: 'Add New Doctor',
-        child: Form(
-          key: formkey,
-          child: ListView(
-            physics: const BouncingScrollPhysics(),
-            children: [
-              SizedBox(
-                height: MediaQuery.of(context).size.height * .15,
-              ),
-              Row(
+    return BlocConsumer<AddDoctorCubit, AddDoctorState>(
+      listener: (context, state) {
+        if (state is AddDoctorLoading) {
+          isLoading = true;
+        } else if (state is AddDoctorSuccess) {
+          BlocProvider.of<GetDoctorsCubit>(context).getAllDoctors();
+          showSuccessDialog(
+            context: context,
+            message: 'Doctor Added Successfully',
+            btnOkOnPress: () {
+              Navigator.pop(context);
+            },
+          );
+          isLoading = false;
+        }
+        if (state is AddDoctorFailuer) {
+          showErrorDialog(context: context, message: state.errorMessage);
+          isLoading = false;
+        }
+      },
+      builder: (context, state) {
+        return Scaffold(
+          body: CustomContainer(
+            isLeading: true,
+            isLogout: true,
+            title: 'Add New Doctor',
+            child: Form(
+              key: formkey,
+              child: ListView(
+                physics: const BouncingScrollPhysics(),
                 children: [
-                  Expanded(
-                    child: CustomFormTextField(
-                      hint: 'First name',
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return 'Value is empty';
-                        }
-                        return null;
-                      },
-                    ),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height * .10,
                   ),
-                  const SizedBox(width: 20),
-                  Expanded(
-                    child: CustomFormTextField(
-                      hint: 'Last name',
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return 'Value is empty';
-                        }
-                        return null;
-                      },
-                    ),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: CustomFormTextField(
+                          hint: 'First name',
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return 'Value is empty';
+                            }
+                            return null;
+                          },
+                          onChange: (data) {
+                            fristName = data;
+                          },
+                        ),
+                      ),
+                      const SizedBox(width: 20),
+                      Expanded(
+                        child: CustomFormTextField(
+                          hint: 'Last name',
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return 'Value is empty';
+                            }
+                            return null;
+                          },
+                          onChange: (data) {
+                            lastName = data;
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                  CustomFormTextField(
+                    // ignore: body_might_complete_normally_nullable
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'value is empty';
+                      }
+                      if (!RegExp(pattern).hasMatch(value)) {
+                        return 'Please enter a valid email';
+                      }
+                    },
+                    onChange: (data) {
+                      email = data;
+                    },
+                    hint: 'Email or Username',
+                    prefexIcon: const Icon(Icons.mail),
+                  ),
+                  CustomFormTextField(
+                    // ignore: body_might_complete_normally_nullable
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'value is empty';
+                      }
+                    },
+                    obSecureText: obSecureText,
+                    onChange: (data) {
+                      password = data;
+                    },
+                    hint: 'Password',
+                    prefexIcon: const Icon(Icons.lock),
+                    sufxIcon: iconButtonChange(),
+                  ),
+                  CustomFormTextField(
+                    obSecureText: obSecureText,
+                    // ignore: body_might_complete_normally_nullable
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'value is empty';
+                      }
+                      if (value != password) {
+                        return 'your password dosn\'t match';
+                      }
+                    },
+                    hint: 'Confirm Password',
+                    onChange: (data) {
+                      if (data == password) {
+                        password = data;
+                      }
+                    },
+                    prefexIcon: const Icon(Icons.lock),
+                    sufxIcon: iconButtonChange(),
+                  ),
+                  CustomFormTextField(
+                    // ignore: body_might_complete_normally_nullable
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'value is empty';
+                      }
+                    },
+                    hint: 'Enter your phone',
+                    prefexIcon: const Icon(Icons.phone),
+                    onChange: (data) {
+                      phoneNumber = data;
+                    },
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  CusttomButton(
+                    child: isLoading
+                        ? const CircleLoading()
+                        : Text('Add Doctor',
+                            style: style15.copyWith(fontSize: 18)),
+                    onTap: () {
+                      if (formkey.currentState!.validate()) {
+                        BlocProvider.of<AddDoctorCubit>(context).doctorRegister(
+                            doctorModel: DoctorModel(
+                                fristName: fristName!,
+                                lastName: lastName!,
+                                email: email!,
+                                phoneNumber: phoneNumber!,
+                                password: password!));
+                      }
+                    },
                   ),
                 ],
               ),
-              CustomFormTextField(
-                // ignore: body_might_complete_normally_nullable
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return 'value is empty';
-                  }
-                  if (!RegExp(pattern).hasMatch(value)) {
-                    return 'Please enter a valid email';
-                  }
-                },
-                onChange: (data) {
-                  email = data;
-                },
-                hint: 'Email or Username',
-                prefexIcon: const Icon(Icons.mail),
-              ),
-              CustomFormTextField(
-                // ignore: body_might_complete_normally_nullable
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return 'value is empty';
-                  }
-                },
-                obSecureText: obSecureText,
-                onChange: (data) {
-                  password = data;
-                },
-                hint: 'Password',
-                prefexIcon: const Icon(Icons.lock),
-                sufxIcon: iconButtonChange(),
-              ),
-              CustomFormTextField(
-                obSecureText: obSecureText,
-                // ignore: body_might_complete_normally_nullable
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return 'value is empty';
-                  }
-                  if (value != password) {
-                    return 'your password dosn\'t match';
-                  }
-                },
-                hint: 'Confirm Password',
-                onChange: (data) {
-                  if (data == password) {
-                    password = data;
-                  }
-                },
-                prefexIcon: const Icon(Icons.lock),
-                sufxIcon: iconButtonChange(),
-              ),
-              const CustomFormTextField(
-                hint: 'Enter your phone',
-                prefexIcon: Icon(Icons.phone),
-              ),
-              const SizedBox(
-                height: 15,
-              ),
-              CusttomButton(
-                text: 'Add Doctor',
-                onTap: () {
-                  if (formkey.currentState!.validate()) {
-                    Navigator.pop(context);
-                    showSuccessgDialog(
-                        dialogContext: context,
-                        message: 'Doctor Added Successfully');
-                  }
-                },
-              ),
-            ],
+            ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 

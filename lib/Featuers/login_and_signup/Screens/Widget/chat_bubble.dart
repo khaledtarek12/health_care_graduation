@@ -1,4 +1,4 @@
-import 'package:health_care/Featuers/login_and_signup/models/message_model.module.dart';
+import 'package:health_care/Featuers/login_and_signup/data/models/message_model.module.dart';
 import 'package:flutter/material.dart';
 
 class ChatBubble extends StatelessWidget {

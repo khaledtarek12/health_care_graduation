@@ -1,19 +1,22 @@
 // ignore_for_file: body_might_complete_normally_nullable
 
+import 'package:get/get.dart';
+import 'package:health_care/Featuers/login_and_signup/Screens/doctor_list_view.dart';
+import 'package:health_care/Featuers/login_and_signup/data/models/patient_model.module.dart';
+import 'package:health_care/core/helper/transation.dart';
+import 'package:health_care/core/utils/styles.dart';
 import 'package:health_care/core/widgets/custom_container.dart';
 import 'package:health_care/Featuers/login_and_signup/Screens/Widget/custom_button.dart';
-import 'package:health_care/Featuers/login_and_signup/Screens/Widget/custom_awsome_icons.dart';
-import 'package:health_care/Featuers/login_and_signup/Screens/Widget/cutom_row_devider.dart';
+// import 'package:health_care/Featuers/login_and_signup/Screens/Widget/custom_awsome_icons.dart';
+// import 'package:health_care/Featuers/login_and_signup/Screens/Widget/cutom_row_devider.dart';
 import 'package:health_care/Featuers/login_and_signup/Screens/Widget/custom_form_validator_field.dart';
-import 'package:health_care/Featuers/login_and_signup/Screens/Widget/text_without_field.dart';
 import 'package:health_care/const.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
 import '../../../core/helper/show_snackbar.dart';
-import '../cubits/register/register_cubit.dart';
-import 'login_home_page.dart';
+import '../bloc/register_patient_cubit/register_cubit.dart';
 
 // ignore: must_be_immutable
 class SignupHomePage extends StatefulWidget {
@@ -30,7 +33,13 @@ class _SignupHomePageState extends State<SignupHomePage> {
 
   bool isLoading = false;
 
+  String? lastName;
+  String? fristName;
   String? email;
+  String? phoneNumber;
+  String? doctorName;
+  String? doctorEmail;
+  late RegisterCubit registerCubit = BlocProvider.of<RegisterCubit>(context);
 
   String pattern = '^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]';
 
@@ -39,17 +48,24 @@ class _SignupHomePageState extends State<SignupHomePage> {
   IconData? icon = Icons.visibility_off;
 
   @override
+  void initState() {
+    doctorName = registerCubit.doctorName;
+    doctorEmail = registerCubit.doctorEmail;
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return BlocConsumer<RegisterCubit, RegisterState>(
       listener: (context, state) {
         if (state is RegisterLoading) {
           isLoading = true;
         } else if (state is RegisterSucessful) {
-          Navigator.pushNamed(context, LoginHomePage.id);
+          Navigator.pop(context);
           isLoading = false;
         }
-        if (state is Registerailuer) {
-          showErrorSnackBar(context: context, message: state.errorMessage);
+        if (state is RegisterFailuer) {
+          showErrorDialog(context: context, message: state.errorMessage);
           isLoading = false;
         }
       },
@@ -66,6 +82,41 @@ class _SignupHomePageState extends State<SignupHomePage> {
                   children: [
                     SizedBox(
                       height: MediaQuery.of(context).size.height * .05,
+                    ),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: CustomFormTextField(
+                            prefexIcon: const Icon(Icons.person),
+                            hint: 'First name',
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return 'Value is empty';
+                              }
+                              return null;
+                            },
+                            onChange: (data) {
+                              fristName = data;
+                            },
+                          ),
+                        ),
+                        const SizedBox(width: 20),
+                        Expanded(
+                          child: CustomFormTextField(
+                            prefexIcon: const Icon(Icons.person),
+                            hint: 'Last name',
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return 'Value is empty';
+                              }
+                              return null;
+                            },
+                            onChange: (data) {
+                              lastName = data;
+                            },
+                          ),
+                        ),
+                      ],
                     ),
                     CustomFormTextField(
                       validator: (value) {
@@ -101,6 +152,14 @@ class _SignupHomePageState extends State<SignupHomePage> {
                         if (value!.isEmpty) {
                           return 'value is empty';
                         }
+                        if (value != password) {
+                          return 'your password dosn\'t match';
+                        }
+                      },
+                      onChange: (data) {
+                        if (data == password) {
+                          password = data;
+                        }
                       },
                       obSecureText: obSecureText,
                       hint: 'Confirm Password',
@@ -115,11 +174,30 @@ class _SignupHomePageState extends State<SignupHomePage> {
                       },
                       hint: 'Enter your phone',
                       prefexIcon: const Icon(Icons.phone),
+                      onChange: (data) {
+                        phoneNumber = data;
+                      },
                     ),
-                    const CustomTextField(
-                      hint: 'Doctor',
-                      prefexIcon: Icon(Icons.person_add_alt_1_sharp),
-                      sufxIcon: Icon(Icons.keyboard_arrow_down_outlined),
+                    CustomFormTextField(
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return 'value is empty';
+                        }
+                      },
+                      prefexIcon: const Icon(Icons.person),
+                      initialValue: doctorName,
+                      readOnly: true,
+                      hint: 'Doctor Name',
+                      sufxIcon: IconButton(
+                          onPressed: () {
+                            Get.to(() => const DoctorListViewBody(),
+                                transition: Motivation.zoomTransition(),
+                                duration: kDuration);
+                          },
+                          icon: const Icon(
+                            Icons.person_add_alt_1_sharp,
+                            size: 35,
+                          )),
                     ),
                     const SizedBox(
                       height: 15,
@@ -128,26 +206,40 @@ class _SignupHomePageState extends State<SignupHomePage> {
                       onTap: () async {
                         if (formkey.currentState!.validate()) {
                           BlocProvider.of<RegisterCubit>(context)
-                              .userRegister(email: email!, password: password!);
-                          showSuccessgDialog(
-                              dialogContext: context,
-                              message: "Your account created successfully");
+                              .patientRegister(
+                                  patientModel: PatientModel(
+                            fristName: fristName!,
+                            lastName: lastName!,
+                            email: email!,
+                            phoneNumber: phoneNumber!,
+                            password: password!,
+                            doctorName: doctorName!,
+                            doctorEmail: doctorEmail!,
+                          ));
+                          showSuccessDialog(
+                            context: context,
+                            message: "Your account created successfully",
+                            btnOkOnPress: () {
+                              Navigator.of(context).pop();
+                            },
+                          );
                         } else {
-                          showErrorgDialog(
+                          showErrorDialog(
                               context: context,
                               message:
                                   "There was an error, please try again...");
                         }
                       },
-                      text: 'Register',
+                      child: Text('Register',
+                          style: style15.copyWith(fontSize: 18)),
                     ),
-                    const CustomRowDevider(),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    const IconSocialMedia(),
+                    // const CustomRowDevider(),
+                    // const SizedBox(
+                    //   height: 15,
+                    // ),
+                    // const IconSocialMedia(),
                     SizedBox(
-                      height: MediaQuery.of(context).size.height * .1,
+                      height: MediaQuery.of(context).size.height * .015,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
