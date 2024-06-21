@@ -11,8 +11,8 @@ class RegisterCubit extends Cubit<RegisterState> {
   RegisterCubit() : super(RegisterInitial());
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
 
-  String doctorName = '';
-  String doctorEmail = '';
+    String doctorName = '';
+    String doctorEmail = '';
 
   Future<void> patientRegister({required PatientModel patientModel}) async {
     emit(RegisterLoading());

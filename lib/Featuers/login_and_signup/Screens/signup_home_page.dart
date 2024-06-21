@@ -1,5 +1,7 @@
 // ignore_for_file: body_might_complete_normally_nullable
 
+import 'dart:developer';
+
 import 'package:get/get.dart';
 import 'package:health_care/Featuers/login_and_signup/Screens/doctor_list_view.dart';
 import 'package:health_care/Featuers/login_and_signup/data/models/patient_model.module.dart';
@@ -31,28 +33,41 @@ class SignupHomePage extends StatefulWidget {
 class _SignupHomePageState extends State<SignupHomePage> {
   GlobalKey<FormState> formkey = GlobalKey();
 
-  bool isLoading = false;
-
   String? lastName;
   String? fristName;
   String? email;
   String? phoneNumber;
   String? doctorName;
   String? doctorEmail;
-  late RegisterCubit registerCubit = BlocProvider.of<RegisterCubit>(context);
 
   String pattern = '^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]';
-
   String? password;
   bool? obSecureText = true;
   IconData? icon = Icons.visibility_off;
 
-  @override
-  void initState() {
-    doctorName = registerCubit.doctorName;
-    doctorEmail = registerCubit.doctorEmail;
-    super.initState();
+  bool isLoading = false;
+  TextEditingController doctorNameController = TextEditingController();
+  late RegisterCubit registerCubit = BlocProvider.of<RegisterCubit>(context);
+  Future<void> selectDoctor() async {
+    final result = await Get.to(() => const DoctorListViewBody(),
+        transition: Motivation.zoomTransition(), duration: kDuration);
+    if (result != null && result is Map<String, String>) {
+      setState(() {
+        doctorName = result['doctorName'];
+        doctorEmail = result['doctorEmail'];
+        registerCubit.doctorName = doctorName!;
+        registerCubit.doctorEmail = doctorEmail!;
+        doctorNameController.text = doctorName!;
+        log("Doctor Name: '${doctorNameController.text}', Doctor Email: $doctorEmail");
+      });
+    }
   }
+
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   doctorNameController.text = doctorName!;
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -61,8 +76,8 @@ class _SignupHomePageState extends State<SignupHomePage> {
         if (state is RegisterLoading) {
           isLoading = true;
         } else if (state is RegisterSucessful) {
-          Navigator.pop(context);
           isLoading = false;
+          Navigator.pop(context);
         }
         if (state is RegisterFailuer) {
           showErrorDialog(context: context, message: state.errorMessage);
@@ -179,21 +194,17 @@ class _SignupHomePageState extends State<SignupHomePage> {
                       },
                     ),
                     CustomFormTextField(
+                      controller: doctorNameController,
                       validator: (value) {
                         if (value!.isEmpty) {
                           return 'value is empty';
                         }
                       },
                       prefexIcon: const Icon(Icons.person),
-                      initialValue: doctorName,
                       readOnly: true,
                       hint: 'Doctor Name',
                       sufxIcon: IconButton(
-                          onPressed: () {
-                            Get.to(() => const DoctorListViewBody(),
-                                transition: Motivation.zoomTransition(),
-                                duration: kDuration);
-                          },
+                          onPressed: selectDoctor,
                           icon: const Icon(
                             Icons.person_add_alt_1_sharp,
                             size: 35,
@@ -213,15 +224,13 @@ class _SignupHomePageState extends State<SignupHomePage> {
                             email: email!,
                             phoneNumber: phoneNumber!,
                             password: password!,
-                            doctorName: doctorName!,
+                            doctorName: doctorNameController.text,
                             doctorEmail: doctorEmail!,
                           ));
                           showSuccessDialog(
                             context: context,
                             message: "Your account created successfully",
-                            btnOkOnPress: () {
-                              Navigator.of(context).pop();
-                            },
+                            btnOkOnPress: () {},
                           );
                         } else {
                           showErrorDialog(

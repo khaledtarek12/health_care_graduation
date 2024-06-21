@@ -75,6 +75,12 @@ class _AdminScreenBodyState extends State<AdminScreenBody> {
                   return Padding(
                     padding: const EdgeInsets.only(top: 10, bottom: 10),
                     child: DoctorCard(
+                        gradient: LinearGradient(
+                          colors: [
+                            kPrimaryColor,
+                            kPrimaryColor.withOpacity(.6)
+                          ],
+                        ),
                         isControled: true,
                         doctorModel: getDoctorsCubit.allDoctors[index]),
                   );

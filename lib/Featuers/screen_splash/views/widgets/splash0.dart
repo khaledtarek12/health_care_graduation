@@ -5,6 +5,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:health_care/Featuers/admin/views/admin_view_page.dart';
+import 'package:health_care/Featuers/doctor_pages/bloc/get_patient_cubit/get_patient_cubit.dart';
 import 'package:health_care/Featuers/doctor_pages/views/doctor_homepage.dart';
 import 'package:health_care/Featuers/login_and_signup/Screens/login_home_page.dart';
 import 'package:health_care/Featuers/patient_pages/views/patient_view.dart';
@@ -47,6 +48,8 @@ class _Splash0State extends State<Splash0> {
             if (!mounted) return;
             BlocProvider.of<GetMyDataCubit>(context)
                 .getMyData(email: prefs.getString('email')!, type: 'Doctor');
+            BlocProvider.of<GetPatientsCubit>(context)
+                .getAllPatients(doctorEmail: prefs.getString('email')!);
             Get.offNamed(DoctorHomepage.id);
           } else if (prefs.getString('type') == 'Patient') {
             if (!mounted) return;

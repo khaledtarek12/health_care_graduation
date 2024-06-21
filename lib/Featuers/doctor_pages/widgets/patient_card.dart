@@ -10,7 +10,7 @@ import 'package:health_care/core/utils/styles.dart';
 class Patientcard extends StatelessWidget {
   const Patientcard({super.key, this.email, required this.patientModel});
 
-  final Object? email;
+  final String? email;
   final PatientModel patientModel;
 
   @override

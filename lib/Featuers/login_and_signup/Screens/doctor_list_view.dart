@@ -24,13 +24,16 @@ class _DoctorListViewBodyState extends State<DoctorListViewBody> {
       BlocProvider.of<GetDoctorsCubit>(context);
   late RegisterCubit registerCubit = BlocProvider.of<RegisterCubit>(context);
   bool isLoading = false;
-  String? doctorName;
-  String? doctorEmail;
   int selectedCrad = -1;
+  late String doctorName;
+  late String doctorEmail;
+
   @override
   void initState() {
     super.initState();
     getDoctorsCubit.getAllDoctors();
+    doctorEmail = registerCubit.doctorEmail;
+    doctorName = registerCubit.doctorName;
   }
 
   @override
@@ -46,9 +49,14 @@ class _DoctorListViewBodyState extends State<DoctorListViewBody> {
               borderRadius: BorderRadius.circular(100)),
           child: const Text('Choose Doctor', style: style15),
           onPressed: () {
-            registerCubit.doctorName = doctorName!;
-            registerCubit.doctorEmail = doctorEmail!;
-            Navigator.of(context).pop();
+            setState(() {
+              registerCubit.doctorName = doctorName;
+              registerCubit.doctorEmail = doctorEmail;
+            });
+            Navigator.of(context).pop({
+              'doctorName': doctorName,
+              'doctorEmail': doctorEmail,
+            });
           },
         ),
       ),
@@ -59,9 +67,13 @@ class _DoctorListViewBodyState extends State<DoctorListViewBody> {
         child: BlocConsumer<GetDoctorsCubit, GetDoctorsState>(
           listener: (context, state) {
             if (state is GetDoctorsLoading) {
-              isLoading = true;
+              setState(() {
+                isLoading = true;
+              });
             } else {
-              isLoading = false;
+              setState(() {
+                isLoading = false;
+              });
             }
             if (state is GetDoctorsFailure) {
               log(state.errorMessage);

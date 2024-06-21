@@ -34,8 +34,6 @@ class GetMyDataCubit extends Cubit<GetMyDataState> {
 
         if (querySnapshot.docs.isNotEmpty) {
           patientData = PatientModel.fromSnapshot(querySnapshot.docs.first);
-          print(patientData.toString());
-          print('khaled1');
           emit(GetMyDataSuccess());
         } else {
           emit(GetMyDataFailure(
@@ -48,8 +46,7 @@ class GetMyDataCubit extends Cubit<GetMyDataState> {
             .get();
         if (querySnapshot.docs.isNotEmpty) {
           doctorData = DoctorModel.fromSnapshot(querySnapshot.docs.first);
-          print(doctorData.toString());
-          print('khaled');
+
           emit(GetMyDataSuccess());
         } else {
           emit(GetMyDataFailure(

@@ -12,19 +12,24 @@ class GetPatientsCubit extends Cubit<GetPatientsState> {
 
   List<PatientModel> allPatient = [];
 
-  Future<void> getAllPatients({required Object email}) async {
+  Future<void> getAllPatients({required String doctorEmail}) async {
     emit(GetPatientsLoading());
     try {
       final querySnapshot = await firestore
           .collection('patients')
-          .where(email, isEqualTo: kDcotorEmail)
+          .where(kDcotorEmail, isEqualTo: doctorEmail)
           .get();
+
+      if (querySnapshot.docs.isEmpty) {
+        return;
+      }
 
       allPatient.clear();
       allPatient = querySnapshot.docs
           .map((doc) => PatientModel.fromSnapshot(doc))
           .toList();
       allPatient.sort((a, b) => a.fristName.compareTo(b.fristName));
+
       emit(GetPatientsSuccess());
     } catch (e) {
       emit(GetPatientsFailure(errorMessage: "There was an error: $e"));

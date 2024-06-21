@@ -14,6 +14,7 @@ class CustomFormTextField extends StatelessWidget {
     this.validator,
     this.readOnly = false,
     this.initialValue,
+    this.controller,
   });
 
   final String? hint;
@@ -25,6 +26,7 @@ class CustomFormTextField extends StatelessWidget {
   final String? Function(String?)? validator;
   final bool? readOnly;
   final String? initialValue;
+  final TextEditingController? controller;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -32,6 +34,7 @@ class CustomFormTextField extends StatelessWidget {
       child: TextFormField(
         initialValue: initialValue,
         readOnly: readOnly!,
+        controller: controller,
         obscureText: obSecureText!,
         // ignore: body_might_complete_normally_nullable
         validator: validator,

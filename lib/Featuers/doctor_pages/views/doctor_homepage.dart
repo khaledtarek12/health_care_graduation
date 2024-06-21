@@ -65,7 +65,7 @@ class _DoctorHomepageState extends State<DoctorHomepage> {
                     Text(
                       state is GetMyDataSuccess
                           ? '${BlocProvider.of<GetMyDataCubit>(context).doctorData.fristName} '
-                          : '',
+                          : 'no thing',
                       style: style25.copyWith(color: kPrimaryColor),
                     ),
                     Text(
@@ -73,7 +73,7 @@ class _DoctorHomepageState extends State<DoctorHomepage> {
                           ? BlocProvider.of<GetMyDataCubit>(context)
                               .doctorData
                               .lastName
-                          : '',
+                          : 'no thing',
                       style: style25.copyWith(color: Colors.white),
                     ),
                   ],
