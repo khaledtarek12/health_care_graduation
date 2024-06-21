@@ -4,7 +4,7 @@ import 'package:health_care/Featuers/admin/bloc/add_doctor_cubit/add_doctor_cubi
 import 'package:health_care/Featuers/admin/bloc/get_doctor_cubit/get_doctors_cubit.dart';
 import 'package:health_care/Featuers/admin/data/model/doctor_model.module.dart';
 import 'package:health_care/Featuers/login_and_signup/Screens/Widget/custom_button.dart';
-import 'package:health_care/Featuers/login_and_signup/Screens/Widget/custom_form_validator_field.dart';
+import 'package:health_care/Featuers/login_and_signup/Screens/Widget/custom_form_text_field.dart';
 import 'package:health_care/core/helper/show_snackbar.dart';
 import 'package:health_care/core/utils/styles.dart';
 import 'package:health_care/core/widgets/circle_loading.dart';
@@ -74,7 +74,7 @@ class _AddNewDoctorState extends State<AddNewDoctor> {
                     children: [
                       Expanded(
                         child: CustomFormTextField(
-                          hint: 'First name',
+                          labelText: 'First name',
                           validator: (value) {
                             if (value!.isEmpty) {
                               return 'Value is empty';
@@ -89,7 +89,7 @@ class _AddNewDoctorState extends State<AddNewDoctor> {
                       const SizedBox(width: 20),
                       Expanded(
                         child: CustomFormTextField(
-                          hint: 'Last name',
+                          labelText: 'Last name',
                           validator: (value) {
                             if (value!.isEmpty) {
                               return 'Value is empty';
@@ -116,7 +116,7 @@ class _AddNewDoctorState extends State<AddNewDoctor> {
                     onChange: (data) {
                       email = data;
                     },
-                    hint: 'Email or Username',
+                    labelText: 'Email or Username',
                     prefexIcon: const Icon(Icons.mail),
                   ),
                   CustomFormTextField(
@@ -130,7 +130,7 @@ class _AddNewDoctorState extends State<AddNewDoctor> {
                     onChange: (data) {
                       password = data;
                     },
-                    hint: 'Password',
+                    labelText: 'Password',
                     prefexIcon: const Icon(Icons.lock),
                     sufxIcon: iconButtonChange(),
                   ),
@@ -145,7 +145,7 @@ class _AddNewDoctorState extends State<AddNewDoctor> {
                         return 'your password dosn\'t match';
                       }
                     },
-                    hint: 'Confirm Password',
+                    labelText: 'Confirm Password',
                     onChange: (data) {
                       if (data == password) {
                         password = data;
@@ -161,7 +161,7 @@ class _AddNewDoctorState extends State<AddNewDoctor> {
                         return 'value is empty';
                       }
                     },
-                    hint: 'Enter your phone',
+                    labelText: 'Enter your phone',
                     prefexIcon: const Icon(Icons.phone),
                     onChange: (data) {
                       phoneNumber = data;

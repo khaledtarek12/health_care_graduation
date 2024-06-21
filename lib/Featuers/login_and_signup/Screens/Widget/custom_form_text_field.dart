@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:health_care/const.dart';
+import 'package:health_care/core/utils/styles.dart';
 
 // ignore: must_be_immutable
 class CustomFormTextField extends StatelessWidget {
   const CustomFormTextField({
     super.key,
-    this.hint,
     this.prefexIcon,
     this.sufxIcon,
     this.onChange,
@@ -15,9 +15,9 @@ class CustomFormTextField extends StatelessWidget {
     this.readOnly = false,
     this.initialValue,
     this.controller,
+    this.labelText,
   });
 
-  final String? hint;
   final Icon? prefexIcon;
   final IconButton? sufxIcon;
   final Function(String)? onChange;
@@ -27,6 +27,7 @@ class CustomFormTextField extends StatelessWidget {
   final bool? readOnly;
   final String? initialValue;
   final TextEditingController? controller;
+  final String? labelText;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -43,8 +44,11 @@ class CustomFormTextField extends StatelessWidget {
         onChanged: onChange,
         decoration: InputDecoration(
           filled: true,
+          labelText: labelText,
+          labelStyle:
+              style15.copyWith(color: kprimaryVeryDarkcolor, fontSize: 13),
           fillColor: const Color(0xffE7EFF2),
-          hintText: hint,
+          alignLabelWithHint: true,
           prefixIcon: prefexIcon,
           prefixIconColor: WidgetStateColor.resolveWith((states) =>
               states.contains(WidgetState.focused)

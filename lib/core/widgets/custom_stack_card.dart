@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:health_care/const.dart';
 
 class CustomStackCard extends StatelessWidget {
-  const CustomStackCard({super.key, this.child, this.onTap});
+  const CustomStackCard({super.key, required this.children, this.onTap});
 
-  final Widget? child;
+  final List<Widget> children;
   final void Function()? onTap;
   @override
   Widget build(BuildContext context) {
@@ -25,7 +25,9 @@ class CustomStackCard extends StatelessWidget {
                   spreadRadius: 2,
                   offset: const Offset(4, 4))
             ]),
-        child: child,
+        child: Column(
+          children: children,
+        ),
       ),
     );
   }

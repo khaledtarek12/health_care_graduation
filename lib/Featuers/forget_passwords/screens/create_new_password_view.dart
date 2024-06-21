@@ -5,7 +5,7 @@ import 'package:health_care/core/utils/styles.dart';
 import 'package:health_care/core/widgets/custom_container.dart';
 import 'package:health_care/Featuers/forget_passwords/screens/password_created_succefuly.dart';
 import 'package:health_care/Featuers/login_and_signup/Screens/Widget/custom_button.dart';
-import 'package:health_care/Featuers/login_and_signup/Screens/Widget/custom_form_validator_field.dart';
+import 'package:health_care/Featuers/login_and_signup/Screens/Widget/custom_form_text_field.dart';
 
 class CreateNewPassword extends StatefulWidget {
   const CreateNewPassword({super.key});
@@ -39,12 +39,12 @@ class _CreateNewPasswordState extends State<CreateNewPassword> {
                 )),
             const SizedBox(height: 40),
             CustomFormTextField(
-              hint: 'new password',
+              labelText: 'new password',
               sufxIcon: iconButtonChange(),
               obSecureText: obSecureText,
             ),
             CustomFormTextField(
-              hint: 'confirm  password',
+              labelText: 'confirm  password',
               sufxIcon: iconButtonChange(),
               obSecureText: obSecureText,
             ),

@@ -59,7 +59,7 @@ class ChatPage extends StatelessWidget {
                       duration: const Duration(microseconds: 500),
                       curve: Curves.easeIn);
                 },
-                hint: 'Send Message',
+                labelText: 'Send Message',
                 sufxIcon: const Icon(Icons.send),
                 controller: controller,
               ),

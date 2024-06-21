@@ -5,14 +5,14 @@ import 'package:health_care/Featuers/patient_pages/cubits/alarm/alarm_data_cubit
 import 'package:health_care/Featuers/patient_pages/views/widget/add_alarm_button.dart';
 import 'package:health_care/Featuers/patient_pages/views/widget/custom_alarm_crad.dart';
 
-class DatePickerPgae extends StatefulWidget {
-  const DatePickerPgae({super.key});
+class AlarmHomePgae extends StatefulWidget {
+  const AlarmHomePgae({super.key});
 
   @override
-  State<DatePickerPgae> createState() => _DatePickerPgaeState();
+  State<AlarmHomePgae> createState() => _AlarmHomePgaeState();
 }
 
-class _DatePickerPgaeState extends State<DatePickerPgae> {
+class _AlarmHomePgaeState extends State<AlarmHomePgae> {
   @override
   Widget build(BuildContext context) {
     return CustomContainer(

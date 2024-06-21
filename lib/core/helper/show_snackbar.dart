@@ -271,7 +271,7 @@ void showQuesstionDialog({
     btnCancelOnPress: btnCancelOnPress,
     btnOkOnPress: btnOkOnPress,
     dismissOnBackKeyPress: true,
-    dialogBackgroundColor: Colors.white70,
+    dialogBackgroundColor: Colors.white,
     keyboardAware: true,
   ).show();
 }
@@ -292,7 +292,7 @@ void showErrorDialog({
     btnOkOnPress: btnOkOnPress,
     btnOkColor: Colors.red,
     btnOkIcon: Icons.cancel,
-    dialogBackgroundColor: Colors.white70,
+    dialogBackgroundColor: Colors.white,
     dismissOnBackKeyPress: true,
     autoHide: const Duration(seconds: 4),
   ).show();
@@ -312,7 +312,7 @@ void showSuccessDialog(
     descTextStyle: style15.copyWith(color: kPrimaryColor, fontSize: 18),
     btnOkOnPress: btnOkOnPress,
     btnOkColor: Colors.green,
-    dialogBackgroundColor: Colors.white70,
+    dialogBackgroundColor: Colors.white,
     dismissOnBackKeyPress: true,
     autoHide: const Duration(seconds: 4),
   ).show();

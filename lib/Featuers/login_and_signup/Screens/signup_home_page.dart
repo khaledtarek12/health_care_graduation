@@ -11,7 +11,7 @@ import 'package:health_care/core/widgets/custom_container.dart';
 import 'package:health_care/Featuers/login_and_signup/Screens/Widget/custom_button.dart';
 // import 'package:health_care/Featuers/login_and_signup/Screens/Widget/custom_awsome_icons.dart';
 // import 'package:health_care/Featuers/login_and_signup/Screens/Widget/cutom_row_devider.dart';
-import 'package:health_care/Featuers/login_and_signup/Screens/Widget/custom_form_validator_field.dart';
+import 'package:health_care/Featuers/login_and_signup/Screens/Widget/custom_form_text_field.dart';
 import 'package:health_care/const.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -103,7 +103,7 @@ class _SignupHomePageState extends State<SignupHomePage> {
                         Expanded(
                           child: CustomFormTextField(
                             prefexIcon: const Icon(Icons.person),
-                            hint: 'First name',
+                            labelText: 'First name',
                             validator: (value) {
                               if (value!.isEmpty) {
                                 return 'Value is empty';
@@ -119,7 +119,7 @@ class _SignupHomePageState extends State<SignupHomePage> {
                         Expanded(
                           child: CustomFormTextField(
                             prefexIcon: const Icon(Icons.person),
-                            hint: 'Last name',
+                            labelText: 'Last name',
                             validator: (value) {
                               if (value!.isEmpty) {
                                 return 'Value is empty';
@@ -145,7 +145,7 @@ class _SignupHomePageState extends State<SignupHomePage> {
                       onChange: (data) {
                         email = data;
                       },
-                      hint: 'Email or Username',
+                      labelText: 'Email or Username',
                       prefexIcon: const Icon(Icons.mail),
                     ),
                     CustomFormTextField(
@@ -158,7 +158,7 @@ class _SignupHomePageState extends State<SignupHomePage> {
                       onChange: (data) {
                         password = data;
                       },
-                      hint: 'Password',
+                      labelText: 'Password',
                       prefexIcon: const Icon(Icons.lock),
                       sufxIcon: iconButtonChange(),
                     ),
@@ -177,7 +177,7 @@ class _SignupHomePageState extends State<SignupHomePage> {
                         }
                       },
                       obSecureText: obSecureText,
-                      hint: 'Confirm Password',
+                      labelText: 'Confirm Password',
                       prefexIcon: const Icon(Icons.lock),
                       sufxIcon: iconButtonChange(),
                     ),
@@ -187,7 +187,7 @@ class _SignupHomePageState extends State<SignupHomePage> {
                           return 'value is empty';
                         }
                       },
-                      hint: 'Enter your phone',
+                      labelText: 'Enter your phone',
                       prefexIcon: const Icon(Icons.phone),
                       onChange: (data) {
                         phoneNumber = data;
@@ -202,7 +202,7 @@ class _SignupHomePageState extends State<SignupHomePage> {
                       },
                       prefexIcon: const Icon(Icons.person),
                       readOnly: true,
-                      hint: 'Doctor Name',
+                      labelText: 'Doctor Name',
                       sufxIcon: IconButton(
                           onPressed: selectDoctor,
                           icon: const Icon(

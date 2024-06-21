@@ -20,11 +20,14 @@ class PatientView extends StatefulWidget {
 
 class _PatientViewState extends State<PatientView> {
   final items = [
-    Icons.person,
+    Icons.home,
     Icons.alarm,
   ];
 
-  final screens = [const PatientViewBody(), const DatePickerPgae()];
+  final List<StatefulWidget> screens = [
+    const PatientViewBody(),
+    const AlarmHomePgae()
+  ];
 
   int pageNumber = 0;
 
@@ -61,7 +64,7 @@ class _PatientViewState extends State<PatientView> {
           return Icon(
             iconData,
             color: isActive ? const Color(0xff0d2633) : Colors.white70,
-            size: isActive ? 55 : 40,
+            size: isActive ? 40 : 30,
           );
         },
         height: 70,

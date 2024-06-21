@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class CustomTextField extends StatelessWidget {
   const CustomTextField({
     super.key,
-    this.hint,
+    this.labelText,
     this.prefexIcon,
     this.sufxIcon,
     this.onChange,
@@ -13,7 +13,7 @@ class CustomTextField extends StatelessWidget {
     this.obSecureText = false,
   });
 
-  final String? hint;
+  final String? labelText;
   final Icon? prefexIcon;
   final Icon? sufxIcon;
   final Function(String)? onChange;
@@ -30,7 +30,7 @@ class CustomTextField extends StatelessWidget {
       decoration: InputDecoration(
         filled: true,
         fillColor: const Color(0xffE7EFF2),
-        hintText: hint,
+        labelText: labelText,
         prefixIcon: prefexIcon,
         suffixIcon: sufxIcon,
         border: const OutlineInputBorder(

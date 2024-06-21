@@ -33,7 +33,7 @@ class _OpinionState extends State<Opinion> {
                 padding: EdgeInsets.symmetric(horizontal: 20),
                 child: TextField(
                   decoration: InputDecoration(
-                    hintText: "your Review here",
+                    labelText: "your Review here",
                     border: InputBorder.none,
                   ),
                 ),

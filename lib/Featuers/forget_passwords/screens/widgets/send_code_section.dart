@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:health_care/const.dart';
 import 'package:health_care/core/utils/styles.dart';
 import 'package:health_care/Featuers/login_and_signup/Screens/Widget/custom_button.dart';
-import 'package:health_care/Featuers/login_and_signup/Screens/Widget/custom_form_validator_field.dart';
+import 'package:health_care/Featuers/login_and_signup/Screens/Widget/custom_form_text_field.dart';
 
 class SendCodeSection extends StatelessWidget {
   const SendCodeSection({
@@ -32,7 +32,7 @@ class SendCodeSection extends StatelessWidget {
         ),
         const SizedBox(height: 20),
         const CustomFormTextField(
-          hint: 'Enter your email',
+          labelText: 'Enter your email',
           prefexIcon: Icon(Icons.email_outlined),
         ),
         const SizedBox(height: 20),

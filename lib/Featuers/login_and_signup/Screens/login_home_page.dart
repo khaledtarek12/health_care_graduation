@@ -15,7 +15,7 @@ import 'Widget/custom_button.dart';
 // import 'Widget/custom_awsome_icons.dart';
 // import 'Widget/cutom_row_devider.dart';
 import 'Widget/cutom_row_radiobutton.dart';
-import 'Widget/custom_form_validator_field.dart';
+import 'Widget/custom_form_text_field.dart';
 import '../bloc/chat/chat_cubit.dart';
 import '../bloc/login_cubit/login_cubit.dart';
 
@@ -117,7 +117,7 @@ class _LoginHomePageState extends State<LoginHomePage> {
                       onChange: (data) {
                         email = data;
                       },
-                      hint: 'Email',
+                      labelText: 'Email',
                       prefexIcon: const Icon(Icons.mail),
                       keyboardType: TextInputType.emailAddress,
                     ),
@@ -132,7 +132,7 @@ class _LoginHomePageState extends State<LoginHomePage> {
                         password = data;
                       },
                       obSecureText: obSecureText,
-                      hint: 'Password',
+                      labelText: 'Password',
                       prefexIcon: const Icon(Icons.lock),
                       sufxIcon: IconButton(
                         icon: Icon(icon),

@@ -1,21 +1,42 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:health_care/Featuers/patient_pages/views/widget/heart_beat_view.dart';
+import 'package:health_care/Featuers/screen_splash/bloc/cubit/get_my_data_cubit.dart';
 import 'package:health_care/const.dart';
 import 'package:health_care/core/helper/transation.dart';
 import 'package:health_care/core/utils/styles.dart';
 import 'package:health_care/core/widgets/custom_container.dart';
 import 'package:health_care/core/widgets/custom_stack_card.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class PatientViewBody extends StatelessWidget {
+class PatientViewBody extends StatefulWidget {
   const PatientViewBody({super.key});
 
   @override
+  State<PatientViewBody> createState() => _PatientViewBodyState();
+}
+
+late SharedPreferences prefs;
+String email = '';
+getEmail() async {
+  prefs = await SharedPreferences.getInstance();
+  email = prefs.getString('email')!;
+}
+
+@override
+initState() {
+  getEmail();
+}
+
+class _PatientViewBodyState extends State<PatientViewBody> {
+  @override
   Widget build(BuildContext context) {
+    GetMyDataCubit getMyDataCubit = BlocProvider.of<GetMyDataCubit>(context);
+
     return CustomContainer(
       title: 'Home Page',
-      isLeading: true,
       isLogout: true,
       child: SingleChildScrollView(
         child: Column(
@@ -39,9 +60,11 @@ class PatientViewBody extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const Icon(Icons.person_3, color: Colors.white, size: 45),
-                const SizedBox(width: 12),
-                Text('Khaled ', style: style25.copyWith(color: kPrimaryColor)),
-                Text(' Tarek', style: style25.copyWith(color: Colors.white)),
+                const SizedBox(width: 5),
+                Text('${getMyDataCubit.patientData.fristName} ',
+                    style: style25.copyWith(color: kPrimaryColor)),
+                Text(getMyDataCubit.patientData.lastName,
+                    style: style25.copyWith(color: Colors.white)),
               ],
             ),
             const SizedBox(
@@ -57,20 +80,33 @@ class PatientViewBody extends StatelessWidget {
                   mainAxisSpacing: 24.0, // Adjust mainAxisSpacing
                 ),
                 children: [
-                  CustomStackCard(
-                    child: SvgPicture.asset(
-                        'assets/images/chat-line-svgrepo-com.svg',
-                        // ignore: deprecated_member_use
-                        color: Colors.white.withOpacity(.8),
-                        fit: BoxFit.contain),
-                  ),
-                  CustomStackCard(
-                    child: SvgPicture.asset(
-                      'assets/images/heart-beat-svgrepo-com.svg',
-                      fit: BoxFit.contain,
+                  CustomStackCard(children: [
+                    SvgPicture.asset(
+                      'assets/images/chat-line-svgrepo-com.svg',
                       // ignore: deprecated_member_use
                       color: Colors.white.withOpacity(.8),
+                      height: 100,
+                      width: 100,
                     ),
+                    const Text(
+                      'My Chat',
+                      style: style15,
+                    ),
+                  ]),
+                  CustomStackCard(
+                    children: [
+                      SvgPicture.asset(
+                        'assets/images/heart-beat-svgrepo-com.svg',
+                        height: 100,
+                        width: 100,
+                        // ignore: deprecated_member_use
+                        color: Colors.white.withOpacity(.8),
+                      ),
+                      const Text(
+                        'Heart Info',
+                        style: style15,
+                      ),
+                    ],
                     onTap: () {
                       Get.to(() => const HeartBeatView(),
                           transition: Motivation.zoomTransition());
