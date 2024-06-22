@@ -52,6 +52,17 @@ class GetMyDataCubit extends Cubit<GetMyDataState> {
           emit(GetMyDataFailure(
               errorMessage: "No doctor found with email $email"));
         }
+      } else if (type == 'Admin') {
+        querySnapshot = await firestore
+            .collection('admins')
+            .where('email', isEqualTo: email)
+            .get();
+        if (querySnapshot.docs.isNotEmpty) {
+          emit(GetMyDataSuccess());
+        } else {
+          emit(GetMyDataFailure(
+              errorMessage: "No doctor found with email $email"));
+        }
       }
     } catch (e) {
       emit(GetMyDataFailure(errorMessage: "There was an error: $e"));

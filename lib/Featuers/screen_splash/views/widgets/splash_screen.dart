@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:health_care/Featuers/screen_splash/views/widgets/splash0.dart';
+import 'package:health_care/Featuers/screen_splash/views/widgets/logo_intro_screen.dart';
 import 'package:health_care/Featuers/screen_splash/views/widgets/splash_view_body.dart';
 import 'package:health_care/core/utils/splacsh_images.dart';
 import 'package:health_care/core/widgets/box_decoration.dart';
@@ -49,7 +49,8 @@ class _SplashScreenState extends State<SplashScreen>
             child: Padding(
               padding: EdgeInsets.only(
                   top: MediaQuery.of(context).size.height * .55),
-              child: Splash0(context: context, slideAnimation: slideAnimation),
+              child: LogoIntroScreen(
+                  context: context, slideAnimation: slideAnimation),
             ),
           ),
         ),

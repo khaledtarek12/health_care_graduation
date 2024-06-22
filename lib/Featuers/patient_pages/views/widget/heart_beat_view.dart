@@ -1,140 +1,116 @@
-import 'dart:async';
-import 'dart:math';
-import 'package:fl_chart/fl_chart.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:syncfusion_flutter_charts/charts.dart';
 
-class HeartBeatView extends StatelessWidget {
+class HeartBeatView extends StatefulWidget {
   const HeartBeatView({super.key});
+
+  @override
+  // ignore: library_private_types_in_public_api
+  _HeartBeatViewState createState() => _HeartBeatViewState();
+}
+
+class _HeartBeatViewState extends State<HeartBeatView> {
+  late DatabaseReference _databaseReference;
+  List<SensorData> _sensorData = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _databaseReference = FirebaseDatabase.instance.ref('Sensor/Bpm');
+
+    // Listen for changes in the Firebase database
+    _databaseReference.onValue.listen((event) {
+      if (event.snapshot.exists) {
+        final data = (event.snapshot.value as Map<dynamic, dynamic>)
+            .map((key, value) => MapEntry(key.toString(), value.toDouble()));
+        final sensorData = data.entries
+            .map((entry) => SensorData(id: entry.key, value: entry.value))
+            .toList();
+
+        setState(() {
+          _sensorData = sensorData;
+        });
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.blueGrey[900],
       appBar: AppBar(
-        backgroundColor: Colors.blueGrey[900],
+        title: const Text('Sensor Data Chart',
+            style: TextStyle(color: Colors.white)),
+        backgroundColor: const Color(0xff191d2d),
         leading: IconButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            icon: const Icon(Icons.arrow_back_ios, color: Colors.white)),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          icon: const Icon(Icons.arrow_back_ios, color: Colors.white),
+        ),
       ),
       body: Center(
-        child: Container(
-          color: Colors.blueGrey[900],
-          height: 450,
-          width: 400,
-          child: const MyLineChart(),
+        child: SfCartesianChart(
+          enableAxisAnimation: true,
+          margin: const EdgeInsets.only(bottom: 100),
+          borderColor: Colors.transparent,
+          primaryXAxis: const CategoryAxis(
+            isVisible: false,
+            borderWidth: 0,
+            borderColor: Colors.transparent,
+            interval: 1,
+          ),
+          primaryYAxis: const NumericAxis(
+            isVisible: false,
+            borderWidth: 0,
+            borderColor: Colors.transparent,
+          ),
+          plotAreaBorderWidth: 0,
+          backgroundColor: const Color(0xff191d2d),
+          zoomPanBehavior: ZoomPanBehavior(
+            enablePinching: true,
+            enablePanning: true,
+            zoomMode: ZoomMode.xy,
+          ),
+          series: <SplineAreaSeries<SensorData, String>>[
+            SplineAreaSeries<SensorData, String>(
+              dataSource: _sensorData,
+              xValueMapper: (SensorData data, _) => data.id,
+              yValueMapper: (SensorData data, _) => data.value,
+              color: Colors.blueAccent.withOpacity(0.5),
+              borderWidth: 2,
+              borderColor: Colors.blueAccent,
+              animationDuration: 500,
+              markerSettings: const MarkerSettings(
+                isVisible: true,
+                color: Colors.lightBlueAccent,
+                shape: DataMarkerType.circle,
+                borderColor: Colors.blueAccent,
+              ),
+              dataLabelSettings: const DataLabelSettings(
+                isVisible: true, // Show data labels
+                labelAlignment: ChartDataLabelAlignment.top,
+              ),
+              enableTooltip: true,
+            )
+          ],
+          tooltipBehavior: TooltipBehavior(enable: true),
         ),
       ),
     );
   }
 }
 
-class MyLineChart extends StatefulWidget {
-  const MyLineChart({super.key});
+class SensorData {
+  final String id;
+  final double value;
 
-  final Color lineColor = Colors.red; // Color for the heartbeat line
+  SensorData({required this.id, required this.value});
 
-  @override
-  State<MyLineChart> createState() => _MyLineChartState();
-}
-
-class _MyLineChartState extends State<MyLineChart> {
-  final int limitCount = 100;
-  final List<FlSpot> heartRateData = [];
-  double x = 0;
-  double step = 0.05;
-
-  late Timer timer;
-  final Random random = Random();
-
-  @override
-  void initState() {
-    super.initState();
-    // Start the timer to generate fake heart rate data periodically
-    timer = Timer.periodic(const Duration(milliseconds: 100), (timer) {
-      if (heartRateData.length > limitCount) {
-        heartRateData.removeAt(0);
-      }
-
-      // Generate fake heart rate data by oscillating around 70 BPM and 100 BPM
-      double fakeHeartRate = random.nextDouble() * 30 + 70;
-
-      // Add the new data point and update x value
-      setState(() {
-        heartRateData.add(FlSpot(x, fakeHeartRate));
-        x += step;
-      });
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return heartRateData.isNotEmpty
-        ? Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const SizedBox(height: 15),
-              Text(
-                'X: ${x.toStringAsFixed(1)}',
-                style: const TextStyle(
-                  color: Colors.grey,
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              Text(
-                'Heart Rate: ${heartRateData.last.y.toStringAsFixed(1)}',
-                style: const TextStyle(
-                  color: Colors.grey,
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              const SizedBox(height: 20),
-              AspectRatio(
-                aspectRatio: 1.5,
-                child: Padding(
-                  padding: const EdgeInsets.only(bottom: 25),
-                  child: LineChart(
-                    LineChartData(
-                      minY: 60,
-                      maxY: 110,
-                      minX: heartRateData.first.x,
-                      maxX: heartRateData.last.x,
-                      lineTouchData: const LineTouchData(enabled: false),
-                      clipData: const FlClipData.all(),
-                      gridData: const FlGridData(show: true),
-                      borderData: FlBorderData(show: false),
-                      lineBarsData: [
-                        heartRateLine(heartRateData),
-                      ],
-                      titlesData: const FlTitlesData(show: false),
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          )
-        : Container();
-  }
-
-  LineChartBarData heartRateLine(List<FlSpot> points) {
-    return LineChartBarData(
-      spots: points,
-      dotData: const FlDotData(show: false),
-      gradient: LinearGradient(
-        colors: [widget.lineColor.withOpacity(0), widget.lineColor],
-        stops: const [.1, 1],
-      ),
-      barWidth: 3,
-      isCurved: false,
+  factory SensorData.fromJson(String id, Map<dynamic, dynamic> json) {
+    return SensorData(
+      id: id,
+      value: json['value'].toDouble(),
     );
-  }
-
-  @override
-  void dispose() {
-    timer.cancel();
-    super.dispose();
   }
 }

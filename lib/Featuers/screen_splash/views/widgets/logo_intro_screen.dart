@@ -14,8 +14,8 @@ import 'package:health_care/Featuers/screen_splash/views/widgets/splash_view_bod
 import 'package:health_care/core/utils/styles.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class Splash0 extends StatefulWidget {
-  const Splash0({
+class LogoIntroScreen extends StatefulWidget {
+  const LogoIntroScreen({
     super.key,
     required this.context,
     this.orientation,
@@ -27,10 +27,10 @@ class Splash0 extends StatefulWidget {
   final Animation<Offset> slideAnimation;
 
   @override
-  State<Splash0> createState() => _Splash0State();
+  State<LogoIntroScreen> createState() => _LogoIntroScreenState();
 }
 
-class _Splash0State extends State<Splash0> {
+class _LogoIntroScreenState extends State<LogoIntroScreen> {
   FirebaseAuth firebaseAuth = FirebaseAuth.instance;
 
   navigateToHome() {
@@ -57,6 +57,9 @@ class _Splash0State extends State<Splash0> {
                 .getMyData(email: prefs.getString('email')!, type: 'Patient');
             Get.offNamed(PatientView.id);
           } else if (prefs.getString('type') == 'Admin') {
+            if (!mounted) return;
+            BlocProvider.of<GetMyDataCubit>(context)
+                .getMyData(email: prefs.getString('email')!, type: 'Admin');
             Get.offNamed(AdminViewPage.id);
           }
         }
