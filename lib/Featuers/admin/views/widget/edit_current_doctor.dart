@@ -187,7 +187,10 @@ class _EditCurrentDoctorState extends State<EditCurrentDoctor> {
                       isLoading = false;
                     } else if (state is EditDoctorFailure) {
                       showErrorDialog(
-                          context: context, message: state.errorMessage);
+                        context: context,
+                        message: state.errorMessage,
+                        btnOkOnPress: () {},
+                      );
                       isLoading = false;
                     }
                   },

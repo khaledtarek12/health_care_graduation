@@ -80,7 +80,11 @@ class _SignupHomePageState extends State<SignupHomePage> {
           Navigator.pop(context);
         }
         if (state is RegisterFailuer) {
-          showErrorDialog(context: context, message: state.errorMessage);
+          showErrorDialog(
+            context: context,
+            message: state.errorMessage,
+            btnOkOnPress: () {},
+          );
           isLoading = false;
         }
       },
@@ -234,6 +238,7 @@ class _SignupHomePageState extends State<SignupHomePage> {
                           );
                         } else {
                           showErrorDialog(
+                              btnOkOnPress: () {},
                               context: context,
                               message:
                                   "There was an error, please try again...");

@@ -52,7 +52,11 @@ class _AddNewDoctorState extends State<AddNewDoctor> {
           isLoading = false;
         }
         if (state is AddDoctorFailuer) {
-          showErrorDialog(context: context, message: state.errorMessage);
+          showErrorDialog(
+            context: context,
+            message: state.errorMessage,
+            btnOkOnPress: () {},
+          );
           isLoading = false;
         }
       },

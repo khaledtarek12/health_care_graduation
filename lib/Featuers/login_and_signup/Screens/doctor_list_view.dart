@@ -77,7 +77,11 @@ class _DoctorListViewBodyState extends State<DoctorListViewBody> {
             }
             if (state is GetDoctorsFailure) {
               log(state.errorMessage);
-              showErrorDialog(context: context, message: state.errorMessage);
+              showErrorDialog(
+                context: context,
+                message: state.errorMessage,
+                btnOkOnPress: () {},
+              );
             }
           },
           builder: (context, state) {

@@ -38,7 +38,11 @@ class _CardPatientListBuilderState extends State<CardPatientListBuilder> {
         if (state is GetPatientsFailure) {
           isLoading = false;
           log(state.errorMessage);
-          showErrorDialog(context: context, message: state.errorMessage);
+          showErrorDialog(
+            context: context,
+            message: state.errorMessage,
+            btnOkOnPress: () {},
+          );
         }
       },
       builder: (context, state) {

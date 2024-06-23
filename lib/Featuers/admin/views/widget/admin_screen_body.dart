@@ -62,7 +62,11 @@ class _AdminScreenBodyState extends State<AdminScreenBody> {
             }
             if (state is GetDoctorsFailure) {
               log(state.errorMessage);
-              showErrorDialog(context: context, message: state.errorMessage);
+              showErrorDialog(
+                context: context,
+                message: state.errorMessage,
+                btnOkOnPress: () {},
+              );
             }
           },
           builder: (context, state) {
@@ -75,7 +79,7 @@ class _AdminScreenBodyState extends State<AdminScreenBody> {
                   return Padding(
                     padding: const EdgeInsets.only(top: 10, bottom: 10),
                     child: DoctorCard(
-                      // id: getDoctorsCubit.allDoctors[index].id,
+                        // id: getDoctorsCubit.allDoctors[index].id,
                         gradient: LinearGradient(
                           colors: [
                             kPrimaryColor,

@@ -294,7 +294,6 @@ void showErrorDialog({
     btnOkIcon: Icons.cancel,
     dialogBackgroundColor: kprimaryVeryDarkcolor,
     dismissOnBackKeyPress: true,
-    autoHide: const Duration(seconds: 4),
   ).show();
 }
 
