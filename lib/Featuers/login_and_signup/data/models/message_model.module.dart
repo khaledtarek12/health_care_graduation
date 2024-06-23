@@ -2,11 +2,13 @@ import 'package:health_care/const.dart';
 
 class MessageModel {
   final String message;
-  final String id;
+  final String senderId;
+  final String recieverId;
 
-  MessageModel(this.message, this.id);
+  MessageModel(this.message, this.senderId, this.recieverId);
 
   factory MessageModel.fromJson(jsonData) {
-    return MessageModel(jsonData[kMessage], jsonData['id']);
+    return MessageModel(
+        jsonData[kMessage], jsonData['senderId'], jsonData['recieverId']);
   }
 }

@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:health_care/Featuers/login_and_signup/bloc/login_cubit/login_cubit.dart';
 import 'package:health_care/Featuers/login_and_signup/data/models/patient_model.module.dart';
 import 'package:health_care/Featuers/patient_pages/views/widget/heart_beat_view.dart';
 import 'package:health_care/const.dart';
 import 'package:health_care/Featuers/login_and_signup/Screens/chat_page.dart';
+import 'package:health_care/core/helper/transation.dart';
 import 'package:health_care/core/utils/styles.dart';
 
 class Patientcard extends StatelessWidget {
-  const Patientcard({super.key, this.email, required this.patientModel});
+  const Patientcard({super.key, required this.patientModel});
 
-  final String? email;
   final PatientModel patientModel;
 
   @override
@@ -60,9 +62,14 @@ class Patientcard extends StatelessWidget {
                           icon: const Icon(FontAwesomeIcons.facebookMessenger,
                               size: 35, color: Color(0xff17455c)),
                           onPressed: () {
-                            Get.to(() => ChatPage(),
-                                arguments: email,
-                                transition: Transition.downToUp);
+                            Get.to(
+                                () => ChatPage(
+                                      doctorId:
+                                          BlocProvider.of<LoginCubit>(context)
+                                              .email,
+                                    ),
+                                arguments: patientModel.email,
+                                transition: Motivation.bootmUpTransition());
                           }),
                       const SizedBox(width: 40),
                       IconButton(
@@ -70,7 +77,7 @@ class Patientcard extends StatelessWidget {
                               size: 35, color: Color(0xff17455c)),
                           onPressed: () {
                             Get.to(() => const HeartBeatView(),
-                                transition: Transition.zoom);
+                                transition: Motivation.zoomTransition());
                           }),
                       const SizedBox(width: 40),
                       const Icon(FontAwesomeIcons.locationDot,

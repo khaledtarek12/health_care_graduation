@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:health_care/Featuers/login_and_signup/Screens/login_home_page.dart';
+import 'package:health_care/Featuers/login_and_signup/bloc/login_cubit/login_cubit.dart';
 import 'package:health_care/const.dart';
 import 'package:health_care/core/helper/show_snackbar.dart';
 import 'package:health_care/core/utils/styles.dart';
@@ -38,7 +40,8 @@ class CustomContainer extends StatelessWidget {
                         context: context,
                         message: 'Are you sure you want to log out?',
                         btnCancelOnPress: () {},
-                        btnOkOnPress: () {
+                        btnOkOnPress: () async {
+                          BlocProvider.of<LoginCubit>(context).deleteEmail();
                           Navigator.pushAndRemoveUntil(context,
                               MaterialPageRoute(
                             builder: (context) {

@@ -120,11 +120,27 @@ class _AddNewDoctorState extends State<AddNewDoctor> {
                     prefexIcon: const Icon(Icons.mail),
                   ),
                   CustomFormTextField(
-                    // ignore: body_might_complete_normally_nullable
                     validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'value is empty';
+                      if (value == null || value.isEmpty) {
+                        return 'Password is empty';
                       }
+
+                      // Check for at least one non-alphanumeric character
+                      bool hasNonAlphanumeric =
+                          value.contains(RegExp(r'[!@#$%^&*(),.?":{}|<>]'));
+                      if (!hasNonAlphanumeric) {
+                        return 'Password must have at least one non-alphanumeric character';
+                      }
+                      // Check for at least one lowercase letter
+                      bool hasLowercase = value.contains(RegExp(r'[a-z]'));
+                      if (!hasLowercase) {
+                        return 'Password must have at least one lowercase letter';
+                      }
+                      bool hasUppercase = value.contains(RegExp(r'[A-Z]'));
+                      if (!hasUppercase) {
+                        return 'Password must have at least one lowercase letter';
+                      }
+                      return null;
                     },
                     obSecureText: obSecureText,
                     onChange: (data) {
@@ -179,11 +195,13 @@ class _AddNewDoctorState extends State<AddNewDoctor> {
                       if (formkey.currentState!.validate()) {
                         BlocProvider.of<AddDoctorCubit>(context).doctorRegister(
                             doctorModel: DoctorModel(
-                                fristName: fristName!,
-                                lastName: lastName!,
+                                fName: fristName!,
+                                lName: lastName!,
                                 email: email!,
                                 phoneNumber: phoneNumber!,
-                                password: password!));
+                                password: password!,
+                                userName:
+                                    '${fristName!.toLowerCase()}${lastName!.toLowerCase()}'));
                       }
                     },
                   ),

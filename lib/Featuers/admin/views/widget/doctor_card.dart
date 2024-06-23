@@ -14,14 +14,16 @@ import 'package:health_care/core/utils/styles.dart';
 
 // ignore: must_be_immutable
 class DoctorCard extends StatelessWidget {
-  DoctorCard(
-      {super.key,
-      required this.doctorModel,
-      this.isControled = false,
-      this.gradient});
+  DoctorCard({
+    super.key,
+    required this.doctorModel,
+    this.isControled = false,
+    this.gradient,
+  });
 
   final DoctorModel doctorModel;
   final bool isControled;
+  // final int? id;
   Gradient? gradient = LinearGradient(
     colors: [kPrimaryColor, kPrimaryColor.withOpacity(.6)],
   );
@@ -33,7 +35,6 @@ class DoctorCard extends StatelessWidget {
         if (state is DeleteDoctorLoading) {
         } else if (state is DeleteDoctorSuccess) {
           BlocProvider.of<GetDoctorsCubit>(context).getAllDoctors();
-          showSuccessSnackBar(context: context, message: '');
         } else if (state is DeleteDoctorFailure) {
           showErrorDialog(context: context, message: state.errorMessage);
         }
@@ -79,7 +80,12 @@ class DoctorCard extends StatelessWidget {
                               message: 'Are you sure to delete Doctor Card',
                               btnOkOnPress: () {
                                 BlocProvider.of<DeleteDoctorCubit>(context)
-                                    .deleteDoctor(email: doctorModel.email);
+                                    .deleteDoctor(
+                                        userId: doctorModel.userId!,
+                                        email: doctorModel.email,
+                                        password: doctorModel.password);
+                                BlocProvider.of<GetDoctorsCubit>(context)
+                                    .getAllDoctors();
                               },
                               btnCancelOnPress: () {},
                             );
@@ -113,7 +119,7 @@ class DoctorCard extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          '${doctorModel.fristName} ${doctorModel.lastName}',
+                          '${doctorModel.fName} ${doctorModel.lName}',
                           style: style15,
                         ),
                         const SizedBox(height: 10),

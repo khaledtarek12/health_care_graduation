@@ -10,7 +10,14 @@ class GetMyDataCubit extends Cubit<GetMyDataState> {
   GetMyDataCubit() : super(GetMyDataInitial());
 
   DoctorModel doctorData = DoctorModel(
-      fristName: '', lastName: '', email: '', phoneNumber: '', password: '');
+      fName: '',
+      lName: '',
+      email: '',
+      phoneNumber: '',
+      password: '',
+      userName: '',
+      id: -1,
+      userId: '');
   PatientModel patientData = PatientModel(
       fristName: '',
       lastName: '',
@@ -45,7 +52,7 @@ class GetMyDataCubit extends Cubit<GetMyDataState> {
             .where('email', isEqualTo: email)
             .get();
         if (querySnapshot.docs.isNotEmpty) {
-          doctorData = DoctorModel.fromSnapshot(querySnapshot.docs.first);
+          doctorData = DoctorModel.fromSnapShot(querySnapshot.docs.first);
 
           emit(GetMyDataSuccess());
         } else {

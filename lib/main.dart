@@ -42,7 +42,7 @@ class ChatApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => LoginCubit()),
+        BlocProvider(create: (context) => LoginCubit()..getEmail()),
         BlocProvider(create: (context) => RegisterCubit()),
         BlocProvider(create: (context) => ChatCubit()),
         BlocProvider(create: (context) => AlarmDataCubit()),
@@ -61,7 +61,7 @@ class ChatApp extends StatelessWidget {
           LoginHomePage.id: (context) => const LoginHomePage(),
           SplashViewHome.id: (context) => const SplashViewHome(),
           SignupHomePage.id: (context) => const SignupHomePage(),
-          ChatPage.id: (context) => ChatPage(),
+          ChatPage.id: (context) => ChatPage(doctorId: ''),
           EntierCallChatScreen.id: (context) => const EntierCallChatScreen()
         },
         debugShowCheckedModeBanner: false,

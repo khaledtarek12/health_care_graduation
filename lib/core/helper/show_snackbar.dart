@@ -265,13 +265,13 @@ void showQuesstionDialog({
     dialogType: DialogType.question,
     animType: AnimType.bottomSlide,
     title: 'Question',
-    titleTextStyle: style15.copyWith(color: kPrimaryColor, fontSize: 18),
+    titleTextStyle: style15.copyWith(fontSize: 18),
     desc: message,
-    descTextStyle: style15.copyWith(color: kPrimaryColor, fontSize: 15),
+    descTextStyle: style15.copyWith(fontSize: 15),
     btnCancelOnPress: btnCancelOnPress,
     btnOkOnPress: btnOkOnPress,
     dismissOnBackKeyPress: true,
-    dialogBackgroundColor: Colors.white,
+    dialogBackgroundColor: kprimaryVeryDarkcolor,
     keyboardAware: true,
   ).show();
 }
@@ -292,7 +292,7 @@ void showErrorDialog({
     btnOkOnPress: btnOkOnPress,
     btnOkColor: Colors.red,
     btnOkIcon: Icons.cancel,
-    dialogBackgroundColor: Colors.white,
+    dialogBackgroundColor: kprimaryVeryDarkcolor,
     dismissOnBackKeyPress: true,
     autoHide: const Duration(seconds: 4),
   ).show();
@@ -307,13 +307,12 @@ void showSuccessDialog(
     dialogType: DialogType.success,
     animType: AnimType.bottomSlide,
     title: 'Success',
-    titleTextStyle: style15.copyWith(color: kPrimaryColor, fontSize: 18),
+    titleTextStyle: style15.copyWith(fontSize: 18),
     desc: message,
-    descTextStyle: style15.copyWith(color: kPrimaryColor, fontSize: 18),
+    descTextStyle: style15.copyWith(fontSize: 18),
     btnOkOnPress: btnOkOnPress,
     btnOkColor: Colors.green,
-    dialogBackgroundColor: Colors.white,
+    dialogBackgroundColor: kprimaryVeryDarkcolor,
     dismissOnBackKeyPress: true,
-    autoHide: const Duration(seconds: 4),
   ).show();
 }

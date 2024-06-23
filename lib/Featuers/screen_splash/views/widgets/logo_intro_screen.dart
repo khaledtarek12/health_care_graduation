@@ -8,6 +8,7 @@ import 'package:health_care/Featuers/admin/views/admin_view_page.dart';
 import 'package:health_care/Featuers/doctor_pages/bloc/get_patient_cubit/get_patient_cubit.dart';
 import 'package:health_care/Featuers/doctor_pages/views/doctor_homepage.dart';
 import 'package:health_care/Featuers/login_and_signup/Screens/login_home_page.dart';
+import 'package:health_care/Featuers/login_and_signup/bloc/login_cubit/login_cubit.dart';
 import 'package:health_care/Featuers/patient_pages/views/patient_view.dart';
 import 'package:health_care/Featuers/screen_splash/bloc/cubit/get_my_data_cubit.dart';
 import 'package:health_care/Featuers/screen_splash/views/widgets/splash_view_body.dart';
@@ -41,7 +42,8 @@ class _LogoIntroScreenState extends State<LogoIntroScreen> {
         if (prefs.getBool('initial') == false ||
             prefs.getBool('initial') == null) {
           Get.to(() => const SplashViewBody());
-        } else if (prefs.getString('type') == null) {
+        } else if (prefs.getString('type') == null ||
+            prefs.getString('email') == null) {
           Get.offNamed(LoginHomePage.id);
         } else {
           if (prefs.getString('type') == 'Doctor') {
@@ -69,6 +71,7 @@ class _LogoIntroScreenState extends State<LogoIntroScreen> {
 
   @override
   void initState() {
+    BlocProvider.of<LoginCubit>(context).getEmail();
     navigateToHome();
     super.initState();
   }

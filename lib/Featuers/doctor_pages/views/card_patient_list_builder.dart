@@ -3,16 +3,13 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:health_care/Featuers/doctor_pages/bloc/get_patient_cubit/get_patient_cubit.dart';
-import 'package:health_care/Featuers/doctor_pages/views/doctor_homepage.dart';
 import 'package:health_care/core/helper/show_snackbar.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
 import '../widgets/patient_card.dart';
 
 class CardPatientListBuilder extends StatefulWidget {
-  const CardPatientListBuilder({super.key, this.email});
-
-  final String? email;
+  const CardPatientListBuilder({super.key});
 
   @override
   State<CardPatientListBuilder> createState() => _CardPatientListBuilderState();
@@ -26,7 +23,7 @@ class _CardPatientListBuilderState extends State<CardPatientListBuilder> {
   @override
   void initState() {
     super.initState();
-    getPatientsCubit.getAllPatients(doctorEmail: email);
+    getPatientsCubit.getAllPatients(doctorEmail: '');
   }
 
   @override
@@ -53,9 +50,7 @@ class _CardPatientListBuilderState extends State<CardPatientListBuilder> {
             itemCount: getPatientsCubit.allPatient.length,
             itemBuilder: (context, index) {
               return Patientcard(
-                patientModel: getPatientsCubit.allPatient[index],
-                email: widget.email,
-              );
+                  patientModel: getPatientsCubit.allPatient[index]);
             },
           ),
         );

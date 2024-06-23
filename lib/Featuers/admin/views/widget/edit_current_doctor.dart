@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:health_care/Featuers/admin/bloc/edit_doctor_cubit/edit_doctor_cubit.dart';
@@ -30,15 +32,17 @@ class _EditCurrentDoctorState extends State<EditCurrentDoctor> {
   String? lastName;
   String? phoneNumber;
   String? password;
+  String? userId;
 
   @override
   void initState() {
     super.initState();
     password = widget.doctorModel.password;
     email = widget.doctorModel.email;
-    fristName = widget.doctorModel.fristName;
-    lastName = widget.doctorModel.lastName;
+    fristName = widget.doctorModel.fName;
+    lastName = widget.doctorModel.lName;
     phoneNumber = widget.doctorModel.phoneNumber;
+    userId = widget.doctorModel.userId;
   }
 
   String pattern = '^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]';
@@ -48,6 +52,7 @@ class _EditCurrentDoctorState extends State<EditCurrentDoctor> {
 
   @override
   Widget build(BuildContext context) {
+    log(userId!);
     return BlocProvider(
       create: (context) => EditDoctorCubit(),
       child: Scaffold(
@@ -67,7 +72,7 @@ class _EditCurrentDoctorState extends State<EditCurrentDoctor> {
                   children: [
                     Expanded(
                       child: CustomFormTextField(
-                        initialValue: widget.doctorModel.fristName,
+                        initialValue: widget.doctorModel.fName,
                         onChange: (value) {
                           fristName = value;
                         },
@@ -84,7 +89,7 @@ class _EditCurrentDoctorState extends State<EditCurrentDoctor> {
                     const SizedBox(width: 20),
                     Expanded(
                       child: CustomFormTextField(
-                        initialValue: widget.doctorModel.lastName,
+                        initialValue: widget.doctorModel.lName,
                         onChange: (value) {
                           lastName = value;
                         },
@@ -195,13 +200,17 @@ class _EditCurrentDoctorState extends State<EditCurrentDoctor> {
                       onTap: () {
                         if (formkey.currentState!.validate()) {
                           BlocProvider.of<EditDoctorCubit>(context).editDoctor(
-                              oldEmail: widget.doctorModel.email,
+                              email: widget.doctorModel.email,
+                              password: widget.doctorModel.password,
+                              userId: userId!,
                               newDoctor: DoctorModel(
-                                  fristName: fristName!,
-                                  lastName: lastName!,
+                                  fName: fristName!,
+                                  lName: lastName!,
                                   email: email!,
                                   phoneNumber: phoneNumber!,
-                                  password: password!));
+                                  password: password!,
+                                  userName:
+                                      '${fristName!.toLowerCase()}${lastName!.toLowerCase()}'));
                         }
                       },
                     );

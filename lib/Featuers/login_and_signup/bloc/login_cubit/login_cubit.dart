@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:meta/meta.dart';
@@ -9,6 +11,7 @@ class LoginCubit extends Cubit<LoginState> {
   LoginCubit() : super(LoginInitial());
 
   late SharedPreferences prefs;
+  String email = '';
   Future<void> loginUser(
       {required String email,
       required String password,
@@ -17,6 +20,7 @@ class LoginCubit extends Cubit<LoginState> {
     try {
       prefs = await SharedPreferences.getInstance();
       await prefs.setString('type', type);
+
       await prefs.setString('email', email);
       var auth = FirebaseAuth.instance;
       await auth.signInWithEmailAndPassword(email: email, password: password);
@@ -29,6 +33,24 @@ class LoginCubit extends Cubit<LoginState> {
       }
     } catch (e) {
       emit(LoginFailuer(errorMessage: 'There was an error'));
+    }
+  }
+
+  getEmail() async {
+    try {
+      prefs = await SharedPreferences.getInstance();
+      email = prefs.getString('email')!;
+    } catch (e) {
+      log(e.toString());
+    }
+  }
+
+  deleteEmail() async {
+    try {
+      prefs = await SharedPreferences.getInstance();
+      prefs.remove('email');
+    } catch (e) {
+      log(e.toString());
     }
   }
 }

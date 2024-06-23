@@ -1,10 +1,12 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:health_care/Featuers/login_and_signup/bloc/login_cubit/login_cubit.dart';
 import 'package:health_care/Featuers/screen_splash/bloc/cubit/get_my_data_cubit.dart';
 import 'package:health_care/const.dart';
 import 'package:health_care/core/utils/styles.dart';
 import 'package:health_care/core/widgets/custom_container.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import '../widgets/image.dart';
 import 'card_patient_list_builder.dart';
 
@@ -17,20 +19,20 @@ class DoctorHomepage extends StatefulWidget {
   State<DoctorHomepage> createState() => _DoctorHomepageState();
 }
 
-late SharedPreferences prefs;
-String email = '';
-getEmail() async {
-  prefs = await SharedPreferences.getInstance();
-  email = prefs.getString('email')!;
-}
+// String email = '';
+// getEmail() async {
+//   SharedPreferences prefs = await SharedPreferences.getInstance();
+//   email = prefs.getString('email')!;
+// }
 
-initState() {
-  getEmail();
-}
+// initState() {
+//   getEmail();
+// }
 
 class _DoctorHomepageState extends State<DoctorHomepage> {
   @override
   Widget build(BuildContext context) {
+    log('emailkhaled: ${BlocProvider.of<LoginCubit>(context).email}');
     return Scaffold(
       body: CustomContainer(
         title: 'Doctor Home Page ',
@@ -64,7 +66,7 @@ class _DoctorHomepageState extends State<DoctorHomepage> {
                     ),
                     Text(
                       state is GetMyDataSuccess
-                          ? '${BlocProvider.of<GetMyDataCubit>(context).doctorData.fristName} '
+                          ? '${BlocProvider.of<GetMyDataCubit>(context).doctorData.fName} '
                           : '',
                       style: style25.copyWith(color: kPrimaryColor),
                     ),
@@ -72,7 +74,7 @@ class _DoctorHomepageState extends State<DoctorHomepage> {
                       state is GetMyDataSuccess
                           ? BlocProvider.of<GetMyDataCubit>(context)
                               .doctorData
-                              .lastName
+                              .lName
                           : '',
                       style: style25.copyWith(color: Colors.white),
                     ),
@@ -85,10 +87,8 @@ class _DoctorHomepageState extends State<DoctorHomepage> {
             child: SizedBox(height: 25),
           ),
           //container
-          SliverToBoxAdapter(
-            child: CardPatientListBuilder(
-              email: email,
-            ),
+          const SliverToBoxAdapter(
+            child: CardPatientListBuilder(),
           )
         ]),
       ),

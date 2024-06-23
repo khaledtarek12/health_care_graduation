@@ -1,22 +1,36 @@
+import 'dart:developer';
+
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:health_care/Featuers/login_and_signup/bloc/login_cubit/login_cubit.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 import 'package:health_care/Featuers/login_and_signup/Screens/Widget/chat_bubble.dart';
 import 'package:health_care/Featuers/login_and_signup/Screens/Widget/custom_app_container_bar.dart';
 import 'package:health_care/Featuers/login_and_signup/Screens/Widget/text_without_field.dart';
 import 'package:health_care/const.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../bloc/chat/chat_cubit.dart';
 
 // ignore: must_be_immutable, use_key_in_widget_constructors
 class ChatPage extends StatelessWidget {
   static String id = 'ChatPage';
+
+  ChatPage({
+    super.key,
+    required this.doctorId,
+  });
+  final String doctorId;
+
   final _controller = ScrollController();
 
   TextEditingController controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    var email = ModalRoute.of(context)!.settings.arguments;
+    log('doctorid  : $doctorId');
+
+    var patientEmail = ModalRoute.of(context)!.settings.arguments;
     return Scaffold(
       body: Container(
         margin: const EdgeInsets.only(top: 80),
@@ -40,7 +54,7 @@ class ChatPage extends StatelessWidget {
                     itemCount: messageList.length,
                     controller: _controller,
                     itemBuilder: (context, index) {
-                      return messageList[index].id == email
+                      return messageList[index].recieverId == patientEmail
                           ? ChatBubble(message: messageList[index])
                           : ChatBubbleFormFriend(message: messageList[index]);
                     },
@@ -52,8 +66,10 @@ class ChatPage extends StatelessWidget {
               padding: const EdgeInsets.all(16),
               child: CustomTextField(
                 onSubmitted: (message) {
-                  BlocProvider.of<ChatCubit>(context)
-                      .sendMessage(message: message, email: email.toString());
+                  BlocProvider.of<ChatCubit>(context).sendMessage(
+                      message: message,
+                      senderId: BlocProvider.of<LoginCubit>(context).email,
+                      recieverId: patientEmail.toString());
                   controller.clear();
                   _controller.animateTo(0,
                       duration: const Duration(microseconds: 500),
@@ -69,4 +85,16 @@ class ChatPage extends StatelessWidget {
       ),
     );
   }
+}
+
+late SharedPreferences prefs;
+String doctorEmail = '';
+getEmail() async {
+  prefs = await SharedPreferences.getInstance();
+  doctorEmail = prefs.getString('email')!;
+}
+
+initState() {
+  getEmail();
+  log(doctorEmail);
 }

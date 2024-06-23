@@ -55,12 +55,14 @@ class _LoginHomePageState extends State<LoginHomePage> {
             showSuccessDialog(
               context: context,
               message: 'Login Successfuly',
+              btnOkOnPress: () {},
             );
           } else if (selectedGender == 'Patient') {
             Navigator.pushNamed(context, PatientView.id, arguments: email);
             showSuccessDialog(
               context: context,
               message: 'Login Successfuly',
+              btnOkOnPress: () {},
             );
           } else if (selectedGender == 'Admin') {
             Navigator.pushNamed(
@@ -71,6 +73,7 @@ class _LoginHomePageState extends State<LoginHomePage> {
             showSuccessDialog(
               context: context,
               message: 'Login Successfuly',
+              btnOkOnPress: () {},
             );
           } else {
             showErrorDialog(

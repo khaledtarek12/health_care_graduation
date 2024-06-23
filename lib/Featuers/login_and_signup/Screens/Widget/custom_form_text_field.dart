@@ -45,7 +45,6 @@ class CustomFormTextField extends StatelessWidget {
         decoration: InputDecoration(
           filled: true,
           labelText: labelText,
-          
           labelStyle:
               style15.copyWith(color: kprimaryVeryDarkcolor, fontSize: 13),
           fillColor: const Color(0xffE7EFF2),
@@ -74,14 +73,14 @@ class CustomFormTextField extends StatelessWidget {
             borderSide: BorderSide(
               color: Colors.white,
             ),
-            
           ),
           enabledBorder: const OutlineInputBorder(
             borderRadius: BorderRadius.all(
               Radius.circular(20),
             ),
             borderSide: BorderSide(
-              color: Colors.white,
+              color: kPrimaryColor,
+              width: 2,
             ),
           ),
           errorBorder: const OutlineInputBorder(

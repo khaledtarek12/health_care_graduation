@@ -13,10 +13,17 @@ class ChatCubit extends Cubit<ChatState> {
 
   CollectionReference messages =
       FirebaseFirestore.instance.collection(kMessageCollection);
-  void sendMessage({required String message, required String email}) {
+  void sendMessage(
+      {required String message,
+      required String senderId,
+      required String recieverId}) {
     try {
-      messages
-          .add({kMessage: message, kCreatedAt: DateTime.now(), 'id': email});
+      messages.add({
+        kMessage: message,
+        kCreatedAt: DateTime.now(),
+        'senderId': senderId,
+        'recieverId': recieverId
+      });
     } catch (e) {
       emit(ChatFailuer(errorMessage: e.toString()));
     }

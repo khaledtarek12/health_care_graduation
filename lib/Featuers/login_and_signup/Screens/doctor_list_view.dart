@@ -94,7 +94,7 @@ class _DoctorListViewBodyState extends State<DoctorListViewBody> {
                         setState(() {
                           selectedCrad = index;
                           doctorName =
-                              '${getDoctorsCubit.allDoctors[index].fristName} ${getDoctorsCubit.allDoctors[index].lastName}';
+                              '${getDoctorsCubit.allDoctors[index].fName} ${getDoctorsCubit.allDoctors[index].lName}';
                           doctorEmail = getDoctorsCubit.allDoctors[index].email;
                         });
                       },
