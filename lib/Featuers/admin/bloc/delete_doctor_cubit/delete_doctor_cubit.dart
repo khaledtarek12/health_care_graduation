@@ -14,6 +14,7 @@ class DeleteDoctorCubit extends Cubit<DeleteDoctorState> {
   DeleteDoctorCubit() : super(DeleteDoctorInitial());
 
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
+  // ignore: unused_field
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   void deleteDoctor(
@@ -38,33 +39,33 @@ class DeleteDoctorCubit extends Cubit<DeleteDoctorState> {
     //             errorMessage: 'Failed to update document: $error')),
     //       );
     // }
-    User? user =
-        // ignore: deprecated_member_use
-        await _auth.fetchSignInMethodsForEmail(email).then((signInMethods) {
-      if (signInMethods.isNotEmpty) {
-        return _auth
-            .signInWithEmailAndPassword(email: email, password: password)
-            .then((userCredential) => userCredential.user);
-      } else {
-        throw FirebaseAuthException(
-            code: 'user-not-found', message: 'User not found');
-      }
-    });
+    // User? user =
+    //     // ignore: deprecated_member_use
+    //     await _auth.fetchSignInMethodsForEmail(email).then((signInMethods) {
+    //   if (signInMethods.isNotEmpty) {
+    //     return _auth
+    //         .signInWithEmailAndPassword(email: email, password: password)
+    //         .then((userCredential) => userCredential.user);
+    //   } else {
+    //     throw FirebaseAuthException(
+    //         code: 'user-not-found', message: 'User not found');
+    //   }
+    // });
 
-    if (user != null) {
-      // Reauthenticate the user
-      AuthCredential credential =
-          EmailAuthProvider.credential(email: email, password: password);
-      await user.reauthenticateWithCredential(credential);
+    // if (user != null) {
+    //   // Reauthenticate the user
+    //   AuthCredential credential =
+    //       EmailAuthProvider.credential(email: email, password: password);
+    //   await user.reauthenticateWithCredential(credential);
 
-      // Delete the user from Firebase Auth
-      await user.delete();
-      log('User deleted successfully from Firebase Auth');
-      emit(DeleteDoctorSuccess());
-    } else {
-      log('No user is currently signed in');
-      emit(DeleteDoctorFailure(errorMessage: 'No user is currently signed in'));
-    }
+    //   // Delete the user from Firebase Auth
+    //   await user.delete();
+    //   log('User deleted successfully from Firebase Auth');
+    //   emit(DeleteDoctorSuccess());
+    // } else {
+    //   log('No user is currently signed in');
+    //   emit(DeleteDoctorFailure(errorMessage: 'No user is currently signed in'));
+    // }
     try {
       String endPoint = '/deleteDoctor/$userId';
       var response =

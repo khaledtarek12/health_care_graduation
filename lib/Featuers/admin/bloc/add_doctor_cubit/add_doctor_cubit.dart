@@ -3,9 +3,8 @@ import 'dart:developer';
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dio/dio.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+// import 'package:firebase_auth/firebase_auth.dart';
 import 'package:health_care/Featuers/admin/data/model/doctor_model.module.dart';
-import 'package:health_care/const.dart';
 import 'package:health_care/core/utils/api_service.dart';
 import 'package:meta/meta.dart';
 
@@ -19,16 +18,16 @@ class AddDoctorCubit extends Cubit<AddDoctorState> {
     emit(AddDoctorLoading());
     try {
       // ignore: unused_local_variable
-      UserCredential user = await FirebaseAuth.instance
-          .createUserWithEmailAndPassword(
-              email: doctorModel.email, password: doctorModel.password);
-      await firestore.collection('doctors').add({
-        kFristName: doctorModel.fName,
-        kLastName: doctorModel.lName,
-        kEmail: doctorModel.email,
-        kPhoneNumber: doctorModel.phoneNumber,
-        kPassword: doctorModel.password,
-      });
+      // UserCredential user = await FirebaseAuth.instance
+      //     .createUserWithEmailAndPassword(
+      //         email: doctorModel.email, password: doctorModel.password);
+      // await firestore.collection('doctors').add({
+      //   kFristName: doctorModel.fName,
+      //   kLastName: doctorModel.lName,
+      //   kEmail: doctorModel.email,
+      //   kPhoneNumber: doctorModel.phoneNumber,
+      //   kPassword: doctorModel.password,
+      // });
       try {
         Map<String, dynamic> response =
             await ApiService(Dio(), 'http://oldmate.runasp.net/api/Admin')
@@ -48,12 +47,6 @@ class AddDoctorCubit extends Cubit<AddDoctorState> {
         emit(AddDoctorFailuer(errorMessage: e.toString()));
       }
       emit(AddDoctorSuccess());
-    } on FirebaseAuthException catch (e) {
-      if (e.code == 'weak-password') {
-        emit(AddDoctorFailuer(errorMessage: 'Weak password'));
-      } else if (e.code == 'email-already-in-use') {
-        emit(AddDoctorFailuer(errorMessage: 'Email already in use'));
-      }
     } catch (e) {
       emit(AddDoctorFailuer(
           errorMessage: 'There was an error + ${e.toString()}'));

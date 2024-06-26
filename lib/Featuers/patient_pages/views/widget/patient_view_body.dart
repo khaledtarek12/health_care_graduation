@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+// import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:health_care/Featuers/patient_pages/views/widget/heart_beat_view.dart';
+import 'package:health_care/Featuers/patient_pages/views/heart_beat_view.dart';
+import 'package:health_care/Featuers/patient_pages/views/history_of_patient_view.dart';
 import 'package:health_care/Featuers/screen_splash/bloc/cubit/get_my_data_cubit.dart';
 import 'package:health_care/const.dart';
 import 'package:health_care/core/helper/transation.dart';
@@ -44,6 +45,7 @@ class _PatientViewBodyState extends State<PatientViewBody> {
           children: [
             const SizedBox(height: 25),
             Container(
+              margin: const EdgeInsets.only(top: 35),
               height: 200,
               width: 200,
               decoration: BoxDecoration(
@@ -52,7 +54,7 @@ class _PatientViewBodyState extends State<PatientViewBody> {
                     image: AssetImage(
                       'assets/images/healthcare.png',
                     ),
-                    fit: BoxFit.fill),
+                    fit: BoxFit.contain),
               ),
             ),
             const SizedBox(height: 20),
@@ -63,7 +65,7 @@ class _PatientViewBodyState extends State<PatientViewBody> {
                 const SizedBox(width: 5),
                 Text('${getMyDataCubit.patientData.fristName} ',
                     style: style25.copyWith(color: kPrimaryColor)),
-                Text(getMyDataCubit.patientData.lastName,
+                Text(getMyDataCubit.patientData.lastName!,
                     style: style25.copyWith(color: Colors.white)),
               ],
             ),
@@ -81,12 +83,17 @@ class _PatientViewBodyState extends State<PatientViewBody> {
                 ),
                 children: [
                   CustomStackCard(children: [
-                    SvgPicture.asset(
-                      'assets/images/chat-line-svgrepo-com.svg',
-                      // ignore: deprecated_member_use
-                      color: Colors.white.withOpacity(.8),
-                      height: 100,
-                      width: 100,
+                    // SvgPicture.asset(
+                    //   'assets/images/chat-line-svgrepo-com.svg',
+                    //   // ignore: deprecated_member_use
+                    //   color: Colors.white.withOpacity(.8),
+                    //   height: 100,
+                    //   width: 100,
+                    // ),
+                    Icon(
+                      Icons.chat_rounded,
+                      size: 90,
+                      color: Colors.white.withOpacity(.7),
                     ),
                     const Text(
                       'My Chat',
@@ -95,20 +102,59 @@ class _PatientViewBodyState extends State<PatientViewBody> {
                   ]),
                   CustomStackCard(
                     children: [
-                      SvgPicture.asset(
-                        'assets/images/heart-beat-svgrepo-com.svg',
-                        height: 100,
-                        width: 100,
-                        // ignore: deprecated_member_use
-                        color: Colors.white.withOpacity(.8),
+                      // SvgPicture.asset(
+                      //   'assets/images/heart-beat-svgrepo-com.svg',
+                      //   height: 100,
+                      //   width: 100,
+                      //   // ignore: deprecated_member_use
+                      //   color: Colors.white.withOpacity(.8),
+                      // ),
+                      Icon(
+                        Icons.bar_chart_rounded,
+                        size: 90,
+                        color: Colors.white.withOpacity(.7),
                       ),
                       const Text(
-                        'Heart Info',
+                        'Heart rate',
                         style: style15,
                       ),
                     ],
                     onTap: () {
                       Get.to(() => const HeartBeatView(),
+                          transition: Motivation.zoomTransition());
+                    },
+                  ),
+                  CustomStackCard(
+                    children: [
+                      Icon(
+                        Icons.history_edu_rounded,
+                        size: 90,
+                        color: Colors.white.withOpacity(.7),
+                      ),
+                      const Text(
+                        'History',
+                        style: style15,
+                      ),
+                    ],
+                    onTap: () {
+                      Get.to(() => const HistoryOfPatientPage(),
+                          transition: Motivation.zoomTransition());
+                    },
+                  ),
+                  CustomStackCard(
+                    children: [
+                      Icon(
+                        Icons.medical_information_rounded,
+                        size: 90,
+                        color: Colors.white.withOpacity(.7),
+                      ),
+                      const Text(
+                        'Informations',
+                        style: style15,
+                      ),
+                    ],
+                    onTap: () {
+                      Get.to(() => const HistoryOfPatientPage(),
                           transition: Motivation.zoomTransition());
                     },
                   ),

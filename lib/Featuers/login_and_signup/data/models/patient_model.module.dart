@@ -1,22 +1,22 @@
 import 'package:health_care/const.dart';
 
 class PatientModel {
-  final String fristName;
-  final String lastName;
+  String? fristName;
+  String? lastName;
   final String email;
+  final String userName;
   final String phoneNumber;
   final String password;
-  final String doctorName;
-  final String doctorEmail;
+  final int doctorId;
 
   PatientModel({
-    required this.fristName,
-    required this.lastName,
+    required this.userName,
+    this.fristName,
+    this.lastName,
     required this.email,
     required this.phoneNumber,
     required this.password,
-    required this.doctorName,
-    required this.doctorEmail,
+    required this.doctorId,
   });
 
   factory PatientModel.fromSnapshot(var docs) {
@@ -27,8 +27,17 @@ class PatientModel {
       email: data[kEmail] ?? "",
       phoneNumber: data[kPhoneNumber] ?? "",
       password: data[kPassword] ?? "",
-      doctorName: data[kDcotorName] ?? "",
-      doctorEmail: data[kDcotorEmail] ?? "",
+      doctorId: data[kDcotorName] ?? "",
+      userName: data['userName'] ?? "",
+    );
+  }
+  factory PatientModel.fromJson(Map<String, dynamic> json) {
+    return PatientModel(
+      email: json["email"],
+      phoneNumber: json["phoneNumber"],
+      password: json["password"],
+      doctorId: json["doctorId"],
+      userName: json["userName"],
     );
   }
 }

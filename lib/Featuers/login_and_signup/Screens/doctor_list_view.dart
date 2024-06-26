@@ -24,9 +24,10 @@ class _DoctorListViewBodyState extends State<DoctorListViewBody> {
       BlocProvider.of<GetDoctorsCubit>(context);
   late RegisterCubit registerCubit = BlocProvider.of<RegisterCubit>(context);
   bool isLoading = false;
-  int selectedCrad = -1;
-  late String doctorName;
-  late String doctorEmail;
+  int selectedCard = -1;
+  late String doctorName = '';
+  late String doctorEmail = '';
+  late int doctorId = -1;
 
   @override
   void initState() {
@@ -34,6 +35,7 @@ class _DoctorListViewBodyState extends State<DoctorListViewBody> {
     getDoctorsCubit.getAllDoctors();
     doctorEmail = registerCubit.doctorEmail;
     doctorName = registerCubit.doctorName;
+    doctorId = registerCubit.doctorId;
   }
 
   @override
@@ -52,10 +54,12 @@ class _DoctorListViewBodyState extends State<DoctorListViewBody> {
             setState(() {
               registerCubit.doctorName = doctorName;
               registerCubit.doctorEmail = doctorEmail;
+              registerCubit.doctorId = doctorId;
             });
             Navigator.of(context).pop({
               'doctorName': doctorName,
               'doctorEmail': doctorEmail,
+              'doctorId': doctorId.toString(),
             });
           },
         ),
@@ -96,13 +100,14 @@ class _DoctorListViewBodyState extends State<DoctorListViewBody> {
                     child: InkWell(
                       onTap: () {
                         setState(() {
-                          selectedCrad = index;
+                          selectedCard = index;
                           doctorName =
                               '${getDoctorsCubit.allDoctors[index].fName} ${getDoctorsCubit.allDoctors[index].lName}';
                           doctorEmail = getDoctorsCubit.allDoctors[index].email;
+                          doctorId = getDoctorsCubit.allDoctors[index].id!;
                         });
                       },
-                      child: selectedCrad == index
+                      child: selectedCard == index
                           ? DoctorCard(
                               gradient: const LinearGradient(colors: [
                                 kprimaryVeryDarkcolor,

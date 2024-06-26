@@ -26,6 +26,8 @@ class CustomStackCard extends StatelessWidget {
                   offset: const Offset(4, 4))
             ]),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: children,
         ),
       ),

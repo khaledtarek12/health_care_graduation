@@ -1,5 +1,3 @@
-// ignore_for_file: body_might_complete_normally_nullable
-
 import 'dart:developer';
 
 import 'package:get/get.dart';
@@ -9,8 +7,6 @@ import 'package:health_care/core/helper/transation.dart';
 import 'package:health_care/core/utils/styles.dart';
 import 'package:health_care/core/widgets/custom_container.dart';
 import 'package:health_care/Featuers/login_and_signup/Screens/Widget/custom_button.dart';
-// import 'package:health_care/Featuers/login_and_signup/Screens/Widget/custom_awsome_icons.dart';
-// import 'package:health_care/Featuers/login_and_signup/Screens/Widget/cutom_row_devider.dart';
 import 'package:health_care/Featuers/login_and_signup/Screens/Widget/custom_form_text_field.dart';
 import 'package:health_care/const.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +16,6 @@ import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import '../../../core/helper/show_snackbar.dart';
 import '../bloc/register_patient_cubit/register_cubit.dart';
 
-// ignore: must_be_immutable
 class SignupHomePage extends StatefulWidget {
   const SignupHomePage({super.key});
 
@@ -39,6 +34,7 @@ class _SignupHomePageState extends State<SignupHomePage> {
   String? phoneNumber;
   String? doctorName;
   String? doctorEmail;
+  String? doctorId;
 
   String pattern = '^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]';
   String? password;
@@ -48,6 +44,7 @@ class _SignupHomePageState extends State<SignupHomePage> {
   bool isLoading = false;
   TextEditingController doctorNameController = TextEditingController();
   late RegisterCubit registerCubit = BlocProvider.of<RegisterCubit>(context);
+
   Future<void> selectDoctor() async {
     final result = await Get.to(() => const DoctorListViewBody(),
         transition: Motivation.zoomTransition(), duration: kDuration);
@@ -55,29 +52,25 @@ class _SignupHomePageState extends State<SignupHomePage> {
       setState(() {
         doctorName = result['doctorName'];
         doctorEmail = result['doctorEmail'];
+        doctorId = result['doctorId'];
         registerCubit.doctorName = doctorName!;
         registerCubit.doctorEmail = doctorEmail!;
+        registerCubit.doctorId = int.parse(doctorId!);
         doctorNameController.text = doctorName!;
-        log("Doctor Name: '${doctorNameController.text}', Doctor Email: $doctorEmail");
+        log("Doctor Name: '${doctorNameController.text}', Doctor Email: $doctorEmail , DoctorId: $doctorId");
       });
     }
   }
 
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   doctorNameController.text = doctorName!;
-  // }
-
   @override
   Widget build(BuildContext context) {
+    log("Doctor Name: '${doctorNameController.text}', Doctor Email: $doctorEmail , DoctorId: $doctorId");
     return BlocConsumer<RegisterCubit, RegisterState>(
       listener: (context, state) {
         if (state is RegisterLoading) {
           isLoading = true;
         } else if (state is RegisterSucessful) {
           isLoading = false;
-          Navigator.pop(context);
         }
         if (state is RegisterFailuer) {
           showErrorDialog(
@@ -145,6 +138,7 @@ class _SignupHomePageState extends State<SignupHomePage> {
                         if (!RegExp(pattern).hasMatch(value)) {
                           return 'Please enter a valid email';
                         }
+                        return null;
                       },
                       onChange: (data) {
                         email = data;
@@ -154,9 +148,23 @@ class _SignupHomePageState extends State<SignupHomePage> {
                     ),
                     CustomFormTextField(
                       validator: (value) {
-                        if (value!.isEmpty) {
-                          return 'value is empty';
+                        if (value == null || value.isEmpty) {
+                          return 'Password is empty';
                         }
+                        bool hasNonAlphanumeric =
+                            value.contains(RegExp(r'[!@#$%^&*(),.?":{}|<>]'));
+                        if (!hasNonAlphanumeric) {
+                          return 'Password must have at least one non-alphanumeric character';
+                        }
+                        bool hasLowercase = value.contains(RegExp(r'[a-z]'));
+                        if (!hasLowercase) {
+                          return 'Password must have at least one lowercase letter';
+                        }
+                        bool hasUppercase = value.contains(RegExp(r'[A-Z]'));
+                        if (!hasUppercase) {
+                          return 'Password must have at least one lowercase letter';
+                        }
+                        return null;
                       },
                       obSecureText: obSecureText,
                       onChange: (data) {
@@ -174,6 +182,7 @@ class _SignupHomePageState extends State<SignupHomePage> {
                         if (value != password) {
                           return 'your password dosn\'t match';
                         }
+                        return null;
                       },
                       onChange: (data) {
                         if (data == password) {
@@ -190,6 +199,7 @@ class _SignupHomePageState extends State<SignupHomePage> {
                         if (value!.isEmpty) {
                           return 'value is empty';
                         }
+                        return null;
                       },
                       labelText: 'Enter your phone',
                       prefexIcon: const Icon(Icons.phone),
@@ -203,6 +213,7 @@ class _SignupHomePageState extends State<SignupHomePage> {
                         if (value!.isEmpty) {
                           return 'value is empty';
                         }
+                        return null;
                       },
                       prefexIcon: const Icon(Icons.person),
                       readOnly: true,
@@ -228,13 +239,15 @@ class _SignupHomePageState extends State<SignupHomePage> {
                             email: email!,
                             phoneNumber: phoneNumber!,
                             password: password!,
-                            doctorName: doctorNameController.text,
-                            doctorEmail: doctorEmail!,
+                            userName: '$fristName$lastName',
+                            doctorId: int.parse(doctorId!),
                           ));
                           showSuccessDialog(
                             context: context,
                             message: "Your account created successfully",
-                            btnOkOnPress: () {},
+                            btnOkOnPress: () {
+                              Navigator.of(context).pop();
+                            },
                           );
                         } else {
                           showErrorDialog(
@@ -247,11 +260,6 @@ class _SignupHomePageState extends State<SignupHomePage> {
                       child: Text('Register',
                           style: style15.copyWith(fontSize: 18)),
                     ),
-                    // const CustomRowDevider(),
-                    // const SizedBox(
-                    //   height: 15,
-                    // ),
-                    // const IconSocialMedia(),
                     SizedBox(
                       height: MediaQuery.of(context).size.height * .015,
                     ),
@@ -288,13 +296,8 @@ class _SignupHomePageState extends State<SignupHomePage> {
       icon: Icon(icon),
       onPressed: () {
         setState(() {
-          if (obSecureText == true) {
-            obSecureText = false;
-            icon = Icons.remove_red_eye;
-          } else if (obSecureText != true) {
-            obSecureText = true;
-            icon = Icons.visibility_off;
-          }
+          obSecureText = !obSecureText!;
+          icon = obSecureText! ? Icons.visibility_off : Icons.remove_red_eye;
         });
       },
     );

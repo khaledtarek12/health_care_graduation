@@ -42,13 +42,6 @@ class _AddNewDoctorState extends State<AddNewDoctor> {
           isLoading = true;
         } else if (state is AddDoctorSuccess) {
           BlocProvider.of<GetDoctorsCubit>(context).getAllDoctors();
-          showSuccessDialog(
-            context: context,
-            message: 'Doctor Added Successfully',
-            btnOkOnPress: () {
-              Navigator.pop(context);
-            },
-          );
           isLoading = false;
         }
         if (state is AddDoctorFailuer) {
@@ -206,6 +199,14 @@ class _AddNewDoctorState extends State<AddNewDoctor> {
                                 password: password!,
                                 userName:
                                     '${fristName!.toLowerCase()}${lastName!.toLowerCase()}'));
+
+                        showSuccessDialog(
+                          context: context,
+                          message: 'Doctor Added Successfully',
+                          btnOkOnPress: () {
+                            Navigator.of(context).pop();
+                          },
+                        );
                       }
                     },
                   ),

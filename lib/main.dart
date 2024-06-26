@@ -10,6 +10,8 @@ import 'package:health_care/Featuers/doctor_pages/bloc/get_patient_cubit/get_pat
 
 import 'package:health_care/Featuers/doctor_pages/views/doctor_homepage.dart';
 import 'package:health_care/Featuers/firebase_options.dart';
+import 'package:health_care/Featuers/forget_passwords/bloc/forget_password_cubit/forget_password_cubit.dart';
+import 'package:health_care/Featuers/forget_passwords/bloc/reset_password_cubit/reset_password_cubit.dart';
 import 'package:health_care/Featuers/login_and_signup/Screens/chat_page.dart';
 import 'package:health_care/Featuers/login_and_signup/Screens/login_home_page.dart';
 import 'package:health_care/Featuers/patient_pages/cubits/alarm/alarm_data_cubit.dart';
@@ -50,6 +52,8 @@ class ChatApp extends StatelessWidget {
         BlocProvider(create: (context) => DeleteDoctorCubit()),
         BlocProvider(create: (context) => GetPatientsCubit()),
         BlocProvider(create: (context) => GetMyDataCubit()),
+        BlocProvider(create: (context) => ForgetPasswordCubit()),
+        BlocProvider(create: (context) => ResetPasswordCubit()),
         BlocProvider(create: (context) => GetDoctorsCubit()..getAllDoctors()),
       ],
       child: GetMaterialApp(
@@ -65,7 +69,8 @@ class ChatApp extends StatelessWidget {
           EntierCallChatScreen.id: (context) => const EntierCallChatScreen()
         },
         debugShowCheckedModeBanner: false,
-        initialRoute: SplashScreen.id,
+        initialRoute:  PatientView.id,
+        // SplashScreen.id,
       ),
     );
   }

@@ -125,15 +125,31 @@ class _EditCurrentDoctorState extends State<EditCurrentDoctor> {
                 ),
                 CustomFormTextField(
                   initialValue: widget.doctorModel.password,
-                  // ignore: body_might_complete_normally_nullable
                   validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'value is empty';
+                    if (value == null || value.isEmpty) {
+                      return 'Password is empty';
                     }
+
+                    // Check for at least one non-alphanumeric character
+                    bool hasNonAlphanumeric =
+                        value.contains(RegExp(r'[!@#$%^&*(),.?":{}|<>]'));
+                    if (!hasNonAlphanumeric) {
+                      return 'Password must have at least one non-alphanumeric character';
+                    }
+                    // Check for at least one lowercase letter
+                    bool hasLowercase = value.contains(RegExp(r'[a-z]'));
+                    if (!hasLowercase) {
+                      return 'Password must have at least one lowercase letter';
+                    }
+                    bool hasUppercase = value.contains(RegExp(r'[A-Z]'));
+                    if (!hasUppercase) {
+                      return 'Password must have at least one lowercase letter';
+                    }
+                    return null;
                   },
                   obSecureText: obSecureText,
-                  onChange: (value) {
-                    password = value;
+                  onChange: (data) {
+                    password = data;
                   },
                   labelText: 'Password',
                   prefexIcon: const Icon(Icons.lock),
@@ -177,13 +193,6 @@ class _EditCurrentDoctorState extends State<EditCurrentDoctor> {
                       isLoading = true;
                     } else if (state is EditDoctorSucess) {
                       BlocProvider.of<GetDoctorsCubit>(context).getAllDoctors();
-                      showSuccessDialog(
-                        context: context,
-                        message: 'Doctor Updated Successfully',
-                        btnOkOnPress: () {
-                          Navigator.pop(context);
-                        },
-                      );
                       isLoading = false;
                     } else if (state is EditDoctorFailure) {
                       showErrorDialog(
@@ -214,6 +223,13 @@ class _EditCurrentDoctorState extends State<EditCurrentDoctor> {
                                   password: password!,
                                   userName:
                                       '${fristName!.toLowerCase()}${lastName!.toLowerCase()}'));
+                          showSuccessDialog(
+                            context: context,
+                            message: 'Doctor Updated Successfully',
+                            btnOkOnPress: () {
+                              Navigator.of(context).pop();
+                            },
+                          );
                         }
                       },
                     );

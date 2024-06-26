@@ -12,8 +12,6 @@ import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import '../../../core/helper/show_snackbar.dart';
 import '../../patient_pages/views/patient_view.dart';
 import 'Widget/custom_button.dart';
-// import 'Widget/custom_awsome_icons.dart';
-// import 'Widget/cutom_row_devider.dart';
 import 'Widget/cutom_row_radiobutton.dart';
 import 'Widget/custom_form_text_field.dart';
 import '../bloc/chat/chat_cubit.dart';
@@ -35,7 +33,7 @@ class _LoginHomePageState extends State<LoginHomePage> {
 
   String? email;
 
-  String? selectedGender;
+  List<String>? selectedRole;
 
   String pattern = '^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]';
   String? password;
@@ -47,42 +45,62 @@ class _LoginHomePageState extends State<LoginHomePage> {
     return BlocConsumer<LoginCubit, LoginState>(
       listener: (context, state) {
         if (state is LoginLoading) {
-          isLoading = true;
+          setState(() {
+            isLoading = true;
+          });
         } else if (state is LoginSucessful) {
           BlocProvider.of<ChatCubit>(context).getMessages();
-          if (selectedGender == 'Doctor') {
-            Navigator.pushNamed(context, DoctorHomepage.id, arguments: email);
-            showSuccessDialog(
+
+          final prefs = BlocProvider.of<LoginCubit>(context).prefs;
+          final roles = prefs.getStringList('roles') ?? [];
+
+          if (selectedRole == null || selectedRole!.isEmpty) {
+            showErrorDialog(
               context: context,
-              message: 'Login Successfuly',
+              message: 'Please select a role: Doctor, Patient, or Admin.',
               btnOkOnPress: () {},
             );
-          } else if (selectedGender == 'Patient') {
-            Navigator.pushNamed(context, PatientView.id, arguments: email);
-            showSuccessDialog(
-              context: context,
-              message: 'Login Successfuly',
-              btnOkOnPress: () {},
-            );
-          } else if (selectedGender == 'Admin') {
-            Navigator.pushNamed(
-              context,
-              AdminViewPage.id,
-              arguments: email,
-            );
-            showSuccessDialog(
-              context: context,
-              message: 'Login Successfuly',
-              btnOkOnPress: () {},
-            );
+            return;
+          }
+
+          if (roles.contains(selectedRole![0])) {
+            if (selectedRole![0] == 'Doctor') {
+              Navigator.pushNamed(context, DoctorHomepage.id, arguments: email);
+              showSuccessDialog(
+                context: context,
+                message: 'Login Successfully',
+                btnOkOnPress: () {},
+              );
+            } else if (selectedRole![0] == 'Patient') {
+              Navigator.pushNamed(context, PatientView.id, arguments: email);
+              showSuccessDialog(
+                context: context,
+                message: 'Login Successfully',
+                btnOkOnPress: () {},
+              );
+            } else if (selectedRole![0] == 'Admin') {
+              Navigator.pushNamed(
+                context,
+                AdminViewPage.id,
+                arguments: email,
+              );
+              showSuccessDialog(
+                context: context,
+                message: 'Login Successfully',
+                btnOkOnPress: () {},
+              );
+            }
           } else {
             showErrorDialog(
               context: context,
-              message: 'Please select a gender : Doctor or Patient?',
+              message: 'You are not an : ${selectedRole![0]}',
               btnOkOnPress: () {},
             );
           }
-          isLoading = false;
+
+          setState(() {
+            isLoading = false;
+          });
         }
         if (state is LoginFailuer) {
           showErrorDialog(
@@ -90,7 +108,9 @@ class _LoginHomePageState extends State<LoginHomePage> {
             message: state.errorMessage,
             btnOkOnPress: () {},
           );
-          isLoading = false;
+          setState(() {
+            isLoading = false;
+          });
         }
       },
       builder: (context, state) {
@@ -108,14 +128,14 @@ class _LoginHomePageState extends State<LoginHomePage> {
                       height: MediaQuery.of(context).size.height * .2,
                     ),
                     CustomFormTextField(
-                      // ignore: body_might_complete_normally_nullable
                       validator: (value) {
                         if (value!.isEmpty) {
-                          return 'value is empty';
+                          return 'Value is empty';
                         }
                         if (!RegExp(pattern).hasMatch(value)) {
                           return 'Please enter a valid email';
                         }
+                        return null;
                       },
                       onChange: (data) {
                         email = data;
@@ -125,11 +145,11 @@ class _LoginHomePageState extends State<LoginHomePage> {
                       keyboardType: TextInputType.emailAddress,
                     ),
                     CustomFormTextField(
-                      // ignore: body_might_complete_normally_nullable
                       validator: (value) {
                         if (value!.isEmpty) {
-                          return 'value is empty';
+                          return 'Value is empty';
                         }
+                        return null;
                       },
                       onChange: (data) {
                         password = data;
@@ -157,9 +177,9 @@ class _LoginHomePageState extends State<LoginHomePage> {
                       height: 15,
                     ),
                     CusttomRadioButtom(
-                      onGenderSelected: (gender) {
+                      onGenderSelected: (role) {
                         setState(() {
-                          selectedGender = gender;
+                          selectedRole = [role!];
                         });
                       },
                     ),
@@ -170,14 +190,15 @@ class _LoginHomePageState extends State<LoginHomePage> {
                       onTap: () async {
                         if (formkey.currentState!.validate()) {
                           BlocProvider.of<LoginCubit>(context).loginUser(
-                              email: email!,
-                              password: password!,
-                              type: selectedGender!);
+                            email: email!,
+                            password: password!,
+                            role: selectedRole!,
+                          );
                           BlocProvider.of<GetMyDataCubit>(context)
-                              .getMyData(email: email!, type: selectedGender!);
+                              .getMyData(email: email!, types: selectedRole!);
                           BlocProvider.of<GetPatientsCubit>(context)
                               .getAllPatients(doctorEmail: email!);
-                        } else {}
+                        }
                       },
                       child: Text('Sign In',
                           style: style15.copyWith(fontSize: 18)),
@@ -186,11 +207,6 @@ class _LoginHomePageState extends State<LoginHomePage> {
                       height: 25,
                     ),
                     const TextForgetYourPassword(),
-                    // const SizedBox(
-                    //   height: 5,
-                    // ),
-                    // const CustomRowDevider(),
-                    // const IconSocialMedia(),
                     const SizedBox(
                       height: 25,
                     ),

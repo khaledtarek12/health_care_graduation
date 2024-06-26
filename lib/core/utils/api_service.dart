@@ -43,7 +43,8 @@ class ApiService {
   }
 
   // Asynchronous function to make a POST request to the API
-  Future<dynamic> add({required String endPoint, required dynamic data}) async {
+  Future<dynamic> add(
+      {required String endPoint, required Map<String, dynamic> data}) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     if (prefs.getString('auth-token') == null) {
       prefs.setString('auth-token', '');

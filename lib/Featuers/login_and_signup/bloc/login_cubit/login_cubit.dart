@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:dio/dio.dart';
 import 'package:meta/meta.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -12,40 +12,75 @@ class LoginCubit extends Cubit<LoginState> {
 
   late SharedPreferences prefs;
   String email = '';
-  Future<void> loginUser(
-      {required String email,
-      required String password,
-      required String type}) async {
+
+  Future<void> loginUser({
+    required String email,
+    required String password,
+    required List<String> role,
+  }) async {
     emit(LoginLoading());
     try {
       prefs = await SharedPreferences.getInstance();
-      await prefs.setString('type', type);
 
-      await prefs.setString('email', email);
-      var auth = FirebaseAuth.instance;
-      await auth.signInWithEmailAndPassword(email: email, password: password);
-      emit(LoginSucessful());
-    } on FirebaseAuthException catch (e) {
-      if (e.code == 'user-not-found') {
-        emit(LoginFailuer(errorMessage: 'user-not-found'));
-      } else if (e.code == 'wrong-password') {
-        emit(LoginFailuer(errorMessage: 'wrong-password'));
+      // Attempt to login using the HTTP API with Dio
+      Dio dio = Dio();
+      final response = await dio.post(
+        'http://oldmate.runasp.net/api/AccountService/Login',
+        data: {'email': email, 'password': password, 'Role': role},
+        options: Options(
+          headers: {'Content-Type': 'application/json'},
+          validateStatus: (status) =>
+              status! < 500, // Allow handling of status codes less than 500
+        ),
+      );
+
+      if (response.statusCode == 200) {
+        final responseBody = response.data;
+
+        await prefs.setString('email', email);
+        await prefs.setStringList('roles', role);
+
+        log(responseBody.toString());
+        emit(LoginSucessful());
+      } else if (response.statusCode == 400) {
+        final responseBody = response.data;
+        emit(LoginFailuer(
+            errorMessage: responseBody['errors'] ?? 'Invalid request data'));
+      } else {
+        emit(LoginFailuer(
+            errorMessage:
+                'Login failed with status code: ${response.statusCode}'));
+      }
+    } on DioException catch (e) {
+      if (e.response != null) {
+        log('Dio error! Status: ${e.response?.statusCode}, Data: ${e.response?.data}, Headers: ${e.response?.headers}');
+        try {
+          emit(LoginFailuer(
+              errorMessage: e.response?.data['errors'] ?? 'Login failed'));
+        } catch (parsingError) {
+          log('Error parsing response data: $parsingError');
+          emit(LoginFailuer(errorMessage: 'Login failed'));
+        }
+      } else {
+        log('Dio error! Message: ${e.message}, Error: ${e.error}');
+        emit(LoginFailuer(errorMessage: 'There was an error'));
       }
     } catch (e) {
+      log('Unexpected error: $e');
       emit(LoginFailuer(errorMessage: 'There was an error'));
     }
   }
 
-  getEmail() async {
+  Future<void> getEmail() async {
     try {
       prefs = await SharedPreferences.getInstance();
-      email = prefs.getString('email')!;
+      email = prefs.getString('email') ?? '';
     } catch (e) {
       log(e.toString());
     }
   }
 
-  deleteEmail() async {
+  Future<void> deleteEmail() async {
     try {
       prefs = await SharedPreferences.getInstance();
       prefs.remove('email');

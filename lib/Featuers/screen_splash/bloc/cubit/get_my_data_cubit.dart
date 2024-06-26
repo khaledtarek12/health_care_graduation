@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dio/dio.dart';
 import 'package:health_care/Featuers/admin/data/model/doctor_model.module.dart';
 import 'package:health_care/Featuers/login_and_signup/data/models/patient_model.module.dart';
 import 'package:meta/meta.dart';
@@ -10,67 +10,63 @@ class GetMyDataCubit extends Cubit<GetMyDataState> {
   GetMyDataCubit() : super(GetMyDataInitial());
 
   DoctorModel doctorData = DoctorModel(
-      fName: '',
-      lName: '',
-      email: '',
-      phoneNumber: '',
-      password: '',
-      userName: '',
-      id: -1,
-      userId: '');
+    fName: '',
+    lName: '',
+    email: '',
+    phoneNumber: '',
+    password: '',
+    userName: '',
+    id: -1,
+    userId: '',
+  );
+
   PatientModel patientData = PatientModel(
-      fristName: '',
-      lastName: '',
-      email: '',
-      phoneNumber: '',
-      password: '',
-      doctorName: '',
-      doctorEmail: '');
+    fristName: '',
+    lastName: '',
+    email: '',
+    phoneNumber: '',
+    password: '',
+    userName: '',
+    doctorId: 0,
+  );
 
-  final FirebaseFirestore firestore = FirebaseFirestore.instance;
+  final Dio dio = Dio();
 
-  void getMyData({required String email, required String type}) async {
+  Future<void> getMyData(
+      {required String email, required List<String> types}) async {
     emit(GetMyDataLoading());
     try {
-      final QuerySnapshot<Map<String, dynamic>> querySnapshot;
-      if (type == 'Patient') {
-        querySnapshot = await firestore
-            .collection('patients')
-            .where('email', isEqualTo: email)
-            .get();
-
-        if (querySnapshot.docs.isNotEmpty) {
-          patientData = PatientModel.fromSnapshot(querySnapshot.docs.first);
-          emit(GetMyDataSuccess());
+      for (String type in types) {
+        final Response response;
+        if (type == 'Patient') {
+          response =
+              await dio.get('http://yourapi.com/api/patients?email=$email');
+          if (response.statusCode == 200 && response.data.isNotEmpty) {
+            patientData = PatientModel.fromJson(response.data);
+            emit(GetMyDataSuccess());
+            return;
+          }
+        } else if (type == 'Doctor') {
+          response = await dio
+              .get('http://oldmate.runasp.net/api/Doctor/GetAllDoctors');
+          if (response.statusCode == 200) {
+            final List doctors = response.data;
+            final doctor = doctors.firstWhere(
+              (doc) => doc['email'] == email,
+              orElse: () => null,
+            );
+            if (doctor != null) {
+              doctorData = DoctorModel.fromJson(doctor);
+              emit(GetMyDataSuccess());
+              return;
+            }
+          }
         } else {
-          emit(GetMyDataFailure(
-              errorMessage: "No patient found with email $email"));
-        }
-      } else if (type == 'Doctor') {
-        querySnapshot = await firestore
-            .collection('doctors')
-            .where('email', isEqualTo: email)
-            .get();
-        if (querySnapshot.docs.isNotEmpty) {
-          doctorData = DoctorModel.fromSnapShot(querySnapshot.docs.first);
-
-          emit(GetMyDataSuccess());
-        } else {
-          emit(GetMyDataFailure(
-              errorMessage: "No doctor found with email $email"));
-        }
-      } else if (type == 'Admin') {
-        querySnapshot = await firestore
-            .collection('admins')
-            .where('email', isEqualTo: email)
-            .get();
-        if (querySnapshot.docs.isNotEmpty) {
-          emit(GetMyDataSuccess());
-        } else {
-          emit(GetMyDataFailure(
-              errorMessage: "No doctor found with email $email"));
+          emit(GetMyDataFailure(errorMessage: "Invalid user type"));
+          return;
         }
       }
+      emit(GetMyDataFailure(errorMessage: "No user found with email $email"));
     } catch (e) {
       emit(GetMyDataFailure(errorMessage: "There was an error: $e"));
     }

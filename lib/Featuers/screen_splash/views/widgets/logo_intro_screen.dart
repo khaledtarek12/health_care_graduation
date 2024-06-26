@@ -1,7 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:health_care/Featuers/admin/views/admin_view_page.dart';
@@ -32,48 +30,55 @@ class LogoIntroScreen extends StatefulWidget {
 }
 
 class _LogoIntroScreenState extends State<LogoIntroScreen> {
-  FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+  // ignore: unused_field
+  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
-  navigateToHome() {
-    Future.delayed(
-      const Duration(seconds: 3),
-      () async {
-        SharedPreferences prefs = await SharedPreferences.getInstance();
-        if (prefs.getBool('initial') == false ||
-            prefs.getBool('initial') == null) {
-          Get.to(() => const SplashViewBody());
-        } else if (prefs.getString('type') == null ||
-            prefs.getString('email') == null) {
-          Get.offNamed(LoginHomePage.id);
-        } else {
-          if (prefs.getString('type') == 'Doctor') {
-            if (!mounted) return;
+  void navigateToHome() async {
+    await Future.delayed(const Duration(seconds: 3));
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool? isInitial = prefs.getBool('initial');
+
+    if (isInitial == false || isInitial == null) {
+      Get.to(() => const SplashViewBody());
+    } else {
+      List<String>? roles = prefs.getStringList('roles');
+      String? userEmail = prefs.getString('email');
+
+      if (roles == null || userEmail == null) {
+        Get.offNamed(LoginHomePage.id);
+      } else {
+        if (roles.contains('Doctor')) {
+          if (mounted) {
             BlocProvider.of<GetMyDataCubit>(context)
-                .getMyData(email: prefs.getString('email')!, type: 'Doctor');
+                .getMyData(email: userEmail, types: ['Doctor']);
             BlocProvider.of<GetPatientsCubit>(context)
-                .getAllPatients(doctorEmail: prefs.getString('email')!);
+                .getAllPatients(doctorEmail: userEmail);
             Get.offNamed(DoctorHomepage.id);
-          } else if (prefs.getString('type') == 'Patient') {
-            if (!mounted) return;
+          }
+        } else if (roles.contains('Patient')) {
+          if (mounted) {
             BlocProvider.of<GetMyDataCubit>(context)
-                .getMyData(email: prefs.getString('email')!, type: 'Patient');
+                .getMyData(email: userEmail, types: ['Patient']);
             Get.offNamed(PatientView.id);
-          } else if (prefs.getString('type') == 'Admin') {
-            if (!mounted) return;
+          }
+        } else if (roles.contains('Admin')) {
+          if (mounted) {
             BlocProvider.of<GetMyDataCubit>(context)
-                .getMyData(email: prefs.getString('email')!, type: 'Admin');
+                .getMyData(email: userEmail, types: ['Admin']);
             Get.offNamed(AdminViewPage.id);
           }
+        } else {
+          Get.offNamed(LoginHomePage.id);
         }
-      },
-    );
+      }
+    }
   }
 
   @override
   void initState() {
+    super.initState();
     BlocProvider.of<LoginCubit>(context).getEmail();
     navigateToHome();
-    super.initState();
   }
 
   @override
@@ -104,17 +109,18 @@ class _LogoIntroScreenState extends State<LogoIntroScreen> {
           ),
           const SizedBox(height: 40),
           AnimatedBuilder(
-              animation: widget.slideAnimation,
-              builder: (context, _) {
-                return SlideTransition(
-                  position: widget.slideAnimation,
-                  child: const Text(
-                    'Taking care of the elderly through a sensor to measure his vital rates',
-                    textAlign: TextAlign.center,
-                    style: style15,
-                  ),
-                );
-              }),
+            animation: widget.slideAnimation,
+            builder: (context, _) {
+              return SlideTransition(
+                position: widget.slideAnimation,
+                child: const Text(
+                  'Taking care of the elderly through a sensor to measure his vital rates',
+                  textAlign: TextAlign.center,
+                  style: style15,
+                ),
+              );
+            },
+          ),
           const SizedBox(height: 20),
         ],
       ),

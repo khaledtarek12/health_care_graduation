@@ -4,7 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:health_care/Featuers/login_and_signup/bloc/login_cubit/login_cubit.dart';
 import 'package:health_care/Featuers/login_and_signup/data/models/patient_model.module.dart';
-import 'package:health_care/Featuers/patient_pages/views/widget/heart_beat_view.dart';
+import 'package:health_care/Featuers/patient_pages/views/heart_beat_view.dart';
 import 'package:health_care/const.dart';
 import 'package:health_care/Featuers/login_and_signup/Screens/chat_page.dart';
 import 'package:health_care/core/helper/transation.dart';

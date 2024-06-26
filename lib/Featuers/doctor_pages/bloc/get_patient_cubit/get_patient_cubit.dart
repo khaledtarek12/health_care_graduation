@@ -28,7 +28,7 @@ class GetPatientsCubit extends Cubit<GetPatientsState> {
       allPatient = querySnapshot.docs
           .map((doc) => PatientModel.fromSnapshot(doc))
           .toList();
-      allPatient.sort((a, b) => a.fristName.compareTo(b.fristName));
+      allPatient.sort((a, b) => a.fristName!.compareTo(b.fristName!));
 
       emit(GetPatientsSuccess());
     } catch (e) {

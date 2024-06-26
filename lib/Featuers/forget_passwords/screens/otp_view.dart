@@ -12,23 +12,31 @@ class OtpView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Extract email from the arguments
+    final email = ModalRoute.of(context)!.settings.arguments as String;
+
+    // Controller to store the OTP code
+    final TextEditingController otpController = TextEditingController();
+
     PinTheme focusTheme = PinTheme(
       height: 75,
       width: 75,
       textStyle: style25,
       decoration: BoxDecoration(
-          color: Colors.white,
-          border: Border.all(color: const Color(0xff35c2c1)),
-          borderRadius: BorderRadius.circular(8)),
+        color: Colors.white,
+        border: Border.all(color: const Color(0xff35c2c1)),
+        borderRadius: BorderRadius.circular(8),
+      ),
     );
     PinTheme defaultTheme = PinTheme(
       height: 75,
       width: 75,
       textStyle: style25,
       decoration: BoxDecoration(
-          color: const Color(0xffe8ecf4),
-          border: Border.all(color: const Color(0xfff7f8f9)),
-          borderRadius: BorderRadius.circular(8)),
+        color: const Color(0xffe8ecf4),
+        border: Border.all(color: const Color(0xfff7f8f9)),
+        borderRadius: BorderRadius.circular(8),
+      ),
     );
 
     return SafeArea(
@@ -44,36 +52,57 @@ class OtpView extends StatelessWidget {
               ),
               const SizedBox(height: 15),
               const Opacity(
-                  opacity: .6,
-                  child: Text(
-                    textAlign: TextAlign.center,
-                    'Enter the verification code we just sent  on your email address.',
-                    style: styleNormal,
-                  )),
+                opacity: .6,
+                child: Text(
+                  textAlign: TextAlign.center,
+                  'Enter the verification code we just sent on your email address.',
+                  style: styleNormal,
+                ),
+              ),
               const SizedBox(height: 40),
               Pinput(
+                controller: otpController,
                 focusedPinTheme: focusTheme,
                 defaultPinTheme: defaultTheme,
                 submittedPinTheme: focusTheme,
               ),
               const SizedBox(height: 40),
               CusttomButton(
-                child: const Text('Verify'),
+                child: Text('Verify', style: style15.copyWith(fontSize: 18)),
                 onTap: () {
-                  Get.to(() => const CreateNewPassword(),
-                      transition: Transition.downToUp, duration: kDuration);
+                  // Check if OTP is not empty
+                  if (otpController.text.isNotEmpty) {
+                    Get.to(
+                      () => const CreateNewPassword(),
+                      arguments: {
+                        'email': email,
+                        'otp': otpController.text,
+                      },
+                      transition: Transition.downToUp,
+                      duration: kDuration,
+                    );
+                  } else {
+                    // Show a snackbar or dialog if OTP is empty
+                    Get.snackbar(
+                      'Error',
+                      'Please enter the OTP code',
+                      snackPosition: SnackPosition.BOTTOM,
+                    );
+                  }
                 },
               ),
-              const Spacer(flex: 5),
+              const SizedBox(height: 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    'Didn\'t received code ?',
+                    'Didn\'t receive code?',
                     style: style15.copyWith(color: Colors.black),
                   ),
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      // Implement resend functionality here
+                    },
                     child: Text(
                       '   Resend',
                       style: style15.copyWith(color: kPrimaryColor),
@@ -81,7 +110,6 @@ class OtpView extends StatelessWidget {
                   ),
                 ],
               ),
-              const Spacer(),
             ],
           ),
         ),

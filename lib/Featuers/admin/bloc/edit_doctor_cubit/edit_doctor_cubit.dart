@@ -13,6 +13,7 @@ part 'edit_doctor_state.dart';
 class EditDoctorCubit extends Cubit<EditDoctorState> {
   EditDoctorCubit() : super(EditDoctorInitial());
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
+  // ignore: unused_field
   final FirebaseAuth _auth = FirebaseAuth.instance;
   void editDoctor(
       {required String userId,
@@ -42,28 +43,28 @@ class EditDoctorCubit extends Cubit<EditDoctorState> {
     //             errorMessage: 'Failed to update document: $error')),
     //       );
     // }
-    try {
-      User? user = _auth.currentUser;
+    // try {
+    //   User? user = _auth.currentUser;
 
-      if (user != null) {
-        // Re-authenticate user
-        AuthCredential credential =
-            EmailAuthProvider.credential(email: email, password: password);
-        await user.reauthenticateWithCredential(credential);
+    //   if (user != null) {
+    //     // Re-authenticate user
+    //     AuthCredential credential =
+    //         EmailAuthProvider.credential(email: email, password: password);
+    //     await user.reauthenticateWithCredential(credential);
 
-        // Update email address
-        // ignore: deprecated_member_use
-        await user.updateEmail(newDoctor.email);
+    //     // Update email address
+    //     // ignore: deprecated_member_use
+    //     await user.updateEmail(newDoctor.email);
 
-        log('Email updated successfully');
-      } else {
-        log('No user currently signed in.');
-        // Handle scenario where no user is signed in
-      }
-    } catch (e) {
-      log('Failed to update email: $e');
-      // Handle error (e.g., display error to user)
-    }
+    //     log('Email updated successfully');
+    //   } else {
+    //     log('No user currently signed in.');
+    //     // Handle scenario where no user is signed in
+    //   }
+    // } catch (e) {
+    //   log('Failed to update email: $e');
+    //   // Handle error (e.g., display error to user)
+    // }
     try {
       Map<String, dynamic> data = {
         'firstName': newDoctor.fName,
