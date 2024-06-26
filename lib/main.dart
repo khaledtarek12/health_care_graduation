@@ -32,7 +32,7 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  await Notifications().initalizeNotification();
+  await Notifications().initializeNotification();
   runApp(const ChatApp());
 }
 

@@ -16,6 +16,7 @@ class _AlarmHomePgaeState extends State<AlarmHomePgae> {
   @override
   Widget build(BuildContext context) {
     return CustomContainer(
+      appbar: true,
       title: 'Alarms',
       isLeading: true,
       isLogout: true,

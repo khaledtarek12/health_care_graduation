@@ -8,8 +8,6 @@ class AddBottomSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(
-        left: 16,
-        right: 16,
         bottom: MediaQuery.of(context).viewInsets.bottom +
             MediaQuery.of(context)
                 .padding

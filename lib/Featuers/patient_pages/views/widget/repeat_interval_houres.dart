@@ -11,18 +11,21 @@ class RepeatIntervalWidget extends StatelessWidget {
     this.onIntervalSelected,
   });
 
+  
+
   @override
   Widget build(BuildContext context) {
-    return Row(
+    
+    return Column(
       children: [
         const Text(
-          'Repeat every',
+          'Choose Repeating time',
           style: TextStyle(
             color: Colors.black,
-            fontWeight: FontWeight.bold,
+            fontWeight: FontWeight.w800,
           ),
         ),
-        const SizedBox(width: 10),
+        const SizedBox(height: 15),
         Wrap(
           spacing: 8,
           runSpacing: 10,
@@ -40,8 +43,8 @@ class RepeatIntervalWidget extends StatelessWidget {
                 padding: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
                   color: selectedInterval == repeatInterval[index]
-                      ? Colors.blue.withOpacity(0.5)
-                      : kPrimaryColor.withOpacity(0.5),
+                      ? const Color(0xff191d2d)
+                      : kPrimaryColor,
                   borderRadius: BorderRadius.circular(10),
                   boxShadow: [
                     BoxShadow(
@@ -60,6 +63,7 @@ class RepeatIntervalWidget extends StatelessWidget {
                     '${repeatInterval[index]}',
                     style: TextStyle(
                       fontSize: 16,
+                      fontWeight: FontWeight.bold,
                       color: selectedInterval == repeatInterval[index]
                           ? Colors.white
                           : Colors.black,
@@ -69,14 +73,6 @@ class RepeatIntervalWidget extends StatelessWidget {
               ),
             );
           }),
-        ),
-        const SizedBox(width: 10),
-        const Text(
-          'hours',
-          style: TextStyle(
-            color: Colors.black,
-            fontWeight: FontWeight.bold,
-          ),
         ),
       ],
     );

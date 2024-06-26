@@ -31,7 +31,7 @@ class CustomContainer extends StatelessWidget {
               title: Text(title == null ? 'there is no title' : title!,
                   style: style15.copyWith(fontSize: 20)),
               centerTitle: true,
-              toolbarHeight: 110,
+              toolbarHeight: 80,
               toolbarOpacity: 0.8,
               automaticallyImplyLeading: false,
               backgroundColor: kprimaryDarkcolor,
