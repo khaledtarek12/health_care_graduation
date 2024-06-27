@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:health_care/Featuers/forget_passwords/bloc/forget_password_cubit/forget_password_cubit.dart';
-import 'package:health_care/Featuers/forget_passwords/screens/otp_view.dart';
+import 'package:health_care/Featuers/forget_passwords/screens/create_new_password_view.dart';
 import 'package:health_care/const.dart';
 import 'package:health_care/core/helper/show_snackbar.dart';
 import 'package:health_care/core/helper/transation.dart';
@@ -39,7 +39,7 @@ class _SendCodeSectionState extends State<SendCodeSection> {
             context: context,
             btnOkOnPress: () {
               Get.to(
-                () => const OtpView(),
+                () => const CreateNewPassword(),
                 transition: Motivation.bootmUpTransition(),
                 duration: kDuration,
                 arguments: email,

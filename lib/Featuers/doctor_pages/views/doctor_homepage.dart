@@ -19,23 +19,14 @@ class DoctorHomepage extends StatefulWidget {
   State<DoctorHomepage> createState() => _DoctorHomepageState();
 }
 
-// String email = '';
-// getEmail() async {
-//   SharedPreferences prefs = await SharedPreferences.getInstance();
-//   email = prefs.getString('email')!;
-// }
-
-// initState() {
-//   getEmail();
-// }
-
 class _DoctorHomepageState extends State<DoctorHomepage> {
   @override
   Widget build(BuildContext context) {
     log('emailkhaled: ${BlocProvider.of<LoginCubit>(context).email}');
     return Scaffold(
       body: CustomContainer(
-        title: 'Doctor Home Page ',
+        appbar: true,
+        title: 'Doctor Home Page',
         isLogout: true,
         child: CustomScrollView(slivers: [
           const SliverToBoxAdapter(

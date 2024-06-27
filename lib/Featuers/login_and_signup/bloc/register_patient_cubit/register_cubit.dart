@@ -14,15 +14,6 @@ class RegisterCubit extends Cubit<RegisterState> {
   RegisterCubit() : super(RegisterInitial());
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
 
-  // await firestore.collection('patients').add({
-  //   kFristName: patientModel.fristName,
-  //   kLastName: patientModel.lastName,
-  //   kEmail: patientModel.email,
-  //   kPhoneNumber: patientModel.phoneNumber,
-  //   kPassword: patientModel.password,
-  //   kDcotorName: patientModel.doctorName,
-  //   kDcotorEmail: patientModel.doctorEmail,
-  // });
   String doctorName = '';
   String doctorEmail = '';
   int doctorId = 0;
@@ -30,10 +21,6 @@ class RegisterCubit extends Cubit<RegisterState> {
     emit(RegisterLoading());
 
     try {
-      // Create user in Firebase
-      // ignore: unused_local_variable
-
-      // Prepare data for API request
       Map<String, dynamic> data = {
         "userName": '${patientModel.fristName}${patientModel.lastName}',
         "email": patientModel.email,
@@ -41,8 +28,8 @@ class RegisterCubit extends Cubit<RegisterState> {
         "phoneNumber": patientModel.phoneNumber,
         "password": patientModel.password,
         "confirmPassword": patientModel.password,
-        "FirstName": patientModel.fristName,
-        "LastName": patientModel.lastName,
+        "firstName": patientModel.fristName,
+        "lastName": patientModel.lastName,
       };
 
       // Ensure userName meets minimum length requirement
@@ -55,17 +42,12 @@ class RegisterCubit extends Cubit<RegisterState> {
       log('Request Data: $data');
 
       // Make API call
-      Map<String, dynamic> response = await ApiService(
-              Dio(), 'http://oldmate.runasp.net/api/AccountService')
-          .add(endPoint: '/Register', data: data);
+      Map<String, dynamic> response =
+          await ApiService(Dio(), 'http://som3a.somee.com/api/AccountService')
+              .add(endPoint: '/Register', data: data);
 
       // Log the response data
       log('Response Data: $response');
-
-      // ignore: unused_local_variable
-      // UserCredential user = await FirebaseAuth.instance
-      //     .createUserWithEmailAndPassword(
-      //         email: patientModel.email, password: patientModel.password);
 
       emit(RegisterSucessful());
     } catch (e) {

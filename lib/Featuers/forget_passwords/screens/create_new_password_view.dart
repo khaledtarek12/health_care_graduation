@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
@@ -24,21 +26,15 @@ class _CreateNewPasswordState extends State<CreateNewPassword> {
   bool? obSecureText = true;
   IconData? icon = Icons.visibility_off;
   String email = '';
-  String otp = '';
   String password = '';
   bool isLoading = false;
+  String token = '';
   GlobalKey<FormState> formkey = GlobalKey();
 
   @override
-  void initState() {
-    super.initState();
-    final arguments = ModalRoute.of(context)!.settings.arguments as Map;
-    email = arguments['email'];
-    otp = arguments['otp'];
-  }
-
-  @override
   Widget build(BuildContext context) {
+    email = ModalRoute.of(context)?.settings.arguments as String;
+    log(email);
     return BlocConsumer<ResetPasswordCubit, ResetPasswordState>(
       listener: (context, state) {
         if (state is ResetPasswordSuccess) {
@@ -79,6 +75,18 @@ class _CreateNewPasswordState extends State<CreateNewPassword> {
                       ),
                     ),
                     const SizedBox(height: 40),
+                    CustomFormTextField(
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return 'Value is empty';
+                        }
+                        return null;
+                      },
+                      onChange: (data) {
+                        token = data;
+                      },
+                      labelText: 'Enter token',
+                    ),
                     CustomFormTextField(
                       validator: (value) {
                         if (value == null || value.isEmpty) {
@@ -133,11 +141,10 @@ class _CreateNewPasswordState extends State<CreateNewPassword> {
                           style: style15.copyWith(fontSize: 18)),
                       onTap: () {
                         if (formkey.currentState!.validate()) {
-                          
                           BlocProvider.of<ResetPasswordCubit>(context)
                               .resetPassword(
                             email: email,
-                            token: otp,
+                            token: token,
                             newPassword: password,
                             confirmPassword: password,
                           );

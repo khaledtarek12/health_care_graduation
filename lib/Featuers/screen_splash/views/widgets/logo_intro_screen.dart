@@ -52,7 +52,7 @@ class _LogoIntroScreenState extends State<LogoIntroScreen> {
             BlocProvider.of<GetMyDataCubit>(context)
                 .getMyData(email: userEmail, types: ['Doctor']);
             BlocProvider.of<GetPatientsCubit>(context)
-                .getAllPatients(doctorEmail: userEmail);
+                .getAllPatients(doctorId: userEmail);
             Get.offNamed(DoctorHomepage.id);
           }
         } else if (roles.contains('Patient')) {

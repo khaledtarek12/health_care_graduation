@@ -20,7 +20,7 @@ class ResetPasswordCubit extends Cubit<ResetPasswordState> {
 
     try {
       final response = await dio.post(
-        'http://oldmate.runasp.net/api/AccountService/reset-password',
+        'http://som3a.somee.com/api/AccountService/reset-password',
         data: {
           'email': email,
           'token': token,
@@ -33,6 +33,7 @@ class ResetPasswordCubit extends Cubit<ResetPasswordState> {
         log(response.data.toString());
         emit(ResetPasswordSuccess());
       } else {
+        log(response.data['errors']);
         emit(ResetPasswordFailure(
           errorMessage: 'Failed to reset password. Please try again.',
         ));

@@ -14,7 +14,7 @@ class ForgetPasswordCubit extends Cubit<ForgetPasswordState> {
     try {
       Dio dio = Dio();
       final response = await dio.post(
-        'http://oldmate.runasp.net/api/AccountService/ForgetPassword',
+        'http://som3a.somee.com/api/AccountService/ForgetPassword',
         data: {'email': email},
         options: Options(
           headers: {'Content-Type': 'application/json'},
@@ -27,7 +27,7 @@ class ForgetPasswordCubit extends Cubit<ForgetPasswordState> {
       } else if (response.statusCode == 400) {
         final responseBody = response.data;
         emit(ForgetPasswordFailure(
-            errorMessage: responseBody['message'] ?? 'Invalid request data'));
+            errorMessage: responseBody['errors'] ?? 'Invalid request data'));
       } else {
         emit(ForgetPasswordFailure(
             errorMessage:

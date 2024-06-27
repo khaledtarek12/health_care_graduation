@@ -51,6 +51,7 @@ class _AdminScreenBodyState extends State<AdminScreenBody> {
         ),
       ),
       body: CustomContainer(
+        appbar: true,
         title: 'Doctors',
         isLogout: true,
         child: BlocConsumer<GetDoctorsCubit, GetDoctorsState>(

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:health_care/Featuers/admin/data/model/doctor_model.module.dart';
@@ -21,13 +23,14 @@ class GetMyDataCubit extends Cubit<GetMyDataState> {
   );
 
   PatientModel patientData = PatientModel(
-    fristName: '',
     lastName: '',
     email: '',
     phoneNumber: '',
     password: '',
     userName: '',
     doctorId: 0,
+    userId: '',
+    fristName: '',
   );
 
   final Dio dio = Dio();
@@ -40,15 +43,23 @@ class GetMyDataCubit extends Cubit<GetMyDataState> {
         final Response response;
         if (type == 'Patient') {
           response =
-              await dio.get('http://yourapi.com/api/patients?email=$email');
-          if (response.statusCode == 200 && response.data.isNotEmpty) {
-            patientData = PatientModel.fromJson(response.data);
-            emit(GetMyDataSuccess());
-            return;
+              await dio.get('http://som3a.somee.com/api/Patient/GetAllPatient');
+          if (response.statusCode == 200) {
+            final List patients = response.data;
+            final patient = patients.firstWhere(
+              (pat) => pat['userId'] == email,
+              orElse: () => null,
+            );
+            if (patient != null) {
+              patientData = PatientModel.fromJson(patient);
+              emit(GetMyDataSuccess());
+              return;
+            }
           }
+          log(response.data.toString());
         } else if (type == 'Doctor') {
-          response = await dio
-              .get('http://oldmate.runasp.net/api/Doctor/GetAllDoctors');
+          response =
+              await dio.get('http://som3a.somee.com/api/Doctor/GetAllDoctors');
           if (response.statusCode == 200) {
             final List doctors = response.data;
             final doctor = doctors.firstWhere(
@@ -66,7 +77,7 @@ class GetMyDataCubit extends Cubit<GetMyDataState> {
           return;
         }
       }
-      emit(GetMyDataFailure(errorMessage: "No user found with email $email"));
+      emit(GetMyDataFailure(errorMessage: "No user found with userId "));
     } catch (e) {
       emit(GetMyDataFailure(errorMessage: "There was an error: $e"));
     }

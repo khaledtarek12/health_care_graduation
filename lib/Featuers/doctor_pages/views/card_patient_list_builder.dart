@@ -23,7 +23,7 @@ class _CardPatientListBuilderState extends State<CardPatientListBuilder> {
   @override
   void initState() {
     super.initState();
-    getPatientsCubit.getAllPatients(doctorEmail: '');
+    getPatientsCubit.getAllPatients(doctorId: '');
   }
 
   @override
@@ -51,10 +51,10 @@ class _CardPatientListBuilderState extends State<CardPatientListBuilder> {
           child: ListView.builder(
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
-            itemCount: getPatientsCubit.allPatient.length,
+            itemCount: getPatientsCubit.allPatients.length,
             itemBuilder: (context, index) {
               return Patientcard(
-                  patientModel: getPatientsCubit.allPatient[index]);
+                  patientModel: getPatientsCubit.allPatients[index]);
             },
           ),
         );

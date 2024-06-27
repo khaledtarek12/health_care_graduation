@@ -28,13 +28,13 @@ class CustomContainer extends StatelessWidget {
       extendBody: true,
       appBar: appbar
           ? AppBar(
-              title: Text(title == null ? 'there is no title' : title!,
+              title: Text(title == null ? '' : title!,
                   style: style15.copyWith(fontSize: 20)),
               centerTitle: true,
               toolbarHeight: 80,
               toolbarOpacity: 0.8,
               automaticallyImplyLeading: false,
-              backgroundColor: kprimaryDarkcolor,
+              backgroundColor: kPrimaryColor,
               actions: isLogout
                   ? [
                       IconButton(

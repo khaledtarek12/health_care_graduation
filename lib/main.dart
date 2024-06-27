@@ -69,8 +69,7 @@ class ChatApp extends StatelessWidget {
           EntierCallChatScreen.id: (context) => const EntierCallChatScreen()
         },
         debugShowCheckedModeBanner: false,
-        initialRoute:  PatientView.id,
-        // SplashScreen.id,
+        initialRoute: SplashScreen.id,
       ),
     );
   }

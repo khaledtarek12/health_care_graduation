@@ -65,7 +65,7 @@ class _PatientViewBodyState extends State<PatientViewBody> {
                 const SizedBox(width: 5),
                 Text('${getMyDataCubit.patientData.fristName} ',
                     style: style25.copyWith(color: kPrimaryColor)),
-                Text(getMyDataCubit.patientData.lastName!,
+                Text(getMyDataCubit.patientData.lastName,
                     style: style25.copyWith(color: Colors.white)),
               ],
             ),

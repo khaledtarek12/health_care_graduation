@@ -30,7 +30,7 @@ class AddDoctorCubit extends Cubit<AddDoctorState> {
       // });
       try {
         Map<String, dynamic> response =
-            await ApiService(Dio(), 'http://oldmate.runasp.net/api/Admin')
+            await ApiService(Dio(), 'http://som3a.somee.com/Api/Admin')
                 .add(endPoint: '/AddDoctor', data: {
           "firstName": doctorModel.fName,
           "lastName": doctorModel.lName,

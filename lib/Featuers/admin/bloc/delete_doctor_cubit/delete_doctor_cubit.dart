@@ -22,54 +22,10 @@ class DeleteDoctorCubit extends Cubit<DeleteDoctorState> {
       required String email,
       required String password}) async {
     emit(DeleteDoctorLoading());
-    // First, find and delete the doctor document in Firestore
-    // final querySnapshot = await firestore
-    //     .collection('doctors')
-    //     .where(kEmail, isEqualTo: email)
-    //     .get();
-
-    // for (var doc in querySnapshot.docs) {
-    //   firestore
-    //       .collection('doctors')
-    //       .doc(doc.id)
-    //       .delete()
-    //       .then((_) => emit(DeleteDoctorSuccess()))
-    //       .catchError(
-    //         (error) => emit(DeleteDoctorFailure(
-    //             errorMessage: 'Failed to update document: $error')),
-    //       );
-    // }
-    // User? user =
-    //     // ignore: deprecated_member_use
-    //     await _auth.fetchSignInMethodsForEmail(email).then((signInMethods) {
-    //   if (signInMethods.isNotEmpty) {
-    //     return _auth
-    //         .signInWithEmailAndPassword(email: email, password: password)
-    //         .then((userCredential) => userCredential.user);
-    //   } else {
-    //     throw FirebaseAuthException(
-    //         code: 'user-not-found', message: 'User not found');
-    //   }
-    // });
-
-    // if (user != null) {
-    //   // Reauthenticate the user
-    //   AuthCredential credential =
-    //       EmailAuthProvider.credential(email: email, password: password);
-    //   await user.reauthenticateWithCredential(credential);
-
-    //   // Delete the user from Firebase Auth
-    //   await user.delete();
-    //   log('User deleted successfully from Firebase Auth');
-    //   emit(DeleteDoctorSuccess());
-    // } else {
-    //   log('No user is currently signed in');
-    //   emit(DeleteDoctorFailure(errorMessage: 'No user is currently signed in'));
-    // }
     try {
-      String endPoint = '/deleteDoctor/$userId';
+      String endPoint = '/DeleteDoctor/$userId';
       var response =
-          await ApiService(Dio(), 'http://oldmate.runasp.net/api/Admin')
+          await ApiService(Dio(), 'http://som3a.somee.com/Api/Admin')
               .delete(endPoint: endPoint);
 
       // Log the response to understand its structure

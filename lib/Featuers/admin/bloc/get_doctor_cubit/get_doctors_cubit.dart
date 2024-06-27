@@ -24,7 +24,7 @@ class GetDoctorsCubit extends Cubit<GetDoctorsState> {
     // allDoctors.sort((a, b) => a.fristName.compareTo(b.fristName));
     try {
       var response =
-          await ApiService(Dio(), 'http://oldmate.runasp.net/api/Doctor')
+          await ApiService(Dio(), 'http://som3a.somee.com/api/Doctor')
               .get(endPoint: '/GetAllDoctors');
       allDoctors.clear();
       if (response is List) {

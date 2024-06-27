@@ -75,16 +75,15 @@ class EditDoctorCubit extends Cubit<EditDoctorState> {
         'password': newDoctor.password,
         'confirmPassword': newDoctor.password,
       };
-      String endPoint = '/editdoctor/$userId';
-      var response =
-          await ApiService(Dio(), 'http://oldmate.runasp.net/api/Admin')
-              .edit(endPoint: endPoint, data: data);
+      String endPoint = '/EditDoctor/$userId';
+      var response = await ApiService(Dio(), 'http://som3a.somee.com/Api/Admin')
+          .edit(endPoint: endPoint, data: data);
       log("response: $response and userid: $userId and id: ${newDoctor.id}");
 
       if (response is Map<String, dynamic>) {
         emit(EditDoctorSucess());
       } else {
-        emit(EditDoctorFailure(errorMessage: response['message']));
+        emit(EditDoctorFailure(errorMessage: response['errors']));
       }
     } catch (e) {
       emit(EditDoctorFailure(errorMessage: e.toString()));

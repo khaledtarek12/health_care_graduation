@@ -192,12 +192,11 @@ class _LoginHomePageState extends State<LoginHomePage> {
                           BlocProvider.of<LoginCubit>(context).loginUser(
                             email: email!,
                             password: password!,
-                            role: selectedRole!,
                           );
                           BlocProvider.of<GetMyDataCubit>(context)
                               .getMyData(email: email!, types: selectedRole!);
                           BlocProvider.of<GetPatientsCubit>(context)
-                              .getAllPatients(doctorEmail: email!);
+                              .getAllPatients(doctorId: email!);
                         }
                       },
                       child: Text('Sign In',

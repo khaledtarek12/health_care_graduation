@@ -33,6 +33,7 @@ class DoctorCard extends StatelessWidget {
     return BlocConsumer<DeleteDoctorCubit, DeleteDoctorState>(
       listener: (context, state) {
         if (state is DeleteDoctorLoading) {
+          BlocProvider.of<GetDoctorsCubit>(context).getAllDoctors();
         } else if (state is DeleteDoctorSuccess) {
           BlocProvider.of<GetDoctorsCubit>(context).getAllDoctors();
         } else if (state is DeleteDoctorFailure) {
@@ -41,6 +42,7 @@ class DoctorCard extends StatelessWidget {
             message: state.errorMessage,
             btnOkOnPress: () {},
           );
+          BlocProvider.of<GetDoctorsCubit>(context).getAllDoctors();
         }
       },
       builder: (context, state) {
@@ -91,7 +93,10 @@ class DoctorCard extends StatelessWidget {
                                 BlocProvider.of<GetDoctorsCubit>(context)
                                     .getAllDoctors();
                               },
-                              btnCancelOnPress: () {},
+                              btnCancelOnPress: () {
+                                BlocProvider.of<GetDoctorsCubit>(context)
+                                    .getAllDoctors();
+                              },
                             );
                           },
                           backgroundColor:
