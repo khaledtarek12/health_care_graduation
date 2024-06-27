@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-// import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:health_care/Featuers/login_and_signup/Screens/login_home_page.dart';
+import 'package:health_care/Featuers/login_and_signup/bloc/login_cubit/login_cubit.dart';
 import 'package:health_care/Featuers/patient_pages/views/heart_beat_view.dart';
 import 'package:health_care/Featuers/patient_pages/views/history_of_patient_view.dart';
+import 'package:health_care/Featuers/patient_pages/views/medical_information_page.dart';
 import 'package:health_care/Featuers/screen_splash/bloc/cubit/get_my_data_cubit.dart';
 import 'package:health_care/const.dart';
+import 'package:health_care/core/helper/show_snackbar.dart';
 import 'package:health_care/core/helper/transation.dart';
 import 'package:health_care/core/utils/styles.dart';
 import 'package:health_care/core/widgets/custom_container.dart';
@@ -61,7 +64,33 @@ class _PatientViewBodyState extends State<PatientViewBody> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Icon(Icons.person_3, color: Colors.white, size: 45),
+                Container(
+                  decoration: const BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(50)),
+                      color: kprimaryDarkcolor),
+                  child: IconButton(
+                      onPressed: () {
+                        showQuesstionDialog(
+                          context: context,
+                          message: 'Are you sure you want to log out?',
+                          btnCancelOnPress: () {},
+                          btnOkOnPress: () async {
+                            BlocProvider.of<LoginCubit>(context).deleteEmail();
+                            Navigator.pushAndRemoveUntil(context,
+                                MaterialPageRoute(
+                              builder: (context) {
+                                return const LoginHomePage();
+                              },
+                            ), (route) => false);
+                          },
+                        );
+                      },
+                      icon: const Icon(
+                        Icons.logout_rounded,
+                        color: Colors.white,
+                        size: 40,
+                      )),
+                ),
                 const SizedBox(width: 5),
                 Text('${getMyDataCubit.patientData.fristName} ',
                     style: style25.copyWith(color: kPrimaryColor)),
@@ -154,7 +183,7 @@ class _PatientViewBodyState extends State<PatientViewBody> {
                       ),
                     ],
                     onTap: () {
-                      Get.to(() => const HistoryOfPatientPage(),
+                      Get.to(() => const MedicalInformationPage(),
                           transition: Motivation.zoomTransition());
                     },
                   ),

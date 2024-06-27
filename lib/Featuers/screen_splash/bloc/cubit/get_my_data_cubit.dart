@@ -47,7 +47,7 @@ class GetMyDataCubit extends Cubit<GetMyDataState> {
           if (response.statusCode == 200) {
             final List patients = response.data;
             final patient = patients.firstWhere(
-              (pat) => pat['userId'] == email,
+              (pat) => pat['email'] == email,
               orElse: () => null,
             );
             if (patient != null) {

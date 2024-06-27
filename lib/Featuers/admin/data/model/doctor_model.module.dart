@@ -31,19 +31,7 @@ class DoctorModel {
       userId: json['userId'],
     );
   }
-
-  factory DoctorModel.fromSnapShot(var docs) {
-    Map<String, dynamic> data = docs.data() as Map<String, dynamic>;
-    return DoctorModel(
-      fName: data['fName'],
-      lName: data['lName'],
-      userName: data['userName'],
-      email: data['email'],
-      phoneNumber: data['phoneNumber'],
-      password: data['password'],
-    );
-  }
 }
 
 
-// Map<String, dynamic> data = docs.data() as Map<String, dynamic>;
+

@@ -34,7 +34,7 @@ class LoginCubit extends Cubit<LoginState> {
           validateStatus: (status) => status! < 500,
         ),
       );
-      log(response.data.toString());
+      // log(response.data.toString());
       if (response.statusCode == 200) {
         final responseBody = response.data;
         final roles = List<String>.from(responseBody['roles']);
