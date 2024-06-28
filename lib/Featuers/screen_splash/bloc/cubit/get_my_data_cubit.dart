@@ -34,7 +34,6 @@ class GetMyDataCubit extends Cubit<GetMyDataState> {
   );
 
   final Dio dio = Dio();
-
   Future<void> getMyData(
       {required String email, required List<String> types}) async {
     emit(GetMyDataLoading());
@@ -60,10 +59,10 @@ class GetMyDataCubit extends Cubit<GetMyDataState> {
           } else {
             emit(GetMyDataFailure(errorMessage: 'Failed to fetch patients'));
           }
-          log(response.data.toString());
         } else if (type == 'Doctor') {
           response = await dio
               .get('http://healthcaree.runasp.net/api/Doctor/GetAllDoctors');
+
           if (response.statusCode == 200) {
             final List doctors = response.data;
             final doctor = doctors.firstWhere(

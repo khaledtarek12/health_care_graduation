@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:health_care/Featuers/admin/views/admin_view_page.dart';
 import 'package:health_care/Featuers/doctor_pages/bloc/get_patient_cubit/get_patient_cubit.dart';
+import 'package:health_care/Featuers/patient_pages/bloc/location_cubit/location_cubit.dart';
 import 'package:health_care/Featuers/screen_splash/bloc/cubit/get_my_data_cubit.dart';
 import 'package:health_care/core/utils/styles.dart';
 import 'package:health_care/core/widgets/custom_container.dart';
@@ -72,6 +73,8 @@ class _LoginHomePageState extends State<LoginHomePage> {
                 btnOkOnPress: () {},
               );
             } else if (selectedRole![0] == 'Patient') {
+              BlocProvider.of<LocationCubit>(context)
+                  .storeLocation(email: email!);
               Navigator.pushNamed(context, PatientView.id, arguments: email);
               showSuccessDialog(
                 context: context,

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:health_care/core/widgets/custom_container.dart';
-import 'package:health_care/Featuers/patient_pages/cubits/alarm/alarm_data_cubit.dart';
+import 'package:health_care/Featuers/patient_pages/bloc/cubits/alarm/alarm_data_cubit.dart';
 import 'package:health_care/Featuers/patient_pages/views/widget/add_alarm_button.dart';
 import 'package:health_care/Featuers/patient_pages/views/widget/custom_alarm_crad.dart';
 

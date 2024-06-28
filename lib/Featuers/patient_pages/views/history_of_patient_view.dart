@@ -1,7 +1,9 @@
+import 'package:direct_sms/direct_sms.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:health_care/Featuers/patient_pages/data/model/sensor_data.module.dart';
 import 'package:health_care/core/utils/styles.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class HistoryOfPatientPage extends StatefulWidget {
   const HistoryOfPatientPage({super.key});
@@ -14,7 +16,7 @@ class HistoryOfPatientPage extends StatefulWidget {
 class _HistoryOfPatientPageState extends State<HistoryOfPatientPage> {
   late DatabaseReference _databaseReference;
   List<SensorData> _sensorData = [];
-
+  var directSms = DirectSms();
   @override
   void initState() {
     super.initState();
@@ -35,30 +37,42 @@ class _HistoryOfPatientPageState extends State<HistoryOfPatientPage> {
         setState(() {
           _sensorData = sensorData;
         });
+
+        for (final sensor in sensorData) {
+          if (sensor.value > 100 || sensor.value < 60) {
+            sendSms(
+                number: '+201008509785',
+                message: 'Dangerous heart rate detected: ${sensor.value} Bp/m');
+            break; // Send SMS only once for the first dangerous value
+          }
+        }
       }
     });
   }
 
+  sendSms({required String number, required String message}) async {
+    final permission = Permission.sms.request();
+    if (await permission.isGranted) {
+      directSms.sendSms(message: message, phone: number);
+    }
+  }
+
   Color _getCardColor(double value) {
-    if (value > 85) {
+    if (value > 100 || value < 60) {
       return Colors.red;
-    } else if (value >= 70 && value <= 85) {
+    } else if (value >= 60 && value <= 100) {
       return Colors.green;
-    } else if (value < 65) {
-      return Colors.limeAccent.withAlpha(200);
     }
     return Colors.white;
   }
 
   String _getCondition(double value) {
-    if (value > 85) {
+    if (value > 100 || value < 60) {
       return "Dangers";
-    } else if (value >= 70 && value <= 85) {
-      return "Moderate";
-    } else if (value < 65) {
-      return "Warning";
+    } else if (value >= 60 && value <= 100) {
+      return "Normal";
     }
-    return "Normal";
+    return "Moderate";
   }
 
   @override

@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:health_care/Featuers/doctor_pages/views/patient_location.dart';
 import 'package:health_care/Featuers/login_and_signup/bloc/login_cubit/login_cubit.dart';
 import 'package:health_care/Featuers/login_and_signup/data/models/patient_model.module.dart';
 import 'package:health_care/Featuers/patient_pages/views/heart_beat_view.dart';
+import 'package:health_care/Featuers/patient_pages/views/history_of_patient_view.dart';
+import 'package:health_care/Featuers/screen_splash/bloc/cubit/get_my_data_cubit.dart';
 import 'package:health_care/const.dart';
 import 'package:health_care/Featuers/login_and_signup/Screens/chat_page.dart';
 import 'package:health_care/core/helper/transation.dart';
@@ -71,17 +74,34 @@ class Patientcard extends StatelessWidget {
                                 arguments: patientModel.patientEmail,
                                 transition: Motivation.bootmUpTransition());
                           }),
-                      const SizedBox(width: 40),
                       IconButton(
-                          icon: const Icon(FontAwesomeIcons.heartCircleCheck,
-                              size: 35, color: Color(0xff17455c)),
+                          icon: const Icon(Icons.history_edu_rounded,
+                              size: 45, color: Color(0xff17455c)),
+                          onPressed: () {
+                            Get.to(() => const HistoryOfPatientPage(),
+                                transition: Motivation.zoomTransition(),
+                                arguments:
+                                    BlocProvider.of<GetMyDataCubit>(context)
+                                        .doctorData
+                                        .phoneNumber);
+                          }),
+                      IconButton(
+                          icon: const Icon(Icons.bar_chart_rounded,
+                              size: 45, color: Color(0xff17455c)),
                           onPressed: () {
                             Get.to(() => const HeartBeatView(),
                                 transition: Motivation.zoomTransition());
                           }),
-                      const SizedBox(width: 40),
-                      const Icon(FontAwesomeIcons.locationDot,
-                          size: 35, color: Color(0xff17455c)),
+                      IconButton(
+                          onPressed: () {
+                            Get.to(
+                                () => PatientLocationPage(
+                                      patientEmail: patientModel.patientEmail,
+                                    ),
+                                transition: Motivation.bootmUpTransition());
+                          },
+                          icon: const Icon(FontAwesomeIcons.locationDot,
+                              size: 35, color: Color(0xff17455c))),
                     ],
                   ),
                 )
