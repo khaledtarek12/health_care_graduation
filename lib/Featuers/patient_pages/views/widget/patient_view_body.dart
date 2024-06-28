@@ -61,45 +61,50 @@ class _PatientViewBodyState extends State<PatientViewBody> {
               ),
             ),
             const SizedBox(height: 20),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  decoration: const BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(50)),
-                      color: kprimaryDarkcolor),
-                  child: IconButton(
-                      onPressed: () {
-                        showQuesstionDialog(
-                          context: context,
-                          message: 'Are you sure you want to log out?',
-                          btnCancelOnPress: () {},
-                          btnOkOnPress: () async {
-                            BlocProvider.of<LoginCubit>(context).deleteEmail();
-                            Navigator.pushAndRemoveUntil(context,
-                                MaterialPageRoute(
-                              builder: (context) {
-                                return const LoginHomePage();
+            BlocBuilder<GetMyDataCubit, GetMyDataState>(
+              builder: (context, state) {
+                return Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      decoration: const BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(50)),
+                          color: kprimaryDarkcolor),
+                      child: IconButton(
+                          onPressed: () {
+                            showQuesstionDialog(
+                              context: context,
+                              message: 'Are you sure you want to log out?',
+                              btnCancelOnPress: () {},
+                              btnOkOnPress: () async {
+                                BlocProvider.of<LoginCubit>(context)
+                                    .deleteEmail();
+                                Navigator.pushAndRemoveUntil(context,
+                                    MaterialPageRoute(
+                                  builder: (context) {
+                                    return const LoginHomePage();
+                                  },
+                                ), (route) => false);
                               },
-                            ), (route) => false);
+                            );
                           },
-                        );
-                      },
-                      icon: const Icon(
-                        Icons.logout_rounded,
-                        color: Colors.white,
-                        size: 40,
-                      )),
-                ),
-                const SizedBox(width: 5),
-                Text('${getMyDataCubit.patientData.fristName} ',
-                    style: style25.copyWith(color: kPrimaryColor)),
-                Text(getMyDataCubit.patientData.lastName,
-                    style: style25.copyWith(color: Colors.white)),
-              ],
+                          icon: const Icon(
+                            Icons.logout_rounded,
+                            color: Colors.white,
+                            size: 30,
+                          )),
+                    ),
+                    const SizedBox(width: 15),
+                    Text('${getMyDataCubit.patientData.firstName} ',
+                        style: style25.copyWith(color: kPrimaryColor)),
+                    Text(getMyDataCubit.patientData.lastName,
+                        style: style25.copyWith(color: Colors.white)),
+                  ],
+                );
+              },
             ),
             const SizedBox(
-                height: 70), // Add some spacing between the image and grid view
+                height: 50), // Add some spacing between the image and grid view
             SizedBox(
               height: 300, // Set a fixed height for the GridView
               child: GridView(

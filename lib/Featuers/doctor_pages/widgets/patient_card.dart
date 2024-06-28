@@ -51,7 +51,7 @@ class Patientcard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  '${patientModel.fristName} ${patientModel.lastName}',
+                  '${patientModel.firstName} ${patientModel.lastName}',
                   style: style15.copyWith(color: Colors.white, fontSize: 20),
                 ),
                 Padding(
@@ -68,7 +68,7 @@ class Patientcard extends StatelessWidget {
                                           BlocProvider.of<LoginCubit>(context)
                                               .email,
                                     ),
-                                arguments: patientModel.email,
+                                arguments: patientModel.patientEmail,
                                 transition: Motivation.bootmUpTransition());
                           }),
                       const SizedBox(width: 40),

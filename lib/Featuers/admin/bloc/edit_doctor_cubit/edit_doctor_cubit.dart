@@ -21,50 +21,6 @@ class EditDoctorCubit extends Cubit<EditDoctorState> {
       required String password,
       required String email}) async {
     emit(EditDoctorLoading());
-    // final querySnapshot = await FirebaseFirestore.instance
-    //     .collection('doctors')
-    //     .where(kEmail, isEqualTo: oldEmail)
-    //     .get();
-
-    // for (var doc in querySnapshot.docs) {
-    //   firestore
-    //       .collection('doctors')
-    //       .doc(doc.id)
-    //       .update({
-    //         kFristName: newDoctor.fName,
-    //         kLastName: newDoctor.lName,
-    //         kEmail: newDoctor.email,
-    //         kPhoneNumber: newDoctor.phoneNumber,
-    //         kPassword: newDoctor.password,
-    //       })
-    //       .then((_) => emit(EditDoctorSucess()))
-    //       .catchError(
-    //         (error) => emit(EditDoctorFailure(
-    //             errorMessage: 'Failed to update document: $error')),
-    //       );
-    // }
-    // try {
-    //   User? user = _auth.currentUser;
-
-    //   if (user != null) {
-    //     // Re-authenticate user
-    //     AuthCredential credential =
-    //         EmailAuthProvider.credential(email: email, password: password);
-    //     await user.reauthenticateWithCredential(credential);
-
-    //     // Update email address
-    //     // ignore: deprecated_member_use
-    //     await user.updateEmail(newDoctor.email);
-
-    //     log('Email updated successfully');
-    //   } else {
-    //     log('No user currently signed in.');
-    //     // Handle scenario where no user is signed in
-    //   }
-    // } catch (e) {
-    //   log('Failed to update email: $e');
-    //   // Handle error (e.g., display error to user)
-    // }
     try {
       Map<String, dynamic> data = {
         'firstName': newDoctor.fName,
@@ -76,8 +32,9 @@ class EditDoctorCubit extends Cubit<EditDoctorState> {
         'confirmPassword': newDoctor.password,
       };
       String endPoint = '/EditDoctor/$userId';
-      var response = await ApiService(Dio(), 'http://som3a.somee.com/Api/Admin')
-          .edit(endPoint: endPoint, data: data);
+      var response =
+          await ApiService(Dio(), 'http://healthcaree.runasp.net/api/Admin')
+              .edit(endPoint: endPoint, data: data);
       log("response: $response and userid: $userId and id: ${newDoctor.id}");
 
       if (response is Map<String, dynamic>) {

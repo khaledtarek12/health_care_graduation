@@ -25,7 +25,7 @@ class DeleteDoctorCubit extends Cubit<DeleteDoctorState> {
     try {
       String endPoint = '/DeleteDoctor/$userId';
       var response =
-          await ApiService(Dio(), 'http://som3a.somee.com/Api/Admin')
+          await ApiService(Dio(), 'http://healthcaree.runasp.net/api/Admin')
               .delete(endPoint: endPoint);
 
       // Log the response to understand its structure

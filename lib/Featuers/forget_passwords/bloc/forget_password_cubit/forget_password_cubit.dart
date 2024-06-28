@@ -14,7 +14,7 @@ class ForgetPasswordCubit extends Cubit<ForgetPasswordState> {
     try {
       Dio dio = Dio();
       final response = await dio.post(
-        'http://som3a.somee.com/api/AccountService/ForgetPassword',
+        'http://healthcaree.runasp.net/api/AccountService/ForgetPassword',
         data: {'email': email},
         options: Options(
           headers: {'Content-Type': 'application/json'},

@@ -16,15 +16,9 @@ class GetDoctorsCubit extends Cubit<GetDoctorsState> {
 
   Future<void> getAllDoctors() async {
     emit(GetDoctorsLoading());
-    // QuerySnapshot querySnapshot = await firestore.collection("doctors").get();
-    // allDoctors.clear();
-    // allDoctors = querySnapshot.docs
-    //     .map((doc) => DoctorModel.fromSnapshot(doc))
-    //     .toList();
-    // allDoctors.sort((a, b) => a.fristName.compareTo(b.fristName));
     try {
       var response =
-          await ApiService(Dio(), 'http://som3a.somee.com/api/Doctor')
+          await ApiService(Dio(), 'http://healthcaree.runasp.net/api/Doctor')
               .get(endPoint: '/GetAllDoctors');
       allDoctors.clear();
       if (response is List) {

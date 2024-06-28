@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:health_care/Featuers/login_and_signup/data/models/patient_model.module.dart';
@@ -11,31 +13,39 @@ class GetPatientsCubit extends Cubit<GetPatientsState> {
   List<PatientModel> allPatients = [];
   final Dio dio = Dio();
 
-  Future<void> getAllPatients({required String doctorId}) async {
+  Future<void> getAllPatients({required String doctorEmail}) async {
     emit(GetPatientsLoading());
     try {
-      final responsePatients =
-          await dio.get('http://som3a.somee.com/api/Patient/GetAllPatient');
-      final responseDoctors =
-          await dio.get('http://som3a.somee.com/api/Doctor/GetAllDoctors');
+      final response = await dio.get(
+        'http://healthcaree.runasp.net/api/Patient/GetAllPatient',
+      );
 
-      if (responsePatients.statusCode == 200 &&
-          responseDoctors.statusCode == 200) {
-        final List patients = responsePatients.data;
-        final List doctors = responseDoctors.data;
+      if (response.statusCode == 200) {
+        log(response.data.toString());
+        final List patients = response.data;
 
-        allPatients.clear();
-        // allPatients = patients
-        //     .map((patient) => PatientModel.fromJson(patient))
-        //     .where((patient) => doctors.any((doctor) =>
-        //         doctor['id'] == doctorId && doctor['id'] == patient.doctorId))
-        //     .toList();
+        // Filter patients based on the doctor's email
+        final filteredPatients =
+            patients.where((pat) => pat['email'] == doctorEmail).toList();
 
-        // allPatients.sort((a, b) => a.fristName.compareTo(b.fristName));
-        emit(GetPatientsSuccess());
+        if (filteredPatients.isEmpty) {
+          return;
+        }
+
+        if (filteredPatients.isNotEmpty) {
+          allPatients = filteredPatients.map((item) {
+            return PatientModel.fromJson(item);
+          }).toList();
+
+          // Optionally sort the patients by their first name
+          allPatients.sort((a, b) => a.firstName.compareTo(b.firstName));
+          emit(GetPatientsSuccess());
+        } else {
+          emit(GetPatientsFailure(
+              errorMessage: 'No patients found for this doctor'));
+        }
       } else {
-        emit(GetPatientsFailure(
-            errorMessage: "Failed to load patients or doctors"));
+        emit(GetPatientsFailure(errorMessage: 'Failed to fetch patients'));
       }
     } catch (e) {
       emit(GetPatientsFailure(errorMessage: "There was an error: $e"));

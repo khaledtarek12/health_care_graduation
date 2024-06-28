@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -52,11 +54,12 @@ class _LogoIntroScreenState extends State<LogoIntroScreen> {
             BlocProvider.of<GetMyDataCubit>(context)
                 .getMyData(email: userEmail, types: ['Doctor']);
             BlocProvider.of<GetPatientsCubit>(context)
-                .getAllPatients(doctorId: userEmail);
+                .getAllPatients(doctorEmail: userEmail);
             Get.offNamed(DoctorHomepage.id);
           }
         } else if (roles.contains('Patient')) {
           if (mounted) {
+            log(userEmail);
             BlocProvider.of<GetMyDataCubit>(context)
                 .getMyData(email: userEmail, types: ['Patient']);
             Get.offNamed(PatientView.id);

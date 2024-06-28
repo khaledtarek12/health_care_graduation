@@ -24,7 +24,7 @@ class LoginCubit extends Cubit<LoginState> {
       // Attempt to login using the HTTP API with Dio
       Dio dio = Dio();
       final response = await dio.post(
-        'http://som3a.somee.com/api/AccountService/Login',
+        'http://healthcaree.runasp.net/api/AccountService/Login',
         data: {
           'email': email,
           'password': password,
@@ -65,7 +65,7 @@ class LoginCubit extends Cubit<LoginState> {
         emit(LoginFailuer(errorMessage: 'There was an error'));
       }
     } catch (e) {
-      log('Unexpected error: $e $ResponseBody');
+      log('Unexpected error: $e');
       emit(LoginFailuer(errorMessage: 'There was an error'));
     }
   }

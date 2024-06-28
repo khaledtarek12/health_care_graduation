@@ -24,13 +24,13 @@ class GetMyDataCubit extends Cubit<GetMyDataState> {
 
   PatientModel patientData = PatientModel(
     lastName: '',
-    email: '',
+    patientEmail: '',
     phoneNumber: '',
     password: '',
     userName: '',
     doctorId: 0,
     userId: '',
-    fristName: '',
+    firstName: '',
   );
 
   final Dio dio = Dio();
@@ -42,24 +42,28 @@ class GetMyDataCubit extends Cubit<GetMyDataState> {
       for (String type in types) {
         final Response response;
         if (type == 'Patient') {
-          response =
-              await dio.get('http://som3a.somee.com/api/Patient/GetAllPatient');
+          response = await dio
+              .get('http://healthcaree.runasp.net/api/Patient/GetAllPatient');
           if (response.statusCode == 200) {
+            log(response.data.toString());
             final List patients = response.data;
             final patient = patients.firstWhere(
-              (pat) => pat['email'] == email,
+              (pat) => pat['patientEmail'] == email,
               orElse: () => null,
             );
             if (patient != null) {
               patientData = PatientModel.fromJson(patient);
               emit(GetMyDataSuccess());
-              return;
+            } else {
+              emit(GetMyDataFailure(errorMessage: 'Patient not found'));
             }
+          } else {
+            emit(GetMyDataFailure(errorMessage: 'Failed to fetch patients'));
           }
           log(response.data.toString());
         } else if (type == 'Doctor') {
-          response =
-              await dio.get('http://som3a.somee.com/api/Doctor/GetAllDoctors');
+          response = await dio
+              .get('http://healthcaree.runasp.net/api/Doctor/GetAllDoctors');
           if (response.statusCode == 200) {
             final List doctors = response.data;
             final doctor = doctors.firstWhere(

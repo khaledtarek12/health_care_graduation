@@ -23,7 +23,7 @@ class _CardPatientListBuilderState extends State<CardPatientListBuilder> {
   @override
   void initState() {
     super.initState();
-    getPatientsCubit.getAllPatients(doctorId: '');
+    getPatientsCubit.getAllPatients(doctorEmail: '');
   }
 
   @override

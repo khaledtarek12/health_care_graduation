@@ -234,9 +234,9 @@ class _SignupHomePageState extends State<SignupHomePage> {
                           BlocProvider.of<RegisterCubit>(context)
                               .patientRegister(
                                   patientModel: PatientModel(
-                            fristName: fristName!,
+                            firstName: fristName!,
                             lastName: lastName!,
-                            email: email!,
+                            patientEmail: email!,
                             phoneNumber: phoneNumber!,
                             password: password!,
                             userName: '$fristName$lastName',

@@ -18,7 +18,6 @@ class _AlarmHomePgaeState extends State<AlarmHomePgae> {
     return CustomContainer(
       appbar: true,
       title: 'Alarms',
-      isLeading: true,
       isLogout: true,
       child: Column(
         children: [

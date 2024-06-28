@@ -1,22 +1,24 @@
 class PatientModel {
   int? id;
-  final String fristName;
+  final String firstName;
   final String lastName;
-  final String email;
+  final String patientEmail;
+  String? doctorEmail;
   final String userName;
-  final String phoneNumber;
-  final String password;
+  String? phoneNumber;
+  String? password;
   final int doctorId;
   String? userId;
 
   PatientModel({
     this.id,
+    this.doctorEmail,
     required this.userName,
-    required this.fristName,
+    required this.firstName,
     required this.lastName,
-    required this.email,
-    required this.phoneNumber,
-    required this.password,
+    required this.patientEmail,
+    this.phoneNumber,
+    this.password,
     required this.doctorId,
     this.userId,
   });
@@ -24,14 +26,13 @@ class PatientModel {
   factory PatientModel.fromJson(Map<String, dynamic> json) {
     return PatientModel(
       id: json["id"],
-      email: json["email"],
-      phoneNumber: json["phoneNumber"],
-      password: json["password"],
+      patientEmail: json["patientEmail"],
       doctorId: json["doctorId"],
       userName: json["userName"],
-      fristName: json['fName'],
+      firstName: json['fName'],
       lastName: json['lName'],
       userId: json['userId'],
+      doctorEmail: json['email'],
     );
   }
 }
