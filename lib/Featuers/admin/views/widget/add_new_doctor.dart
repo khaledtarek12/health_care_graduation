@@ -47,7 +47,7 @@ class _AddNewDoctorState extends State<AddNewDoctor> {
         if (state is AddDoctorFailuer) {
           showErrorDialog(
             context: context,
-            message: state.errorMessage,
+            message: 'Oops , there was an error',
             btnOkOnPress: () {},
           );
           isLoading = false;

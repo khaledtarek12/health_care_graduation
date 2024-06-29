@@ -83,7 +83,7 @@ class _DoctorListViewBodyState extends State<DoctorListViewBody> {
               log(state.errorMessage);
               showErrorDialog(
                 context: context,
-                message: state.errorMessage,
+                message: 'Oops , there was an error',
                 btnOkOnPress: () {},
               );
             }

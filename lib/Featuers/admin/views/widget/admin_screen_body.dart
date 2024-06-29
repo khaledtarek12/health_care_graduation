@@ -65,7 +65,7 @@ class _AdminScreenBodyState extends State<AdminScreenBody> {
               log(state.errorMessage);
               showErrorDialog(
                 context: context,
-                message: state.errorMessage,
+                message: 'Oops , there was an error',
                 btnOkOnPress: () {},
               );
             }

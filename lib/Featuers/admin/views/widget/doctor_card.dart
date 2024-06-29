@@ -39,7 +39,7 @@ class DoctorCard extends StatelessWidget {
         } else if (state is DeleteDoctorFailure) {
           showErrorDialog(
             context: context,
-            message: state.errorMessage,
+            message: 'Oops , there was an error',
             btnOkOnPress: () {},
           );
           BlocProvider.of<GetDoctorsCubit>(context).getAllDoctors();

@@ -50,7 +50,7 @@ class _PatientLocationPageState extends State<PatientLocationPage> {
           setState(() {
             isLoading = false;
           });
-          showErrorDialog(context: context, message: state.errorMessage);
+          showErrorDialog(context: context, message: 'Oops , there was an error');
         }
       },
       builder: (context, state) {

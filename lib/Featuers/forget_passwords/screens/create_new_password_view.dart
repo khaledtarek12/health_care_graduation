@@ -45,7 +45,7 @@ class _CreateNewPasswordState extends State<CreateNewPassword> {
           isLoading = false;
           showErrorDialog(
               context: context,
-              message: 'Failed to reset password: ${state.errorMessage}');
+              message: 'Failed to reset password');
         } else {
           isLoading = true;
         }

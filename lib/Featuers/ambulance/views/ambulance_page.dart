@@ -45,7 +45,7 @@ class _AmbulancePageState extends State<AmbulancePage> {
           setState(() {
             isLoading = false;
           });
-          showErrorDialog(context: context, message: state.errorMessage);
+          showErrorDialog(context: context, message: 'Oops , there was an error');
         } else if (state is GetAllPatientsLocationsSuccess) {
           setState(() {
             isLoading = false;

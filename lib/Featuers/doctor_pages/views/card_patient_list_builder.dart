@@ -40,7 +40,7 @@ class _CardPatientListBuilderState extends State<CardPatientListBuilder> {
           log(state.errorMessage);
           showErrorDialog(
             context: context,
-            message: state.errorMessage,
+            message: 'Oops , there was an error',
             btnOkOnPress: () {},
           );
         }

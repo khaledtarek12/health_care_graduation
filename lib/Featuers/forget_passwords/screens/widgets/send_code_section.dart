@@ -51,7 +51,7 @@ class _SendCodeSectionState extends State<SendCodeSection> {
           isLoading = false;
           showErrorDialog(
             context: context,
-            message: state.errorMessage,
+            message: 'Oops , there was an error',
             btnOkOnPress: () {},
           );
         }
