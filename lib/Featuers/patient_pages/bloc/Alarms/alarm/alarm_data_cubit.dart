@@ -19,7 +19,7 @@ class AlarmDataCubit extends Cubit<AlarmDataState> {
       emit(AlarmDataFailuer(errorMessage: e.toString()));
     }
   }
-
+  
   void deleteAlarm({required AlarmInfo alarm}) {
     emit(AlarmDataLoading());
     try {

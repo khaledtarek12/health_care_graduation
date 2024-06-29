@@ -1,9 +1,11 @@
 import 'package:direct_sms/direct_sms.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart';
+import 'package:health_care/Featuers/patient_pages/bloc/email_cubit/email_cubit.dart';
 import 'package:health_care/Featuers/patient_pages/data/model/sensor_data.module.dart';
 import 'package:health_care/core/utils/styles.dart';
-import 'package:permission_handler/permission_handler.dart';
 
 class HistoryOfPatientPage extends StatefulWidget {
   const HistoryOfPatientPage({super.key});
@@ -17,16 +19,31 @@ class _HistoryOfPatientPageState extends State<HistoryOfPatientPage> {
   late DatabaseReference _databaseReference;
   List<SensorData> _sensorData = [];
   var directSms = DirectSms();
+  late String doctorEmail;
+  late String firstName;
+  late String lastName;
+  final Map<String, dynamic>? args = Get.arguments as Map<String, dynamic>?;
   @override
   void initState() {
     super.initState();
     _databaseReference = FirebaseDatabase.instance.ref('Sensor/Bpm');
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
 
     // Listen for changes in the Firebase database
     _databaseReference.onValue.listen((event) {
       if (event.snapshot.exists) {
         final data = (event.snapshot.value as Map<dynamic, dynamic>)
             .map((key, value) => MapEntry(key.toString(), value.toDouble()));
+
+        if (args != null) {
+          doctorEmail = args!['doctorEmail'] as String;
+          firstName = args!['firstName'] as String;
+          lastName = args!['lastName'] as String;
+        }
 
         // Filter out zero values
         final sensorData = data.entries
@@ -39,40 +56,33 @@ class _HistoryOfPatientPageState extends State<HistoryOfPatientPage> {
         });
 
         for (final sensor in sensorData) {
-          if (sensor.value > 100 || sensor.value < 60) {
-            sendSms(
-                number: '+201008509785',
-                message: 'Dangerous heart rate detected: ${sensor.value} Bp/m');
-            break; // Send SMS only once for the first dangerous value
+          if (sensor.value > 60 || sensor.value < 18) {
+            context.read<EmailCubit>().sendEmail(
+                  message:
+                      'informations: Dangerous sensor value detected: ${sensor.value} for Patient : $firstName $lastName',
+                  email: doctorEmail,
+                );
+            break; // Send email only once for the first dangerous value
           }
         }
       }
     });
   }
 
-  sendSms({required String number, required String message}) async {
-    final permission = Permission.sms.request();
-    if (await permission.isGranted) {
-      directSms.sendSms(message: message, phone: number);
-    }
-  }
-
   Color _getCardColor(double value) {
-    if (value > 100 || value < 60) {
+    if (value > 60 || value < 18) {
       return Colors.red;
-    } else if (value >= 60 && value <= 100) {
+    } else {
       return Colors.green;
     }
-    return Colors.white;
   }
 
   String _getCondition(double value) {
-    if (value > 100 || value < 60) {
+    if (value > 60 || value < 18) {
       return "Dangers";
-    } else if (value >= 60 && value <= 100) {
+    } else {
       return "Normal";
     }
-    return "Moderate";
   }
 
   @override

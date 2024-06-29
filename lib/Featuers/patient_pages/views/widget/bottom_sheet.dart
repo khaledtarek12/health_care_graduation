@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:health_care/Featuers/login_and_signup/Screens/Widget/custom_button.dart';
 import 'package:health_care/Featuers/login_and_signup/Screens/Widget/custom_form_text_field.dart';
-import 'package:health_care/Featuers/patient_pages/bloc/cubits/alarm/alarm_data_cubit.dart';
+import 'package:health_care/Featuers/patient_pages/bloc/Alarms/alarm/alarm_data_cubit.dart';
 import 'package:health_care/Featuers/patient_pages/data/model/alarm_info.module.dart';
 import 'package:health_care/Featuers/patient_pages/views/widget/repeat_interval_houres.dart';
 import 'package:health_care/const.dart';

@@ -7,7 +7,6 @@ import 'package:health_care/Featuers/login_and_signup/bloc/login_cubit/login_cub
 import 'package:health_care/Featuers/login_and_signup/data/models/patient_model.module.dart';
 import 'package:health_care/Featuers/patient_pages/views/heart_beat_view.dart';
 import 'package:health_care/Featuers/patient_pages/views/history_of_patient_view.dart';
-import 'package:health_care/Featuers/screen_splash/bloc/cubit/get_my_data_cubit.dart';
 import 'package:health_care/const.dart';
 import 'package:health_care/Featuers/login_and_signup/Screens/chat_page.dart';
 import 'package:health_care/core/helper/transation.dart';
@@ -78,12 +77,16 @@ class Patientcard extends StatelessWidget {
                           icon: const Icon(Icons.history_edu_rounded,
                               size: 45, color: Color(0xff17455c)),
                           onPressed: () {
-                            Get.to(() => const HistoryOfPatientPage(),
-                                transition: Motivation.zoomTransition(),
-                                arguments:
-                                    BlocProvider.of<GetMyDataCubit>(context)
-                                        .doctorData
-                                        .phoneNumber);
+                            Get.to(
+                              () => const HistoryOfPatientPage(),
+                              transition: Motivation.zoomTransition(),
+                              arguments: {
+                                'doctorEmail': patientModel.doctorEmail,
+                                'firstName': patientModel.firstName,
+                                'lastName': patientModel.lastName,
+                                // Add more arguments as needed
+                              },
+                            );
                           }),
                       IconButton(
                           icon: const Icon(Icons.bar_chart_rounded,

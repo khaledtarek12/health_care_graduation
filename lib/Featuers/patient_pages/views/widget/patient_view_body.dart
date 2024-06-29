@@ -171,8 +171,16 @@ class _PatientViewBodyState extends State<PatientViewBody> {
                       ),
                     ],
                     onTap: () {
-                      Get.to(() => const HistoryOfPatientPage(),
-                          transition: Motivation.zoomTransition());
+                      Get.to(
+                        () => const HistoryOfPatientPage(),
+                        transition: Motivation.zoomTransition(),
+                        arguments: {
+                          'doctorEmail': getMyDataCubit.patientData.doctorEmail,
+                          'firstName': getMyDataCubit.patientData.firstName,
+                          'lastName': getMyDataCubit.patientData.lastName,
+                          // Add more arguments as needed
+                        },
+                      );
                     },
                   ),
                   CustomStackCard(

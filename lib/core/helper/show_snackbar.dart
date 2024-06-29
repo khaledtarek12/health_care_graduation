@@ -276,6 +276,28 @@ void showQuesstionDialog({
   ).show();
 }
 
+void showInfoDialog({
+  required BuildContext context,
+  required String message,
+  void Function()? btnCancelOnPress,
+  void Function()? btnOkOnPress,
+}) {
+  AwesomeDialog(
+    context: context,
+    dialogType: DialogType.info,
+    animType: AnimType.bottomSlide,
+    title: 'Infomartion',
+    titleTextStyle: style15.copyWith(fontSize: 18),
+    desc: message,
+    descTextStyle: style15.copyWith(fontSize: 15),
+    btnCancelOnPress: btnCancelOnPress,
+    btnOkOnPress: btnOkOnPress,
+    dismissOnBackKeyPress: true,
+    dialogBackgroundColor: kprimaryVeryDarkcolor,
+    keyboardAware: true,
+  ).show();
+}
+
 void showErrorDialog({
   required BuildContext context,
   required String message,

@@ -15,7 +15,8 @@ import 'package:health_care/Featuers/forget_passwords/bloc/forget_password_cubit
 import 'package:health_care/Featuers/forget_passwords/bloc/reset_password_cubit/reset_password_cubit.dart';
 import 'package:health_care/Featuers/login_and_signup/Screens/chat_page.dart';
 import 'package:health_care/Featuers/login_and_signup/Screens/login_home_page.dart';
-import 'package:health_care/Featuers/patient_pages/bloc/cubits/alarm/alarm_data_cubit.dart';
+import 'package:health_care/Featuers/patient_pages/bloc/Alarms/alarm/alarm_data_cubit.dart';
+import 'package:health_care/Featuers/patient_pages/bloc/email_cubit/email_cubit.dart';
 import 'package:health_care/Featuers/patient_pages/bloc/get_patient_location_cubit/get_patient_location_cubit.dart';
 import 'package:health_care/Featuers/patient_pages/bloc/location_cubit/location_cubit.dart';
 import 'package:health_care/Featuers/patient_pages/data/services/notification_awsome.service.dart';
@@ -50,6 +51,7 @@ class ChatApp extends StatelessWidget {
         BlocProvider(create: (context) => LoginCubit()..getEmail()),
         BlocProvider(create: (context) => RegisterCubit()),
         BlocProvider(create: (context) => LocationCubit()),
+        BlocProvider(create: (context) => EmailCubit()),
         BlocProvider(create: (context) => GetPatientLocationCubit()),
         BlocProvider(create: (context) => ChatCubit()),
         BlocProvider(create: (context) => AlarmDataCubit()),

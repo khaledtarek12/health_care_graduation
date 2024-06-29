@@ -5,7 +5,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:health_care/const.dart';
 import 'package:health_care/core/helper/show_snackbar.dart';
 import 'package:health_care/core/utils/styles.dart';
-import 'package:health_care/Featuers/patient_pages/bloc/cubits/alarm/alarm_data_cubit.dart';
+import 'package:health_care/Featuers/patient_pages/bloc/Alarms/alarm/alarm_data_cubit.dart';
 import 'package:health_care/Featuers/patient_pages/data/model/alarm_info.module.dart';
 
 class CustomAlarmCard extends StatefulWidget {
