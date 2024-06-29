@@ -20,3 +20,8 @@ class GetPatientLocationFailure extends GetPatientLocationState {
 
   GetPatientLocationFailure(this.errorMessage);
 }
+class GetAllPatientsLocationsSuccess extends GetPatientLocationState {
+  final Map<String, Map<String, dynamic>> latestLocations;
+
+  GetAllPatientsLocationsSuccess(this.latestLocations);
+}

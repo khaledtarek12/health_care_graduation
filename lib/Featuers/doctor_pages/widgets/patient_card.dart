@@ -98,6 +98,7 @@ class Patientcard extends StatelessWidget {
                                 () => PatientLocationPage(
                                       patientEmail: patientModel.patientEmail,
                                     ),
+                                arguments: patientModel,
                                 transition: Motivation.bootmUpTransition());
                           },
                           icon: const Icon(FontAwesomeIcons.locationDot,

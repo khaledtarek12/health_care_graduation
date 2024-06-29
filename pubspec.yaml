@@ -63,6 +63,7 @@ dependencies:
   google_maps_flutter: ^2.5.3
   gradient_icon: ^2.0.8
   image_picker: ^1.0.7
+  intl: ^0.19.0
   jwt_decoder: ^2.0.1
   location: ^5.0.3
   meta: ^1.10.0

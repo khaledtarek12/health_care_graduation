@@ -46,4 +46,37 @@ class GetPatientLocationCubit extends Cubit<GetPatientLocationState> {
       emit(GetPatientLocationFailure('Failed to fetch location: $e'));
     }
   }
+
+  Future<void> fetchAllPatientsLatestLocations() async {
+    try {
+      emit(GetPatientLocationLoading());
+
+      // Fetch the latest locations for all patients
+      QuerySnapshot querySnapshot = await _firestore
+          .collection('locations')
+          .orderBy('timestamp', descending: true)
+          .get();
+
+      if (querySnapshot.docs.isNotEmpty) {
+        Map<String, Map<String, dynamic>> latestLocations = {};
+
+        for (var doc in querySnapshot.docs) {
+          var locationData = doc.data();
+
+          if (locationData is Map<String, dynamic>) {
+            String email = locationData['email'];
+            if (!latestLocations.containsKey(email)) {
+              latestLocations[email] = locationData;
+            }
+          }
+        }
+
+        emit(GetAllPatientsLocationsSuccess(latestLocations));
+      } else {
+        emit(GetPatientLocationFailure('No locations found.'));
+      }
+    } catch (e) {
+      emit(GetPatientLocationFailure('Failed to fetch locations: $e'));
+    }
+  }
 }

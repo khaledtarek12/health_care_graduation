@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:health_care/Featuers/admin/views/admin_view_page.dart';
+import 'package:health_care/Featuers/ambulance/views/ambulance_page.dart';
 import 'package:health_care/Featuers/doctor_pages/bloc/get_patient_cubit/get_patient_cubit.dart';
 import 'package:health_care/Featuers/patient_pages/bloc/location_cubit/location_cubit.dart';
 import 'package:health_care/Featuers/screen_splash/bloc/cubit/get_my_data_cubit.dart';
@@ -85,6 +86,17 @@ class _LoginHomePageState extends State<LoginHomePage> {
               Navigator.pushNamed(
                 context,
                 AdminViewPage.id,
+                arguments: email,
+              );
+              showSuccessDialog(
+                context: context,
+                message: 'Login Successfully',
+                btnOkOnPress: () {},
+              );
+            } else if (selectedRole![0] == 'Ambulance') {
+              Navigator.pushNamed(
+                context,
+                AmbulancePage.id,
                 arguments: email,
               );
               showSuccessDialog(

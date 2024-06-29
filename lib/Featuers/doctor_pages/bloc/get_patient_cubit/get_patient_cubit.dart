@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:health_care/Featuers/login_and_signup/data/models/patient_model.module.dart';
@@ -21,7 +19,6 @@ class GetPatientsCubit extends Cubit<GetPatientsState> {
       );
 
       if (response.statusCode == 200) {
-        log(response.data.toString());
         final List patients = response.data;
 
         // Filter patients based on the doctor's email

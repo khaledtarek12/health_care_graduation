@@ -14,8 +14,32 @@ class _CusttomRadioButtomState extends State<CusttomRadioButtom> {
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
       children: [
+        Radio(
+            activeColor: const Color(0xff17455c),
+            value: 'Ambulance',
+            groupValue: gender,
+            onChanged: (value) {
+              setState(() {
+                gender = value;
+                widget.onGenderSelected(gender);
+              });
+            }),
+        GestureDetector(
+          onTap: () {
+            setState(() {
+              gender = 'Ambulance';
+              widget.onGenderSelected(gender); // Notify parent widget
+            });
+          },
+          child: const Text(
+            'Ambulance',
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 13,
+            ),
+          ),
+        ),
         Radio(
             activeColor: const Color(0xff17455c),
             value: 'Admin',
@@ -37,13 +61,10 @@ class _CusttomRadioButtomState extends State<CusttomRadioButtom> {
             'Admin',
             style: TextStyle(
               fontWeight: FontWeight.bold,
-              fontSize: 16,
+              fontSize: 13,
             ),
           ),
         ),
-        // const SizedBox(
-        //   width: 15,
-        // ),
         Radio(
             activeColor: const Color(0xff17455c),
             value: 'Doctor',
@@ -65,13 +86,10 @@ class _CusttomRadioButtomState extends State<CusttomRadioButtom> {
             'Doctor',
             style: TextStyle(
               fontWeight: FontWeight.bold,
-              fontSize: 16,
+              fontSize: 13,
             ),
           ),
         ),
-        // const SizedBox(
-        //   width: 15,
-        // ),
         Radio(
             activeColor: const Color(0xff17455c),
             value: 'Patient',
@@ -93,7 +111,7 @@ class _CusttomRadioButtomState extends State<CusttomRadioButtom> {
             'Patient',
             style: TextStyle(
               fontWeight: FontWeight.bold,
-              fontSize: 16,
+              fontSize: 13,
             ),
           ),
         )

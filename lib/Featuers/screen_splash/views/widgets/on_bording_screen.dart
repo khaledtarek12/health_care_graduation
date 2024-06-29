@@ -15,8 +15,8 @@ import 'package:health_care/Featuers/screen_splash/views/widgets/splash_view_bod
 import 'package:health_care/core/utils/styles.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class LogoIntroScreen extends StatefulWidget {
-  const LogoIntroScreen({
+class OnBordingScreen extends StatefulWidget {
+  const OnBordingScreen({
     super.key,
     required this.context,
     this.orientation,
@@ -28,10 +28,10 @@ class LogoIntroScreen extends StatefulWidget {
   final Animation<Offset> slideAnimation;
 
   @override
-  State<LogoIntroScreen> createState() => _LogoIntroScreenState();
+  State<OnBordingScreen> createState() => _OnBordingScreenState();
 }
 
-class _LogoIntroScreenState extends State<LogoIntroScreen> {
+class _OnBordingScreenState extends State<OnBordingScreen> {
   // ignore: unused_field
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
@@ -39,8 +39,8 @@ class _LogoIntroScreenState extends State<LogoIntroScreen> {
     await Future.delayed(const Duration(seconds: 3));
     SharedPreferences prefs = await SharedPreferences.getInstance();
     bool? isInitial = prefs.getBool('initial');
-
-    if (isInitial == false || isInitial == null) {
+    String? token = prefs.getString('token');
+    if (isInitial == false || isInitial == null || token == null) {
       Get.to(() => const SplashViewBody());
     } else {
       List<String>? roles = prefs.getStringList('roles');
@@ -81,6 +81,7 @@ class _LogoIntroScreenState extends State<LogoIntroScreen> {
   void initState() {
     super.initState();
     BlocProvider.of<LoginCubit>(context).getEmail();
+    BlocProvider.of<LoginCubit>(context).getToken();
     navigateToHome();
   }
 

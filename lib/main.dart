@@ -6,6 +6,7 @@ import 'package:health_care/Featuers/admin/bloc/add_doctor_cubit/add_doctor_cubi
 import 'package:health_care/Featuers/admin/bloc/delete_doctor_cubit/delete_doctor_cubit.dart';
 import 'package:health_care/Featuers/admin/bloc/get_doctor_cubit/get_doctors_cubit.dart';
 import 'package:health_care/Featuers/admin/views/admin_view_page.dart';
+import 'package:health_care/Featuers/ambulance/views/ambulance_page.dart';
 import 'package:health_care/Featuers/doctor_pages/bloc/get_patient_cubit/get_patient_cubit.dart';
 
 import 'package:health_care/Featuers/doctor_pages/views/doctor_homepage.dart';
@@ -69,6 +70,7 @@ class ChatApp extends StatelessWidget {
           LoginHomePage.id: (context) => const LoginHomePage(),
           SplashViewHome.id: (context) => const SplashViewHome(),
           SignupHomePage.id: (context) => const SignupHomePage(),
+          AmbulancePage.id: (context) => const AmbulancePage(),
           ChatPage.id: (context) => ChatPage(doctorId: ''),
           EntierCallChatScreen.id: (context) => const EntierCallChatScreen()
         },

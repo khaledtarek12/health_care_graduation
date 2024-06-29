@@ -1,45 +1,40 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:health_care/Featuers/login_and_signup/data/models/patient_model.module.dart';
+import 'package:intl/intl.dart';
 import 'package:health_care/core/helper/show_snackbar.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:health_care/Featuers/patient_pages/bloc/get_patient_location_cubit/get_patient_location_cubit.dart';
 
-class PatientLocationPage extends StatefulWidget {
-  const PatientLocationPage({super.key, required this.patientEmail});
+class AmbulancePage extends StatefulWidget {
+  const AmbulancePage({super.key});
 
-  final String patientEmail;
+  static const id = 'AmbulancePage';
 
   @override
-  State<PatientLocationPage> createState() => _PatientLocationPageState();
+  State<AmbulancePage> createState() => _AmbulancePageState();
 }
 
-class _PatientLocationPageState extends State<PatientLocationPage> {
+class _AmbulancePageState extends State<AmbulancePage> {
   final Completer<GoogleMapController> _googleMapController = Completer();
   late GoogleMapController _mapController;
   bool isLoading = false;
   double zoom = 16;
-  bool isConnected = false;
 
   @override
   void initState() {
     super.initState();
-    fetchPatientLocation();
+    fetchAllPatientsLocations();
   }
 
-  void fetchPatientLocation() {
+  void fetchAllPatientsLocations() {
     BlocProvider.of<GetPatientLocationCubit>(context)
-        .fetchPatientLocation(widget.patientEmail);
+        .fetchAllPatientsLatestLocations();
   }
 
   @override
   Widget build(BuildContext context) {
-    PatientModel patientModel =
-        ModalRoute.of(context)?.settings.arguments as PatientModel;
-
     return BlocConsumer<GetPatientLocationCubit, GetPatientLocationState>(
       listener: (context, state) {
         if (state is GetPatientLocationLoading) {
@@ -51,12 +46,30 @@ class _PatientLocationPageState extends State<PatientLocationPage> {
             isLoading = false;
           });
           showErrorDialog(context: context, message: state.errorMessage);
+        } else if (state is GetAllPatientsLocationsSuccess) {
+          setState(() {
+            isLoading = false;
+          });
         }
       },
       builder: (context, state) {
-        if (state is GetPatientLocationSuccess) {
-          final double latitude = state.latitude;
-          final double longitude = state.longitude;
+        if (state is GetAllPatientsLocationsSuccess) {
+          final Map<String, Map<String, dynamic>> latestLocations =
+              state.latestLocations;
+          Set<Marker> markers = latestLocations.entries.map((entry) {
+            String email = entry.key;
+            Map<String, dynamic> data = entry.value;
+            String formattedTimestamp = _formatTimestamp(data['timestamp']);
+            return Marker(
+              markerId: MarkerId(email),
+              position: LatLng(data['latitude'], data['longitude']),
+              infoWindow: InfoWindow(
+                title: email,
+                snippet: 'Last updated: $formattedTimestamp',
+              ),
+            );
+          }).toSet();
+
           return Scaffold(
             body: ModalProgressHUD(
               inAsyncCall: isLoading,
@@ -64,7 +77,9 @@ class _PatientLocationPageState extends State<PatientLocationPage> {
                 children: [
                   GoogleMap(
                     initialCameraPosition: CameraPosition(
-                      target: LatLng(latitude, longitude),
+                      target: markers.isNotEmpty
+                          ? markers.first.position
+                          : const LatLng(0, 0),
                       zoom: zoom,
                     ),
                     mapType: MapType.normal,
@@ -73,20 +88,7 @@ class _PatientLocationPageState extends State<PatientLocationPage> {
                       _googleMapController.complete(controller);
                       _mapController = controller;
                     },
-                    markers: {
-                      Marker(
-                        infoWindow: InfoWindow(
-                          title:
-                              '${patientModel.firstName} ${patientModel.lastName}',
-                          snippet: patientModel.patientEmail,
-                          onTap: () {
-                            zoom = 24;
-                          },
-                        ),
-                        markerId: const MarkerId('patient_location'),
-                        position: LatLng(latitude, longitude),
-                      ),
-                    },
+                    markers: markers,
                   ),
                   Positioned(
                     top: 50,
@@ -123,6 +125,12 @@ class _PatientLocationPageState extends State<PatientLocationPage> {
         }
       },
     );
+  }
+
+  String _formatTimestamp(String timestamp) {
+    final DateTime dateTime = DateTime.parse(timestamp);
+    final DateFormat formatter = DateFormat('yyyy-MM-dd h:mm a');
+    return formatter.format(dateTime);
   }
 
   void _zoomIn() {

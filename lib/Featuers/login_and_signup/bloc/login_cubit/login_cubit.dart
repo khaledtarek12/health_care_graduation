@@ -34,12 +34,16 @@ class LoginCubit extends Cubit<LoginState> {
           validateStatus: (status) => status! < 500,
         ),
       );
-      // log(response.data.toString());
+
       if (response.statusCode == 200) {
         final responseBody = response.data;
         final roles = List<String>.from(responseBody['roles']);
+        final token = responseBody['jwToken'];
+
         await prefs.setString('email', email);
         await prefs.setStringList('roles', roles);
+        await prefs.setString('token', token);
+
         emit(LoginSucessful());
       } else if (response.statusCode == 400) {
         final responseBody = response.data;
@@ -84,8 +88,19 @@ class LoginCubit extends Cubit<LoginState> {
     try {
       prefs = await SharedPreferences.getInstance();
       prefs.remove('email');
+      prefs.remove('token');
     } catch (e) {
       log(e.toString());
+    }
+  }
+
+  Future<String?> getToken() async {
+    try {
+      prefs = await SharedPreferences.getInstance();
+      return prefs.getString('token');
+    } catch (e) {
+      log(e.toString());
+      return null;
     }
   }
 }

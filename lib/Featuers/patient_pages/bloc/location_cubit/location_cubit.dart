@@ -2,14 +2,11 @@ import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:location/location.dart';
 import 'package:meta/meta.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
 part 'location_state.dart';
 
 class LocationCubit extends Cubit<LocationState> {
   final Location _location = Location();
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-  late SharedPreferences prefs;
   double latitude = 0;
   double longitude = 0;
   LocationCubit() : super(LocationInitial());
@@ -42,8 +39,6 @@ class LocationCubit extends Cubit<LocationState> {
       latitude = locationData.latitude!;
       longitude = locationData.longitude!;
       final String timestamp = DateTime.now().toIso8601String();
-      await prefs.setString('latitude', latitude.toString());
-      await prefs.setString('longitude', longitude.toString());
       await _firestore.collection('locations').add({
         'email': email,
         'latitude': latitude,
