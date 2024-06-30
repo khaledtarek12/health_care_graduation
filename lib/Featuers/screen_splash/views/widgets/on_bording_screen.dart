@@ -9,6 +9,7 @@ import 'package:health_care/Featuers/doctor_pages/bloc/get_patient_cubit/get_pat
 import 'package:health_care/Featuers/doctor_pages/views/doctor_homepage.dart';
 import 'package:health_care/Featuers/login_and_signup/Screens/login_home_page.dart';
 import 'package:health_care/Featuers/login_and_signup/bloc/login_cubit/login_cubit.dart';
+import 'package:health_care/Featuers/patient_pages/bloc/location_cubit/location_cubit.dart';
 import 'package:health_care/Featuers/patient_pages/views/patient_view.dart';
 import 'package:health_care/Featuers/screen_splash/bloc/cubit/get_my_data_cubit.dart';
 import 'package:health_care/Featuers/screen_splash/views/widgets/splash_view_body.dart';
@@ -62,6 +63,8 @@ class _OnBordingScreenState extends State<OnBordingScreen> {
             log(userEmail);
             BlocProvider.of<GetMyDataCubit>(context)
                 .getMyData(email: userEmail, types: ['Patient']);
+            BlocProvider.of<LocationCubit>(context)
+                .storeLocation(email: userEmail);
             Get.offNamed(PatientView.id);
           }
         } else if (roles.contains('Admin')) {

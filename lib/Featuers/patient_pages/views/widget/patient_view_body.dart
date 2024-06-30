@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 import 'package:health_care/Featuers/login_and_signup/Screens/login_home_page.dart';
 import 'package:health_care/Featuers/login_and_signup/bloc/login_cubit/login_cubit.dart';
+import 'package:health_care/Featuers/patient_pages/bloc/Alarms/alarm/alarm_data_cubit.dart';
 import 'package:health_care/Featuers/patient_pages/views/heart_beat_view.dart';
 import 'package:health_care/Featuers/patient_pages/views/history_of_patient_view.dart';
 import 'package:health_care/Featuers/patient_pages/views/medical_information_page.dart';
@@ -79,6 +80,8 @@ class _PatientViewBodyState extends State<PatientViewBody> {
                               btnOkOnPress: () async {
                                 BlocProvider.of<LoginCubit>(context)
                                     .deleteEmail();
+                                BlocProvider.of<AlarmDataCubit>(context)
+                                    .closeBox();
                                 Navigator.pushAndRemoveUntil(context,
                                     MaterialPageRoute(
                                   builder: (context) {

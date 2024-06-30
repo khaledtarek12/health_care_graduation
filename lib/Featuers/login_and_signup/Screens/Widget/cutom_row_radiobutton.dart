@@ -36,7 +36,7 @@ class _CusttomRadioButtomState extends State<CusttomRadioButtom> {
             'Ambulance',
             style: TextStyle(
               fontWeight: FontWeight.bold,
-              fontSize: 13,
+              fontSize: 12,
             ),
           ),
         ),
@@ -61,7 +61,7 @@ class _CusttomRadioButtomState extends State<CusttomRadioButtom> {
             'Admin',
             style: TextStyle(
               fontWeight: FontWeight.bold,
-              fontSize: 13,
+              fontSize: 12,
             ),
           ),
         ),
@@ -86,7 +86,7 @@ class _CusttomRadioButtomState extends State<CusttomRadioButtom> {
             'Doctor',
             style: TextStyle(
               fontWeight: FontWeight.bold,
-              fontSize: 13,
+              fontSize: 12,
             ),
           ),
         ),
@@ -111,7 +111,7 @@ class _CusttomRadioButtomState extends State<CusttomRadioButtom> {
             'Patient',
             style: TextStyle(
               fontWeight: FontWeight.bold,
-              fontSize: 13,
+              fontSize: 12,
             ),
           ),
         )

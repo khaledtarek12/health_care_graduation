@@ -19,11 +19,13 @@ import 'package:health_care/Featuers/patient_pages/bloc/Alarms/alarm/alarm_data_
 import 'package:health_care/Featuers/patient_pages/bloc/email_cubit/email_cubit.dart';
 import 'package:health_care/Featuers/patient_pages/bloc/get_patient_location_cubit/get_patient_location_cubit.dart';
 import 'package:health_care/Featuers/patient_pages/bloc/location_cubit/location_cubit.dart';
+import 'package:health_care/Featuers/patient_pages/data/model/alarm_info.module.dart';
 import 'package:health_care/Featuers/patient_pages/data/services/notification_awsome.service.dart';
 import 'package:health_care/Featuers/screen_splash/bloc/cubit/get_my_data_cubit.dart';
 import 'package:health_care/Featuers/screen_splash/views/splash_view.dart';
 import 'package:health_care/Featuers/screen_splash/views/widgets/splash_screen.dart';
-
+import 'package:health_care/const.dart';
+import 'package:hive_flutter/adapters.dart';
 import 'Featuers/login_and_signup/Screens/entier_doctor_chatcall_page.dart';
 import 'Featuers/login_and_signup/Screens/signup_home_page.dart';
 import 'Featuers/login_and_signup/bloc/chat/chat_cubit.dart';
@@ -32,10 +34,14 @@ import 'Featuers/login_and_signup/bloc/register_patient_cubit/register_cubit.dar
 import 'Featuers/patient_pages/views/patient_view.dart';
 
 void main() async {
+  await Hive.initFlutter();
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  Hive.registerAdapter(AlarmInfoAdapter());
+  Hive.registerAdapter(TimeOfDayAdapter());
+  await Hive.openBox<AlarmInfo>(kAlarmbox);
   await Notifications().initializeNotification();
   runApp(const ChatApp());
 }
@@ -54,7 +60,12 @@ class ChatApp extends StatelessWidget {
         BlocProvider(create: (context) => EmailCubit()),
         BlocProvider(create: (context) => GetPatientLocationCubit()),
         BlocProvider(create: (context) => ChatCubit()),
-        BlocProvider(create: (context) => AlarmDataCubit()),
+        BlocProvider(
+            create: (context) => AlarmDataCubit()
+              ..fetchAllAlarms(
+                  email: BlocProvider.of<LoginCubit>(context)
+                      .prefs
+                      .getString('email')!)),
         BlocProvider(create: (context) => AddDoctorCubit()),
         BlocProvider(create: (context) => DeleteDoctorCubit()),
         BlocProvider(create: (context) => GetPatientsCubit()),

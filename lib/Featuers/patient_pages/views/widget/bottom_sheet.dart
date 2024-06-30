@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:health_care/Featuers/login_and_signup/Screens/Widget/custom_button.dart';
 import 'package:health_care/Featuers/login_and_signup/Screens/Widget/custom_form_text_field.dart';
+import 'package:health_care/Featuers/login_and_signup/bloc/login_cubit/login_cubit.dart';
 import 'package:health_care/Featuers/patient_pages/bloc/Alarms/alarm/alarm_data_cubit.dart';
 import 'package:health_care/Featuers/patient_pages/data/model/alarm_info.module.dart';
 import 'package:health_care/Featuers/patient_pages/views/widget/repeat_interval_houres.dart';
@@ -35,6 +36,7 @@ class _BottomSheetpageState extends State<BottomSheetpage> {
       id: uuid.v4(),
       isActive: true,
       interval: 0,
+      email: BlocProvider.of<LoginCubit>(context).prefs.getString('email')!,
     );
     super.initState();
   }
@@ -162,6 +164,8 @@ class _BottomSheetpageState extends State<BottomSheetpage> {
                     alarmInfo.alarmDateTime = timeOfDay;
                     BlocProvider.of<AlarmDataCubit>(context)
                         .addAlarm(alarm: alarmInfo);
+                    BlocProvider.of<AlarmDataCubit>(context)
+                        .fetchAllAlarms(email: alarmInfo.email);
                     Navigator.pop(context);
                   }
                 },

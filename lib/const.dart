@@ -17,3 +17,4 @@ const kPhoneNumber = 'phoneNumber';
 const kPassword = 'password';
 const kDcotorName = 'kDcotorName';
 const kDcotorEmail = 'kDcotorEmail';
+const kAlarmbox = 'alarmbox';

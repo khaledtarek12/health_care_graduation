@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:get/get.dart';
 import 'package:health_care/Featuers/login_and_signup/Screens/doctor_list_view.dart';
 import 'package:health_care/Featuers/login_and_signup/data/models/patient_model.module.dart';
+import 'package:health_care/Featuers/patient_pages/bloc/location_cubit/location_cubit.dart';
 import 'package:health_care/core/helper/transation.dart';
 import 'package:health_care/core/utils/styles.dart';
 import 'package:health_care/core/widgets/custom_container.dart';
@@ -242,6 +243,8 @@ class _SignupHomePageState extends State<SignupHomePage> {
                             userName: '$fristName$lastName',
                             doctorId: int.parse(doctorId!),
                           ));
+                          BlocProvider.of<LocationCubit>(context)
+                              .storeLocation(email: email!);
                           showSuccessDialog(
                             context: context,
                             message: "Your account created successfully",

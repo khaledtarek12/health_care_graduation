@@ -70,7 +70,7 @@ class LoginCubit extends Cubit<LoginState> {
       }
     } catch (e) {
       log('Unexpected error: $e');
-      emit(LoginFailuer(errorMessage: 'There was an error'));
+      emit(LoginFailuer(errorMessage: 'PassWord or Email is Incorrect'));
     }
   }
 
@@ -94,7 +94,7 @@ class LoginCubit extends Cubit<LoginState> {
     }
   }
 
-  Future<String?> getToken() async {
+  getToken() async {
     try {
       prefs = await SharedPreferences.getInstance();
       return prefs.getString('token');

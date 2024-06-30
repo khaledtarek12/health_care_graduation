@@ -30,10 +30,6 @@ class _CustomAlarmCardState extends State<CustomAlarmCard> {
     return BlocBuilder<AlarmDataCubit, AlarmDataState>(
         builder: (context, state) {
       if (state is AlarmDataFailuer) {
-        showErrorSnackBar(
-          context: context,
-          message: state.errorMessage,
-        );
         return Text(state.errorMessage);
       } else if (state is AlarmDataSuccesful) {
         return Container(
@@ -109,6 +105,7 @@ class _CustomAlarmCardState extends State<CustomAlarmCard> {
                                   BlocProvider.of<AlarmDataCubit>(context)
                                       .toggleUpdateAlarmActivity(
                                           alarm: widget.alarmInfo);
+                                  
                                 },
                               );
                             } else {

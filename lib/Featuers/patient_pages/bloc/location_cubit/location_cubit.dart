@@ -13,7 +13,7 @@ class LocationCubit extends Cubit<LocationState> {
 
   Future<void> storeLocation({required String email}) async {
     emit(LocationLoading());
-
+  
     try {
       final bool serviceEnabled = await _location.serviceEnabled();
       if (!serviceEnabled) {
