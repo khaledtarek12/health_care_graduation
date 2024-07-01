@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:health_care/Featuers/patient_pages/data/model/information_container_model.dart';
 import 'package:health_care/const.dart';
+import 'package:health_care/core/helper/transation.dart';
 
 class MedicalInformationPage extends StatelessWidget {
   const MedicalInformationPage({super.key});
@@ -7,40 +10,36 @@ class MedicalInformationPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: kprimaryVeryDarkcolor,
       appBar: AppBar(
-        automaticallyImplyLeading: false,
+        leading: IconButton(
+            onPressed: () => Navigator.pop(context),
+            icon: const Icon(Icons.arrow_back_ios, color: Colors.white)),
         backgroundColor: Colors.transparent,
+        centerTitle: true,
         title: const Text(
           'Important Information',
-          style: TextStyle(fontWeight: FontWeight.w800),
+          style: TextStyle(fontWeight: FontWeight.w800, color: Colors.white),
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
+      body: const Padding(
+        padding: EdgeInsets.all(16.0),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          textDirection: TextDirection.rtl,
           children: [
-            const Text(
-              'نصائح الاسعافات الاوليه',
-              textDirection: TextDirection.rtl,
-              style: TextStyle(fontSize: 25, fontWeight: FontWeight.w800),
-            ),
-            const SizedBox(height: 10),
-            GestureDetector(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const EmergencyLowPage()),
-                );
-              },
-              child: const Row(
-                textDirection: TextDirection.rtl,
-                children: [
-                  CustomMedicalCrad(),
-                ],
-              ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Text(
+                  'نصائح الاسعافات الاوليه',
+                  textDirection: TextDirection.rtl,
+                  style: TextStyle(
+                      fontSize: 25,
+                      fontWeight: FontWeight.w800,
+                      color: Colors.white),
+                ),
+                SizedBox(height: 15),
+                CardListData(),
+              ],
             ),
           ],
         ),
@@ -49,41 +48,92 @@ class MedicalInformationPage extends StatelessWidget {
   }
 }
 
-class CustomMedicalCrad extends StatelessWidget {
-  const CustomMedicalCrad({
-    super.key,
-  });
+class CardListData extends StatelessWidget {
+  const CardListData({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(16.0),
-      width: 200,
-      decoration: BoxDecoration(
-        color: const Color(0xff2C2B65),
-        borderRadius: BorderRadius.circular(10),
+    final List<InformationContainerModel> cardData = [
+      InformationContainerModel(
+        text: 'إرشادات أزمة انخفاض ضغط الدم',
+        image: 'assets/images/flat-world-hypertension-day-illustration.png',
+        color: const Color(0xff3DC2EC),
+        onTap: () {
+          Get.to(() => const EmergencyLowPage(),
+              duration: kDuration, transition: Motivation.zoomTransition());
+        },
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        textDirection: TextDirection.rtl,
-        children: [
-          Image.asset(
-            'assets/images/flat-world-hypertension-day-illustration.png',
-            width: 180,
-            height: 180,
-          ),
-          const SizedBox(height: 10),
-          const Text(
-            'إرشادات أزمة انخفاض ضغط الدم',
-            maxLines: 2,
-            textAlign: TextAlign.right,
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
+      InformationContainerModel(
+        text: 'التهدئة السريعه للقلب المتسارع',
+        image:
+            'assets/images/pills-heart-tablets-bottle-drugstore-products-health-care-antibiotics-dosage-painkillers-analgetic-sedatives-white-background-vector-isolated-concept-metaphor-illustration.png',
+        color: const Color(0xff4C3BCF),
+        onTap: () {
+          Get.to(() => const EmergencyLowPage(),
+              duration: kDuration, transition: Motivation.zoomTransition());
+        },
+      ),
+      InformationContainerModel(
+        text: 'إرشادات أزمة ارتفاع ضغط الدم',
+        image: 'assets/images/virus-cure-concept.png',
+        color: const Color(0xff4B70F5),
+        onTap: () {
+          Get.to(() => const EmergencyLowPage(),
+              duration: kDuration, transition: Motivation.zoomTransition());
+        },
+      ),
+    ];
+    return SizedBox(
+      height: 300,
+      child: ListView.separated(
+          reverse: true,
+          scrollDirection: Axis.horizontal,
+          itemBuilder: (context, index) =>
+              CustomMedicalCrad(informationContainerModel: cardData[index]),
+          separatorBuilder: (context, index) => const SizedBox(width: 10),
+          itemCount: cardData.length),
+    );
+  }
+}
+
+class CustomMedicalCrad extends StatelessWidget {
+  const CustomMedicalCrad({super.key, required this.informationContainerModel});
+
+  final InformationContainerModel informationContainerModel;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: informationContainerModel.onTap,
+      child: Container(
+        padding: const EdgeInsets.all(16.0),
+        width: 200,
+        decoration: BoxDecoration(
+          color: informationContainerModel.color,
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          textDirection: TextDirection.rtl,
+          children: [
+            Image.asset(
+              informationContainerModel.image,
+              width: 200,
+              height: 200,
             ),
-          ),
-        ],
+            const SizedBox(height: 10),
+            Text(
+              informationContainerModel.text,
+              maxLines: 2,
+              textAlign: TextAlign.right,
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -121,9 +171,8 @@ class EmergencyLowPage extends StatelessWidget {
         child: ListView(
           children: const [
             CustomContainerInfo(
-              description:
-                  "عندما تعاني من أي من أعراض انخفاض ضغط الدم، حاول الاستلقاء أو الجلوس على سطح مستوٍ بأمان وعلى الفور. يمكن أن يؤدي الاستمرار في الوقوف إلى تفاقم انخفاض ضغط الدم الموضعي. يفيد الاستلقاء أو الجلوس في تطبيع ضغط الدم.",
-            ),
+                description:
+                    '''لا توجد نقطة محددة يصبح فيها ضغط الدم منخفضاً جداً. ومع ذلك، إذا كانت الأعراض الشديدة ناجمة عن انخفاض ضغط الدم، فهذا يشير إلى حالة طارئة لخفض ضغط الدم. يجب أن تكون الخطوة الأولى هي الاتصال بطبيبك للحصول على علاج طبي فوري واتخاذ مراجعة دقيقة لأدويتك. وكان ماذا يمكنك أن تفعل؟ تعلم النصائح أدناه وقد تكون جاهزاً بعد الآن.'''),
             SizedBox(height: 20),
             EmergencyInfoWidget(
               number: "1.",
@@ -131,7 +180,19 @@ class EmergencyLowPage extends StatelessWidget {
               description:
                   "عندما تعاني من أي من أعراض انخفاض ضغط الدم، حاول الاستلقاء أو الجلوس على سطح مستوٍ بأمان وعلى الفور. يمكن أن يؤدي الاستمرار في الوقوف إلى تفاقم انخفاض ضغط الدم الموضعي. يفيد الاستلقاء أو الجلوس في تطبيع ضغط الدم.",
             ),
-            // Add more EmergencyInfoWidget instances as needed
+            EmergencyInfoWidget(
+              number: "2.",
+              title: "تناول الملح الكافي ",
+              description:
+                  '''جرب تناول المزيد من الأطعمة المالحة أو بلعق قليل من الملح للسماح للصوديوم برفع ضغط الدم. يمكنك أيضاً شرب المشروبات الرياضية أو تناول أملاح الإماهة الفموية (ORS) التي يمكن أن تعيد ترطيبك وتوفر الملح بالإضافة إلى الأملاح الأخرى لتحسين ضغط الدم.
+ومع ذلك، لا تتناول أملاح الإماهة الفموية إذا كنت مريضاً بالسكري وتأكد من أنك لا تتناول الكثير.''',
+            ),
+            EmergencyInfoWidget(
+              number: "3.",
+              title: "ابقي رطباً",
+              description:
+                  '''الجفاف هو أحد الأسباب الشائعة لانخفاض ضغط الدم. وبالتالي، فإن شرب المزيد من السوائل، وخاصةً الماء، والمشروبات الرياضية، لا يمكن أن يشمل ذلك فقدان من السوائل بشدة. قم بذلك، يمكن أن يساعد الجفاف. مع ذلك، يمكنك إضافة كمية صغيرة من الملح إذا.''',
+            ),
           ],
         ),
       ),
