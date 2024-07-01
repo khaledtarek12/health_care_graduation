@@ -55,13 +55,6 @@ class _CustomAlarmCardState extends State<CustomAlarmCard> {
                 motion: const ScrollMotion(),
                 children: [
                   SlidableAction(
-                    onPressed: (context) {},
-                    backgroundColor: const Color(0xFF7BC043),
-                    foregroundColor: Colors.white,
-                    icon: Icons.edit_notifications_rounded,
-                    label: 'Edit',
-                  ),
-                  SlidableAction(
                     onPressed: (slidContext) {
                       showQuesstionDialog(
                         context: context,
@@ -70,6 +63,7 @@ class _CustomAlarmCardState extends State<CustomAlarmCard> {
                         btnOkOnPress: () {
                           BlocProvider.of<AlarmDataCubit>(context)
                               .deleteAlarm(alarm: widget.alarmInfo);
+                          widget.alarmInfo.delete();
                         },
                       );
                     },
@@ -105,7 +99,6 @@ class _CustomAlarmCardState extends State<CustomAlarmCard> {
                                   BlocProvider.of<AlarmDataCubit>(context)
                                       .toggleUpdateAlarmActivity(
                                           alarm: widget.alarmInfo);
-                                  
                                 },
                               );
                             } else {

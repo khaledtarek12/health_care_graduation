@@ -16,7 +16,6 @@ import '../../patient_pages/views/patient_view.dart';
 import 'Widget/custom_button.dart';
 import 'Widget/cutom_row_radiobutton.dart';
 import 'Widget/custom_form_text_field.dart';
-import '../bloc/chat/chat_cubit.dart';
 import '../bloc/login_cubit/login_cubit.dart';
 
 class LoginHomePage extends StatefulWidget {
@@ -51,8 +50,6 @@ class _LoginHomePageState extends State<LoginHomePage> {
             isLoading = true;
           });
         } else if (state is LoginSucessful) {
-          BlocProvider.of<ChatCubit>(context).getMessages();
-
           final prefs = BlocProvider.of<LoginCubit>(context).prefs;
           final roles = prefs.getStringList('roles') ?? [];
 

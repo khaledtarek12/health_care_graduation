@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
+import 'package:health_care/Featuers/login_and_signup/Screens/chat_page.dart';
 import 'package:health_care/Featuers/login_and_signup/Screens/login_home_page.dart';
 import 'package:health_care/Featuers/login_and_signup/bloc/login_cubit/login_cubit.dart';
 import 'package:health_care/Featuers/patient_pages/bloc/Alarms/alarm/alarm_data_cubit.dart';
@@ -119,33 +120,32 @@ class _PatientViewBodyState extends State<PatientViewBody> {
                   mainAxisSpacing: 24.0, // Adjust mainAxisSpacing
                 ),
                 children: [
-                  CustomStackCard(children: [
-                    // SvgPicture.asset(
-                    //   'assets/images/chat-line-svgrepo-com.svg',
-                    //   // ignore: deprecated_member_use
-                    //   color: Colors.white.withOpacity(.8),
-                    //   height: 100,
-                    //   width: 100,
-                    // ),
-                    Icon(
-                      Icons.chat_rounded,
-                      size: 90,
-                      color: Colors.white.withOpacity(.7),
-                    ),
-                    const Text(
-                      'My Chat',
-                      style: style15,
-                    ),
-                  ]),
                   CustomStackCard(
                     children: [
-                      // SvgPicture.asset(
-                      //   'assets/images/heart-beat-svgrepo-com.svg',
-                      //   height: 100,
-                      //   width: 100,
-                      //   // ignore: deprecated_member_use
-                      //   color: Colors.white.withOpacity(.8),
-                      // ),
+                      Icon(
+                        Icons.chat_rounded,
+                        size: 90,
+                        color: Colors.white.withOpacity(.7),
+                      ),
+                      const Text(
+                        'My Chat',
+                        style: style15,
+                      ),
+                    ],
+                    onTap: () {
+                      Get.to(
+                          () => ChatPage(
+                                senderEmail:
+                                    getMyDataCubit.patientData.patientEmail,
+                                recieverEmail:
+                                    getMyDataCubit.patientData.doctorEmail!,
+                                name: getMyDataCubit.patientData.doctorEmail!,
+                              ),
+                          transition: Motivation.zoomTransition());
+                    },
+                  ),
+                  CustomStackCard(
+                    children: [
                       Icon(
                         Icons.bar_chart_rounded,
                         size: 90,

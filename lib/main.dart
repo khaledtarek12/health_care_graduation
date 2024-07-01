@@ -13,7 +13,6 @@ import 'package:health_care/Featuers/doctor_pages/views/doctor_homepage.dart';
 import 'package:health_care/Featuers/firebase_options.dart';
 import 'package:health_care/Featuers/forget_passwords/bloc/forget_password_cubit/forget_password_cubit.dart';
 import 'package:health_care/Featuers/forget_passwords/bloc/reset_password_cubit/reset_password_cubit.dart';
-import 'package:health_care/Featuers/login_and_signup/Screens/chat_page.dart';
 import 'package:health_care/Featuers/login_and_signup/Screens/login_home_page.dart';
 import 'package:health_care/Featuers/patient_pages/bloc/Alarms/alarm/alarm_data_cubit.dart';
 import 'package:health_care/Featuers/patient_pages/bloc/email_cubit/email_cubit.dart';
@@ -26,7 +25,6 @@ import 'package:health_care/Featuers/screen_splash/views/splash_view.dart';
 import 'package:health_care/Featuers/screen_splash/views/widgets/splash_screen.dart';
 import 'package:health_care/const.dart';
 import 'package:hive_flutter/adapters.dart';
-import 'Featuers/login_and_signup/Screens/entier_doctor_chatcall_page.dart';
 import 'Featuers/login_and_signup/Screens/signup_home_page.dart';
 import 'Featuers/login_and_signup/bloc/chat/chat_cubit.dart';
 import 'Featuers/login_and_signup/bloc/login_cubit/login_cubit.dart';
@@ -84,8 +82,6 @@ class ChatApp extends StatelessWidget {
           SplashViewHome.id: (context) => const SplashViewHome(),
           SignupHomePage.id: (context) => const SignupHomePage(),
           AmbulancePage.id: (context) => const AmbulancePage(),
-          ChatPage.id: (context) => ChatPage(doctorId: ''),
-          EntierCallChatScreen.id: (context) => const EntierCallChatScreen()
         },
         debugShowCheckedModeBanner: false,
         initialRoute: SplashScreen.id,

@@ -35,44 +35,55 @@ class MedicalInformationPage extends StatelessWidget {
                       builder: (context) => const EmergencyLowPage()),
                 );
               },
-              child: Row(
+              child: const Row(
                 textDirection: TextDirection.rtl,
                 children: [
-                  Container(
-                    padding: const EdgeInsets.all(16.0),
-                    width: 200,
-                    decoration: BoxDecoration(
-                      color: const Color(0xff2C2B65),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      textDirection: TextDirection.rtl,
-                      children: [
-                        Image.asset(
-                          'assets/images/flat-world-hypertension-day-illustration.png',
-                          width: 180,
-                          height: 180,
-                        ),
-                        const SizedBox(height: 10),
-                        const Text(
-                          'إرشادات أزمة انخفاض ضغط الدم',
-                          maxLines: 2,
-                          textAlign: TextAlign.right,
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+                  CustomMedicalCrad(),
                 ],
               ),
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class CustomMedicalCrad extends StatelessWidget {
+  const CustomMedicalCrad({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(16.0),
+      width: 200,
+      decoration: BoxDecoration(
+        color: const Color(0xff2C2B65),
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        textDirection: TextDirection.rtl,
+        children: [
+          Image.asset(
+            'assets/images/flat-world-hypertension-day-illustration.png',
+            width: 180,
+            height: 180,
+          ),
+          const SizedBox(height: 10),
+          const Text(
+            'إرشادات أزمة انخفاض ضغط الدم',
+            maxLines: 2,
+            textAlign: TextAlign.right,
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -109,6 +120,11 @@ class EmergencyLowPage extends StatelessWidget {
         padding: const EdgeInsets.all(16.0),
         child: ListView(
           children: const [
+            CustomContainerInfo(
+              description:
+                  "عندما تعاني من أي من أعراض انخفاض ضغط الدم، حاول الاستلقاء أو الجلوس على سطح مستوٍ بأمان وعلى الفور. يمكن أن يؤدي الاستمرار في الوقوف إلى تفاقم انخفاض ضغط الدم الموضعي. يفيد الاستلقاء أو الجلوس في تطبيع ضغط الدم.",
+            ),
+            SizedBox(height: 20),
             EmergencyInfoWidget(
               number: "1.",
               title: "الاستلقاء",
@@ -196,6 +212,35 @@ class EmergencyInfoWidget extends StatelessWidget {
               textAlign: TextAlign.right,
             ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class CustomContainerInfo extends StatelessWidget {
+  final String description;
+
+  const CustomContainerInfo({
+    super.key,
+    required this.description,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      child: Container(
+        decoration: BoxDecoration(
+          color: const Color(0xff004763), // Background color
+          borderRadius: BorderRadius.circular(10),
+        ),
+        padding: const EdgeInsets.all(16.0),
+        child: Text(
+          description,
+          style: const TextStyle(
+              color: Colors.white, fontSize: 18, fontWeight: FontWeight.w800),
+          textAlign: TextAlign.right,
         ),
       ),
     );

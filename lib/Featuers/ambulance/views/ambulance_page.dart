@@ -21,6 +21,8 @@ class _AmbulancePageState extends State<AmbulancePage> {
   late GoogleMapController _mapController;
   bool isLoading = false;
   double zoom = 16;
+  int currentIndex = 0;
+  List<Marker> markersList = [];
 
   @override
   void initState() {
@@ -70,6 +72,8 @@ class _AmbulancePageState extends State<AmbulancePage> {
             );
           }).toSet();
 
+          markersList = markers.toList();
+
           return Scaffold(
             body: ModalProgressHUD(
               inAsyncCall: isLoading,
@@ -108,6 +112,13 @@ class _AmbulancePageState extends State<AmbulancePage> {
                           onPressed: _zoomOut,
                           child: const Icon(Icons.remove),
                         ),
+                        const SizedBox(height: 8.0),
+                        FloatingActionButton(
+                          key: UniqueKey(),
+                          heroTag: 'btn 3',
+                          onPressed: _nextLocation,
+                          child: const Icon(Icons.navigation),
+                        ),
                       ],
                     ),
                   ),
@@ -139,5 +150,13 @@ class _AmbulancePageState extends State<AmbulancePage> {
 
   void _zoomOut() {
     _mapController.animateCamera(CameraUpdate.zoomOut());
+  }
+
+  void _nextLocation() {
+    if (markersList.isEmpty) return;
+    currentIndex = (currentIndex + 1) % markersList.length;
+    _mapController.animateCamera(
+      CameraUpdate.newLatLng(markersList[currentIndex].position),
+    );
   }
 }

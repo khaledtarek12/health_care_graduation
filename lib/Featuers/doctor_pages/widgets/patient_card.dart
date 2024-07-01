@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:health_care/Featuers/doctor_pages/views/patient_location.dart';
-import 'package:health_care/Featuers/login_and_signup/bloc/login_cubit/login_cubit.dart';
 import 'package:health_care/Featuers/login_and_signup/data/models/patient_model.module.dart';
 import 'package:health_care/Featuers/patient_pages/views/heart_beat_view.dart';
 import 'package:health_care/Featuers/patient_pages/views/history_of_patient_view.dart';
@@ -66,11 +64,10 @@ class Patientcard extends StatelessWidget {
                           onPressed: () {
                             Get.to(
                                 () => ChatPage(
-                                      doctorId:
-                                          BlocProvider.of<LoginCubit>(context)
-                                              .email,
+                                      senderEmail: patientModel.doctorEmail!,
+                                      recieverEmail: patientModel.patientEmail,
+                                      name: patientModel.patientEmail,
                                     ),
-                                arguments: patientModel.patientEmail,
                                 transition: Motivation.bootmUpTransition());
                           }),
                       IconButton(

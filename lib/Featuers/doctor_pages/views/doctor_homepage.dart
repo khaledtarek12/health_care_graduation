@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:health_care/Featuers/login_and_signup/Screens/login_home_page.dart';
@@ -24,7 +22,6 @@ class DoctorHomepage extends StatefulWidget {
 class _DoctorHomepageState extends State<DoctorHomepage> {
   @override
   Widget build(BuildContext context) {
-    log('emailkhaled: ${BlocProvider.of<LoginCubit>(context).email}');
     return Scaffold(
       body: CustomContainer(
         title: 'Doctor Home Page',

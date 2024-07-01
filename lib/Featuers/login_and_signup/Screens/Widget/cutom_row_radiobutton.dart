@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:health_care/const.dart';
 
 class CusttomRadioButtom extends StatefulWidget {
   const CusttomRadioButtom({super.key, required this.onGenderSelected});
@@ -16,9 +17,10 @@ class _CusttomRadioButtomState extends State<CusttomRadioButtom> {
     return Row(
       children: [
         Radio(
-            activeColor: const Color(0xff17455c),
+            activeColor: kprimaryVeryDarkcolor,
             value: 'Ambulance',
             groupValue: gender,
+            fillColor: const WidgetStatePropertyAll(kprimaryDarkcolor),
             onChanged: (value) {
               setState(() {
                 gender = value;
@@ -36,12 +38,14 @@ class _CusttomRadioButtomState extends State<CusttomRadioButtom> {
             'Ambulance',
             style: TextStyle(
               fontWeight: FontWeight.bold,
-              fontSize: 12,
+              color: kprimaryVeryDarkcolor,
+              fontSize: 13,
             ),
           ),
         ),
         Radio(
-            activeColor: const Color(0xff17455c),
+            activeColor: kprimaryVeryDarkcolor,
+            fillColor: const WidgetStatePropertyAll(kprimaryDarkcolor),
             value: 'Admin',
             groupValue: gender,
             onChanged: (value) {
@@ -61,12 +65,14 @@ class _CusttomRadioButtomState extends State<CusttomRadioButtom> {
             'Admin',
             style: TextStyle(
               fontWeight: FontWeight.bold,
-              fontSize: 12,
+              color: kprimaryVeryDarkcolor,
+              fontSize: 13,
             ),
           ),
         ),
         Radio(
-            activeColor: const Color(0xff17455c),
+            activeColor: kprimaryVeryDarkcolor,
+            fillColor: const WidgetStatePropertyAll(kprimaryDarkcolor),
             value: 'Doctor',
             groupValue: gender,
             onChanged: (value) {
@@ -86,12 +92,14 @@ class _CusttomRadioButtomState extends State<CusttomRadioButtom> {
             'Doctor',
             style: TextStyle(
               fontWeight: FontWeight.bold,
-              fontSize: 12,
+              color: kprimaryVeryDarkcolor,
+              fontSize: 13,
             ),
           ),
         ),
         Radio(
-            activeColor: const Color(0xff17455c),
+            activeColor: kprimaryVeryDarkcolor,
+            fillColor: const WidgetStatePropertyAll(kprimaryDarkcolor),
             value: 'Patient',
             groupValue: gender,
             onChanged: (value) {
@@ -111,7 +119,8 @@ class _CusttomRadioButtomState extends State<CusttomRadioButtom> {
             'Patient',
             style: TextStyle(
               fontWeight: FontWeight.bold,
-              fontSize: 12,
+              color: kprimaryVeryDarkcolor,
+              fontSize: 13,
             ),
           ),
         )

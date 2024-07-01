@@ -1,32 +1,33 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 
 class CusttomContainerAppBar extends StatelessWidget {
   const CusttomContainerAppBar({
     super.key,
+    required this.name,
   });
+
+  final String name;
 
   @override
   Widget build(BuildContext context) {
+    log(name);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 25),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           IconButton(
-            onPressed: () {
-              // Add functionality for back button here
-            },
-            icon: IconButton(
-              icon: const Icon(
-                Icons.arrow_back_ios_new,
-                size: 25,
-              ),
-              onPressed: () {
-                Navigator.pop(context);
-              },
+            icon: const Icon(
+              Icons.arrow_back_ios_new,
+              size: 25,
             ),
+            onPressed: () {
+              Navigator.pop(context);
+            },
           ),
           Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               ClipOval(
                 child: Image.asset(
@@ -37,17 +38,11 @@ class CusttomContainerAppBar extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: 10),
-              const Text(
-                'Dr. Anya Geraldine',
-                style: TextStyle(fontSize: 20),
+              Text(
+                name,
+                style: const TextStyle(fontSize: 20),
               ),
             ],
-          ),
-          IconButton(
-            onPressed: () {
-              // Add functionality for video call button here
-            },
-            icon: const Icon(Icons.videocam_rounded, size: 40),
           ),
         ],
       ),
