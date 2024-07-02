@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:health_care/Featuers/login_and_signup/bloc/login_cubit/login_cubit.dart';
 import 'package:health_care/core/widgets/custom_container.dart';
 import 'package:health_care/Featuers/patient_pages/bloc/Alarms/alarm/alarm_data_cubit.dart';
 import 'package:health_care/Featuers/patient_pages/views/widget/add_alarm_button.dart';
@@ -12,9 +13,15 @@ class AlarmHomePgae extends StatefulWidget {
   State<AlarmHomePgae> createState() => _AlarmHomePgaeState();
 }
 
-
-
 class _AlarmHomePgaeState extends State<AlarmHomePgae> {
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    BlocProvider.of<AlarmDataCubit>(context).fetchAllAlarms(
+        email: BlocProvider.of<LoginCubit>(context).prefs.getString('email')!);
+  }
+
   @override
   Widget build(BuildContext context) {
     return CustomContainer(

@@ -28,6 +28,7 @@ class _BottomSheetpageState extends State<BottomSheetpage> {
 
   @override
   void initState() {
+    super.initState();
     timeOfDay = const TimeOfDay(hour: 0, minute: 00);
     alarmInfo = AlarmInfo(
       title: '',
@@ -38,7 +39,6 @@ class _BottomSheetpageState extends State<BottomSheetpage> {
       interval: 0,
       email: BlocProvider.of<LoginCubit>(context).prefs.getString('email')!,
     );
-    super.initState();
   }
 
   @override
@@ -166,8 +166,8 @@ class _BottomSheetpageState extends State<BottomSheetpage> {
                         .addAlarm(alarm: alarmInfo);
                     BlocProvider.of<AlarmDataCubit>(context)
                         .fetchAllAlarms(email: alarmInfo.email);
-                    Navigator.pop(context);
                   }
+                  Navigator.pop(context);
                 },
               ),
             ],

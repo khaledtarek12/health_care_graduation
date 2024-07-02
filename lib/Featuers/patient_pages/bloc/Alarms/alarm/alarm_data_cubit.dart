@@ -28,8 +28,7 @@ class AlarmDataCubit extends Cubit<AlarmDataState> {
     emit(AlarmDataLoading());
     try {
       alarmInfo.remove(alarm);
-      alarm.delete;
-      alarm.save;
+
       Notifications().cancelNotification(alarmInfo: alarm);
       emit(AlarmDataSuccesful());
     } catch (e) {
