@@ -144,7 +144,6 @@ class Patientcard extends StatelessWidget {
                                 () => ChatPage(
                                   senderEmail: patientModel.doctorEmail!,
                                   recieverEmail: patientModel.patientEmail,
-                                  name: patientModel.patientEmail,
                                 ),
                                 transition: Motivation.bootmUpTransition(),
                               );

@@ -139,7 +139,6 @@ class _PatientViewBodyState extends State<PatientViewBody> {
                                     getMyDataCubit.patientData.patientEmail,
                                 recieverEmail:
                                     getMyDataCubit.patientData.doctorEmail!,
-                                name: getMyDataCubit.patientData.doctorEmail!,
                               ),
                           transition: Motivation.zoomTransition());
                     },
