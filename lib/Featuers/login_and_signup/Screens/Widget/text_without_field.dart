@@ -15,7 +15,7 @@ class CustomTextField extends StatelessWidget {
 
   final String? labelText;
   final Icon? prefexIcon;
-  final Icon? sufxIcon;
+  final IconButton? sufxIcon;
   final Function(String)? onChange;
   final Function(String)? onSubmitted;
   final TextEditingController? controller;

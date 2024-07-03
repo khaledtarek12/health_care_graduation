@@ -39,6 +39,8 @@ class _ChatPageState extends State<ChatPage> {
     ); // Call getMessages with specific doctor and patient emails
   }
 
+  String getMessage = '';
+
   @override
   Widget build(BuildContext context) {
     log('doctorEmail = ${widget.senderEmail} patientEmail =${widget.recieverEmail} , name = ${widget.name}');
@@ -95,8 +97,25 @@ class _ChatPageState extends State<ChatPage> {
                     curve: Curves.easeIn,
                   );
                 },
+                onChange: (message) {
+                  getMessage = message;
+                },
                 labelText: 'Send Message',
-                sufxIcon: const Icon(Icons.send),
+                sufxIcon: IconButton(
+                    onPressed: () {
+                      BlocProvider.of<ChatCubit>(context).sendMessage(
+                        message: getMessage,
+                        senderId: widget.senderEmail,
+                        recieverId: widget.recieverEmail,
+                      );
+                      controller.clear(); // Clear the text input
+                      _controller.animateTo(
+                        0,
+                        duration: const Duration(milliseconds: 500),
+                        curve: Curves.easeIn,
+                      );
+                    },
+                    icon: const Icon(Icons.send)),
                 controller: controller,
               ),
             )

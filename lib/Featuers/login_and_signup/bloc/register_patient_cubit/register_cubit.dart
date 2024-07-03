@@ -28,8 +28,8 @@ class RegisterCubit extends Cubit<RegisterState> {
         "phoneNumber": patientModel.phoneNumber,
         "password": patientModel.password,
         "confirmPassword": patientModel.password,
-        "FirstName": patientModel.firstName,
-        "LastName": patientModel.lastName,
+        "firstName": patientModel.firstName,
+        "lastName": patientModel.lastName,
       };
 
       // Ensure userName meets minimum length requirement

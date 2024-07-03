@@ -1,5 +1,9 @@
 import 'dart:developer';
+import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:file_picker/file_picker.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:get/get.dart';
 import 'package:health_care/Featuers/login_and_signup/Screens/doctor_list_view.dart';
 import 'package:health_care/Featuers/login_and_signup/data/models/patient_model.module.dart';
@@ -35,7 +39,8 @@ class _SignupHomePageState extends State<SignupHomePage> {
   String? doctorName;
   String? doctorEmail;
   String? doctorId;
-
+  String? patientHistoryUrl;
+  FilePickerResult? result;
   String pattern = '^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]';
   String? password;
   bool? obSecureText = true;
@@ -43,6 +48,7 @@ class _SignupHomePageState extends State<SignupHomePage> {
 
   bool isLoading = false;
   TextEditingController doctorNameController = TextEditingController();
+  TextEditingController patientHistoryController = TextEditingController();
   late RegisterCubit registerCubit = BlocProvider.of<RegisterCubit>(context);
 
   Future<void> selectDoctor() async {
@@ -62,6 +68,57 @@ class _SignupHomePageState extends State<SignupHomePage> {
     }
   }
 
+  // Adjusted pickFile method for better error handling
+  Future<void> pickFile() async {
+    try {
+      result = await FilePicker.platform.pickFiles();
+      if (result != null) {
+        File file = File(result!.files.single.path!);
+        String fileName = result!.files.single.name;
+        log('File picked: ${file.path}, fileName: $fileName');
+
+        // Upload file to Firebase Storage
+        Reference ref = FirebaseStorage.instance
+            .ref()
+            .child('patientHistory')
+            .child(fileName);
+        UploadTask uploadTask = ref.putFile(file);
+
+        await uploadTask.whenComplete(() async {
+          log('Upload complete for file: $fileName');
+
+          // Get download URL from Firebase Storage
+          String downloadUrl = await ref.getDownloadURL();
+          log('Download URL obtained: $downloadUrl');
+
+          setState(() {
+            patientHistoryUrl = downloadUrl;
+            patientHistoryController.text = fileName;
+          });
+
+          // Save download URL to Firestore
+          await FirebaseFirestore.instance.collection('patientHistory').add({
+            'email': email,
+            'fileName': fileName,
+            'fileUrl': patientHistoryUrl,
+            'createdAt': Timestamp.now(),
+          }).then((value) {
+            log('File data saved to Firestore');
+          }).catchError((error) {
+            log('Failed to save file data to Firestore: $error');
+          });
+          // ignore: body_might_complete_normally_catch_error
+        }).catchError((error) {
+          log('Upload failed: $error');
+        });
+      } else {
+        log('File picking cancelled or no file selected');
+      }
+    } catch (e) {
+      log('Error picking or uploading file: $e');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     log("Doctor Name: '${doctorNameController.text}', Doctor Email: $doctorEmail , DoctorId: $doctorId");
@@ -71,6 +128,13 @@ class _SignupHomePageState extends State<SignupHomePage> {
           isLoading = true;
         } else if (state is RegisterSucessful) {
           isLoading = false;
+          showSuccessDialog(
+            context: context,
+            message: "Your account created successfully",
+            btnOkOnPress: () {
+              Navigator.of(context).pop();
+            },
+          );
         }
         if (state is RegisterFailuer) {
           showErrorDialog(
@@ -225,6 +289,24 @@ class _SignupHomePageState extends State<SignupHomePage> {
                             size: 35,
                           )),
                     ),
+                    CustomFormTextField(
+                      controller: patientHistoryController,
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return 'Please select a file';
+                        }
+                        return null;
+                      },
+                      readOnly: true,
+                      labelText: 'Patient History',
+                      prefexIcon: const Icon(Icons.file_copy),
+                      sufxIcon: IconButton(
+                          onPressed: pickFile,
+                          icon: const Icon(
+                            Icons.attach_file,
+                            size: 35,
+                          )),
+                    ),
                     const SizedBox(
                       height: 15,
                     ),
@@ -242,19 +324,6 @@ class _SignupHomePageState extends State<SignupHomePage> {
                             userName: '$fristName$lastName',
                             doctorId: int.parse(doctorId!),
                           ));
-                          showSuccessDialog(
-                            context: context,
-                            message: "Your account created successfully",
-                            btnOkOnPress: () {
-                              Navigator.of(context).pop();
-                            },
-                          );
-                        } else {
-                          showErrorDialog(
-                              btnOkOnPress: () {},
-                              context: context,
-                              message:
-                                  "There was an error, please try again...");
                         }
                       },
                       child: Text('Register',
