@@ -121,7 +121,7 @@ class _LoginHomePageState extends State<LoginHomePage> {
             btnOkOnPress: () {},
           );
           setState(() {
-            isLoading = true;
+            isLoading = false;
           });
         }
       },
