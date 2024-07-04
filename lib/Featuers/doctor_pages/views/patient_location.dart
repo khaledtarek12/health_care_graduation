@@ -5,6 +5,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:health_care/Featuers/login_and_signup/data/models/patient_model.module.dart';
 import 'package:health_care/core/helper/show_snackbar.dart';
+import 'package:health_care/core/widgets/circle_loading.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:health_care/Featuers/patient_pages/bloc/get_patient_location_cubit/get_patient_location_cubit.dart';
 
@@ -50,7 +51,8 @@ class _PatientLocationPageState extends State<PatientLocationPage> {
           setState(() {
             isLoading = false;
           });
-          showErrorDialog(context: context, message: 'Oops , there was an error');
+          showErrorDialog(
+              context: context, message: 'Oops , there was an error');
         }
       },
       builder: (context, state) {
@@ -117,7 +119,7 @@ class _PatientLocationPageState extends State<PatientLocationPage> {
           // Handle initial loading state or other states if needed
           return const Scaffold(
             body: Center(
-              child: CircularProgressIndicator(),
+              child: CircleLoading(),
             ),
           );
         }

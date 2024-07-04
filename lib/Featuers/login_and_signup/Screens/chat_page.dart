@@ -6,6 +6,7 @@ import 'package:health_care/Featuers/login_and_signup/Screens/Widget/chat_bubble
 import 'package:health_care/Featuers/login_and_signup/Screens/Widget/custom_app_container_bar.dart';
 import 'package:health_care/Featuers/login_and_signup/Screens/Widget/text_without_field.dart';
 import 'package:health_care/const.dart';
+import 'package:health_care/core/widgets/circle_loading.dart';
 
 import '../bloc/chat/chat_cubit.dart';
 
@@ -76,7 +77,7 @@ class _ChatPageState extends State<ChatPage> {
                         child: Text(
                             'Failed to load messages: ${state.errorMessage}'));
                   } else {
-                    return const Center(child: CircularProgressIndicator());
+                    return const Center(child: CircleLoading());
                   }
                 },
               ),

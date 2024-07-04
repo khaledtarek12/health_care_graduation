@@ -7,6 +7,7 @@ import 'package:health_care/core/helper/show_snackbar.dart';
 import 'package:health_care/core/utils/styles.dart';
 import 'package:health_care/Featuers/patient_pages/bloc/Alarms/alarm/alarm_data_cubit.dart';
 import 'package:health_care/Featuers/patient_pages/data/model/alarm_info.module.dart';
+import 'package:health_care/core/widgets/circle_loading.dart';
 
 class CustomAlarmCard extends StatefulWidget {
   const CustomAlarmCard({
@@ -103,7 +104,7 @@ class _CustomAlarmCardState extends State<CustomAlarmCard> {
                               );
                             } else {
                               // Show loading indicator or handle other states if needed
-                              return const CircularProgressIndicator();
+                              return const CircleLoading();
                             }
                           },
                         ),
@@ -134,7 +135,7 @@ class _CustomAlarmCardState extends State<CustomAlarmCard> {
           ),
         );
       } else {
-        return const Center(child: CircularProgressIndicator());
+        return const Center(child: CircleLoading());
       }
     });
   }

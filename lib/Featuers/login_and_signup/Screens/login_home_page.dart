@@ -6,6 +6,7 @@ import 'package:health_care/Featuers/doctor_pages/bloc/get_patient_cubit/get_pat
 import 'package:health_care/Featuers/patient_pages/bloc/location_cubit/location_cubit.dart';
 import 'package:health_care/Featuers/screen_splash/bloc/cubit/get_my_data_cubit.dart';
 import 'package:health_care/core/utils/styles.dart';
+import 'package:health_care/core/widgets/circle_loading.dart';
 import 'package:health_care/core/widgets/custom_container.dart';
 import 'package:health_care/Featuers/doctor_pages/views/doctor_homepage.dart';
 import 'package:health_care/Featuers/login_and_signup/Screens/Widget/login_page_bottom_text_row.dart';
@@ -120,13 +121,14 @@ class _LoginHomePageState extends State<LoginHomePage> {
             btnOkOnPress: () {},
           );
           setState(() {
-            isLoading = false;
+            isLoading = true;
           });
         }
       },
       builder: (context, state) {
         return ModalProgressHUD(
           inAsyncCall: isLoading,
+          progressIndicator: const CircleLoading(),
           child: Scaffold(
             body: CustomContainer(
               title: 'Login to your Account',
