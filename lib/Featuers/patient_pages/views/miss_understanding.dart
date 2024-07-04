@@ -26,7 +26,10 @@ class MissUnderstanding extends StatelessWidget {
           textAlign: TextAlign.right,
           textDirection: TextDirection.rtl,
           maxLines: 2,
-          style: TextStyle(fontWeight: FontWeight.w800, color: Colors.white),
+          style: TextStyle(
+              fontWeight: FontWeight.w800,
+              color: Colors.white,
+              fontFamily: 'Cairo'),
         ),
       ),
       body: Padding(

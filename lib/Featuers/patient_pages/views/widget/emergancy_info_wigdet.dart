@@ -45,18 +45,18 @@ class EmergencyInfoWidget extends StatelessWidget {
                         text: TextSpan(
                           text: '$number ',
                           style: const TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                            fontSize: 23,
-                          ),
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                              fontSize: 23,
+                              fontFamily: 'Cairo'),
                           children: [
                             TextSpan(
                               text: title,
                               style: const TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                                fontSize: 23,
-                              ),
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                  fontSize: 23,
+                                  fontFamily: 'Cairo'),
                             ),
                           ],
                         ),
@@ -69,7 +69,8 @@ class EmergencyInfoWidget extends StatelessWidget {
             const SizedBox(height: 8),
             Text(
               description,
-              style: const TextStyle(color: Colors.white, fontSize: 19),
+              style: const TextStyle(
+                  color: Colors.white, fontSize: 19, fontFamily: 'Cairo'),
               textAlign: TextAlign.right,
             ),
           ],
@@ -100,7 +101,10 @@ class CustomContainerInfo extends StatelessWidget {
         child: Text(
           description,
           style: const TextStyle(
-              color: Colors.white, fontSize: 18, fontWeight: FontWeight.w800),
+              color: Colors.white,
+              fontSize: 18,
+              fontWeight: FontWeight.w800,
+              fontFamily: 'Cairo'),
           textAlign: TextAlign.right,
         ),
       ),

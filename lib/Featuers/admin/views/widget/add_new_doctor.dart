@@ -57,6 +57,7 @@ class _AddNewDoctorState extends State<AddNewDoctor> {
         return Scaffold(
           body: CustomContainer(
             isLeading: true,
+            appbar: true,
             isLogout: true,
             title: 'Add New Doctor',
             child: Form(

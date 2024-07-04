@@ -34,7 +34,7 @@ class _LoginHomePageState extends State<LoginHomePage> {
 
   String? email;
 
-  List<String>? selectedRole;
+  List<String> selectedRole = [];
 
   String pattern = '^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]';
   String? password;
@@ -53,24 +53,23 @@ class _LoginHomePageState extends State<LoginHomePage> {
           final prefs = BlocProvider.of<LoginCubit>(context).prefs;
           final roles = prefs.getStringList('roles') ?? [];
 
-          if (selectedRole == null || selectedRole!.isEmpty) {
+          if (selectedRole.isEmpty) {
             showErrorDialog(
               context: context,
               message: 'Please select a role: Doctor, Patient, or Admin.',
               btnOkOnPress: () {},
             );
-            return;
           }
 
-          if (roles.contains(selectedRole![0])) {
-            if (selectedRole![0] == 'Doctor') {
+          if (roles.contains(selectedRole[0])) {
+            if (selectedRole[0] == 'Doctor') {
               Navigator.pushNamed(context, DoctorHomepage.id, arguments: email);
               showSuccessDialog(
                 context: context,
                 message: 'Login Successfully',
                 btnOkOnPress: () {},
               );
-            } else if (selectedRole![0] == 'Patient') {
+            } else if (selectedRole[0] == 'Patient') {
               BlocProvider.of<LocationCubit>(context)
                   .storeLocation(email: email!);
               Navigator.pushNamed(context, PatientView.id, arguments: email);
@@ -79,7 +78,7 @@ class _LoginHomePageState extends State<LoginHomePage> {
                 message: 'Login Successfully',
                 btnOkOnPress: () {},
               );
-            } else if (selectedRole![0] == 'Admin') {
+            } else if (selectedRole[0] == 'Admin') {
               Navigator.pushNamed(
                 context,
                 AdminViewPage.id,
@@ -90,7 +89,7 @@ class _LoginHomePageState extends State<LoginHomePage> {
                 message: 'Login Successfully',
                 btnOkOnPress: () {},
               );
-            } else if (selectedRole![0] == 'Ambulance') {
+            } else if (selectedRole[0] == 'Ambulance') {
               Navigator.pushNamed(
                 context,
                 AmbulancePage.id,
@@ -105,7 +104,7 @@ class _LoginHomePageState extends State<LoginHomePage> {
           } else {
             showErrorDialog(
               context: context,
-              message: 'You are not an : ${selectedRole![0]}',
+              message: 'You are not an : ${selectedRole[0]}',
               btnOkOnPress: () {},
             );
           }
@@ -206,7 +205,7 @@ class _LoginHomePageState extends State<LoginHomePage> {
                             password: password!,
                           );
                           BlocProvider.of<GetMyDataCubit>(context)
-                              .getMyData(email: email!, types: selectedRole!);
+                              .getMyData(email: email!, types: selectedRole);
                           BlocProvider.of<GetPatientsCubit>(context)
                               .getAllPatients(doctorEmail: email!);
                         }

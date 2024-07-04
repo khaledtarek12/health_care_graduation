@@ -21,10 +21,10 @@ class TextForgetYourPassword extends StatelessWidget {
       child: const Text(
         'Forget your password ?',
         style: TextStyle(
-          color: kPrimaryColor,
-          fontSize: 18,
-          fontWeight: FontWeight.w900,
-        ),
+            color: kPrimaryColor,
+            fontSize: 18,
+            fontWeight: FontWeight.w900,
+            fontFamily: 'Cairo'),
         textAlign: TextAlign.center,
       ),
     );

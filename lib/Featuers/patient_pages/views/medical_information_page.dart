@@ -17,7 +17,10 @@ class MedicalInformationPage extends StatelessWidget {
         centerTitle: true,
         title: const Text(
           'Important Information',
-          style: TextStyle(fontWeight: FontWeight.w800, color: Colors.white),
+          style: TextStyle(
+              fontWeight: FontWeight.w800,
+              color: Colors.white,
+              fontFamily: 'Cairo'),
         ),
       ),
       body: Padding(
@@ -33,7 +36,8 @@ class MedicalInformationPage extends StatelessWidget {
                   style: TextStyle(
                       fontSize: 25,
                       fontWeight: FontWeight.w800,
-                      color: Colors.white),
+                      color: Colors.white,
+                      fontFamily: 'Cairo'),
                 ),
                 SizedBox(height: 15),
                 CardListData(),
@@ -49,7 +53,8 @@ class MedicalInformationPage extends StatelessWidget {
                   style: TextStyle(
                       fontSize: 25,
                       fontWeight: FontWeight.w800,
-                      color: Colors.white),
+                      color: Colors.white,
+                      fontFamily: 'Cairo'),
                 ),
                 SizedBox(height: 15),
                 CardListData2(),

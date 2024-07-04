@@ -49,7 +49,6 @@ class _LocationPageState extends State<LocationPage> {
           GoogleMap(
             initialCameraPosition: const CameraPosition(
               target: LatLng(0, 0),
-              zoom: 19,
             ),
             mapType: MapType.normal,
             zoomControlsEnabled: false,

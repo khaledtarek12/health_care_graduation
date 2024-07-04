@@ -44,8 +44,7 @@ class _CreateNewPasswordState extends State<CreateNewPassword> {
         } else if (state is ResetPasswordFailure) {
           isLoading = false;
           showErrorDialog(
-              context: context,
-              message: 'Failed to reset password');
+              context: context, message: 'Failed to reset password');
         } else {
           isLoading = true;
         }
@@ -60,7 +59,7 @@ class _CreateNewPasswordState extends State<CreateNewPassword> {
                 key: formkey,
                 child: Column(
                   children: [
-                    const SizedBox(height: 25),
+                    const SizedBox(height: 55),
                     const Text(
                       'Create new password',
                       style: style25,

@@ -47,7 +47,8 @@ class _AmbulancePageState extends State<AmbulancePage> {
           setState(() {
             isLoading = false;
           });
-          showErrorDialog(context: context, message: 'Oops , there was an error');
+          showErrorDialog(
+              context: context, message: 'Oops , there was an error');
         } else if (state is GetAllPatientsLocationsSuccess) {
           setState(() {
             isLoading = false;
@@ -95,7 +96,7 @@ class _AmbulancePageState extends State<AmbulancePage> {
                     markers: markers,
                   ),
                   Positioned(
-                    top: 50,
+                    bottom: 50,
                     right: 16.0,
                     child: Column(
                       children: [

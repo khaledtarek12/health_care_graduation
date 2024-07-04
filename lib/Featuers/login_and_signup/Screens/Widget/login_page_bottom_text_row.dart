@@ -13,7 +13,10 @@ class CustomTextRow extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        const Text('Don\'t have an account ?'),
+        const Text(
+          'Don\'t have an account ?',
+          style: TextStyle(fontFamily: 'Cairo'),
+        ),
         GestureDetector(
           onTap: () {
             Get.to(() => const SignupHomePage(),
@@ -21,7 +24,10 @@ class CustomTextRow extends StatelessWidget {
           },
           child: const Text(
             '   Sign up',
-            style: TextStyle(color: kPrimaryColor, fontWeight: FontWeight.bold),
+            style: TextStyle(
+                color: kPrimaryColor,
+                fontWeight: FontWeight.bold,
+                fontFamily: 'Cairo'),
           ),
         )
       ],

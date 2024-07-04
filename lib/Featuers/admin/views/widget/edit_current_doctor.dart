@@ -59,6 +59,7 @@ class _EditCurrentDoctorState extends State<EditCurrentDoctor> {
         body: CustomContainer(
           isLeading: true,
           isLogout: true,
+          appbar: true,
           title: 'Edit the Informations',
           child: Form(
             key: formkey,

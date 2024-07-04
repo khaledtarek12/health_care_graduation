@@ -34,6 +34,7 @@ class CustomMedicalCrad extends StatelessWidget {
               style: const TextStyle(
                 color: Colors.white,
                 fontSize: 18,
+                fontFamily: 'Cairo',
                 fontWeight: FontWeight.bold,
               ),
             ),

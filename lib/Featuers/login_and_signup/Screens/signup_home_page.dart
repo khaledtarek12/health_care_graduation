@@ -157,7 +157,7 @@ class _SignupHomePageState extends State<SignupHomePage> {
                   physics: const BouncingScrollPhysics(),
                   children: [
                     SizedBox(
-                      height: MediaQuery.of(context).size.height * .05,
+                      height: MediaQuery.of(context).size.height * .15,
                     ),
                     Row(
                       children: [
@@ -335,7 +335,10 @@ class _SignupHomePageState extends State<SignupHomePage> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const Text('Already have an account ?'),
+                        const Text(
+                          'Already have an account ?',
+                          style: TextStyle(fontFamily: 'Cairo'),
+                        ),
                         GestureDetector(
                           onTap: () {
                             Navigator.pop(context);
@@ -343,6 +346,7 @@ class _SignupHomePageState extends State<SignupHomePage> {
                           child: const Text(
                             '   LogIn',
                             style: TextStyle(
+                                fontFamily: 'Cairo',
                                 color: kPrimaryColor,
                                 fontWeight: FontWeight.bold),
                           ),

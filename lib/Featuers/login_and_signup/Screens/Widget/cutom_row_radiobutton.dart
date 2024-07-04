@@ -37,10 +37,10 @@ class _CusttomRadioButtomState extends State<CusttomRadioButtom> {
           child: const Text(
             'Ambulance',
             style: TextStyle(
-              fontWeight: FontWeight.bold,
-              color: kprimaryVeryDarkcolor,
-              fontSize: 13,
-            ),
+                fontWeight: FontWeight.bold,
+                color: kprimaryVeryDarkcolor,
+                fontSize: 13,
+                fontFamily: 'Cairo'),
           ),
         ),
         Radio(
@@ -64,10 +64,10 @@ class _CusttomRadioButtomState extends State<CusttomRadioButtom> {
           child: const Text(
             'Admin',
             style: TextStyle(
-              fontWeight: FontWeight.bold,
-              color: kprimaryVeryDarkcolor,
-              fontSize: 13,
-            ),
+                fontWeight: FontWeight.bold,
+                color: kprimaryVeryDarkcolor,
+                fontSize: 13,
+                fontFamily: 'Cairo'),
           ),
         ),
         Radio(
@@ -91,10 +91,10 @@ class _CusttomRadioButtomState extends State<CusttomRadioButtom> {
           child: const Text(
             'Doctor',
             style: TextStyle(
-              fontWeight: FontWeight.bold,
-              color: kprimaryVeryDarkcolor,
-              fontSize: 13,
-            ),
+                fontWeight: FontWeight.bold,
+                color: kprimaryVeryDarkcolor,
+                fontSize: 13,
+                fontFamily: 'Cairo'),
           ),
         ),
         Radio(
@@ -118,10 +118,10 @@ class _CusttomRadioButtomState extends State<CusttomRadioButtom> {
           child: const Text(
             'Patient',
             style: TextStyle(
-              fontWeight: FontWeight.bold,
-              color: kprimaryVeryDarkcolor,
-              fontSize: 13,
-            ),
+                fontWeight: FontWeight.bold,
+                color: kprimaryVeryDarkcolor,
+                fontSize: 13,
+                fontFamily: 'Cairo'),
           ),
         )
       ],
