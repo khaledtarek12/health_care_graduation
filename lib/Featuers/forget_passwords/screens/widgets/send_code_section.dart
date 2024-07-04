@@ -64,7 +64,7 @@ class _SendCodeSectionState extends State<SendCodeSection> {
             key: formkey,
             child: Column(
               children: [
-                const SizedBox(height: 25),
+                const SizedBox(height: 50),
                 const Text(
                   'Forgot Password?',
                   style: style25,

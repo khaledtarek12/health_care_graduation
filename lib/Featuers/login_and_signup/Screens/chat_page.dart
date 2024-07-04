@@ -17,11 +17,14 @@ class ChatPage extends StatefulWidget {
     super.key,
     required this.senderEmail,
     required this.recieverEmail,
+    required this.doctorEmail,
+    required this.patientEmail,
   });
 
   final String senderEmail;
   final String recieverEmail;
-
+  final String doctorEmail;
+  final String patientEmail;
   @override
   State<ChatPage> createState() => _ChatPageState();
 }
@@ -40,6 +43,11 @@ class _ChatPageState extends State<ChatPage> {
   }
 
   String getMessage = '';
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -64,9 +72,16 @@ class _ChatPageState extends State<ChatPage> {
                       itemBuilder: (context, index) {
                         final message = messageList[index];
                         if (message.senderId == widget.senderEmail) {
-                          return ChatBubble(message: message);
+                          return ChatBubble(
+                            message: message,
+                            doctorEmail: widget.doctorEmail,
+                            patientEmail: widget.patientEmail,
+                          );
                         } else if (message.senderId == widget.recieverEmail) {
-                          return ChatBubbleFormFriend(message: message);
+                          return ChatBubbleFormFriend(
+                              message: message,
+                              doctorEmail: widget.doctorEmail,
+                              patientEmail: widget.patientEmail);
                         } else {
                           return const SizedBox.shrink();
                         }
