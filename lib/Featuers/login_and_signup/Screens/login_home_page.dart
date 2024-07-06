@@ -55,11 +55,16 @@ class _LoginHomePageState extends State<LoginHomePage> {
           final roles = prefs.getStringList('roles') ?? [];
 
           if (selectedRole.isEmpty) {
+            setState(() {
+              isLoading = false;
+            });
             showErrorDialog(
               context: context,
-              message: 'Please select a role: Doctor, Patient, or Admin.',
+              message:
+                  'Please select a role: Doctor, Patient, Admin, or Ambulance.',
               btnOkOnPress: () {},
             );
+            return; // Exit the listener to stop further execution
           }
 
           if (roles.contains(selectedRole[0])) {

@@ -60,7 +60,8 @@ class RegisterCubit extends Cubit<RegisterState> {
           if (errorData.containsKey('errors')) {
             Map<String, dynamic> errors = errorData['errors'];
             errors.forEach((key, value) {
-              errorMessage += '\n$key: ${value.join(', ')}';
+              // Get the first message from the list of errors
+              errorMessage += '\n$key: ${value[0]}';
             });
           }
           emit(RegisterFailuer(errorMessage: errorMessage));

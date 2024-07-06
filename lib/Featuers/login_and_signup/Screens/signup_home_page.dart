@@ -150,6 +150,7 @@ class _SignupHomePageState extends State<SignupHomePage> {
           inAsyncCall: isLoading,
           child: Scaffold(
             body: CustomContainer(
+              appbar: true,
               title: 'Create a new Account',
               child: Form(
                 key: formkey,
@@ -157,7 +158,7 @@ class _SignupHomePageState extends State<SignupHomePage> {
                   physics: const BouncingScrollPhysics(),
                   children: [
                     SizedBox(
-                      height: MediaQuery.of(context).size.height * .15,
+                      height: MediaQuery.of(context).size.height * .05,
                     ),
                     Row(
                       children: [
