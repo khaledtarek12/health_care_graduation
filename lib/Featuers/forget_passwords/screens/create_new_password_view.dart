@@ -147,6 +147,11 @@ class _CreateNewPasswordState extends State<CreateNewPassword> {
                             newPassword: password,
                             confirmPassword: password,
                           );
+                        } else {
+                          showErrorDialog(
+                              context: context,
+                              message:
+                                  'there was an error in resitng password');
                         }
                       },
                     )
